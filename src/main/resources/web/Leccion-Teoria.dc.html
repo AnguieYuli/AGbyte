@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Lección</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-btn{transition:background-color .15s ease}
+.cy-btn:hover{background-color:#5E1229!important}
+.cy-run:hover{background-color:#9B2242!important}
+.cy-code{font-family:'JetBrains Mono',monospace;padding:1px 6px;border-radius:6px;background:var(--track);font-size:.92em}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="lecciones" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="normal" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1160px; box-sizing: border-box; padding: 20px 32px 48px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Ruta de navegación" style="font-size: 13px; font-weight: 800; color: var(--ink-4);">AGbyte <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <a href="Lecciones.dc.html" style="color: var(--ink-4); text-decoration: none;">Lecciones</a> <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <span style="color: var(--g-text);">{{crumb}}</span></nav>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 14px 18px; border-radius: 16px; background: var(--card); border: 1px solid var(--line);">
+        <a href="Lecciones.dc.html" aria-label="Salir de la lección" style="width: 40px; height: 40px; flex: none; border-radius: 10px; background: var(--bg); color: var(--ink-2); display: flex; align-items: center; justify-content: center; text-decoration: none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></a>
+        <ol aria-label="Pasos de la lección" style="list-style: none; margin: 0; padding: 0; flex: 1 1 360px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+          <li aria-current="step" style="display: flex; flex-direction: column; gap: 6px;"><span style="height: 8px; border-radius: 999px; background: #B02A50;"></span><span style="font-size: 12px; font-weight: 900; color: var(--g-ink);">1 · Teoría</span></li>
+          <li style="display: flex; flex-direction: column; gap: 6px;"><span style="height: 8px; border-radius: 999px; {{step2}}"></span><span style="font-size: 12px; font-weight: 800; color: var(--ink-3);">2 · Pruébalo</span></li>
+          <li style="display: flex; flex-direction: column; gap: 6px;"><span style="height: 8px; border-radius: 999px; background: var(--track-2);"></span><span style="font-size: 12px; font-weight: 800; color: var(--ink-3);">3 · Quiz</span></li>
+        </ol>
+        <span style="flex: none; font-size: 13px; font-weight: 900; color: var(--ink-2);">Lección {{n}} de {{of}} · 5 min</span>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <article style="flex: 3 1 520px; min-width: 0; box-sizing: border-box; padding: 28px 32px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 1px 2px var(--shadow-soft); display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+            <span style="padding: 4px 10px; border-radius: 999px; background: var(--p50); font-size: 12px; font-weight: 900; color: var(--p-text2);">{{kicker}}</span>
+            <span style="padding: 4px 10px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; {{tile}}">{{glyph}}</span>
+            <sc-if value="{{isReview}}" hint-placeholder-val="{{ false }}"><span style="padding: 4px 10px; border-radius: 999px; background: var(--g100); font-size: 12px; font-weight: 900; color: var(--g-ink);">Repaso</span></sc-if>
+          </div>
+          <h1 style="margin: 0; font-size: 30px; line-height: 1.15; font-weight: 900; letter-spacing: -0.02em;">{{title}}</h1>
+
+          <sc-if value="{{hasContent}}" hint-placeholder-val="{{ true }}">
+            <sc-for list="{{paras}}" as="p" hint-placeholder-count="2">
+              <p style="margin: 0; max-width: 660px; font-size: 17px; line-height: 1.6; font-weight: 600; color: var(--ink-1);"><sc-for list="{{p.segs}}" as="s"><sc-if value="{{s.isText}}" hint-placeholder-val="{{ true }}">{{s.t}}</sc-if><sc-if value="{{s.isCode}}" hint-placeholder-val="{{ false }}"><code class="cy-code">{{s.t}}</code></sc-if><sc-if value="{{s.isBold}}" hint-placeholder-val="{{ false }}"><strong>{{s.t}}</strong></sc-if></sc-for></p>
+            </sc-for>
+
+            <sc-if value="{{hasDiagram}}" hint-placeholder-val="{{ false }}">
+              <figure style="margin: 0; padding: 20px; border-radius: 18px; background: var(--sunken); border: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 14px;">
+                <sc-for list="{{diagram}}" as="dg" hint-placeholder-count="3">
+                  <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <span style="padding: 12px 20px; border-radius: 14px; font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; {{dg.style}}">{{dg.t}}</span>
+                    <span style="font-size: 13px; font-weight: 800; color: var(--ink-2);">{{dg.label}}</span>
+                  </div>
+                </sc-for>
+                <figcaption style="flex-basis: 100%; text-align: center; font-size: 14px; font-weight: 700; color: var(--ink-2);">{{diagramCaption}}</figcaption>
+              </figure>
+            </sc-if>
+
+            <div style="border-radius: 16px; background: #241B20; overflow: hidden;">
+              <div style="padding: 8px 14px; background: #2E2329; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C3B3BA;">{{exampleFile}}</div>
+              <div style="padding: 12px 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; overflow-x: auto;">
+                <sc-for list="{{example}}" as="ln" hint-placeholder-count="4">
+                  <div style="padding: 0 16px; height: 24px; display: flex; align-items: center; white-space: pre; color: #F3EAEE;"><sc-for list="{{ln.toks}}" as="tk"><span style="color: {{tk.c}};">{{tk.t}}</span></sc-for></div>
+                </sc-for>
+              </div>
+              <div style="padding: 10px 16px; border-top: 1px solid #3F3038; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #C3B3BA; display: flex; gap: 10px;">
+                <span>Salida</span>
+                <span style="display: flex; flex-direction: column; color: #F3EAEE; white-space: pre;"><sc-for list="{{exampleOut}}" as="o"><span>› {{o.t}}</span></sc-for></span>
+              </div>
+            </div>
+
+            <section aria-labelledby="prueba-t" style="padding: 20px; border-radius: 18px; background: var(--g50); border: 2px solid var(--g200); display: flex; flex-direction: column; gap: 14px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="width: 32px; height: 32px; border-radius: 10px; background: #B02A50; color: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg></span>
+                <h2 id="prueba-t" style="margin: 0; font-size: 18px; font-weight: 900; color: var(--g-ink);">{{tryLabel}}</h2>
+              </div>
+              <div role="group" aria-label="Elige un valor" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <sc-for list="{{choices}}" as="f" hint-placeholder-count="3">
+                  <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.on}}" style="height: 40px; padding: 0 16px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; cursor: pointer; {{f.style}}">{{f.name}}</button>
+                </sc-for>
+              </div>
+              <div style="border-radius: 14px; background: #241B20; overflow: hidden;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 8px 6px 14px; background: #2E2329;">
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C3B3BA;">{{tryFile}}</span>
+                  <button type="button" class="cy-run" onClick="{{run}}" style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 8px; border: 0; background: #7A1A35; font-family: inherit; font-size: 13px; font-weight: 900; color: #FFFFFF; cursor: pointer;"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg>Ejecutar</button>
+                </div>
+                <div style="padding: 12px 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; overflow-x: auto;">
+                  <sc-for list="{{tryCode}}" as="ln" hint-placeholder-count="2">
+                    <div style="padding: 0 16px; height: 24px; display: flex; align-items: center; white-space: pre; color: #F3EAEE;"><sc-for list="{{ln.toks}}" as="tk"><span style="color: {{tk.c}};">{{tk.t}}</span></sc-for></div>
+                  </sc-for>
+                </div>
+                <div aria-live="polite" style="padding: 10px 16px; border-top: 1px solid #3F3038; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #C3B3BA;"><span style="display: flex; gap: 10px; align-items: flex-start;"><span style="flex: none;">Salida</span><span style="white-space: pre-wrap; word-break: break-word; {{outColor}}">{{output}}</span></span></div>
+              </div>
+            </section>
+
+            <aside aria-labelledby="recuerda-t" style="padding: 18px 20px; border-radius: 18px; background: var(--o50); border: 1px solid var(--o200); display: flex; flex-direction: column; gap: 10px;">
+              <h2 id="recuerda-t" style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 900; color: var(--o-ink);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.1 14c.2-1 .7-1.7 1.4-2.5A4.7 4.7 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.4 2.5"></path></svg>
+                Recuerda
+              </h2>
+              <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.5; font-weight: 700; color: var(--o-ink3);">
+                <sc-for list="{{remember}}" as="r" hint-placeholder-count="3">
+                  <li><sc-for list="{{r.segs}}" as="s"><sc-if value="{{s.isText}}" hint-placeholder-val="{{ true }}">{{s.t}}</sc-if><sc-if value="{{s.isCode}}" hint-placeholder-val="{{ false }}"><code style="font-family: 'JetBrains Mono', monospace;">{{s.t}}</code></sc-if><sc-if value="{{s.isBold}}" hint-placeholder-val="{{ false }}"><strong>{{s.t}}</strong></sc-if></sc-for></li>
+                </sc-for>
+              </ul>
+            </aside>
+
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 6px;">
+              <a href="Lecciones.dc.html" style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 20px; border-radius: 14px; border: 2px solid var(--line-2); background: var(--card); box-shadow: 0 4px 0 var(--line-4); color: var(--ink-2); font-size: 15px; font-weight: 900; text-decoration: none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>Volver a lecciones</a>
+              <a href="{{quizHref}}" class="cy-btn" style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 26px; border-radius: 14px; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; color: #FFFFFF; font-size: 16px; font-weight: 900; text-decoration: none;">Ir al quiz <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{noContent}}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; padding: 22px; border-radius: 18px; background: var(--sunken); border: 2px dashed var(--line-2);">
+              <dc-import name="Cody" size="96" mood="piensa" hint-size="96px,96px"></dc-import>
+              <div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 6px;">
+                <strong style="font-size: 19px; font-weight: 900;">{{fallbackTitle}}</strong>
+                <span style="font-size: 15px; line-height: 1.5; font-weight: 700; color: var(--ink-2);">{{fallbackText}}</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+              <sc-if value="{{canSkip}}" hint-placeholder-val="{{ true }}">
+                <button type="button" class="cy-btn" onClick="{{skip}}" style="display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 22px; border: 0; border-radius: 14px; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; font-family: inherit; color: #FFFFFF; font-size: 15px; font-weight: 900; cursor: pointer;">Marcar como vista y continuar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+              </sc-if>
+              <a href="Editor.dc.html" style="display: inline-flex; align-items: center; height: 50px; padding: 0 20px; border-radius: 14px; border: 2px solid var(--line-2); background: var(--card); color: var(--ink); font-size: 15px; font-weight: 900; text-decoration: none; box-sizing: border-box;">Practicar en el editor</a>
+              <a href="Ejercicio.dc.html" style="display: inline-flex; align-items: center; height: 50px; padding: 0 20px; border-radius: 14px; border: 2px solid var(--line-2); background: var(--card); color: var(--ink); font-size: 15px; font-weight: 900; text-decoration: none; box-sizing: border-box;">Hacer un ejercicio</a>
+              <a href="Lecciones.dc.html" style="display: inline-flex; align-items: center; height: 50px; padding: 0 20px; border-radius: 14px; border: 2px solid var(--line-2); background: var(--card); color: var(--ink); font-size: 15px; font-weight: 900; text-decoration: none; box-sizing: border-box;">Volver a lecciones</a>
+            </div>
+          </sc-if>
+        </article>
+
+        <aside style="flex: 1.4 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-label="Consejo de Cody" style="padding: 22px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;">
+            <dc-import name="Cody" size="104" mood="feliz" hint-size="104px,104px"></dc-import>
+            <p style="margin: 0; width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 14px; background: var(--g50); font-size: 14px; line-height: 1.5; font-weight: 800; color: var(--g-ink);">{{tip}}</p>
+            <a href="Chat-Cody.dc.html" style="font-size: 14px; font-weight: 900; text-decoration: none;">Tengo una duda</a>
+          </section>
+          <section aria-labelledby="mod-actual" style="padding: 20px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px;">
+            <h2 id="mod-actual" style="margin: 0; font-size: 12px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2);">Módulo {{moduleN}}</h2>
+            <strong style="font-size: 16px; font-weight: 900; color: var(--g-ink);">{{moduleTitle}} · {{courseName}}</strong>
+            <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 800;">
+              <sc-for list="{{siblings}}" as="l" hint-placeholder-count="5">
+                <li aria-current="{{l.cur}}" style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; margin: 0 -8px; border-radius: 10px; {{l.row}}">
+                  <span style="width: 16px; height: 16px; flex: none; display: flex; align-items: center; justify-content: center;">
+                    <sc-if value="{{l.done}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9B2242" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                    <sc-if value="{{l.isHere}}" hint-placeholder-val="{{ false }}"><span style="width: 9px; height: 9px; border-radius: 50%; background: #F97316;"></span></sc-if>
+                    <sc-if value="{{l.pending}}" hint-placeholder-val="{{ true }}"><span style="width: 8px; height: 8px; border-radius: 50%; border: 2px solid var(--ink-5); box-sizing: border-box;"></span></sc-if>
+                  </span>
+                  {{l.title}}
+                </li>
+              </sc-for>
+            </ol>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1160}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const S = window.CodyuStore;
+    const q = new URLSearchParams(window.location.search);
+    const cid = S && S.COURSES[q.get('c')] ? q.get('c') : (S ? S.me().course : 'python');
+    const course = S ? S.course(cid) : null;
+    let g = q.get('l') !== null ? parseInt(q.get('l'), 10) : (course ? course.current.g : 7);
+    if (course && (isNaN(g) || g < 0 || g > course.current.g)) g = course.current.g;
+    const content = S ? S.lessonContent(cid, g) : null;
+    this.state = { cid, g, choice: content && content.tryit ? content.tryit.choices[0] : '', ran: false };
+  }
+  segs(p) {
+    return p.map((x) => typeof x === 'string'
+      ? { t: x, isText: true, isCode: false, isBold: false }
+      : x.c !== undefined ? { t: x.c, isText: false, isCode: true, isBold: false } : { t: x.b, isText: false, isCode: false, isBold: true });
+  }
+  renderVals() {
+    const S = window.CodyuStore;
+    if (!S) return {};
+    const s = this.state, c = S.course(s.cid), meta = S.lessonMeta(s.cid, s.g), ct = S.lessonContent(s.cid, s.g);
+    const lang = c.lang;
+    const has = !!ct;
+    const base = {
+      crumb: meta.module + ' · ' + c.name, n: meta.n, of: meta.of, title: meta.title, glyph: c.glyph,
+      tile: 'background: ' + c.tileBg + '; color: ' + c.tileFg + ';', kicker: has ? 'Concepto' : 'Lección',
+      isReview: meta.done, moduleN: meta.moduleN, moduleTitle: meta.module, courseName: c.name,
+      hasContent: has, noContent: !has,
+      step2: s.ran ? 'background: #B02A50;' : 'background: var(--track-2);',
+      tip: has ? ct.tip : 'Mientras preparo esta lección, practica lo que ya sabes en el editor: es la mejor forma de avanzar.',
+      siblings: meta.siblings.map((l) => ({
+        title: l.title, done: l.done && l.g !== s.g, isHere: l.g === s.g, pending: !l.done && l.g !== s.g, cur: l.g === s.g ? 'step' : undefined,
+        row: l.g === s.g ? 'background: var(--g50); color: var(--g-ink);' : l.done ? 'color: var(--ink-2);' : 'color: var(--ink-3);'
+      })),
+      fallbackTitle: 'Esta lección todavía no tiene explicación',
+      fallbackText: meta.done ? 'Ya la marcaste como vista. Puedes seguir con la siguiente lección o practicar en el editor.' : 'Cody aún está escribiendo «' + meta.title + '». Para no frenarte, márcala como vista y sigue con la siguiente lección; también puedes practicar en el editor.',
+      canSkip: !meta.done,
+      skip: () => {
+        const v = S.skipLesson(s.cid, s.g);
+        window.location.href = v.finished ? 'Lecciones.dc.html' : 'Leccion-Teoria.dc.html?c=' + s.cid + '&l=' + v.current.g;
+      }
+    };
+    if (!has) return base;
+    const t = ct.tryit, v = s.choice;
+    const out = t.outputs ? t.outputs[v] : t.output.replace('{v}', v);
+    return Object.assign(base, {
+      paras: ct.paras.map((p) => ({ segs: this.segs(p) })),
+      remember: ct.remember.map((p) => ({ segs: this.segs(p) })),
+      hasDiagram: !!ct.diagram,
+      diagram: ct.diagram ? ct.diagram.parts.map((d) => ({ t: d.t, label: d.label, style: d.kind === 'name' ? 'background: var(--card); border: 2px solid #B02A50; color: var(--g-text);' : d.kind === 'value' ? 'background: var(--card); border: 2px solid #FDBA74; color: var(--o-text);' : 'color: var(--ink);' })) : [],
+      diagramCaption: ct.diagram ? ct.diagram.caption : '',
+      exampleFile: ct.example.file,
+      example: ct.example.lines.map((l) => ({ toks: S.tokenize(l, lang) })),
+      exampleOut: ct.example.output.map((o) => ({ t: o })),
+      tryLabel: t.label, tryFile: t.file,
+      choices: t.choices.map((n) => ({ name: n, on: n === v, style: n === v ? 'background: #7A1A35; color: #FFFFFF; border: 2px solid #7A1A35;' : 'background: var(--card); color: var(--g-ink); border: 2px solid var(--g200);', pick: () => this.setState({ choice: n, ran: false }) })),
+      tryCode: t.lines.map((l) => ({ toks: S.tokenize(l.split('{v}').join(v), lang) })),
+      output: s.ran ? '› ' + out : 'Pulsa Ejecutar',
+      outColor: s.ran ? 'color: #F3EAEE;' : 'color: #A08E97;',
+      run: () => this.setState({ ran: true }),
+      quizHref: 'Leccion-Quiz.dc.html?c=' + s.cid + '&l=' + s.g
+    });
+  }
+}
+</script>
+</body>
+</html>

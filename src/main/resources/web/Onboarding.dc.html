@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Configura tu plan</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-btn{transition:background-color .15s ease}
+.cy-btn:hover{background-color:#5E1229!important}
+.cy-opt{transition:border-color .15s ease,background-color .15s ease,transform .15s ease}
+.cy-opt:hover:not(:disabled){border-color:var(--g300)!important;transform:translateY(-1px)}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+
+  <header style="width: 100%; max-width: 880px; margin: 0 auto; box-sizing: border-box; padding: 24px 24px 0; display: flex; align-items: center; gap: 20px;">
+    <a href="Registro.dc.html" aria-label="Salir del onboarding" style="width: 44px; height: 44px; flex: none; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--ink-3); text-decoration: none;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+    </a>
+    <div role="progressbar" aria-label="Progreso del onboarding" aria-valuemin="1" aria-valuemax="3" aria-valuenow="{{step}}" style="flex: 1; height: 14px; border-radius: 999px; background: var(--track-2); overflow: hidden;">
+      <div style="height: 100%; border-radius: 999px; background: #B02A50; transition: width .4s ease; width: {{pct}};"></div>
+    </div>
+    <span style="flex: none; font-size: 14px; font-weight: 800; color: var(--ink-3);">Paso {{step}} de 3</span>
+  </header>
+
+  <main style="flex: 1 1 auto; width: 100%; max-width: 880px; margin: 0 auto; box-sizing: border-box; padding: 40px 24px 24px; display: flex; flex-direction: column; gap: 32px;">
+    <div style="display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap;">
+      <dc-import name="Cody" size="120" mood="{{mood}}" hint-size="120px,120px"></dc-import>
+      <div style="position: relative; flex: 1 1 360px; min-width: 0; padding: 20px 24px; border-radius: 20px; background: var(--card); border: 2px solid var(--line-4); margin-bottom: 18px;">
+        <span aria-hidden="true" style="position: absolute; left: -9px; bottom: 26px; width: 16px; height: 16px; background: var(--card); border-left: 2px solid var(--line-4); border-bottom: 2px solid var(--line-4); transform: rotate(45deg);"></span>
+        <h1 style="margin: 0; font-size: 26px; line-height: 1.25; font-weight: 900; letter-spacing: -0.01em;">{{question}}</h1>
+        <p style="margin: 6px 0 0; font-size: 15px; font-weight: 700; color: var(--ink-3);">{{helper}}</p>
+      </div>
+    </div>
+
+    <div role="group" aria-label="{{question}}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+      <sc-for list="{{options}}" as="o" hint-placeholder-count="4">
+        <button type="button" class="cy-opt" onClick="{{o.pick}}" disabled="{{o.disabled}}" aria-pressed="{{o.sel}}" style="position: relative; display: flex; align-items: center; gap: 16px; padding: 18px; border-radius: 18px; text-align: left; font-family: inherit; cursor: pointer; {{o.style}}">
+          <span style="width: 52px; height: 52px; flex: none; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 700; {{o.tile}}">{{o.glyph}}</span>
+          <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;">
+            <span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <strong style="font-size: 17px; font-weight: 900; {{o.titleColor}}">{{o.title}}</strong>
+              <sc-if value="{{o.hasBadge}}" hint-placeholder-val="{{ false }}">
+                <span style="padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 900; {{o.badgeStyle}}">{{o.badge}}</span>
+              </sc-if>
+            </span>
+            <span style="font-size: 14px; line-height: 1.4; font-weight: 700; color: var(--ink-3);">{{o.desc}}</span>
+          </span>
+          <sc-if value="{{o.sel}}" hint-placeholder-val="{{ false }}">
+            <span aria-hidden="true" style="position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%; background: #7A1A35; color: #FFFFFF; display: flex; align-items: center; justify-content: center;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            </span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{isLast}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 18px; border-radius: 16px; background: var(--g50); border: 1px solid var(--g200); font-size: 15px; font-weight: 800; color: var(--g-ink);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A1A35" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle></svg>
+        Tu plan: {{summary}}
+      </div>
+    </sc-if>
+  </main>
+
+  <footer style="border-top: 2px solid var(--line-4); background: var(--card);">
+    <div style="width: 100%; max-width: 880px; margin: 0 auto; box-sizing: border-box; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <sc-if value="{{canBack}}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{back}}" style="height: 50px; padding: 0 22px; border-radius: 14px; border: 2px solid var(--line-2); background: var(--card); box-shadow: 0 4px 0 var(--line-4); font-family: inherit; font-size: 15px; font-weight: 800; color: var(--ink); cursor: pointer;">Atrás</button>
+      </sc-if>
+      <sc-if value="{{noBack}}" hint-placeholder-val="{{ true }}">
+        <span style="font-size: 14px; font-weight: 700; color: var(--ink-3);">Podrás cambiarlo luego en Ajustes.</span>
+      </sc-if>
+      <sc-if value="{{notLast}}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="cy-btn" onClick="{{next}}" style="height: 50px; padding: 0 32px; border-radius: 14px; border: 0; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; font-family: inherit; font-size: 16px; font-weight: 900; color: #FFFFFF; cursor: pointer;">Continuar</button>
+      </sc-if>
+      <sc-if value="{{isLast}}" hint-placeholder-val="{{ false }}">
+        <a href="Inicio.dc.html" onClick="{{finish}}" class="cy-btn" style="display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 28px; border-radius: 14px; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; font-size: 16px; font-weight: 900; color: #FFFFFF; text-decoration: none;">
+          Empezar a aprender
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </sc-if>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const S = window.CodyuStore;
+    this.state = { step: 1, lang: S ? S.me().course : 'python', goal: String(S ? S.settings().goal : 10), level: 'nuevo' };
+  }
+  renderVals() {
+    const s = this.state;
+    const S = window.CodyuStore;
+    const blurbs = { python: 'Claro, versátil y perfecto para empezar.', javascript: 'El lenguaje de la web.', html: 'Crea y diseña páginas web.', sql: 'Consulta y ordena datos.', java: 'Apps Android, servidores y videojuegos.', cpp: 'Rápido y potente: videojuegos y sistemas.' };
+    const order = S ? S.COURSE_ORDER : ['python', 'java', 'javascript', 'html', 'css', 'sql', 'cpp'];
+    const langs = order.map((id) => {
+      const c = S ? S.COURSES[id] : { name: id, glyph: id.slice(0, 2), blurb: blurbs[id] };
+      return { id, glyph: c.glyph, title: c.name, desc: c.blurb || blurbs[id], badge: id === 'python' ? 'Recomendado' : '' };
+    });
+    const steps = {
+      1: {
+        key: 'lang', mood: 'saluda',
+        question: '¡Hola! Soy Cody. ¿Qué quieres aprender primero?',
+        helper: 'Empezamos con uno. Puedes cambiar de curso o sumar otros cuando quieras.',
+        options: langs
+      },
+      2: {
+        key: 'goal', mood: 'feliz',
+        question: '¿Cuánto tiempo quieres practicar al día?',
+        helper: 'Lo importante es la constancia. Te recordaré tu meta cada día.',
+        options: [
+          { id: '5', glyph: '5', title: 'Casual', desc: '5 min al día · 1 lección' },
+          { id: '10', glyph: '10', title: 'Regular', desc: '10 min al día · 2 lecciones', badge: 'Popular' },
+          { id: '15', glyph: '15', title: 'En serio', desc: '15 min al día · 3 lecciones' },
+          { id: '20', glyph: '20', title: 'Intenso', desc: '20 min al día · 4 lecciones' }
+        ]
+      },
+      3: {
+        key: 'level', mood: 'piensa',
+        question: 'Último paso: ¿cuánto sabes de programación?',
+        helper: 'Así sé por dónde empezar tu ruta.',
+        options: [
+          { id: 'nuevo', glyph: '0', title: 'Nunca he programado', desc: 'Empiezo desde la primera lección.' },
+          { id: 'basico', glyph: '1', title: 'Sé lo básico', desc: 'Hago una prueba de 3 minutos y salto lo que ya sé.' },
+          { id: 'otro', glyph: '2', title: 'Programo en otro lenguaje', desc: 'Voy directo a lo propio de Python.' }
+        ]
+      }
+    };
+    const cur = steps[s.step];
+    const selected = s[cur.key];
+    const options = cur.options.map((o) => {
+      const sel = o.id === selected;
+      const dis = !!o.disabled;
+      return {
+        ...o,
+        sel,
+        disabled: dis,
+        hasBadge: !!o.badge,
+        style: dis
+          ? 'background: var(--bg); border: 2px dashed var(--line-strong); box-shadow: none; cursor: not-allowed;'
+          : sel
+            ? 'background: var(--g50); border: 2px solid #B02A50; box-shadow: 0 4px 0 var(--g200);'
+            : 'background: var(--card); border: 2px solid var(--line-3); box-shadow: 0 4px 0 var(--line-4);',
+        tile: dis
+          ? 'background: var(--track-3); color: var(--ink-3);'
+          : sel ? 'background: #B02A50; color: #FFFFFF;' : 'background: var(--g100); color: var(--g-text);',
+        titleColor: dis ? 'color: var(--ink-3);' : 'color: var(--ink);',
+        badgeStyle: dis
+          ? 'background: var(--track-3); color: var(--ink-3);'
+          : o.badge === 'Popular' ? 'background: var(--o100); color: var(--o-ink2);' : 'background: var(--g100); color: var(--g-ink);',
+        pick: () => { if (!dis) this.setState({ [cur.key]: o.id }); }
+      };
+    });
+    const goalTxt = { '5': '5 min al día', '10': '10 min al día', '15': '15 min al día', '20': '20 min al día' }[s.goal];
+    const levelTxt = { nuevo: 'desde la lección 1', basico: 'con prueba de nivel', otro: 'ruta acelerada' }[s.level];
+    return {
+      step: s.step,
+      pct: Math.round((s.step / 3) * 100) + '%',
+      mood: cur.mood,
+      question: cur.question,
+      helper: cur.helper,
+      options,
+      isLast: s.step === 3,
+      notLast: s.step !== 3,
+      canBack: s.step > 1,
+      noBack: s.step === 1,
+      summary: (langs.find((l) => l.id === s.lang) || langs[0]).title + ' · ' + goalTxt + ' · ' + levelTxt,
+      finish: () => { if (S) S.finishOnboarding({ course: s.lang, goal: s.goal, level: s.level }); },
+      next: () => this.setState({ step: Math.min(3, s.step + 1) }),
+      back: () => this.setState({ step: Math.max(1, s.step - 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

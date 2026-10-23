@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Ejercicios</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-btn{transition:background-color .15s ease}
+.cy-btn:hover:not(:disabled){background-color:#5E1229!important}
+.cy-tok{transition:transform .12s ease}
+.cy-tok:hover:not(:disabled){transform:translateY(-2px)}
+.cy-chip:hover,.cy-opt:hover{border-color:var(--g300)!important}
+.cy-gap:focus{outline:none;border-color:#E59AB2!important;background:#3A2C33!important}
+.cy-code{outline:none}
+.cy-code::selection{background:rgba(240,139,168,.32)}
+.cy-code:focus{box-shadow:inset 0 0 0 2px rgba(240,139,168,.32)}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="ejercicios" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="normal" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1180px; box-sizing: border-box; padding: 20px 32px 48px; display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+        <nav aria-label="Ruta de navegación" style="font-size: 13px; font-weight: 800; color: var(--ink-4);">AGbyte <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> Ejercicios <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <span style="color: var(--g-text);">{{courseName}}</span></nav>
+        <a href="Lecciones.dc.html" style="font-size: 13px; font-weight: 900; text-decoration: none;">Cambiar lenguaje</a>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <div style="flex: 3 1 540px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-label="Progreso" style="padding: 14px 16px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; font-weight: 900;">
+              <span style="color: var(--ink-2);">Práctica de {{courseName}} · {{doneCount}} de {{total}} resueltos</span>
+              <span style="color: var(--g-text);">+15 XP por ejercicio</span>
+            </div>
+            <div role="progressbar" aria-label="Ejercicios resueltos" aria-valuemin="0" aria-valuemax="{{total}}" aria-valuenow="{{doneCount}}" style="height: 10px; border-radius: 999px; background: var(--track); overflow: hidden;"><div style="height: 100%; border-radius: 999px; background: #B02A50; transition: width .4s ease; width: {{progress}};"></div></div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <sc-for list="{{levels}}" as="lv" hint-placeholder-count="3">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+                  <span style="flex: 0 0 210px; display: flex; flex-direction: column; min-width: 0;">
+                    <strong style="font-size: 13px; font-weight: 900; color: var(--ink);">Nivel {{lv.n}} · {{lv.name}}</strong>
+                    <span style="font-size: 12px; font-weight: 800; {{lv.subColor}}">{{lv.sub}}</span>
+                  </span>
+                  <div role="group" aria-label="Ejercicios del nivel {{lv.n}}" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <sc-for list="{{lv.items}}" as="it" hint-placeholder-count="3">
+                      <button type="button" class="cy-chip" onClick="{{it.pick}}" aria-label="{{it.aria}}" aria-current="{{it.current}}" title="{{it.aria}}" style="display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 12px; box-sizing: border-box; border-radius: 12px; font-family: inherit; font-size: 13px; font-weight: 900; cursor: pointer; {{it.style}}">
+                        <sc-if value="{{it.locked}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></sc-if>
+                        <sc-if value="{{it.done}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                        {{it.label}}
+                      </button>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{hasLockMsg}}" hint-placeholder-val="{{ false }}"><p role="status" style="margin: 0; padding: 8px 12px; border-radius: 10px; background: var(--o50); border: 1px solid var(--o200); font-size: 13px; font-weight: 800; color: var(--o-ink2);">{{lockMsg}}</p></sc-if>
+          </section>
+
+          <section aria-labelledby="ej-title" style="padding: 24px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 1px 2px var(--shadow-soft); display: flex; flex-direction: column; gap: 18px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span aria-hidden="true" style="width: 34px; height: 34px; border-radius: 10px; background: #7A1A35; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900;">{{num}}</span>
+              <span style="display: flex; flex-direction: column; min-width: 0;"><span style="font-size: 12px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; color: var(--g-text);">{{levelLabel}}</span><h1 id="ej-title" style="margin: 0; font-size: 24px; font-weight: 900;">{{title}}</h1></span>
+              <sc-if value="{{wasDone}}" hint-placeholder-val="{{ false }}"><span style="margin-left: auto; padding: 4px 10px; border-radius: 999px; background: var(--g100); font-size: 12px; font-weight: 900; color: var(--g-ink);">Resuelto</span></sc-if>
+            </div>
+            <p style="margin: 0; font-size: 16px; line-height: 1.5; font-weight: 700; color: var(--ink-2);">{{goal}}</p>
+
+            <sc-if value="{{isOrder}}" hint-placeholder-val="{{ true }}">
+              <div style="border-radius: 18px; background: #241B20; overflow: hidden;">
+                <div style="display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #2E2329; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C3B3BA;">
+                  <span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #F87171;"></span><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #FBBF24;"></span><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #E07A97;"></span>
+                  <span style="margin-left: 6px;">{{file}}</span>
+                </div>
+                <div role="group" aria-label="Tu respuesta" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 22px 18px; min-height: 64px; box-sizing: border-box;">
+                  <span aria-hidden="true" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A08C96; margin-right: 6px;">1</span>
+                  <sc-for list="{{slots}}" as="sl" hint-placeholder-count="4">
+                    <button type="button" class="cy-tok" onClick="{{sl.remove}}" disabled="{{sl.empty}}" aria-label="{{sl.aria}}" style="min-width: 64px; height: 44px; padding: 0 12px; box-sizing: border-box; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; cursor: pointer; {{sl.style}}">{{sl.text}}</button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{showOut}}" hint-placeholder-val="{{ false }}">
+                  <div style="padding: 10px 18px 14px; border-top: 1px solid #3F3038; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #C3B3BA;">Salida <span style="margin-left: 10px; color: #F0A9BD;">› {{output}}</span></div>
+                </sc-if>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <span style="font-size: 12px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-4);">Banco de piezas · toca una pieza para colocarla</span>
+                <div role="group" aria-label="Banco de piezas" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                  <sc-for list="{{bank}}" as="b" hint-placeholder-count="7">
+                    <button type="button" class="cy-tok" onClick="{{b.place}}" disabled="{{b.used}}" aria-label="{{b.aria}}" style="height: 44px; padding: 0 16px; box-sizing: border-box; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; cursor: pointer; {{b.style}}">{{b.text}}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{isFill}}" hint-placeholder-val="{{ false }}">
+              <div style="border-radius: 18px; background: #241B20; overflow: hidden;">
+                <div style="display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #2E2329; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C3B3BA;">
+                  <span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #F87171;"></span><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #FBBF24;"></span><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #E07A97;"></span>
+                  <span style="margin-left: 6px;">{{file}}</span>
+                </div>
+                <div style="padding: 16px 0; font-family: 'JetBrains Mono', monospace; font-size: 15px;">
+                  <sc-for list="{{fillLines}}" as="ln" hint-placeholder-count="2">
+                    <div style="display: flex; align-items: center; min-height: 40px; padding: 0 18px; white-space: pre; color: #F3EAEE;">
+                      <span aria-hidden="true" style="width: 26px; flex: none; font-size: 12px; color: #A08C96;">{{ln.n}}</span>
+                      <sc-for list="{{ln.parts}}" as="p">
+                        <sc-if value="{{p.isGap}}" hint-placeholder-val="{{ false }}">
+                          <input type="text" class="cy-gap" aria-label="Escribe lo que falta" value="{{p.val}}" onChange="{{p.onInput}}" onKeyDown="{{p.onKey}}" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="?" style="height: 34px; margin: 0 2px; padding: 0 8px; box-sizing: border-box; border-radius: 8px; background: #3A2C33; font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; text-align: center; color: #FDE68A; {{p.style}}">
+                        </sc-if>
+                        <sc-if value="{{p.isText}}" hint-placeholder-val="{{ true }}"><sc-for list="{{p.toks}}" as="tk"><span style="color: {{tk.c}};">{{tk.t}}</span></sc-for></sc-if>
+                      </sc-for>
+                    </div>
+                  </sc-for>
+                </div>
+                <sc-if value="{{showOut}}" hint-placeholder-val="{{ false }}">
+                  <div style="padding: 10px 18px 14px; border-top: 1px solid #3F3038; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #C3B3BA; white-space: pre-wrap;">Salida <span style="margin-left: 10px; color: #F0A9BD;">› {{output}}</span></div>
+                </sc-if>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{isPredict}}" hint-placeholder-val="{{ false }}">
+              <div style="border-radius: 18px; background: #241B20; overflow: hidden;">
+                <div style="display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #2E2329; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C3B3BA;">
+                  <span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #F87171;"></span><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #FBBF24;"></span><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #E07A97;"></span>
+                  <span style="margin-left: 6px;">{{file}}</span>
+                </div>
+                <div style="padding: 14px 0; font-family: 'JetBrains Mono', monospace; font-size: 15px;">
+                  <sc-for list="{{predLines}}" as="ln" hint-placeholder-count="3">
+                    <div style="display: flex; align-items: center; min-height: 26px; padding: 0 18px; color: #F3EAEE;"><span aria-hidden="true" style="width: 26px; flex: none; font-size: 12px; color: #A08C96;">{{ln.n}}</span><span style="white-space: pre;"><sc-for list="{{ln.toks}}" as="tk"><span style="color: {{tk.c}};">{{tk.t}}</span></sc-for></span></div>
+                  </sc-for>
+                </div>
+              </div>
+              <div role="radiogroup" aria-label="Opciones" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+                <sc-for list="{{options}}" as="op" hint-placeholder-count="4">
+                  <button type="button" role="radio" class="cy-opt" aria-checked="{{op.sel}}" onClick="{{op.pick}}" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 10px 14px; box-sizing: border-box; border-radius: 14px; font-family: inherit; font-size: 15px; font-weight: 800; text-align: left; cursor: pointer; {{op.style}}">
+                    <span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; {{op.badge}}">{{op.letter}}</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">{{op.text}}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{isCode}}" hint-placeholder-val="{{ false }}">
+              <div style="border-radius: 18px; background: #241B20; overflow: hidden;">
+                <div style="display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #2E2329; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C3B3BA;">
+                  <span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #F87171;"></span><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #FBBF24;"></span><span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #E07A97;"></span>
+                  <span style="margin-left: 6px;">{{file}}</span>
+                  <span style="flex: 1;"></span>
+                  <button type="button" onClick="{{resetCode}}" style="height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid #4D3A44; background: transparent; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800; color: #DCCED4; cursor: pointer;">Empezar de nuevo</button>
+                </div>
+                <div style="position: relative; height: 280px; overflow: hidden; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 22px;">
+                  <div aria-hidden="true" style="position: absolute; left: 0; top: 0; right: 0; padding: 14px 16px 14px 56px; pointer-events: none; color: #F3EAEE; transform: {{codeShift}};">
+                    <sc-for list="{{rows}}" as="ln" hint-placeholder-count="6">
+                      <div style="height: 22px; white-space: pre;"><sc-for list="{{ln.toks}}" as="tk"><span style="color: {{tk.c}};">{{tk.t}}</span></sc-for>&#8203;</div>
+                    </sc-for>
+                  </div>
+                  <div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 44px; padding-top: 14px; background: #241B20; transform: {{gutterShift}};">
+                    <sc-for list="{{rows}}" as="ln" hint-placeholder-count="6">
+                      <div style="height: 22px; padding-right: 10px; text-align: right; font-size: 12px; color: #8A7680;">{{ln.n}}</div>
+                    </sc-for>
+                  </div>
+                  <label for="codigo-ej" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Tu código</label>
+                  <textarea id="codigo-ej" class="cy-code" value="{{code}}" onChange="{{onCode}}" onKeyDown="{{onKey}}" onScroll="{{onScroll}}" wrap="off" spellcheck="false" autocomplete="off" autocapitalize="off" style="position: relative; display: block; width: 100%; height: 280px; box-sizing: border-box; margin: 0; padding: 14px 16px 14px 56px; border: 0; resize: none; background: transparent; color: transparent; caret-color: #F8FAFC; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 22px; tab-size: 2; white-space: pre; overflow: auto;"></textarea>
+                </div>
+                <sc-if value="{{hasConsole}}" hint-placeholder-val="{{ false }}">
+                  <div role="log" aria-label="Consola" style="max-height: 180px; overflow: auto; padding: 12px 18px 14px; border-top: 1px solid #3F3038; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 20px;">
+                    <span style="color: #C3B3BA;">Consola</span>
+                    <sc-for list="{{out}}" as="o" hint-placeholder-count="1"><div style="white-space: pre-wrap; word-break: break-word; color: {{o.c}};">{{o.t}}</div></sc-for>
+                  </div>
+                </sc-if>
+              </div>
+              <sc-if value="{{isWeb}}" hint-placeholder-val="{{ false }}">
+                <div style="border-radius: 16px; border: 1px solid var(--line); overflow: hidden;">
+                  <div style="padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--sunken); font-size: 12px; font-weight: 900; color: var(--ink-3);">Vista previa</div>
+                  <iframe title="Vista previa de tu código" src="{{previewUrl}}" sandbox="allow-scripts" style="display: block; width: 100%; height: 200px; border: 0; background: #FFFFFF;"></iframe>
+                </div>
+              </sc-if>
+            </sc-if>
+          </section>
+
+          <sc-if value="{{isOk}}" hint-placeholder-val="{{ false }}">
+            <div role="status" style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 18px; background: var(--g50); border: 2px solid var(--g300);">
+              <span aria-hidden="true" style="width: 40px; height: 40px; flex: none; border-radius: 50%; background: #7A1A35; color: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
+              <span style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 2px;"><strong style="font-size: 17px; font-weight: 900; color: var(--g-ink);">{{okTitle}}</strong><span style="font-size: 14px; font-weight: 700; color: var(--g-ink);">{{okText}}</span></span>
+              <button type="button" class="cy-btn" onClick="{{next}}" style="display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 22px; border: 0; border-radius: 14px; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; font-family: inherit; color: #FFFFFF; font-size: 15px; font-weight: 900; cursor: pointer;">{{nextLabel}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+            </div>
+          </sc-if>
+          <sc-if value="{{isBad}}" hint-placeholder-val="{{ false }}">
+            <div role="alert" style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 18px; background: var(--r50); border: 2px solid var(--r200);">
+              <span aria-hidden="true" style="width: 40px; height: 40px; flex: none; border-radius: 50%; background: #D92D20; color: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></span>
+              <span style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 2px;"><strong style="font-size: 17px; font-weight: 900; color: var(--r-text);">Casi… inténtalo otra vez</strong><span style="font-size: 14px; font-weight: 700; color: var(--r-text2);">{{badText}}</span></span>
+            </div>
+          </sc-if>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <button type="button" onClick="{{reset}}" style="height: 52px; padding: 0 24px; border-radius: 14px; border: 2px solid var(--line-2); background: var(--card); box-shadow: 0 4px 0 var(--line-4); font-family: inherit; font-size: 15px; font-weight: 900; color: var(--ink-2); cursor: pointer;">Reiniciar</button>
+            <button type="button" class="cy-btn" onClick="{{verify}}" disabled="{{cantVerify}}" style="flex: 1 1 240px; height: 52px; border-radius: 14px; border: 0; font-family: inherit; font-size: 16px; font-weight: 900; {{verifyStyle}}">{{verifyLabel}}</button>
+          </div>
+        </div>
+
+        <aside style="flex: 1.4 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-label="Cody" style="padding: 22px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;">
+            <dc-import name="Cody" size="110" mood="{{mood}}" hint-size="110px,110px"></dc-import>
+            <p aria-live="polite" style="margin: 0; width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 14px; background: var(--g50); font-size: 14px; line-height: 1.45; font-weight: 800; color: var(--g-ink);">{{codyMsg}}</p>
+          </section>
+
+          <section aria-labelledby="pista-t" style="padding: 20px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h2 id="pista-t" style="margin: 0; font-size: 13px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2);">Pista</h2>
+              <button type="button" onClick="{{toggleHint}}" aria-expanded="{{hint}}" style="display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 10px; border: 2px solid var(--o200); background: var(--o50); font-family: inherit; font-size: 13px; font-weight: 900; color: var(--o-ink2); cursor: pointer;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.1 14c.2-1 .7-1.7 1.4-2.5A4.7 4.7 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.4 2.5"></path></svg>
+                {{hintLabel}}
+              </button>
+            </div>
+            <sc-if value="{{hint}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <sc-if value="{{hasHintCode}}" hint-placeholder-val="{{ true }}">
+                  <div style="padding: 10px 0; border-radius: 12px; background: #241B20; font-family: 'JetBrains Mono', monospace; font-size: 13px; overflow-x: auto;">
+                    <sc-for list="{{hintCode}}" as="ln" hint-placeholder-count="2">
+                      <div style="padding: 0 14px; height: 22px; display: flex; align-items: center; white-space: pre; color: #F3EAEE;"><sc-for list="{{ln.toks}}" as="tk"><span style="color: {{tk.c}};">{{tk.t}}</span></sc-for></div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <p style="margin: 0; font-size: 13px; line-height: 1.5; font-weight: 700; color: var(--ink-2);">{{hintNote}}</p>
+              </div>
+            </sc-if>
+            <sc-if value="{{noHint}}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0; font-size: 13px; line-height: 1.5; font-weight: 700; color: var(--ink-3);">Intenta primero sin ayuda. Ver la pista no te quita XP.</p>
+            </sc-if>
+          </section>
+
+          <section style="padding: 18px 20px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px;">
+            <h2 style="margin: 0; font-size: 13px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2);">Tu práctica</h2>
+            <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 800;"><span>Ejercicios resueltos (total)</span><span>{{solved}}</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 800;"><span>De {{courseName}}</span><span>{{doneCount}} / {{total}}</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 800;"><span>Recompensa</span><span style="color: var(--g-text);">+15 XP la primera vez</span></div>
+            <a href="Editor.dc.html" style="margin-top: 4px; font-size: 14px; font-weight: 900; text-decoration: none;">Practicar libre en el editor</a>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const S = window.CodyuStore;
+    this.cid = S ? S.me().course : 'python';
+    const list = S ? S.exercises(this.cid) : [];
+    const done = S ? S.exerciseDoneIds(this.cid) : {};
+    let idx = list.findIndex((e) => !done[e.id]);
+    if (idx < 0) idx = list.length - 1;
+    this.state = this.fresh(Math.max(0, idx));
+    this.lastPreview = { key: null, url: '' };
+  }
+  fresh(idx) {
+    const S = window.CodyuStore;
+    const list = S ? S.exercises(this.cid) : [];
+    const ex = list[idx] || {};
+    return {
+      idx, placed: [], gap: '', pick: -1, result: null, msg: '', run: null, checking: false, hint: false, sx: 0, sy: 0, fillOut: '', lockMsg: '', firstWin: false,
+      code: ex.type === 'code' && S ? S.getCode(this.cid, ex.id, ex.starter) : ''
+    };
+  }
+  unlocked(i) {
+    const S = window.CodyuStore, list = S.exercises(this.cid), d = S.exerciseDoneIds(this.cid);
+    return i === 0 || !!d[list[i].id] || !!d[list[i - 1].id];
+  }
+  go(i) {
+    if (!this.unlocked(i)) { this.setState({ lockMsg: 'Ese ejercicio está bloqueado. Resuelve el ejercicio ' + i + ' para desbloquearlo.' }); return; }
+    this.setState(this.fresh(i));
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { /* nada */ }
+  }
+  componentWillUnmount() {
+    if (this.lastPreview.url) { try { URL.revokeObjectURL(this.lastPreview.url); } catch (e) { /* nada */ } }
+  }
+  preview(code) {
+    const key = this.cid + '|' + code;
+    if (this.lastPreview.key === key) return this.lastPreview.url;
+    let html;
+    if (this.cid === 'css') {
+      html = '<!doctype html><html><head><meta charset="utf-8"><style>body{font-family:system-ui,sans-serif;padding:12px}</style><style>' + code.replace(/<\/style/gi, '') + '</style></head><body>' + window.CodyuStore.cssSample() + '</body></html>';
+    } else {
+      html = '<!doctype html><html><head><meta charset="utf-8"><style>body{font-family:system-ui,sans-serif;padding:12px}</style></head><body>' + code + '</body></html>';
+    }
+    const url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+    const old = this.lastPreview.url;
+    this.lastPreview = { key, url };
+    if (old) setTimeout(() => { try { URL.revokeObjectURL(old); } catch (e) { /* nada */ } }, 2000);
+    return url;
+  }
+  win(ex) { return window.CodyuStore.solveExercise(this.cid, ex.id); }
+  setCode(text) {
+    const S = window.CodyuStore;
+    const ex = S.exercises(this.cid)[this.state.idx];
+    this.setState({ code: text, result: this.state.result === 'ok' ? 'ok' : null });
+    S.saveCode(this.cid, ex.id, text);
+  }
+  renderVals() {
+    const S = window.CodyuStore;
+    if (!S) return {};
+    const s = this.state, cid = this.cid, lang = S.lang(cid), C = S.COURSES[cid];
+    const list = S.exercises(cid), names = S.exerciseLevels(cid);
+    const doneIds = S.exerciseDoneIds(cid);
+    const ex = list[s.idx];
+    const ORD = S.EXERCISE[cid];
+    const isWeb = cid === 'html' || cid === 'css';
+    const res = s.result, ok = res === 'ok', bad = res === 'bad';
+    const doneCount = list.filter((e) => doneIds[e.id]).length;
+    const kind = { order: 'Ordenar', fill: 'Completar', predict: 'Adivinar', code: 'Programar' };
+    const levels = names.map((name, li) => {
+      const items = [];
+      list.forEach((e, i) => {
+        if (e.lv !== li + 1) return;
+        const d = !!doneIds[e.id], open = this.unlocked(i), on = i === s.idx;
+        items.push({
+          label: (i + 1) + ' · ' + kind[e.type], locked: !open, done: d, current: on ? 'true' : undefined,
+          aria: 'Ejercicio ' + (i + 1) + ', ' + kind[e.type] + (d ? ', resuelto' : open ? '' : ', bloqueado'),
+          style: on ? 'background: var(--g50); border: 2px solid #9B2242; color: var(--g-ink);'
+            : d ? 'background: #7A1A35; border: 2px solid #7A1A35; color: #FFFFFF;'
+            : open ? 'background: var(--card); border: 2px solid var(--g200); color: var(--g-text);'
+            : 'background: var(--muted-bg); border: 2px dashed var(--line-strong); color: var(--ink-4); cursor: not-allowed;',
+          pick: () => this.go(i)
+        });
+      });
+      const lvDone = list.filter((e) => e.lv === li + 1 && doneIds[e.id]).length;
+      const lvTotal = items.length;
+      const lvOpen = items.some((it) => !it.locked);
+      return { n: li + 1, name, items, sub: lvDone === lvTotal ? 'Nivel completado' : lvOpen ? lvDone + ' de ' + lvTotal + ' resueltos' : 'Bloqueado', subColor: lvDone === lvTotal ? 'color: var(--g-text);' : 'color: var(--ink-4);' };
+    });
+    const nextIdx = s.idx < list.length - 1 ? s.idx + 1 : list.findIndex((e) => !doneIds[e.id]);
+    const allDone = doneCount === list.length;
+    const nextEx = nextIdx >= 0 ? list[nextIdx] : null;
+    const retos = S.retos(cid);
+    const retosPending = retos.some((x, i) => !doneIds[S.retoId(i)]);
+    const course = S.course(cid);
+    const endLabel = retosPending ? 'Continuar con los retos' : course.finished ? 'Practicar otro lenguaje' : 'Continuar: ' + course.current.title;
+    const endHref = retosPending ? 'Editor.dc.html' : course.finished ? 'Lecciones.dc.html' : 'Leccion-Teoria.dc.html?c=' + cid + '&l=' + course.current.g;
+    const v = {
+      courseName: C.name, total: list.length, doneCount, levels,
+      hasLockMsg: !!s.lockMsg, lockMsg: s.lockMsg,
+      progress: Math.max(4, Math.round(doneCount / list.length * 100)) + '%',
+      num: s.idx + 1, wasDone: !!doneIds[ex.id] && !ok,
+      isOrder: ex.type === 'order', isFill: ex.type === 'fill', isCode: ex.type === 'code', isPredict: ex.type === 'predict', isWeb,
+      solved: S.stats().exercises,
+      isOk: ok, isBad: bad, badText: s.msg,
+      hint: s.hint, noHint: !s.hint, hintLabel: s.hint ? 'Ocultar' : 'Ver pista',
+      toggleHint: () => this.setState({ hint: !s.hint }),
+      okTitle: s.firstWin ? '¡Correcto! +15 XP' : '¡Correcto!',
+      nextLabel: nextEx && !(allDone && s.idx === list.length - 1) ? 'Continuar' + (nextEx.lv !== ex.lv ? ' al nivel ' + nextEx.lv : '') : endLabel,
+      next: () => {
+        if (nextEx && !(allDone && s.idx === list.length - 1)) { this.go(nextIdx); return; }
+        window.location.href = endHref;
+      },
+      showOut: false, output: '', rows: [], out: [], hasConsole: false, previewUrl: '', code: '', hintCode: [], hasHintCode: false, hintNote: '',
+      slots: [], bank: [], fillLines: [], predLines: [], options: [],
+      levelLabel: 'Nivel ' + ex.lv + ' · ' + names[ex.lv - 1]
+    };
+    let mood = 'piensa', codyMsg = '¡Tú puedes! Lee bien el enunciado.';
+
+    if (ex.type === 'order') {
+      const tokens = ORD.tokens.map((t) => ({ t, c: (S.tokenize(t, lang)[0] || { c: '#F3EAEE' }).c }));
+      const answer = ORD.answer, N = answer.length, placed = s.placed;
+      v.title = 'Ordena las piezas'; v.goal = ORD.goal; v.file = ORD.file;
+      v.slots = answer.map((_, i) => {
+        const idx = placed[i], filled = idx !== undefined;
+        let border = '#E07A97';
+        if (bad) border = idx === answer[i] ? '#E07A97' : '#F97066';
+        return {
+          empty: !filled, text: filled ? tokens[idx].t : '',
+          aria: filled ? 'Quitar ' + tokens[idx].t + ' del hueco ' + (i + 1) : 'Hueco ' + (i + 1) + ' vacío',
+          style: filled ? 'background: #3A2C33; color: ' + tokens[idx].c + '; border: 2px solid ' + border + ';' : 'background: transparent; color: transparent; border: 2px dashed #5E4A54; cursor: default;',
+          remove: () => { if (!filled || ok) return; const n = placed.slice(); n.splice(i, 1); this.setState({ placed: n, result: null }); }
+        };
+      });
+      v.bank = tokens.map((tk, i) => {
+        const used = placed.includes(i);
+        return {
+          text: tk.t, used, aria: used ? tk.t + ', ya colocada' : 'Colocar ' + tk.t,
+          style: used ? 'background: var(--muted-bg); color: transparent; border: 2px solid var(--line-soft); box-shadow: none; cursor: default;' : 'background: var(--card); color: var(--g-text); border: 2px solid var(--g200); box-shadow: 0 3px 0 var(--g100);',
+          place: () => { if (used || placed.length >= N || ok) return; this.setState({ placed: placed.concat([i]), result: null }); }
+        };
+      });
+      const full = placed.length === N;
+      v.showOut = ok; v.output = ORD.output; v.okText = ORD.ok;
+      v.hasHintCode = true; v.hintCode = ORD.hint.map((l) => ({ toks: S.tokenize(l, lang) })); v.hintNote = ORD.hintNote;
+      v.cantVerify = !full || ok; v.verifyLabel = 'Verificar respuesta';
+      v.verify = () => {
+        if (!full) return;
+        const good = answer.every((a, i) => placed[i] === a);
+        const first = good ? this.win(ex) : false;
+        this.setState({ result: good ? 'ok' : 'bad', firstWin: first, msg: 'Las piezas en rojo están fuera de lugar. Tócalas para quitarlas y prueba otra vez.' });
+      };
+      v.reset = () => this.setState({ placed: [], result: null });
+      if (full && !res) { mood = 'feliz'; codyMsg = 'Todo listo. Pulsa «Verificar respuesta».'; } else codyMsg = 'Toca las piezas en el orden correcto. Sobran algunas: ¡cuidado con las trampas!';
+    }
+
+    if (ex.type === 'fill') {
+      const ansMax = Math.max.apply(null, ex.answers.map((a) => a.length));
+      v.title = ex.title; v.goal = ex.goal; v.file = S.EDITOR[cid].main.name;
+      const gapBorder = ok ? '#E07A97' : bad ? '#F97066' : '#E59AB2';
+      v.fillLines = ex.lines.map((line, i) => {
+        const bits = line.split('___');
+        const parts = [];
+        bits.forEach((b, j) => {
+          if (b) parts.push({ isText: true, isGap: false, toks: S.tokenize(b, lang) });
+          if (j < bits.length - 1) parts.push({
+            isText: false, isGap: true, val: s.gap,
+            style: 'width: ' + (ansMax + 3) + 'ch; border: 2px solid ' + gapBorder + ';',
+            onInput: (e) => { if (!ok) this.setState({ gap: e.target.value, result: null }); },
+            onKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); v.verify(); } }
+          });
+        });
+        return { n: i + 1, parts };
+      });
+      const squash = (x) => { const y = String(x).replace(/\s+/g, ''); return ex.caseInsensitive ? y.toLowerCase() : y; };
+      v.showOut = ok && !!s.fillOut; v.output = s.fillOut;
+      v.okText = ex.explain;
+      v.hasHintCode = false; v.hintNote = 'Empieza con «' + ex.answers[0].charAt(0) + '» y tiene ' + ex.answers[0].length + ' ' + (ex.answers[0].length === 1 ? 'carácter' : 'caracteres') + '.';
+      v.cantVerify = !s.gap.trim() || ok; v.verifyLabel = 'Verificar respuesta';
+      v.verify = () => {
+        if (!this.state.gap.trim() || this.state.result === 'ok') return;
+        const good = ex.answers.some((a) => squash(a) === squash(this.state.gap));
+        if (!good) { this.setState({ result: 'bad', msg: '«' + this.state.gap.trim() + '» no es lo que falta aquí. Revisa la pista si la necesitas.' }); return; }
+        const first = this.win(ex);
+        this.setState({ result: 'ok', firstWin: first, fillOut: '' });
+        if (!isWeb) {
+          const prog = S.exerciseProgram(cid, ex, ex.lines.join('\n').replace('___', this.state.gap.trim()));
+          S.run(cid, prog, '').then((r) => { if (r.ok) this.setState({ fillOut: S.norm(r.stdout).split('\n').filter((l) => !/^[-+\s]+$/.test(l)).join('  ·  ') || '(sin salida)' }); });
+        }
+      };
+      v.reset = () => this.setState({ gap: '', result: null, fillOut: '' });
+      codyMsg = 'Escribe en el recuadro la palabra o símbolo que falta y pulsa Enter.';
+    }
+
+    if (ex.type === 'predict') {
+      v.title = ex.title; v.goal = ex.goal; v.file = S.EDITOR[cid].main.name;
+      v.predLines = ex.code.map((l, i) => ({ n: i + 1, toks: S.tokenize(l, lang) }));
+      v.options = ex.options.map((o, i) => {
+        const sel = s.pick === i, right = ok && i === ex.answer, wrong = bad && sel;
+        return {
+          letter: 'ABCD'.charAt(i), text: o, sel: sel ? 'true' : 'false',
+          style: right ? 'background: var(--g50); border: 2px solid #9B2242; color: var(--g-ink);'
+            : wrong ? 'background: var(--r50); border: 2px solid #F97066; color: var(--r-text);'
+            : sel ? 'background: var(--g50); border: 2px solid var(--g300); color: var(--ink);'
+            : 'background: var(--card); border: 2px solid var(--line-2); color: var(--ink);',
+          badge: right || (sel && !wrong) ? 'background: #7A1A35; color: #FFFFFF;' : wrong ? 'background: #D92D20; color: #FFFFFF;' : 'background: var(--muted-bg); color: var(--ink-2);',
+          pick: () => { if (!ok) this.setState({ pick: i, result: null }); }
+        };
+      });
+      v.okText = ex.explain;
+      v.hasHintCode = false; v.hintNote = isWeb ? 'Lee cada etiqueta o propiedad: su nombre suele decir lo que hace.' : 'Lee el código línea por línea y anota el valor de cada variable.';
+      v.cantVerify = s.pick < 0 || ok; v.verifyLabel = 'Verificar respuesta';
+      v.verify = () => {
+        if (this.state.pick < 0 || this.state.result === 'ok') return;
+        if (this.state.pick === ex.answer) { const first = this.win(ex); this.setState({ result: 'ok', firstWin: first }); }
+        else this.setState({ result: 'bad', msg: 'Esa no es. Vuelve a leer el código con calma y elige otra opción.' });
+      };
+      v.reset = () => this.setState({ pick: -1, result: null });
+      codyMsg = 'Lee el código y elige la opción correcta.';
+    }
+
+    if (ex.type === 'code') {
+      const code = s.code;
+      const lines = code.split('\n');
+      v.title = ex.title; v.goal = ex.goal; v.file = S.EDITOR[cid].main.name; v.code = code;
+      v.rows = lines.map((l, i) => ({ n: i + 1, toks: S.tokenize(l, lang) }));
+      v.codeShift = 'translate(' + (-s.sx) + 'px, ' + (-s.sy) + 'px)'; v.gutterShift = 'translateY(' + (-s.sy) + 'px)';
+      v.previewUrl = isWeb ? this.preview(code) : '';
+      const r = s.run;
+      if (r) {
+        if (S.norm(r.stdout)) r.stdout.replace(/\s+$/, '').split('\n').forEach((t) => v.out.push({ t, c: '#F3EAEE' }));
+        if (r.stderr) r.stderr.replace(/\s+$/, '').split('\n').forEach((t) => v.out.push({ t, c: '#FDA29B' }));
+        if (r.ok && !S.norm(r.stdout)) v.out.push({ t: '(El programa no mostró nada)', c: '#C3B3BA' });
+      }
+      if (s.checking) v.out = [{ t: 'Ejecutando…', c: '#FDE68A' }];
+      v.hasConsole = !isWeb && (!!r || s.checking);
+      v.okText = String(s.msg || '').replace(/^¡(Correcto|Bien)!\s*/, '');
+      v.hasHintCode = true; v.hintCode = ex.hint.split('\n').map((l) => ({ toks: S.tokenize(l, lang) }));
+      v.hintNote = ex.reference ? 'Tablas: frutas (nombre, precio, stock), clientes (nombre, ciudad) y pedidos.' : (cid === 'java' || cid === 'cpp') && ex.hint.indexOf('main') < 0 ? 'Escríbelo dentro de main, donde dice «Escribe tu código aquí».' : 'Una posible solución. Escríbela tú mismo para practicar.';
+      v.cantVerify = s.checking || ok; v.verifyLabel = s.checking ? 'Comprobando…' : (isWeb ? 'Comprobar' : 'Ejecutar y comprobar');
+      v.verify = () => {
+        if (this.state.checking || this.state.result === 'ok') return;
+        this.setState({ checking: true, result: null });
+        S.checkExercise(cid, ex, this.state.code).then((rr) => {
+          const first = rr.pass ? this.win(ex) : false;
+          if (rr.run && (rr.run.ok || rr.run.stdout)) S.editorRun();
+          this.setState({ checking: false, run: rr.run || null, result: rr.pass ? 'ok' : 'bad', msg: rr.msg, firstWin: first });
+        });
+      };
+      v.reset = () => { S.resetCode(cid, ex.id); this.setState({ code: ex.starter, result: null, run: null }); };
+      v.resetCode = v.reset;
+      v.onCode = (e) => this.setCode(e.target.value);
+      v.onScroll = (e) => this.setState({ sx: e.target.scrollLeft, sy: e.target.scrollTop });
+      v.onKey = (e) => {
+        const el = e.target, val = el.value, a = el.selectionStart, b = el.selectionEnd;
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); v.verify(); return; }
+        if (e.key === 'Tab') { e.preventDefault(); el.setRangeText('  ', a, b, 'end'); this.setCode(el.value); return; }
+        if (e.key === 'Enter' && !e.shiftKey) {
+          const ls = val.lastIndexOf('\n', a - 1) + 1, cur = val.slice(ls, a);
+          let ind = (cur.match(/^\s*/) || [''])[0];
+          if (/[:{(\[]\s*$/.test(cur)) ind += '  ';
+          e.preventDefault();
+          const ins = '\n' + ind;
+          el.setRangeText(ins, a, b, 'end'); this.setCode(el.value);
+        }
+      };
+      codyMsg = isWeb ? 'Escribe tu código: la vista previa cambia al instante. Luego pulsa Comprobar.' : 'Escribe tu código y pulsa «Ejecutar y comprobar» (o Ctrl + Enter).';
+    }
+
+    if (ok) {
+      mood = 'celebra';
+      if (allDone) codyMsg = '¡Completaste los ' + list.length + ' ejercicios de ' + C.name + '! ' + (retosPending ? 'Sigue con los retos del editor.' : 'Sigue con tu próxima lección.');
+      else if (nextEx && nextEx.lv !== ex.lv) codyMsg = '¡Nivel ' + ex.lv + ' completado! Desbloqueaste el nivel ' + nextEx.lv + '.';
+      else codyMsg = '¡Muy bien! Desbloqueaste el ejercicio ' + (nextIdx + 1) + '. Pulsa Continuar.';
+    }
+    if (bad) { mood = 'triste'; codyMsg = ex.type === 'order' ? 'Casi. Las piezas en rojo están fuera de lugar.' : 'No pasa nada: revisa el mensaje, corrige y vuelve a intentarlo.'; }
+    v.mood = mood; v.codyMsg = codyMsg;
+    v.verifyStyle = v.cantVerify ? 'background: var(--track-2); color: var(--ink-3); cursor: not-allowed;' : 'background: #7A1A35; color: #FFFFFF; box-shadow: 0 4px 0 #4A0E22; cursor: pointer;';
+    return v;
+  }
+}
+</script>
+</body>
+</html>

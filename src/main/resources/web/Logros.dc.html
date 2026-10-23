@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Logros</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-card{transition:transform .2s ease,box-shadow .2s ease}
+.cy-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(31,20,24,.08)}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="logros" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="normal" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1160px; box-sizing: border-box; padding: 20px 32px 48px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Ruta de navegación" style="font-size: 13px; font-weight: 800; color: var(--ink-4);">AGbyte <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <span style="color: var(--g-text);">Logros y estadísticas</span></nav>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <div style="flex: 3 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <h1 style="margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -0.01em;">Tus logros</h1>
+              <span style="font-size: 14px; font-weight: 700; color: var(--ink-3);">{{summary}}</span>
+            </div>
+            <div role="tablist" aria-label="Filtrar insignias" style="display: flex; gap: 4px; padding: 4px; border-radius: 14px; background: var(--seg);">
+              <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+                <button type="button" role="tab" onClick="{{t.pick}}" aria-selected="{{t.on}}" style="height: 36px; padding: 0 14px; border: 0; border-radius: 10px; font-family: inherit; font-size: 13px; font-weight: 900; cursor: pointer; {{t.style}}">{{t.label}} · {{t.n}}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px;">
+            <sc-for list="{{list}}" as="b" hint-placeholder-count="8">
+              <article class="{{b.cls}}" style="position: relative; padding: 18px; border-radius: 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; {{b.box}}">
+                <span style="position: absolute; top: 10px; right: 12px; font-size: 11px; font-weight: 900; color: var(--ink-4);">{{b.n}}</span>
+                <span style="position: relative; width: 56px; height: 56px; border-radius: 18px; display: flex; align-items: center; justify-content: center; {{b.tile}}"><sc-if value="{{b.i_play}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg></sc-if><sc-if value="{{b.i_term}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 4 4-4 4"></path><path d="M12 16h7"></path></svg></sc-if><sc-if value="{{b.i_zap}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path></svg></sc-if><sc-if value="{{b.i_flame}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg></sc-if><sc-if value="{{b.i_code}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path></svg></sc-if><sc-if value="{{b.i_star}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg></sc-if><sc-if value="{{b.i_bot}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="3"></rect><path d="M12 8V4"></path><circle cx="12" cy="3.5" r="1"></circle><circle cx="9.5" cy="13" r="1"></circle><circle cx="14.5" cy="13" r="1"></circle></svg></sc-if><sc-if value="{{b.i_check}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></sc-if><sc-if value="{{b.locked}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="position: absolute; right: -6px; bottom: -6px; width: 22px; height: 22px; border-radius: 50%; background: var(--card); border: 2px solid var(--line-strong); color: var(--ink-3); display: flex; align-items: center; justify-content: center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span></sc-if></span>
+                <h2 style="margin: 0; font-size: 16px; font-weight: 900; {{b.titleColor}}">{{b.title}}</h2>
+                <p style="margin: 0; font-size: 13px; line-height: 1.4; font-weight: 700; color: var(--ink-3);">{{b.desc}}</p>
+                <sc-if value="{{b.earned}}" hint-placeholder-val="{{ true }}">
+                  <span style="padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 900; {{b.chip}}">+{{b.xp}} XP</span>
+                  <span style="font-size: 12px; font-weight: 700; color: var(--ink-4);">Obtenida el {{b.date}}</span>
+                </sc-if>
+                <sc-if value="{{b.locked}}" hint-placeholder-val="{{ false }}">
+                  <div style="width: 100%; display: flex; align-items: center; gap: 8px;"><span style="flex: 1; height: 8px; border-radius: 999px; background: var(--track-2); overflow: hidden;"><span style="display: block; height: 100%; border-radius: 999px; background: #B02A50; width: {{b.pctW}};"></span></span><span style="font-size: 12px; font-weight: 900; color: var(--ink-2);">{{b.cur}}/{{b.max}}</span></div>
+                  <span style="font-size: 12px; font-weight: 800; color: var(--ink-3);">Recompensa: {{b.xp}} XP</span>
+                </sc-if>
+              </article>
+            </sc-for>
+          </div>
+        </div>
+
+        <aside style="flex: 1.3 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="nivel-t" style="padding: 20px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px;">
+            <h2 id="nivel-t" style="margin: 0; font-size: 12px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2);">Nivel actual</h2>
+            <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-size: 44px; line-height: 1; font-weight: 900; color: var(--g-num);">{{level}}</span><span style="font-size: 14px; font-weight: 800; color: var(--ink-2);">{{levelName}}</span></div>
+            <div style="height: 10px; border-radius: 999px; background: var(--track); overflow: hidden;"><div style="height: 100%; border-radius: 999px; background: #B02A50; width: {{levelPct}};"></div></div>
+            <span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">{{levelNote}}</span>
+          </section>
+
+          <section aria-labelledby="racha-t" style="padding: 20px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px;">
+            <h2 id="racha-t" style="margin: 0; font-size: 16px; font-weight: 900;">Racha actual</h2>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="#F97316" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+              <div style="display: flex; flex-direction: column;"><span style="font-size: 26px; line-height: 1.1; font-weight: 900; color: var(--o-text);">{{streak}}</span><span style="font-size: 12px; font-weight: 800; color: var(--ink-3);">Récord personal: {{best}}</span></div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; text-align: center;">
+              <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+                <span style="display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 800; {{d.labelStyle}}"><span style="width: 26px; height: 26px; box-sizing: border-box; border-radius: 8px; color: #FFFFFF; display: flex; align-items: center; justify-content: center; {{d.style}}"><sc-if value="{{d.done}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>{{d.label}}</span>
+              </sc-for>
+            </div>
+          </section>
+
+          <section aria-labelledby="stats-t" style="padding: 20px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px;">
+            <h2 id="stats-t" style="margin: 0 0 6px; font-size: 16px; font-weight: 900;">Estadísticas</h2>
+            <dl style="margin: 0; display: flex; flex-direction: column;">
+              <sc-for list="{{statRows}}" as="r" hint-placeholder-count="6">
+                <div style="display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px;"><dt style="font-weight: 700; color: var(--ink-2);">{{r.k}}</dt><dd style="margin: 0; font-weight: 900;">{{r.v}}</dd></div>
+              </sc-for>
+            </dl>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'todas' };
+  }
+  renderVals() {
+    const tab = this.state.tab;
+    const S = window.CodyuStore;
+    const all = S.badges(), st = S.stats();
+    const earnedN = all.filter((b) => b.earned).length;
+    const tones = { g: ['var(--g100)', 'var(--g-text)', 'var(--g200)'], b: ['var(--b100)', 'var(--b-text)', 'var(--b200)'], p: ['var(--p100)', 'var(--p-text)', 'var(--p200)'], o: ['var(--o100)', '#EA580C', 'var(--o200)'], a: ['var(--a100)', 'var(--a-text)', '#FCD34D'] };
+    const list = all.filter((b) => tab === 'todas' || (tab === 'obtenidas' ? b.earned : !b.earned)).map((b) => {
+      const t = tones[b.tone];
+      const o = { n: b.n, title: b.title, desc: b.desc, xp: b.xp, date: b.date, earned: b.earned, locked: !b.earned, cur: b.cur, max: b.max, pctW: Math.max(b.pct, 3) + '%',
+        cls: b.earned ? 'cy-card' : '',
+        box: b.earned ? 'background: var(--card); border: 2px solid ' + t[2] + ';' : 'background: var(--sunken); border: 2px dashed var(--line-strong);',
+        tile: b.earned ? 'background: ' + t[0] + '; color: ' + t[1] + ';' : 'background: var(--muted-bg); color: var(--ink-3);',
+        chip: 'background: ' + t[0] + '; color: ' + t[1] + ';',
+        titleColor: b.earned ? 'color: var(--ink);' : 'color: var(--ink-1);' };
+      ['play', 'term', 'zap', 'flame', 'code', 'star', 'bot', 'check'].forEach((k) => { o['i_' + k] = b.icon === k; });
+      return o;
+    });
+    const rewards = all.filter((b) => b.earned).reduce((s, b) => s + b.xp, 0);
+    const defs = [
+      { id: 'todas', label: 'Todas', n: all.length },
+      { id: 'obtenidas', label: 'Obtenidas', n: earnedN },
+      { id: 'pendientes', label: 'Por desbloquear', n: all.length - earnedN }
+    ];
+    const mins = st.minutes, h = Math.floor(mins / 60), m = mins % 60;
+    return {
+      tabs: defs.map((d) => ({
+        ...d,
+        on: d.id === tab,
+        style: d.id === tab ? 'background: var(--card); color: var(--g-ink); box-shadow: 0 1px 3px rgba(31,20,24,0.12);' : 'background: transparent; color: var(--ink-2);',
+        pick: () => this.setState({ tab: d.id })
+      })),
+      list,
+      summary: earnedN + ' de ' + all.length + ' insignias · ' + rewards + ' XP ganados en recompensas',
+      level: st.level, levelName: st.levelName, levelPct: Math.max(st.levelPct, 2) + '%',
+      levelNote: st.toNext > 0 ? st.xp + ' / ' + st.nextLevelXp + ' XP · te faltan ' + st.toNext + ' para el nivel ' + (st.level + 1) : st.xp + ' XP',
+      streak: st.streak + (st.streak === 1 ? ' día' : ' días'), best: st.streakBest + (st.streakBest === 1 ? ' día' : ' días'),
+      week: S.week().map((d) => ({ label: d.label, done: d.done, style: d.done ? 'background: #B02A50;' : d.isToday ? 'border: 2px dashed #F97316; background: var(--o50);' : 'background: var(--muted-bg);', labelStyle: d.isToday ? 'color: var(--o-text); font-weight: 900;' : 'color: var(--ink-3);' })),
+      statRows: [
+        { k: 'Insignias ganadas', v: earnedN + ' de ' + all.length },
+        { k: 'XP total', v: st.xp },
+        { k: 'Lecciones completadas', v: st.lessonsTotal },
+        { k: 'Ejercicios resueltos', v: st.exercises },
+        { k: 'Racha máxima', v: st.streakBest + (st.streakBest === 1 ? ' día' : ' días') },
+        { k: 'Tiempo de estudio', v: (h ? h + ' h ' : '') + m + ' min' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

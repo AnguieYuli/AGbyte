@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Notificaciones</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-note:hover{background-color:var(--sunken)!important}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="ninguno" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="activo" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1160px; box-sizing: border-box; padding: 20px 32px 48px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Ruta de navegación" style="font-size: 13px; font-weight: 800; color: var(--ink-4);">AGbyte <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <span style="color: var(--g-text);">Notificaciones</span></nav>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <div style="flex: 3 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <h1 style="margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -0.01em;">Notificaciones</h1>
+              <span aria-live="polite" style="font-size: 14px; font-weight: 700; color: var(--ink-3);">{{summary}}</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+              <div role="tablist" aria-label="Filtrar notificaciones" style="display: flex; gap: 4px; padding: 4px; border-radius: 14px; background: var(--seg);">
+                <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+                  <button type="button" role="tab" onClick="{{t.pick}}" aria-selected="{{t.on}}" style="height: 36px; padding: 0 14px; border: 0; border-radius: 10px; font-family: inherit; font-size: 13px; font-weight: 900; cursor: pointer; {{t.style}}">{{t.label}}</button>
+                </sc-for>
+              </div>
+              <button type="button" onClick="{{markAll}}" disabled="{{noneUnread}}" style="height: 44px; padding: 0 14px; border-radius: 12px; border: 2px solid var(--line-2); background: var(--card); font-family: inherit; font-size: 13px; font-weight: 900; cursor: pointer; {{markStyle}}">Marcar todo como leído</button>
+            </div>
+          </div>
+
+          <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+            <section aria-label="{{g.label}}" style="display: flex; flex-direction: column; gap: 8px;">
+              <h2 style="margin: 4px 0 0; font-size: 12px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2);">{{g.label}}</h2>
+              <ul style="list-style: none; margin: 0; padding: 0; border-radius: 20px; background: var(--card); border: 1px solid var(--line); overflow: hidden;">
+                <sc-for list="{{g.items}}" as="n" hint-placeholder-count="2">
+                  <li class="cy-note" style="display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; border-top: 1px solid var(--line-soft); {{n.rowStyle}}">
+                    <span aria-hidden="true" style="width: 42px; height: 42px; flex: none; border-radius: 12px; display: flex; align-items: center; justify-content: center; {{n.tile}}">
+                      <sc-if value="{{n.isFlame}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg></sc-if>
+                      <sc-if value="{{n.isUsers}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="6" width="6" height="15" rx="1.2"></rect><rect x="3" y="11" width="6" height="10" rx="1.2"></rect><rect x="15" y="14" width="6" height="7" rx="1.2"></rect></svg></sc-if>
+                      <sc-if value="{{n.isTrophy}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M18 2H6v7a6 6 0 0 0 12 0z"></path><path d="M12 15v7"></path></svg></sc-if>
+                      <sc-if value="{{n.isCheck}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                      <sc-if value="{{n.isMoon}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+                      <sc-if value="{{n.isSpark}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"></path></svg></sc-if>
+                    </span>
+                    <button type="button" onClick="{{n.read}}" aria-label="{{n.aria}}" style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; padding: 0; border: 0; background: transparent; text-align: left; font-family: inherit; cursor: pointer; color: var(--ink);">
+                      <span style="display: flex; align-items: center; gap: 8px;">
+                        <strong style="font-size: 15px; {{n.titleWeight}}">{{n.title}}</strong>
+                        <sc-if value="{{n.unread}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 50%; background: #D92D20;"></span></sc-if>
+                      </span>
+                      <span style="font-size: 14px; line-height: 1.45; font-weight: 700; color: var(--ink-2);">{{n.text}}</span>
+                      <span style="font-size: 12px; font-weight: 800; color: var(--ink-4);">{{n.time}}</span>
+                    </button>
+                    <sc-if value="{{n.hasAction}}" hint-placeholder-val="{{ false }}">
+                      <a href="{{n.href}}" style="flex: none; align-self: center; height: 38px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: 10px; border: 2px solid var(--line-2); background: var(--card); font-size: 13px; font-weight: 900; text-decoration: none;">{{n.action}}</a>
+                    </sc-if>
+                  </li>
+                </sc-for>
+              </ul>
+            </section>
+          </sc-for>
+
+          <sc-if value="{{allClear}}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 40px 20px; border-radius: 20px; background: var(--card); border: 2px dashed var(--line-2); text-align: center;">
+              <dc-import name="Cody" size="100" mood="feliz" hint-size="100px,100px"></dc-import>
+              <strong style="font-size: 18px; font-weight: 900;">¡Estás al día!</strong>
+              <span style="font-size: 14px; font-weight: 700; color: var(--ink-3);">No tienes notificaciones sin leer.</span>
+            </div>
+          </sc-if>
+        </div>
+
+        <aside style="flex: 1.3 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="pref-t" style="padding: 20px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px;">
+            <h2 id="pref-t" style="margin: 0 0 6px; font-size: 16px; font-weight: 900;">Qué quieres que te avise</h2>
+            <sc-for list="{{prefs}}" as="p" hint-placeholder-count="4">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line-soft);">
+                <span style="flex: 1; display: flex; flex-direction: column;"><strong id="{{p.id}}" style="font-size: 14px; font-weight: 900;">{{p.label}}</strong><span style="font-size: 12px; font-weight: 700; color: var(--ink-3);">{{p.desc}}</span></span>
+                <button type="button" role="switch" aria-checked="{{p.on}}" aria-labelledby="{{p.id}}" onClick="{{p.toggle}}" style="position: relative; width: 48px; height: 28px; flex: none; border-radius: 999px; border: 0; cursor: pointer; {{p.track}}"><span style="position: absolute; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 3px rgba(0,0,0,0.25); transition: left .2s ease; {{p.knob}}"></span></button>
+              </div>
+            </sc-for>
+            <a href="Ajustes.dc.html" style="margin-top: 10px; font-size: 14px; font-weight: 900; text-decoration: none;">Más opciones en Ajustes</a>
+          </section>
+          <section style="padding: 18px 20px; border-radius: 22px; background: var(--g50); border: 1px solid var(--g200); display: flex; align-items: center; gap: 12px;">
+            <dc-import name="Cody" size="56" mood="saluda" hint-size="56px,56px"></dc-import>
+            <span style="font-size: 14px; line-height: 1.45; font-weight: 800; color: var(--g-ink);">Te aviso una vez al día, nunca más de eso. Prometido.</span>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1080}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'todas' };
+  }
+  renderVals() {
+    const s = this.state;
+    const S = window.CodyuStore;
+    const items = S.notifications();
+    const set = S.settings();
+    s.read = {}; items.forEach((it) => { s.read[it.id] = it.read; });
+    s.prefs = set.t;
+    const tiles = {
+      flame: 'background: var(--o100); color: var(--o-num);', users: 'background: var(--b100); color: var(--b-text);',
+      trophy: 'background: var(--g100); color: var(--g-text);', check: 'background: var(--g100); color: var(--g-text);',
+      moon: 'background: var(--p100); color: var(--p-text);', spark: 'background: var(--g50); color: var(--g-num);'
+    };
+    const unreadCount = items.filter((it) => !s.read[it.id]).length;
+    const visible = items.filter((it) => s.tab === 'todas' || !s.read[it.id]);
+    const order = ['Hoy', 'Ayer', 'Esta semana'];
+    const groups = order.map((label) => ({
+      label,
+      items: visible.filter((it) => it.group === label).map((it, idx) => {
+        const unread = !s.read[it.id];
+        return {
+          ...it,
+          unread,
+          hasAction: !!it.action,
+          tile: tiles[it.icon],
+          isFlame: it.icon === 'flame', isUsers: it.icon === 'users', isTrophy: it.icon === 'trophy',
+          isCheck: it.icon === 'check', isMoon: it.icon === 'moon', isSpark: it.icon === 'spark',
+          rowStyle: (idx === 0 ? 'border-top: 0;' : '') + (unread ? ' background: var(--tint-new);' : ' background: var(--card);'),
+          titleWeight: unread ? 'font-weight: 900;' : 'font-weight: 800;',
+          aria: it.title + (unread ? ', sin leer. Marcar como leída' : ''),
+          read: () => { S.markRead(it.id); this.forceUpdate(); }
+        };
+      })
+    })).filter((g) => g.items.length > 0);
+    const prefDefs = [
+      { id: 'diario', label: 'Recordatorio diario', desc: 'A las 19:00' },
+      { id: 'racha', label: 'Racha en riesgo', desc: 'Si a las 21:00 aún no practicas' },
+      { id: 'liga', label: 'Movimientos en la liga', desc: 'Cuando alguien te supera' },
+      { id: 'novedades', label: 'Novedades por correo', desc: 'Cursos y funciones nuevas' }
+    ];
+    return {
+      summary: unreadCount === 0 ? 'Todo leído' : unreadCount === 1 ? '1 sin leer' : unreadCount + ' sin leer',
+      tabs: [{ id: 'todas', label: 'Todas' }, { id: 'nuevas', label: 'Sin leer' }].map((t) => ({
+        ...t, on: s.tab === t.id,
+        style: s.tab === t.id ? 'background: var(--card); color: var(--g-ink); box-shadow: 0 1px 3px rgba(31,20,24,0.12);' : 'background: transparent; color: var(--ink-2);',
+        pick: () => this.setState({ tab: t.id })
+      })),
+      groups,
+      allClear: groups.length === 0,
+      noneUnread: unreadCount === 0,
+      markStyle: unreadCount === 0 ? 'color: var(--ink-3); cursor: not-allowed; opacity: 0.7;' : 'color: var(--g-text);',
+      markAll: () => { S.markAllRead(); this.forceUpdate(); },
+      prefs: prefDefs.map((p) => {
+        const on = !!s.prefs[p.id];
+        return {
+          ...p, id: 'pref-' + p.id, on,
+          track: on ? 'background: #7A1A35;' : 'background: #B0A4A9;',
+          knob: on ? 'left: 23px;' : 'left: 3px;',
+          toggle: () => { S.setToggle(p.id, !on); this.forceUpdate(); }
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

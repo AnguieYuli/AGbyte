@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Ajustes</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-snav:hover{background-color:var(--g50)}
+.cy-sec:hover{background-color:var(--g50)!important}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="ajustes" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="normal" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1160px; box-sizing: border-box; padding: 20px 32px 48px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Ruta de navegación" style="font-size: 13px; font-weight: 800; color: var(--ink-4);">AGbyte <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <span style="color: var(--g-text);">Ajustes</span></nav>
+
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px;">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -0.01em;">Ajustes</h1>
+        <span role="status" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; color: var(--g-text);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>{{saveLabel}}</span>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <nav aria-label="Secciones de ajustes" style="flex: 0 1 220px; min-width: 200px; padding: 10px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px;">
+          <a href="#cuenta" class="cy-snav" style="display: flex; align-items: center; min-height: 42px; padding: 0 12px; border-radius: 10px; font-size: 14px; font-weight: 800; color: var(--ink-1); text-decoration: none;">Cuenta</a>
+          <a href="#aprendizaje" class="cy-snav" style="display: flex; align-items: center; min-height: 42px; padding: 0 12px; border-radius: 10px; font-size: 14px; font-weight: 800; color: var(--ink-1); text-decoration: none;">Aprendizaje</a>
+          <a href="#notificaciones" class="cy-snav" style="display: flex; align-items: center; min-height: 42px; padding: 0 12px; border-radius: 10px; font-size: 14px; font-weight: 800; color: var(--ink-1); text-decoration: none;">Notificaciones</a>
+          <a href="#apariencia" class="cy-snav" style="display: flex; align-items: center; justify-content: space-between; min-height: 42px; padding: 0 12px; border-radius: 10px; font-size: 14px; font-weight: 800; color: var(--ink-1); text-decoration: none;">Apariencia <span style="padding: 2px 8px; border-radius: 999px; background: var(--p100); font-size: 11px; font-weight: 900; color: var(--p-text2);">Nuevo</span></a>
+          <a href="#accesibilidad" class="cy-snav" style="display: flex; align-items: center; min-height: 42px; padding: 0 12px; border-radius: 10px; font-size: 14px; font-weight: 800; color: var(--ink-1); text-decoration: none;">Sonido y accesibilidad</a>
+          <a href="#privacidad" class="cy-snav" style="display: flex; align-items: center; min-height: 42px; padding: 0 12px; border-radius: 10px; font-size: 14px; font-weight: 800; color: var(--ink-1); text-decoration: none;">Privacidad y datos</a>
+        </nav>
+
+        <div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+
+          <section id="cuenta" aria-labelledby="h-cuenta" style="padding: 22px 24px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column;">
+            <h2 id="h-cuenta" style="margin: 0 0 8px; font-size: 18px; font-weight: 900;">Cuenta</h2>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line-soft);">
+              <span style="flex: 1 1 240px; display: flex; flex-direction: column;"><strong style="font-size: 15px; font-weight: 900;">{{name}}</strong><span style="font-size: 14px; font-weight: 700; color: var(--ink-2);">{{email}} · {{user}}</span></span>
+              <a href="Perfil.dc.html" class="cy-sec" style="height: 40px; padding: 0 14px; display: inline-flex; align-items: center; box-sizing: border-box; border-radius: 10px; border: 2px solid var(--line-2); background: var(--card); font-size: 13px; font-weight: 900; color: var(--g-text); text-decoration: none;">Editar perfil</a>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--line-soft);">
+              <span style="display: flex; flex-direction: column;"><strong style="font-size: 15px; font-weight: 900;">Cuenta de Google</strong><span style="font-size: 14px; line-height: 1.45; font-weight: 700; color: var(--ink-2);">Conéctala para entrar con un clic y usar tu foto de Google.</span></span>
+              <div style="max-width: 420px;"><dc-import name="GoogleConnect" mode="link" label="Conectar con Google" hint-size="100%,52px"></dc-import></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 0 2px;">
+              <span style="flex: 1 1 240px; display: flex; flex-direction: column;"><strong style="font-size: 15px; font-weight: 900;">Dónde se guarda tu progreso</strong><span style="font-size: 14px; line-height: 1.45; font-weight: 700; color: var(--ink-2);">En este equipo. Tus lecciones, XP, racha y ajustes siguen aquí cuando vuelvas a abrir AGbyte.</span></span>
+            </div>
+          </section>
+
+          <section id="aprendizaje" aria-labelledby="h-apr" style="padding: 22px 24px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px;">
+            <h2 id="h-apr" style="margin: 0; font-size: 18px; font-weight: 900;">Aprendizaje</h2>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span id="meta-lbl" style="font-size: 15px; font-weight: 900;">Meta diaria</span>
+              <div role="radiogroup" aria-labelledby="meta-lbl" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+                <sc-for list="{{goals}}" as="g" hint-placeholder-count="4">
+                  <button type="button" role="radio" aria-checked="{{g.on}}" onClick="{{g.pick}}" style="padding: 12px 8px; border-radius: 14px; font-family: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; {{g.style}}">
+                    <strong style="font-size: 18px; font-weight: 900;">{{g.min}} min</strong>
+                    <span style="font-size: 12px; font-weight: 800;">{{g.label}}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+              <div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px;">
+                <label for="hora" style="font-size: 15px; font-weight: 900;">Hora del recordatorio</label>
+                <select id="hora" value="{{hour}}" onChange="{{onHour}}" style="height: 46px; padding: 0 12px; border-radius: 12px; border: 2px solid var(--line-strong); background: var(--card); font-family: inherit; font-size: 15px; font-weight: 800; color: var(--ink);">
+                  <option value="08:00">08:00</option>
+                  <option value="13:00">13:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="21:00">21:00</option>
+                </select>
+              </div>
+              <div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-size: 15px; font-weight: 900;">Curso activo</span>
+                <span style="height: 46px; display: flex; align-items: center; gap: 10px; padding: 0 12px; border-radius: 12px; background: var(--sunken); border: 2px solid var(--line-4); font-size: 15px; font-weight: 800; box-sizing: border-box;"><span style="padding: 1px 6px; border-radius: 6px; font-family: monospace; font-size: 12px; font-weight: 700; {{courseTile}}">{{courseGlyph}}</span>{{courseTitle}}<a href="Lecciones.dc.html" style="margin-left: auto; font-size: 13px; font-weight: 900; text-decoration: none;">Cambiar</a></span>
+              </div>
+            </div>
+          </section>
+
+          <section id="notificaciones" aria-labelledby="h-not" style="padding: 22px 24px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column;">
+            <h2 id="h-not" style="margin: 0 0 6px; font-size: 18px; font-weight: 900;">Notificaciones</h2>
+            <sc-for list="{{notifs}}" as="t" hint-placeholder-count="4">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line-soft);">
+                <span style="flex: 1; display: flex; flex-direction: column;"><strong id="{{t.id}}" style="font-size: 15px; font-weight: 900;">{{t.label}}</strong><span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">{{t.desc}}</span></span>
+                <button type="button" role="switch" aria-checked="{{t.on}}" aria-labelledby="{{t.id}}" onClick="{{t.toggle}}" style="position: relative; width: 52px; height: 30px; flex: none; border-radius: 999px; border: 0; cursor: pointer; {{t.track}}"><span style="position: absolute; top: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 3px rgba(0,0,0,0.25); transition: left .2s ease; {{t.knob}}"></span></button>
+              </div>
+            </sc-for>
+          </section>
+
+          <section id="apariencia" aria-labelledby="h-apa" style="padding: 22px 24px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px;">
+            <h2 id="h-apa" style="margin: 0; font-size: 18px; font-weight: 900;">Apariencia</h2>
+            <div role="radiogroup" aria-label="Tema" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px;">
+              <sc-for list="{{themes}}" as="th" hint-placeholder-count="3">
+                <button type="button" role="radio" aria-checked="{{th.on}}" onClick="{{th.pick}}" style="padding: 10px; border-radius: 18px; background: var(--card); font-family: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 10px; text-align: left; {{th.ring}}">
+                  <span aria-hidden="true" style="height: 92px; border-radius: 12px; overflow: hidden; display: flex; {{th.frame}}">
+                    <span style="width: 28%; display: flex; flex-direction: column; gap: 5px; padding: 8px 6px; box-sizing: border-box; {{th.side}}">
+                      <span style="height: 8px; width: 70%; border-radius: 3px; background: #B02A50;"></span>
+                      <span style="height: 5px; border-radius: 3px; {{th.line}}"></span>
+                      <span style="height: 5px; border-radius: 3px; {{th.line}}"></span>
+                      <span style="height: 5px; border-radius: 3px; {{th.line}}"></span>
+                    </span>
+                    <span style="flex: 1; display: flex; flex-direction: column; gap: 6px; padding: 8px; box-sizing: border-box; {{th.body}}">
+                      <span style="height: 24px; border-radius: 6px; background: #9B2242;"></span>
+                      <span style="display: flex; gap: 5px;"><span style="flex: 1; height: 22px; border-radius: 6px; {{th.card}}"></span><span style="flex: 1; height: 22px; border-radius: 6px; {{th.card}}"></span></span>
+                    </span>
+                  </span>
+                  <span style="display: flex; align-items: center; gap: 8px; padding: 0 4px 4px;">
+                    <span aria-hidden="true" style="width: 18px; height: 18px; flex: none; box-sizing: border-box; border-radius: 50%; {{th.radio}}"></span>
+                    <strong style="font-size: 14px; font-weight: 900; color: var(--ink);">{{th.label}}</strong>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+            <sc-if value="{{darkPicked}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; background: #191215; color: #F4EBEF;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F0A9BD" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                <span style="flex: 1 1 240px; font-size: 14px; font-weight: 800;">Listo: toda la app usa el modo oscuro. El editor y la consola siempre se ven oscuros.</span>
+              </div>
+            </sc-if>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span id="txt-lbl" style="font-size: 15px; font-weight: 900;">Tamaño del texto</span>
+              <div role="radiogroup" aria-labelledby="txt-lbl" style="display: flex; gap: 4px; padding: 4px; border-radius: 14px; background: var(--seg); align-self: flex-start;">
+                <sc-for list="{{sizes}}" as="z" hint-placeholder-count="3">
+                  <button type="button" role="radio" aria-checked="{{z.on}}" onClick="{{z.pick}}" style="height: 36px; padding: 0 14px; border: 0; border-radius: 10px; font-family: inherit; font-size: 13px; font-weight: 900; cursor: pointer; {{z.style}}">{{z.label}}</button>
+                </sc-for>
+              </div>
+              <p style="margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--sunken); line-height: 1.5; font-weight: 700; color: var(--ink-1); font-size: {{previewSize}};">Una variable es un nombre que guarda un valor para usarlo después.</p>
+            </div>
+          </section>
+
+          <section id="accesibilidad" aria-labelledby="h-acc" style="padding: 22px 24px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column;">
+            <h2 id="h-acc" style="margin: 0 0 6px; font-size: 18px; font-weight: 900;">Sonido y accesibilidad</h2>
+            <sc-for list="{{access}}" as="t" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line-soft);">
+                <span style="flex: 1; display: flex; flex-direction: column;"><strong id="{{t.id}}" style="font-size: 15px; font-weight: 900;">{{t.label}}</strong><span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">{{t.desc}}</span></span>
+                <button type="button" role="switch" aria-checked="{{t.on}}" aria-labelledby="{{t.id}}" onClick="{{t.toggle}}" style="position: relative; width: 52px; height: 30px; flex: none; border-radius: 999px; border: 0; cursor: pointer; {{t.track}}"><span style="position: absolute; top: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 3px rgba(0,0,0,0.25); transition: left .2s ease; {{t.knob}}"></span></button>
+              </div>
+            </sc-for>
+          </section>
+
+          <section id="privacidad" aria-labelledby="h-pri" style="padding: 22px 24px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column;">
+            <h2 id="h-pri" style="margin: 0 0 6px; font-size: 18px; font-weight: 900;">Privacidad y datos</h2>
+            <sc-for list="{{privacy}}" as="t" hint-placeholder-count="1">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line-soft);">
+                <span style="flex: 1; display: flex; flex-direction: column;"><strong id="{{t.id}}" style="font-size: 15px; font-weight: 900;">{{t.label}}</strong><span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">{{t.desc}}</span></span>
+                <button type="button" role="switch" aria-checked="{{t.on}}" aria-labelledby="{{t.id}}" onClick="{{t.toggle}}" style="position: relative; width: 52px; height: 30px; flex: none; border-radius: 999px; border: 0; cursor: pointer; {{t.track}}"><span style="position: absolute; top: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 3px rgba(0,0,0,0.25); transition: left .2s ease; {{t.knob}}"></span></button>
+              </div>
+            </sc-for>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line-soft);">
+              <span style="flex: 1 1 240px; display: flex; flex-direction: column;"><strong style="font-size: 15px; font-weight: 900;">Descargar mis datos</strong><span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">Tu progreso, logros y código en un archivo.</span></span>
+              <button type="button" class="cy-sec" style="height: 40px; padding: 0 14px; border-radius: 10px; border: 2px solid var(--line-2); background: var(--card); font-family: inherit; font-size: 13px; font-weight: 900; color: var(--g-text); cursor: pointer;" onClick="{{download}}">{{downloadLabel}}</button>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 0 2px;">
+              <span style="flex: 1 1 240px; display: flex; flex-direction: column;"><strong style="font-size: 15px; font-weight: 900; color: var(--r-text);">Eliminar cuenta</strong><span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">Borra tu cuenta y todo tu progreso. No se puede deshacer.</span></span>
+              <sc-if value="{{askDelete}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; gap: 8px;"><button type="button" onClick="{{cancelDelete}}" style="height: 40px; padding: 0 14px; border-radius: 10px; border: 2px solid var(--line-2); background: var(--card); font-family: inherit; font-size: 13px; font-weight: 900; color: var(--ink-2); cursor: pointer;">Cancelar</button><button type="button" onClick="{{confirmDelete}}" style="height: 40px; padding: 0 14px; border-radius: 10px; border: 0; background: #B42318; font-family: inherit; font-size: 13px; font-weight: 900; color: #FFFFFF; cursor: pointer;">Sí, eliminar</button></span></sc-if>
+              <sc-if value="{{notAskDelete}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{askDel}}" style="height: 40px; padding: 0 14px; border-radius: 10px; border: 2px solid var(--r300); background: var(--r50); font-family: inherit; font-size: 13px; font-weight: 900; color: var(--r-text); cursor: pointer;">Eliminar cuenta</button></sc-if>
+            </div>
+          </section>
+
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+            <span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">AGbyte 2.0 para escritorio</span>
+            <a href="Main.dc.html" onClick="{{logout}}" style="display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 18px; border-radius: 12px; background: var(--r50); border: 1px solid var(--r200); color: var(--r-text3); font-size: 14px; font-weight: 900; text-decoration: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg>
+              Cerrar sesión
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { changed: false, askDelete: false, downloaded: false };
+  }
+  sw(id, label, desc) {
+    const on = !!window.CodyuStore.settings().t[id];
+    return {
+      id: 'sw-' + id, label, desc, on,
+      track: on ? 'background: #7A1A35;' : 'background: #B0A4A9;',
+      knob: on ? 'left: 25px;' : 'left: 3px;',
+      toggle: () => { window.CodyuStore.setToggle(id, !on); this.setState({ changed: true }); }
+    };
+  }
+  renderVals() {
+    const S = window.CodyuStore;
+    const set = S.settings(), me = S.me();
+    const s = Object.assign({}, this.state, { goal: set.goal, hour: set.hour, theme: set.theme, size: set.size });
+    const goalDefs = [{ min: 5, label: 'Casual' }, { min: 10, label: 'Regular' }, { min: 15, label: 'En serio' }, { min: 20, label: 'Intenso' }];
+    const themeDefs = [
+      { id: 'claro', label: 'Claro', frame: 'background: #F8F5F6; border: 1px solid #E9E1E4;', side: 'background: #FFFFFF;', line: 'background: #E9E1E4;', body: 'background: #F8F5F6;', card: 'background: #FFFFFF; border: 1px solid #E9E1E4;' },
+      { id: 'oscuro', label: 'Oscuro', frame: 'background: #140E11; border: 1px solid #30252A;', side: 'background: #191215;', line: 'background: #2A3A32;', body: 'background: #140E11;', card: 'background: #1E161A; border: 1px solid #30252A;' },
+      { id: 'sistema', label: 'Según el sistema', frame: 'background: linear-gradient(90deg, #F8F5F6 50%, #140E11 50%); border: 1px solid var(--line-strong);', side: 'background: #FFFFFF;', line: 'background: #E9E1E4;', body: 'background: linear-gradient(90deg, #F8F5F6 38%, #140E11 38%);', card: 'background: #B0A4A9;' }
+    ];
+    const sizeDefs = [{ id: 'normal', label: 'Normal', px: '15px' }, { id: 'grande', label: 'Grande', px: '17px' }, { id: 'xl', label: 'Muy grande', px: '20px' }];
+    const curSize = sizeDefs.find((z) => z.id === s.size) || sizeDefs[0];
+    const cur = S.course();
+    return {
+      courseTile: 'background: ' + cur.tileBg + '; color: ' + cur.tileFg + ';', courseGlyph: cur.glyph, courseTitle: cur.title,
+      saveLabel: s.changed ? 'Cambios guardados' : 'Los cambios se guardan solos',
+      name: me.name, email: me.email, user: me.user,
+      logout: () => S.logout(),
+      askDelete: s.askDelete, notAskDelete: !s.askDelete,
+      askDel: () => this.setState({ askDelete: true }),
+      cancelDelete: () => this.setState({ askDelete: false }),
+      confirmDelete: () => { S.deleteAccount(); window.location.href = 'Main.dc.html'; },
+      downloadLabel: s.downloaded ? 'Archivo descargado' : 'Descargar archivo',
+      download: () => {
+        try {
+          const blob = new Blob([S.exportData()], { type: 'application/json' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob); a.download = 'codyu-mis-datos.json';
+          document.body.appendChild(a); a.click(); a.remove();
+          this.setState({ downloaded: true });
+        } catch (e) { /* descarga no disponible */ }
+      },
+      goals: goalDefs.map((g) => ({
+        ...g, on: s.goal === g.min,
+        style: s.goal === g.min ? 'background: var(--g50); border: 2px solid #B02A50; color: var(--g-ink); box-shadow: 0 3px 0 var(--g200);' : 'background: var(--card); border: 2px solid var(--line-3); color: var(--ink-1);',
+        pick: () => { S.setSetting('goal', g.min); this.setState({ changed: true }); }
+      })),
+      hour: s.hour,
+      onHour: (e) => { S.setSetting('hour', e.target.value); this.setState({ changed: true }); },
+      notifs: [
+        this.sw('diario', 'Recordatorio diario', 'Cada día a las ' + s.hour),
+        this.sw('racha', 'Racha en riesgo', 'Si a las 21:00 aún no practicas'),
+        this.sw('liga', 'Movimientos en la liga', 'Cuando alguien te supera o subes de puesto'),
+        this.sw('novedades', 'Novedades por correo', 'Cursos nuevos y funciones, una vez al mes')
+      ],
+      themes: themeDefs.map((th) => {
+        const on = s.theme === th.id;
+        return {
+          ...th, on,
+          ring: on ? 'border: 2px solid #B02A50; box-shadow: 0 0 0 3px var(--g100);' : 'border: 2px solid var(--line-3);',
+          radio: on ? 'border: 6px solid #7A1A35; background: var(--card);' : 'border: 2px solid #B0A4A9; background: var(--card);',
+          pick: () => { S.setSetting('theme', th.id); this.setState({ changed: true }); }
+        };
+      }),
+      darkPicked: s.theme !== 'claro',
+      sizes: sizeDefs.map((z) => ({
+        ...z, on: s.size === z.id,
+        style: s.size === z.id ? 'background: var(--card); color: var(--g-ink); box-shadow: 0 1px 3px rgba(31,20,24,0.12);' : 'background: transparent; color: var(--ink-2);',
+        pick: () => { S.setSetting('size', z.id); this.setState({ changed: true }); }
+      })),
+      previewSize: curSize.px,
+      access: [
+        this.sw('sonido', 'Efectos de sonido', 'Al acertar, fallar y completar lecciones'),
+        this.sw('animaciones', 'Reducir animaciones', 'Menos movimiento en barras y celebraciones'),
+        this.sw('contraste', 'Alto contraste', 'Bordes y textos más marcados')
+      ],
+      privacy: [
+        this.sw('ranking', 'Aparecer en el ranking', 'Otros estudiantes verán tu nombre y tu XP semanal')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

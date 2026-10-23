@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Ruta de aprendizaje</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-btn{transition:background-color .15s ease}
+.cy-btn:hover{background-color:#5E1229!important}
+.cy-node{transition:transform .15s ease}
+.cy-node:hover{transform:translateY(-2px)}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="ruta" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="normal" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1160px; box-sizing: border-box; padding: 20px 32px 48px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Ruta de navegación" style="font-size: 13px; font-weight: 800; color: var(--ink-4);">AGbyte <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <span style="color: var(--g-text);">Ruta de aprendizaje</span></nav>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <section aria-labelledby="ruta-h1" style="flex: 3 1 480px; min-width: 0; box-sizing: border-box; padding: 26px 28px 32px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(31,20,24,0.04); display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-end;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <h1 id="ruta-h1" style="margin: 0; font-size: 26px; font-weight: 900; letter-spacing: -0.01em;">Tu ruta de aprendizaje</h1>
+              <span style="font-size: 14px; font-weight: 700; color: var(--ink-4);">{{courseTitle}} · {{modCount}} módulos · {{total}} lecciones</span>
+            </div>
+            <ul aria-label="Leyenda" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; font-weight: 800; color: var(--ink-2);">
+              <li style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 4px; background: #B02A50;"></span>Completado</li>
+              <li style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; box-sizing: border-box; border-radius: 4px; background: var(--g100); border: 2px solid #B02A50;"></span>En curso</li>
+              <li style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 4px; background: var(--o100);"></span>Siguiente</li>
+              <li style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; box-sizing: border-box; border-radius: 4px; border: 2px dashed #B0A4A9;"></span>Bloqueado</li>
+            </ul>
+          </div>
+
+          <div style="position: relative; width: 360px; max-width: 100%; margin: 8px auto 0; height: {{pathH}};">
+            <svg width="360" height="{{pathHn}}" viewBox="{{viewBox}}" aria-hidden="true" style="position: absolute; left: 0; top: 0;">
+              <polyline points="{{allPts}}" fill="none" stroke="#DFD4D8" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round" stroke-linejoin="round"></polyline>
+              <polyline points="{{donePts}}" fill="none" stroke="#B02A50" stroke-width="5" stroke-linecap="round"></polyline>
+            </svg>
+            <sc-for list="{{modules}}" as="m" hint-placeholder-count="8">
+              <button type="button" class="cy-node" onClick="{{m.pick}}" aria-pressed="{{m.sel}}" aria-label="{{m.aria}}" style="position: absolute; width: 160px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0; border: 0; background: transparent; cursor: pointer; font-family: inherit; {{m.pos}}">
+                <span style="position: relative; width: 72px; height: 72px; box-sizing: border-box; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; {{m.nodeStyle}}">
+                  <sc-if value="{{m.isDone}}" hint-placeholder-val="{{ false }}">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+                  </sc-if>
+                  <sc-if value="{{m.isLocked}}" hint-placeholder-val="{{ false }}">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+                  </sc-if>
+                  <sc-if value="{{m.showNum}}" hint-placeholder-val="{{ true }}">{{m.n}}</sc-if>
+                  <sc-if value="{{m.isCurrent}}" hint-placeholder-val="{{ false }}">
+                    <span style="position: absolute; left: 62px; top: -14px; white-space: nowrap; padding: 3px 9px; border-radius: 999px; background: #7A1A35; color: #FFFFFF; font-size: 11px; font-weight: 900; box-shadow: 0 2px 0 #4A0E22;">Estás aquí</span>
+                  </sc-if>
+                </span>
+                <span style="display: flex; flex-direction: column; align-items: center; gap: 1px;">
+                  <span style="font-size: 15px; font-weight: 900; {{m.titleColor}}">{{m.title}}</span>
+                  <span style="font-size: 12px; font-weight: 800; color: var(--ink-4);">{{m.count}} lecciones</span>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+        </section>
+
+        <div style="flex: 2 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+          <section aria-labelledby="det-title" style="box-sizing: border-box; padding: 24px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(31,20,24,0.04); display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span style="width: 56px; height: 56px; flex: none; box-sizing: border-box; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; {{sel.nodeStyle}}">
+                <sc-if value="{{sel.isDone}}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                <sc-if value="{{sel.isLocked}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></sc-if>
+                <sc-if value="{{sel.showNum}}" hint-placeholder-val="{{ true }}">{{sel.n}}</sc-if>
+              </span>
+              <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                <span style="font-size: 12px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-4);">Módulo {{sel.n}}</span>
+                <h2 id="det-title" style="margin: 0; font-size: 22px; font-weight: 900;">{{sel.title}}</h2>
+              </div>
+              <span style="margin-left: auto; flex: none; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 900; {{sel.chipStyle}}">{{sel.statusLabel}}</span>
+            </div>
+            <p style="margin: 0; font-size: 15px; line-height: 1.5; font-weight: 700; color: var(--ink-2);">{{sel.desc}}</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; font-weight: 800; color: var(--ink-2);">
+              <span style="padding: 6px 10px; border-radius: 10px; background: var(--bg);">{{sel.count}} lecciones</span>
+              <span style="padding: 6px 10px; border-radius: 10px; background: var(--bg);">~{{sel.minutes}} min</span>
+              <span style="padding: 6px 10px; border-radius: 10px; background: var(--g50); color: var(--g-ink);">+{{sel.xp}} XP</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 800;"><span>Progreso del módulo</span><span style="color: var(--ink-2);">{{sel.doneCount}} de {{sel.count}}</span></div>
+              <div style="height: 10px; border-radius: 999px; background: var(--track); overflow: hidden;"><div style="height: 100%; border-radius: 999px; background: #B02A50; width: {{sel.pct}};"></div></div>
+            </div>
+            <ol aria-label="Lecciones del módulo" style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px;">
+              <sc-for list="{{sel.lessons}}" as="l" hint-placeholder-count="5">
+                <li style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; {{l.rowStyle}}">
+                  <span style="width: 24px; height: 24px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; {{l.dotStyle}}">
+                    <sc-if value="{{l.done}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                    <sc-if value="{{l.notDone}}" hint-placeholder-val="{{ true }}">{{l.n}}</sc-if>
+                  </span>
+                  <span style="flex: 1; font-size: 14px; font-weight: 800; {{l.textColor}}">{{l.title}}</span>
+                  <sc-if value="{{l.current}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; font-weight: 900; color: var(--g-ink);">Siguiente</span></sc-if>
+                </li>
+              </sc-for>
+            </ol>
+            <sc-if value="{{sel.canGo}}" hint-placeholder-val="{{ true }}">
+              <a href="{{sel.href}}" class="cy-btn" style="display: flex; align-items: center; justify-content: center; gap: 10px; height: 52px; border-radius: 14px; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; color: #FFFFFF; font-size: 16px; font-weight: 900; text-decoration: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg>
+                {{sel.cta}}
+              </a>
+            </sc-if>
+            <sc-if value="{{sel.cannotGo}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 14px; background: var(--bg); border: 2px dashed var(--line-strong); font-size: 14px; font-weight: 800; color: var(--ink-2);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+                {{sel.cta}}
+              </div>
+            </sc-if>
+          </section>
+
+          <section aria-labelledby="prog-title" style="box-sizing: border-box; padding: 22px 24px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px;">
+            <h2 id="prog-title" style="margin: 0; font-size: 17px; font-weight: 900;">Tu progreso</h2>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 800;"><span>Módulos completados</span><span style="color: var(--ink-2);">{{modsDone}} de {{modCount}}</span></div>
+              <div style="height: 10px; border-radius: 999px; background: var(--track); overflow: hidden;"><div style="height: 100%; border-radius: 999px; background: #B02A50; width: {{modsPct}};"></div></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 800;"><span>Lecciones completadas</span><span style="color: var(--ink-2);">{{done}} de {{total}}</span></div>
+              <div style="height: 10px; border-radius: 999px; background: var(--track); overflow: hidden;"><div style="height: 100%; border-radius: 999px; background: #F97316; width: {{donePct}};"></div></div>
+            </div>
+            <a href="Logros.dc.html" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--o50); border: 1px solid var(--o200); text-decoration: none; color: var(--ink);">
+              <span style="width: 36px; height: 36px; flex: none; border-radius: 10px; background: var(--card); color: var(--o-text); display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path></svg></span>
+              <span style="display: flex; flex-direction: column; gap: 1px;"><strong style="font-size: 14px; font-weight: 900;">{{nextBadge}}</strong><span style="font-size: 13px; font-weight: 700; color: var(--ink-2);">{{nextBadgeSub}}</span></span>
+            </a>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1280}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const S = window.CodyuStore;
+    this.state = { sel: S ? S.course().current.moduleN : 2 };
+  }
+  renderVals() {
+    const S = window.CodyuStore;
+    const cv = S.course();
+    const data = cv.modules.map((m) => ({ title: m.title, status: m.status, desc: m.desc, lessons: m.lessons.map((l) => l.title), done: m.done }));
+    const offsets = [40, 180, 80, 200, 60, 180, 40, 160];
+    const nodeBase = {
+      done: 'background: #B02A50; color: #FFFFFF; box-shadow: 0 5px 0 #9B2242;',
+      current: 'background: var(--g100); color: var(--g-ink); border: 3px solid #B02A50; box-shadow: 0 5px 0 var(--g300);',
+      next: 'background: var(--o50); color: var(--o-text); border: 2px solid var(--o200); box-shadow: 0 5px 0 var(--o200);',
+      locked: 'background: var(--bg); color: var(--ink-4); border: 2px dashed #B0A4A9;'
+    };
+    const statusLabel = { done: 'Completado', current: 'En curso', next: 'Siguiente', locked: 'Bloqueado' };
+    const chip = {
+      done: 'background: var(--g100); color: var(--g-ink);',
+      current: 'background: #7A1A35; color: #FFFFFF;',
+      next: 'background: var(--o100); color: var(--o-ink2);',
+      locked: 'background: var(--muted-bg); color: var(--ink-2);'
+    };
+    const selIdx = this.state.sel;
+    const modules = data.map((d, i) => {
+      const n = i + 1;
+      const isSel = n === selIdx;
+      const ring = isSel ? ' outline: 4px solid #93C5FD; outline-offset: 4px;' : '';
+      return {
+        n,
+        title: d.title,
+        count: d.lessons.length,
+        sel: isSel,
+        isDone: d.status === 'done',
+        isLocked: d.status === 'locked',
+        isCurrent: d.status === 'current',
+        showNum: d.status === 'current' || d.status === 'next',
+        pos: 'left: ' + offsets[i % 8] + 'px; top: ' + (i * 120) + 'px;',
+        nodeStyle: nodeBase[d.status] + ring,
+        titleColor: d.status === 'locked' ? 'color: var(--ink-2);' : 'color: var(--ink);',
+        aria: 'Módulo ' + n + ': ' + d.title + ', ' + statusLabel[d.status],
+        pick: () => this.setState({ sel: n })
+      };
+    });
+    const d = data[selIdx - 1];
+    const count = d.lessons.length;
+    const prevTitle = selIdx > 1 ? data[selIdx - 2].title : '';
+    let cta = '', href = '', canGo = true;
+    if (d.status === 'done') { cta = 'Repasar módulo'; href = 'Lecciones.dc.html'; }
+    else if (d.status === 'current') { cta = 'Continuar: lección ' + (d.done + 1); href = 'Leccion-Teoria.dc.html'; }
+    else { cta = 'Termina «' + prevTitle + '» para desbloquearlo'; canGo = false; }
+    const lessons = d.lessons.map((t, j) => {
+      const done = j < d.done;
+      const current = d.status === 'current' && j === d.done;
+      return {
+        n: j + 1,
+        title: t,
+        done,
+        notDone: !done,
+        current,
+        rowStyle: current ? 'background: var(--g50); border: 1px solid var(--g200);' : 'border: 1px solid transparent;',
+        dotStyle: done ? 'background: #B02A50; color: #FFFFFF;' : current ? 'background: #7A1A35; color: #FFFFFF;' : 'background: var(--muted-bg); color: var(--ink-2);',
+        textColor: d.status === 'locked' ? 'color: var(--ink-2);' : 'color: var(--ink);'
+      };
+    });
+    const nb = S.badges().find((b) => !b.earned);
+    return {
+      courseTitle: cv.title, total: cv.total, done: cv.done, donePct: Math.max(cv.pct, 1) + '%',
+      modsDone: cv.modulesDone, modsPct: Math.max(Math.round(cv.modulesDone / cv.modules.length * 100), 1) + '%',
+      modCount: cv.modules.length,
+      pathH: (cv.modules.length * 120 + 20) + 'px',
+      pathHn: cv.modules.length * 120 + 20,
+      viewBox: '0 0 360 ' + (cv.modules.length * 120 + 20),
+      allPts: cv.modules.map((m, i) => (offsets[i % 8] + 80) + ',' + (i * 120 + 36)).join(' '),
+      donePts: cv.modules.slice(0, Math.min(cv.modulesDone + 1, cv.modules.length)).map((m, i) => (offsets[i % 8] + 80) + ',' + (i * 120 + 36)).join(' '),
+      nextBadge: nb ? 'Próxima insignia: ' + nb.title : '¡Tienes todas las insignias!',
+      nextBadgeSub: nb ? nb.desc + ' · +' + nb.xp + ' XP' : 'Sigue sumando XP en tu liga.',
+      modules,
+      sel: {
+        n: selIdx,
+        title: d.title,
+        desc: d.desc,
+        count,
+        minutes: count * 5,
+        xp: count * 10,
+        doneCount: d.done,
+        pct: Math.round((d.done / count) * 100) + '%',
+        isDone: d.status === 'done',
+        isLocked: d.status === 'locked',
+        showNum: d.status === 'current' || d.status === 'next',
+        nodeStyle: nodeBase[d.status],
+        statusLabel: statusLabel[d.status],
+        chipStyle: chip[d.status],
+        lessons,
+        cta,
+        href,
+        canGo,
+        cannotGo: !canGo
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

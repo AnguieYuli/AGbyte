@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Conectar con Google</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+.gc-btn{transition:background-color .15s ease,border-color .15s ease}
+.gc-btn:hover:not(:disabled){background-color:var(--g50)!important;border-color:var(--g300)!important}
+.gc-main:hover:not(:disabled){background-color:#5E1229!important}
+.gc-in:focus{border-color:#9B2242!important;box-shadow:0 0 0 4px var(--g100);outline:none}
+.gc-link{background:none;border:0;padding:0;font:inherit;font-weight:900;color:var(--g-text);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+@keyframes gc-spin{to{transform:rotate(360deg)}}
+.gc-spin{animation:gc-spin 0.9s linear infinite}
+</style>
+</helmet>
+<div style="width: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px; font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+
+  <sc-if value="{{showLinked}}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--g50); border: 1px solid var(--g200);">
+      <span aria-hidden="true" style="width: 32px; height: 32px; flex: none; border-radius: 50%; background: var(--card); border: 2px solid var(--g300); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 900; color: var(--g-text);">G</span>
+      <span style="flex: 1 1 180px; display: flex; flex-direction: column; min-width: 0;">
+        <strong style="font-size: 14px; font-weight: 900; color: var(--g-ink);">Cuenta de Google conectada</strong>
+        <span style="font-size: 13px; font-weight: 700; color: var(--ink-2); overflow-wrap: anywhere;">{{linkedEmail}}</span>
+      </span>
+      <button type="button" class="gc-btn" onClick="{{unlink}}" style="height: 38px; padding: 0 14px; border-radius: 10px; border: 2px solid var(--line-2); background: var(--card); font-family: inherit; font-size: 13px; font-weight: 900; color: var(--ink-2); cursor: pointer;">Desconectar</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{showButton}}" hint-placeholder-val="{{ true }}">
+    <button type="button" class="gc-btn" onClick="{{begin}}" disabled="{{busy}}" style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 52px; border-radius: 14px; border: 2px solid var(--line-2); background: var(--card); box-shadow: 0 4px 0 var(--line-4); font-family: inherit; font-size: 15px; font-weight: 900; color: var(--ink); cursor: pointer;">
+      <sc-if value="{{busy}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" class="gc-spin" style="width: 18px; height: 18px; box-sizing: border-box; border-radius: 50%; border: 3px solid var(--g200); border-top-color: #9B2242;"></span></sc-if>
+      <sc-if value="{{notBusy}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width: 26px; height: 26px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--line-strong); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: var(--g-text);">G</span></sc-if>
+      {{buttonLabel}}
+    </button>
+  </sc-if>
+
+  <sc-if value="{{hasMsg}}" hint-placeholder-val="{{ false }}">
+    <p role="status" style="margin: 0; font-size: 13px; font-weight: 800; color: var(--g-text);">{{msg}}</p>
+  </sc-if>
+
+  <sc-if value="{{showError}}" hint-placeholder-val="{{ false }}">
+    <div role="alert" style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border-radius: 14px; background: var(--r50); border: 1px solid var(--r200);">
+      <span style="font-size: 14px; font-weight: 800; color: var(--r-text);">{{error}}</span>
+      <span style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px;">
+        <button type="button" class="gc-link" onClick="{{begin}}">Intentar de nuevo</button>
+        <sc-if value="{{canReconfig}}" hint-placeholder-val="{{ false }}"><button type="button" class="gc-link" onClick="{{reconfig}}">Cambiar el ID de cliente</button></sc-if>
+      </span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{showNoServer}}" hint-placeholder-val="{{ false }}">
+    <p role="alert" style="margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--o50); border: 1px solid var(--o200); font-size: 14px; line-height: 1.45; font-weight: 800; color: var(--o-ink2);">Para entrar con Google abre AGbyte con <strong>AGbyte.exe</strong> (o con «Abrir AGbyte.bat»). Así la app puede abrir Google en tu navegador de forma segura.</p>
+  </sc-if>
+
+  <sc-if value="{{showWaiting}}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 16px; background: var(--g50); border: 1px solid var(--g200);">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span aria-hidden="true" class="gc-spin" style="width: 22px; height: 22px; flex: none; box-sizing: border-box; border-radius: 50%; border: 3px solid var(--g200); border-top-color: #9B2242;"></span>
+        <strong style="font-size: 15px; font-weight: 900; color: var(--g-ink);">Abrimos Google en tu navegador</strong>
+      </div>
+      <span style="font-size: 14px; line-height: 1.45; font-weight: 700; color: var(--ink-2);">Elige tu cuenta y acepta. Luego vuelve a esta ventana: {{waitingNext}}</span>
+      <span style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px;">
+        <button type="button" class="gc-link" onClick="{{begin}}">Abrir Google otra vez</button>
+        <button type="button" class="gc-link" onClick="{{copyLink}}">{{copyLabel}}</button>
+        <button type="button" class="gc-link" onClick="{{cancel}}" style="color: var(--ink-3);">Cancelar</button>
+      </span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{showSetup}}" hint-placeholder-val="{{ false }}">
+    <section aria-labelledby="gc-setup-t" style="display: flex; flex-direction: column; gap: 12px; padding: 18px; border-radius: 18px; background: var(--card); border: 2px solid var(--g200); text-align: left;">
+      <h3 id="gc-setup-t" style="margin: 0; font-size: 16px; font-weight: 900;">Activa el inicio con Google (solo una vez)</h3>
+      <p style="margin: 0; font-size: 13px; line-height: 1.5; font-weight: 700; color: var(--ink-2);">Google pide que cada app tenga su propio «ID de cliente». Es gratis y tarda unos 5 minutos:</p>
+      <ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; line-height: 1.45; font-weight: 700; color: var(--ink-2);">
+        <li>Abre <button type="button" class="gc-link" onClick="{{openConsole}}">Google Cloud Console</button>, inicia sesión y crea un proyecto (por ejemplo «AGbyte»).</li>
+        <li>En <strong>Google Auth Platform</strong> pulsa <strong>Comenzar</strong>: nombre de la app «AGbyte», tu correo y público <strong>Externo</strong>.</li>
+        <li>En <strong>Público</strong> agrega como usuarios de prueba los correos que usarán AGbyte (o pulsa <strong>Publicar app</strong>).</li>
+        <li>En <strong>Clientes</strong> pulsa <strong>Crear cliente</strong>, elige <strong>App de escritorio</strong> y copia aquí el ID y el secreto.</li>
+      </ol>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="gc-id" style="font-size: 13px; font-weight: 900;">ID de cliente</label>
+        <input id="gc-id" class="gc-in" type="text" value="{{cid}}" onChange="{{onCid}}" spellcheck="false" autocomplete="off" placeholder="123456-abc.apps.googleusercontent.com" style="height: 44px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 2px solid var(--line-strong); background: var(--card); font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink);">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="gc-sec" style="font-size: 13px; font-weight: 900;">Secreto del cliente</label>
+        <input id="gc-sec" class="gc-in" type="password" value="{{sec}}" onChange="{{onSec}}" spellcheck="false" autocomplete="off" placeholder="GOCSPX-…" style="height: 44px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 2px solid var(--line-strong); background: var(--card); font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink);">
+      </div>
+      <sc-if value="{{hasSetupError}}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 13px; font-weight: 800; color: var(--r-text);">{{setupError}}</p></sc-if>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+        <button type="button" class="gc-main" onClick="{{saveCfg}}" disabled="{{saving}}" style="height: 44px; padding: 0 18px; border-radius: 12px; border: 0; background: #7A1A35; box-shadow: 0 3px 0 #4A0E22; font-family: inherit; font-size: 14px; font-weight: 900; color: #FFFFFF; cursor: pointer;">Guardar y continuar con Google</button>
+        <button type="button" class="gc-link" onClick="{{cancel}}" style="font-size: 13px; color: var(--ink-3);">Ahora no</button>
+      </div>
+      <span style="font-size: 12px; font-weight: 700; color: var(--ink-4);">Se guarda solo en este equipo. Tus datos de Google no salen de tu PC: AGbyte solo lee tu nombre, correo y foto.</span>
+    </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"enum","options":["login","link"],"default":"login"},"label":{"editor":"text","default":"Continuar con Google"},"$preview":{"width":420,"height":120}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { phase: 'idle', flow: null, url: '', error: '', reconfig: false, cid: '', sec: '', setupError: '', saving: false, msg: '', copied: false };
+  }
+  componentWillUnmount() { this.dead = true; clearTimeout(this.timer); }
+  mode() { return this.props.mode === 'link' ? 'link' : 'login'; }
+  begin() {
+    const S = window.CodyuStore;
+    clearTimeout(this.timer);
+    this.setState({ phase: 'checking', error: '', msg: '', copied: false });
+    S.googleStatus().then((st) => {
+      if (this.dead) return;
+      if (st.noServer) { this.setState({ phase: 'noserver' }); return; }
+      if (!st.configured) { this.setState({ phase: 'setup', setupError: '' }); return; }
+      this.start();
+    });
+  }
+  start() {
+    const S = window.CodyuStore;
+    S.googleStart().then((r) => {
+      if (this.dead) return;
+      if (!r.configured) { this.setState({ phase: 'setup' }); return; }
+      this.started = Date.now();
+      this.setState({ phase: 'waiting', flow: r.state, url: r.url || '' });
+      this.poll(r.state);
+    }).catch(() => this.setState({ phase: 'error', error: 'No pude iniciar la conexión con Google. Vuelve a intentarlo.' }));
+  }
+  poll(flow) {
+    const S = window.CodyuStore;
+    this.timer = setTimeout(() => {
+      S.googleResult(flow).then((r) => {
+        if (this.dead || this.state.flow !== flow || this.state.phase !== 'waiting') return;
+        if (r.status === 'pending') {
+          if (Date.now() - this.started > 5 * 60 * 1000) this.setState({ phase: 'error', error: 'Se acabó el tiempo de espera. Pulsa otra vez para intentarlo.' });
+          else this.poll(flow);
+        } else if (r.status === 'ok') this.finish(r.profile);
+        else this.setState({ phase: 'error', error: r.message || 'No se pudo conectar con Google.', reconfig: /rechaz/i.test(r.message || '') });
+      }).catch(() => { if (!this.dead) this.poll(flow); });
+    }, 1200);
+  }
+  finish(profile) {
+    const S = window.CodyuStore;
+    if (this.mode() === 'login') {
+      const r = S.loginGoogle(profile);
+      window.location.href = r.account.onboarded ? 'Inicio.dc.html' : 'Onboarding.dc.html';
+      return;
+    }
+    S.linkGoogle(profile);
+    this.setState({ phase: 'idle', flow: null, msg: 'Listo: conectaste ' + profile.email + '.' });
+  }
+  renderVals() {
+    const S = window.CodyuStore;
+    const s = this.state, mode = this.mode();
+    const linked = mode === 'link' && S ? S.me().google : '';
+    const idleLike = s.phase === 'idle' || s.phase === 'checking' || s.phase === 'error' || s.phase === 'noserver';
+    return {
+      showLinked: !!linked && s.phase === 'idle',
+      linkedEmail: linked,
+      unlink: () => { S.unlinkGoogle(); this.setState({ msg: 'Desconectaste tu cuenta de Google.' }); },
+      showButton: idleLike && !linked,
+      busy: s.phase === 'checking', notBusy: s.phase !== 'checking',
+      buttonLabel: s.phase === 'checking' ? 'Conectando…' : (this.props.label || (mode === 'link' ? 'Conectar con Google' : 'Continuar con Google')),
+      begin: () => this.begin(),
+      hasMsg: !!s.msg && s.phase === 'idle', msg: s.msg,
+      showError: s.phase === 'error', error: s.error, canReconfig: !!s.reconfig,
+      reconfig: () => this.setState({ phase: 'setup', setupError: '' }),
+      showNoServer: s.phase === 'noserver',
+      showWaiting: s.phase === 'waiting',
+      waitingNext: mode === 'login' ? 'entrarás solo.' : 'quedará conectada sola.',
+      copyLabel: s.copied ? 'Enlace copiado' : 'Copiar enlace',
+      copyLink: () => {
+        const done = () => this.setState({ copied: true });
+        try { navigator.clipboard.writeText(s.url).then(done, done); } catch (e) { done(); }
+      },
+      cancel: () => { clearTimeout(this.timer); this.setState({ phase: 'idle', flow: null }); },
+      showSetup: s.phase === 'setup',
+      openConsole: () => S.openExternal('https://console.cloud.google.com/auth/clients'),
+      cid: s.cid, sec: s.sec,
+      onCid: (e) => this.setState({ cid: e.target.value, setupError: '' }),
+      onSec: (e) => this.setState({ sec: e.target.value, setupError: '' }),
+      hasSetupError: !!s.setupError, setupError: s.setupError,
+      saving: s.saving,
+      saveCfg: () => {
+        const cid = s.cid.trim(), sec = s.sec.trim();
+        let body = { client_id: cid, client_secret: sec };
+        if (cid.charAt(0) === '{') body = { json: cid };
+        if (!/\.apps\.googleusercontent\.com\s*$/.test(cid) && !body.json) { this.setState({ setupError: 'El ID de cliente termina en .apps.googleusercontent.com. Cópialo completo.' }); return; }
+        this.setState({ saving: true });
+        S.googleSaveConfig(body).then((r) => {
+          if (this.dead) return;
+          if (!r.configured) { this.setState({ saving: false, setupError: r.error || 'No pude guardar el ID de cliente.' }); return; }
+          this.setState({ saving: false, sec: '', reconfig: false });
+          this.start();
+        }).catch(() => this.setState({ saving: false, setupError: 'No pude guardar. ¿Abriste AGbyte con AGbyte.exe?' }));
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Lecciones</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-btn{transition:background-color .15s ease}
+.cy-btn:hover{background-color:#5E1229!important}
+.cy-row:hover{background-color:var(--sunken)}
+.cy-input:focus{border-color:#9B2242!important;box-shadow:0 0 0 4px var(--g100);outline:none}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="lecciones" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="normal" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1160px; box-sizing: border-box; padding: 20px 32px 48px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Ruta de navegación" style="font-size: 13px; font-weight: 800; color: var(--ink-4);">AGbyte <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <span style="color: var(--g-text);">Lecciones</span></nav>
+
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <h1 style="margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -0.01em;">Lecciones</h1>
+          <span style="font-size: 14px; font-weight: 700; color: var(--ink-4);">Todo el temario, módulo por módulo. Repasa lo que ya hiciste cuando quieras.</span>
+        </div>
+        <div style="position: relative; flex: 0 1 320px; min-width: 220px;">
+          <label for="buscar" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Buscar lecciones</label>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="stroke: var(--ink-4); position: absolute; left: 14px; top: 13px;"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+          <input id="buscar" class="cy-input" type="search" placeholder="Buscar: bucles, print, listas…" value="{{query}}" onChange="{{onQuery}}" style="width: 100%; height: 44px; box-sizing: border-box; padding: 0 14px 0 42px; border-radius: 12px; border: 2px solid var(--line-strong); background: var(--card); font-family: inherit; font-size: 14px; font-weight: 700; color: var(--ink);">
+        </div>
+      </div>
+
+      <div role="tablist" aria-label="Cursos" style="display: flex; flex-wrap: wrap; gap: 4px 8px; border-bottom: 2px solid var(--line-4);">
+        <sc-for list="{{tabs}}" as="tb" hint-placeholder-count="6">
+          <button type="button" role="tab" onClick="{{tb.pick}}" aria-selected="{{tb.on}}" style="display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 14px; margin-bottom: -2px; border: 0; background: transparent; font-family: inherit; font-size: 15px; cursor: pointer; {{tb.style}}">
+            <span aria-hidden="true" style="min-width: 26px; padding: 2px 6px; box-sizing: border-box; border-radius: 6px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; {{tb.tile}}">{{tb.glyph}}</span>
+            {{tb.name}}
+            <sc-if value="{{tb.started}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; font-weight: 900; color: var(--o-text);">{{tb.pct}}%</span></sc-if>
+          </button>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{notActive}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 16px; background: var(--b100); border: 1px solid var(--b200);">
+          <span style="flex: 1 1 260px; font-size: 15px; font-weight: 800; color: var(--b-text3);">Estás viendo {{tabTitle}}. Tu curso actual es {{activeTitle}}.</span>
+          <button type="button" class="cy-btn" onClick="{{makeActive}}" style="height: 42px; padding: 0 18px; border-radius: 12px; border: 0; background: #7A1A35; box-shadow: 0 3px 0 #4A0E22; font-family: inherit; font-size: 14px; font-weight: 900; color: #FFFFFF; cursor: pointer;">Estudiar {{tabName}}</button>
+        </div>
+      </sc-if>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <div style="flex: 3 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+          <div role="group" aria-label="Filtrar módulos" style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+              <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.on}}" style="height: 36px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 900; cursor: pointer; {{f.style}}">{{f.label}} · {{f.n}}</button>
+            </sc-for>
+          </div>
+
+          <sc-for list="{{modules}}" as="m" hint-placeholder-count="6">
+            <section style="border-radius: 20px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(31,20,24,0.04); overflow: hidden;">
+              <button type="button" onClick="{{m.toggle}}" aria-expanded="{{m.open}}" style="width: 100%; display: flex; align-items: center; gap: 16px; padding: 16px 20px; border: 0; background: transparent; font-family: inherit; text-align: left; cursor: pointer; color: var(--ink);">
+                <span style="width: 48px; height: 48px; flex: none; box-sizing: border-box; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; {{m.tile}}">
+                  <sc-if value="{{m.isDone}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                  <sc-if value="{{m.isLocked}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></sc-if>
+                  <sc-if value="{{m.showNum}}" hint-placeholder-val="{{ true }}">{{m.n}}</sc-if>
+                </span>
+                <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px;">
+                  <span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <strong style="font-size: 17px; font-weight: 900;">Módulo {{m.n}} · {{m.title}}</strong>
+                    <span style="padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 900; {{m.chip}}">{{m.statusLabel}}</span>
+                  </span>
+                  <span style="font-size: 13px; font-weight: 700; color: var(--ink-4);">{{m.count}} lecciones · ~{{m.minutes}} min · {{m.doneCount}} de {{m.count}} hechas</span>
+                </span>
+                <span aria-hidden="true" style="width: 120px; flex: none; height: 8px; border-radius: 999px; background: var(--track); overflow: hidden;"><span style="display: block; height: 100%; border-radius: 999px; background: #B02A50; width: {{m.pct}};"></span></span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="stroke: var(--ink-2); flex: none; transition: transform .2s ease; {{m.chevron}}"><path d="m6 9 6 6 6-6"></path></svg>
+              </button>
+              <sc-if value="{{m.open}}" hint-placeholder-val="{{ false }}">
+                <ol style="list-style: none; margin: 0; padding: 4px 12px 12px; border-top: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: 2px;">
+                  <sc-for list="{{m.lessons}}" as="l" hint-placeholder-count="5">
+                    <li class="cy-row" style="display: flex; align-items: center; gap: 14px; padding: 10px 10px; border-radius: 12px; {{l.rowStyle}}">
+                      <span style="width: 30px; height: 30px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; {{l.dotStyle}}">
+                        <sc-if value="{{l.done}}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                        <sc-if value="{{l.current}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg></sc-if>
+                        <sc-if value="{{l.locked}}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></sc-if>
+                      </span>
+                      <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px;">
+                        <span style="font-size: 15px; font-weight: 800; {{l.textColor}}">{{l.n}}. {{l.title}}</span>
+                        <span style="font-size: 12px; font-weight: 700; color: var(--ink-4);">{{l.meta}}</span>
+                      </span>
+                      <sc-if value="{{l.done}}" hint-placeholder-val="{{ false }}">
+                        <a href="{{l.href}}" onClick="{{l.go}}" style="height: 36px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: 10px; border: 2px solid var(--line-2); font-size: 13px; font-weight: 900; text-decoration: none;">Repasar</a>
+                      </sc-if>
+                      <sc-if value="{{l.current}}" hint-placeholder-val="{{ false }}">
+                        <a href="{{l.href}}" onClick="{{l.go}}" class="cy-btn" style="height: 36px; padding: 0 16px; display: inline-flex; align-items: center; border-radius: 10px; background: #7A1A35; box-shadow: 0 3px 0 #4A0E22; color: #FFFFFF; font-size: 13px; font-weight: 900; text-decoration: none;">Continuar</a>
+                      </sc-if>
+                      <sc-if value="{{l.locked}}" hint-placeholder-val="{{ true }}">
+                        <span style="font-size: 12px; font-weight: 800; color: var(--ink-4);">Bloqueada</span>
+                      </sc-if>
+                    </li>
+                  </sc-for>
+                </ol>
+              </sc-if>
+            </section>
+          </sc-for>
+
+          <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 40px 20px; border-radius: 20px; background: var(--card); border: 2px dashed var(--line-2); text-align: center;">
+              <dc-import name="Cody" size="96" mood="piensa" hint-size="96px,96px"></dc-import>
+              <strong style="font-size: 18px; font-weight: 900;">No encontré lecciones con «{{query}}»</strong>
+              <span style="font-size: 14px; font-weight: 700; color: var(--ink-3);">Prueba con otra palabra o quita el filtro.</span>
+              <button type="button" onClick="{{clear}}" style="margin-top: 6px; height: 42px; padding: 0 18px; border-radius: 12px; border: 2px solid var(--line-2); background: var(--card); font-family: inherit; font-size: 14px; font-weight: 900; color: var(--g-text); cursor: pointer;">Ver todas las lecciones</button>
+            </div>
+          </sc-if>
+        </div>
+
+        <aside style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="curso-aside" style="padding: 22px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);">Tu curso actual</span>
+            <h2 id="curso-aside" style="margin: 0; font-size: 17px; font-weight: 900;">{{activeTitle}}</h2>
+            <div style="display: flex; align-items: baseline; gap: 8px;"><span style="font-size: 30px; font-weight: 900; color: var(--o-text);">{{activePct}}%</span><span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">{{activeDone}} de {{activeTotal}} lecciones</span></div>
+            <div style="height: 10px; border-radius: 999px; background: var(--track); overflow: hidden;"><div style="height: 100%; border-radius: 999px; background: #F97316; width: {{activePctW}};"></div></div>
+            <a href="Leccion-Teoria.dc.html" class="cy-btn" style="display: flex; align-items: center; justify-content: center; text-align: center; min-height: 46px; padding: 6px 12px; box-sizing: border-box; border-radius: 12px; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; color: #FFFFFF; font-size: 15px; font-weight: 900; text-decoration: none;">{{activeCta}}</a>
+          </section>
+          <section aria-labelledby="mis-cursos" style="padding: 22px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px;">
+            <h2 id="mis-cursos" style="margin: 0; font-size: 17px; font-weight: 900;">Todos los cursos</h2>
+            <sc-for list="{{tabs}}" as="c" hint-placeholder-count="6">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span aria-hidden="true" style="width: 40px; height: 40px; flex: none; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; {{c.tile}}">{{c.glyph}}</span>
+                <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px;">
+                  <strong style="font-size: 14px; font-weight: 900;">{{c.name}}</strong>
+                  <span style="height: 6px; border-radius: 999px; background: var(--track); overflow: hidden;"><span style="display: block; height: 100%; border-radius: 999px; background: #F97316; width: {{c.pctW}};"></span></span>
+                </span>
+                <button type="button" onClick="{{c.pick}}" aria-label="Ver el curso {{c.name}}" style="height: 34px; padding: 0 12px; border-radius: 10px; font-family: inherit; font-size: 12px; font-weight: 900; cursor: pointer; {{c.btn}}">{{c.btnLabel}}</button>
+              </div>
+            </sc-for>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const S = window.CodyuStore;
+    const tab = S ? S.me().course : 'python';
+    const cur = S ? S.course(tab).current.moduleN : 2;
+    this.state = { filter: 'todas', query: '', tab, open: { [tab + ':' + cur]: true } };
+  }
+  renderVals() {
+    const s = this.state;
+    const S = window.CodyuStore;
+    const cv = S.course(s.tab);
+    const activeId = S.me().course;
+    const data = cv.modules.map((m) => ({ title: m.title, status: m.status, lessons: m.lessons.map((l) => l.title), done: m.done, start: m.start }));
+    const group = { done: 'completadas', current: 'curso', next: 'bloqueadas', locked: 'bloqueadas' };
+    const q = (s.query || '').trim().toLowerCase();
+    const tiles = {
+      done: 'background: #B02A50; color: #FFFFFF;',
+      current: 'background: var(--g100); color: var(--g-ink); border: 3px solid #B02A50;',
+      next: 'background: var(--o50); color: var(--o-text); border: 2px solid var(--o200);',
+      locked: 'background: var(--bg); color: var(--ink-4); border: 2px dashed #B0A4A9;'
+    };
+    const chips = {
+      done: 'background: var(--g100); color: var(--g-ink);', current: 'background: #7A1A35; color: #FFFFFF;',
+      next: 'background: var(--o100); color: var(--o-ink2);', locked: 'background: var(--muted-bg); color: var(--ink-2);'
+    };
+    const labels = { done: 'Completado', current: 'En curso', next: 'Siguiente', locked: 'Bloqueado' };
+    const counts = { todas: 8, curso: 0, completadas: 0, bloqueadas: 0 };
+    data.forEach((d) => { counts[group[d.status]] += 1; });
+    const modules = [];
+    data.forEach((d, i) => {
+      const n = i + 1;
+      if (s.filter !== 'todas' && group[d.status] !== s.filter) return;
+      const titleHit = q && d.title.toLowerCase().includes(q);
+      const lessonHit = q && d.lessons.some((t) => t.toLowerCase().includes(q));
+      if (q && !titleHit && !lessonHit) return;
+      const open = q ? true : !!s.open[s.tab + ':' + n];
+      const lessons = d.lessons
+        .map((t, j) => ({ t, j }))
+        .filter((x) => !q || titleHit || x.t.toLowerCase().includes(q))
+        .map(({ t, j }) => {
+          const done = j < d.done;
+          const current = d.status === 'current' && j === d.done;
+          const locked = !done && !current;
+          const g = d.start + j;
+          const has = !!S.lessonContent(s.tab, g);
+          return {
+            n: j + 1, title: t, done, current, locked,
+            href: 'Leccion-Teoria.dc.html?c=' + s.tab + '&l=' + g,
+            go: () => { if (s.tab !== activeId && current) S.setCourse(s.tab); },
+            meta: '5 min · +10 XP' + (has || locked ? '' : ' · en preparación'),
+            rowStyle: current ? 'background: var(--g50);' : '',
+            dotStyle: done ? 'background: #B02A50; color: #FFFFFF;' : current ? 'background: #7A1A35; color: #FFFFFF;' : 'background: var(--muted-bg); color: var(--ink-3);',
+            textColor: locked ? 'color: var(--ink-2);' : 'color: var(--ink);'
+          };
+        });
+      modules.push({
+        n, title: d.title, count: d.lessons.length, minutes: d.lessons.length * 5, doneCount: d.done,
+        pct: Math.round((d.done / d.lessons.length) * 100) + '%',
+        isDone: d.status === 'done', isLocked: d.status === 'locked', showNum: d.status === 'current' || d.status === 'next',
+        tile: tiles[d.status], chip: chips[d.status], statusLabel: labels[d.status],
+        open, chevron: open ? 'transform: rotate(180deg);' : '',
+        lessons,
+        toggle: () => this.setState({ open: { ...s.open, [s.tab + ':' + n]: !s.open[s.tab + ':' + n] } })
+      });
+    });
+    const filterDefs = [
+      { id: 'todas', label: 'Todas' }, { id: 'curso', label: 'En curso' },
+      { id: 'completadas', label: 'Completadas' }, { id: 'bloqueadas', label: 'Por desbloquear' }
+    ];
+    const filters = filterDefs.map((f) => ({
+      ...f, n: counts[f.id], on: s.filter === f.id,
+      style: s.filter === f.id ? 'background: #7A1A35; color: #FFFFFF; border: 2px solid #7A1A35;' : 'background: var(--card); color: var(--ink-2); border: 2px solid var(--line-2);',
+      pick: () => this.setState({ filter: f.id })
+    }));
+    const ac = S.course(activeId);
+    const tabs = S.courses().map((c) => ({
+      id: c.id, name: c.name, glyph: c.glyph, pct: c.pct, pctW: Math.max(c.pct, 2) + '%', started: c.started || c.active, on: c.id === s.tab,
+      tile: 'background: ' + c.tileBg + '; color: ' + c.tileFg + ';',
+      style: c.id === s.tab ? 'border-bottom: 3px solid #B02A50; color: var(--g-ink); font-weight: 900;' : 'border-bottom: 3px solid transparent; color: var(--ink-2); font-weight: 800;',
+      btn: c.active ? 'background: var(--g100); color: var(--g-ink); border: 2px solid var(--g200);' : 'background: var(--card); color: var(--g-text); border: 2px solid var(--line-2);',
+      btnLabel: c.active ? 'Actual' : c.id === s.tab ? 'Viendo' : 'Ver',
+      pick: () => this.setState({ tab: c.id, filter: 'todas', query: '', open: { ...s.open, [c.id + ':' + c.current.moduleN]: true } })
+    }));
+    return {
+      query: s.query,
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      clear: () => this.setState({ query: '', filter: 'todas' }),
+      filters, modules, tabs,
+      notActive: s.tab !== activeId, tabTitle: cv.title, tabName: cv.name, activeTitle: ac.title,
+      makeActive: () => { S.setCourse(s.tab); this.forceUpdate(); },
+      activePct: ac.pct, activePctW: Math.max(ac.pct, 1) + '%', activeDone: ac.done, activeTotal: ac.total,
+      activeCta: ac.finished ? 'Curso completado' : (ac.done === 0 ? 'Empezar: ' : 'Continuar: ') + ac.current.title,
+      empty: modules.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

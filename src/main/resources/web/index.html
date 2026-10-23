@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte</title>
+<script>
+  var destino = 'Main.dc.html';
+  try {
+    var guardado = JSON.parse(localStorage.getItem('codyu:v1') || '{}');
+    if (guardado && guardado.session) destino = 'Inicio.dc.html';
+  } catch (e) { /* sin almacenamiento: mostrar bienvenida */ }
+  location.replace(destino);
+</script>
+</head>
+<body style="font-family: system-ui, sans-serif; padding: 40px;">
+<p>Abriendo AGbyte… Si no se abre solo, entra a <a href="Main.dc.html">Main.dc.html</a>.</p>
+</body>
+</html>

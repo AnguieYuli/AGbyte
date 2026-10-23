@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Mi perfil</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-btn{transition:background-color .15s ease}
+.cy-btn:hover{background-color:#5E1229!important}
+.cy-sec:hover{background-color:var(--g50)!important}
+.cy-ava:hover .cy-ava-hover,.cy-ava:focus-visible .cy-ava-hover{opacity:1!important}
+.cy-ava-hover{transition:opacity .15s ease}
+.cy-plink{background:none;border:0;padding:0;font:inherit;font-weight:900;color:var(--g-text);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.cy-input:focus{border-color:#9B2242!important;box-shadow:0 0 0 4px var(--g100);outline:none}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="perfil" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="normal" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1160px; box-sizing: border-box; padding: 20px 32px 48px; display: flex; flex-direction: column; gap: 20px;">
+      <nav aria-label="Ruta de navegación" style="font-size: 13px; font-weight: 800; color: var(--ink-4);">AGbyte <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <span style="color: var(--g-text);">Mi perfil</span></nav>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+        <div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="perfil-nombre" style="position: relative; overflow: hidden; padding: 28px 24px 24px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
+            <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 84px; background: linear-gradient(110deg, #7A1A35, #B02A50);"></div>
+            <div style="position: relative; margin-top: 20px;">
+              <button type="button" class="cy-ava" onClick="{{pickPhoto}}" aria-label="{{photoAria}}" title="{{photoAria}}" style="position: relative; display: flex; align-items: center; justify-content: center; width: 100px; height: 100px; padding: 0; box-sizing: border-box; border-radius: 30px; background: #7A1A35; border: 4px solid var(--card); box-shadow: 0 6px 16px rgba(31,20,24,0.18); overflow: hidden; font-family: inherit; color: #FFFFFF; font-size: 42px; font-weight: 900; cursor: pointer;">
+                <sc-if value="{{hasPhoto}}" hint-placeholder-val="{{ false }}"><span style="display: block; width: 100%; height: 100%; background: center / cover no-repeat url('{{photo}}');"></span></sc-if>
+                <sc-if value="{{noPhoto}}" hint-placeholder-val="{{ true }}">{{initial}}</sc-if>
+                <span class="cy-ava-hover" aria-hidden="true" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(31,20,24,0.45); opacity: 0;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg></span>
+              </button>
+              <span aria-hidden="true" style="position: absolute; right: -6px; bottom: -6px; width: 34px; height: 34px; box-sizing: border-box; border-radius: 50%; background: var(--card); border: 2px solid var(--g200); color: var(--g-text); display: flex; align-items: center; justify-content: center; pointer-events: none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg></span>
+              <input id="foto-perfil" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" onChange="{{onPhoto}}" style="display: none;">
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; font-size: 13px;">
+              <button type="button" class="cy-plink" onClick="{{pickPhoto}}">{{photoAction}}</button>
+              <sc-if value="{{hasPhoto}}" hint-placeholder-val="{{ false }}"><button type="button" class="cy-plink" onClick="{{removePhoto}}" style="color: var(--ink-3);">Quitar foto</button></sc-if>
+            </div>
+            <sc-if value="{{hasPhotoMsg}}" hint-placeholder-val="{{ false }}"><span role="status" style="font-size: 13px; font-weight: 800; {{photoMsgColor}}">{{photoMsg}}</span></sc-if>
+            <h1 id="perfil-nombre" style="margin: 4px 0 0; font-size: 24px; font-weight: 900;">{{name}}</h1>
+            <span style="font-size: 14px; font-weight: 700; color: var(--ink-3);">{{user}} · {{email}}</span>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;">
+              <span style="padding: 4px 10px; border-radius: 999px; background: var(--g100); font-size: 12px; font-weight: 900; color: var(--g-ink);">Nivel {{level}}</span>
+              <span style="padding: 4px 10px; border-radius: 999px; background: var(--o100); font-size: 12px; font-weight: 900; color: var(--o-ink);">{{streakLabel}}</span>
+              <span style="padding: 4px 10px; border-radius: 999px; background: var(--g50); border: 1px solid var(--g200); font-size: 12px; font-weight: 900; color: var(--g-ink);">Liga Granate</span>
+            </div>
+            <span style="font-size: 13px; font-weight: 700; color: var(--ink-4);">Aprendiendo desde {{sinceMonth}}</span>
+            <button type="button" class="cy-sec" onClick="{{startEdit}}" style="margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 12px; border: 2px solid var(--line-2); background: var(--card); font-family: inherit; font-size: 14px; font-weight: 900; color: var(--g-text); cursor: pointer;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4z"></path></svg>
+              Editar perfil
+            </button>
+          </section>
+
+          <section aria-labelledby="est-t" style="padding: 22px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px;">
+            <h2 id="est-t" style="margin: 0; font-size: 17px; font-weight: 900;">Estadísticas</h2>
+            <div style="display: flex; flex-direction: column; gap: 6px;"><div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 800;"><span>XP total</span><span style="color: var(--g-text); font-weight: 900;">{{xp}}</span></div><div style="height: 8px; border-radius: 999px; background: var(--track); overflow: hidden;"><div style="width: {{xpPct}}; height: 100%; border-radius: 999px; background: #B02A50;"></div></div></div>
+            <div style="display: flex; flex-direction: column; gap: 6px;"><div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 800;"><span>Lecciones completadas</span><span style="color: var(--p-text); font-weight: 900;">{{lessons}}</span></div><div style="height: 8px; border-radius: 999px; background: var(--track); overflow: hidden;"><div style="width: {{lessonsPct}}; height: 100%; border-radius: 999px; background: #8B5CF6;"></div></div></div>
+            <div style="display: flex; flex-direction: column; gap: 6px;"><div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 800;"><span>Insignias</span><span style="color: var(--o-text); font-weight: 900;">{{badges}} de 8</span></div><div style="height: 8px; border-radius: 999px; background: var(--track); overflow: hidden;"><div style="width: {{badgesPct}}; height: 100%; border-radius: 999px; background: #F97316;"></div></div></div>
+          </section>
+
+          <section aria-labelledby="cursos-t" style="padding: 22px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px;">
+            <h2 id="cursos-t" style="margin: 0; font-size: 17px; font-weight: 900;">Mis cursos</h2>
+            <sc-for list="{{courses}}" as="c" hint-placeholder-count="1">
+              <a href="Lecciones.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink);">
+                <span style="width: 44px; height: 44px; flex: none; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; {{c.tile}}">{{c.glyph}}</span>
+                <span style="flex: 1; display: flex; flex-direction: column; gap: 4px;"><strong style="font-size: 15px; font-weight: 900;">{{c.title}}</strong><span style="height: 6px; border-radius: 999px; background: var(--track); overflow: hidden;"><span style="display: block; height: 100%; border-radius: 999px; background: #F97316; width: {{c.pctW}};"></span></span></span>
+                <span style="font-size: 14px; font-weight: 900; color: var(--o-text);">{{c.pct}}%</span>
+              </a>
+            </sc-for>
+          </section>
+        </div>
+
+        <div style="flex: 2 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <section aria-labelledby="datos-t" style="padding: 22px 24px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; {{editRing}}">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+              <h2 id="datos-t" style="margin: 0; font-size: 18px; font-weight: 900;">Datos de cuenta</h2>
+              <sc-if value="{{saved}}" hint-placeholder-val="{{ false }}"><span role="status" style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 900; color: var(--g-text);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Cambios guardados</span></sc-if>
+            </div>
+
+            <sc-if value="{{viewing}}" hint-placeholder-val="{{ true }}">
+              <dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                <div style="padding: 12px 14px; border-radius: 12px; background: var(--sunken);"><dt style="font-size: 11px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);">Nombre</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 900;">{{name}}</dd></div>
+                <div style="padding: 12px 14px; border-radius: 12px; background: var(--sunken);"><dt style="font-size: 11px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);">Correo</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 900;">{{email}}</dd></div>
+                <div style="padding: 12px 14px; border-radius: 12px; background: var(--sunken);"><dt style="font-size: 11px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);">Usuario</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 900;">{{user}}</dd></div>
+                <div style="padding: 12px 14px; border-radius: 12px; background: var(--sunken);"><dt style="font-size: 11px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);">País</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 900;">{{country}}</dd></div>
+                <div style="padding: 12px 14px; border-radius: 12px; background: var(--sunken);"><dt style="font-size: 11px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);">Miembro desde</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 900;">{{sinceLabel}}</dd></div>
+                <div style="padding: 12px 14px; border-radius: 12px; background: var(--sunken);"><dt style="font-size: 11px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3);">Meta diaria</dt><dd style="margin: 4px 0 0; font-size: 15px; font-weight: 900;">{{goal}} min al día</dd></div>
+              </dl>
+            </sc-if>
+
+            <sc-if value="{{editing}}" hint-placeholder-val="{{ false }}">
+              <form aria-label="Editar datos" style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                  <div style="display: flex; flex-direction: column; gap: 6px;"><label for="p-name" style="font-size: 13px; font-weight: 900;">Nombre</label><input id="p-name" class="cy-input" type="text" value="{{draftName}}" onChange="{{onName}}" style="height: 46px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 2px solid var(--line-strong); font-family: inherit; font-size: 15px; font-weight: 700; color: var(--ink);"></div>
+                  <div style="display: flex; flex-direction: column; gap: 6px;"><label for="p-user" style="font-size: 13px; font-weight: 900;">Usuario</label><input id="p-user" class="cy-input" type="text" value="{{draftUser}}" onChange="{{onUser}}" style="height: 46px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 2px solid var(--line-strong); font-family: inherit; font-size: 15px; font-weight: 700; color: var(--ink);"></div>
+                  <div style="display: flex; flex-direction: column; gap: 6px;"><label for="p-country" style="font-size: 13px; font-weight: 900;">País</label>
+                    <select id="p-country" class="cy-input" value="{{draftCountry}}" onChange="{{onCountry}}" style="height: 46px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 2px solid var(--line-strong); background: var(--card); font-family: inherit; font-size: 15px; font-weight: 700; color: var(--ink);">
+                      <option value="Argentina">Argentina</option>
+                      <option value="Chile">Chile</option>
+                      <option value="Colombia">Colombia</option>
+                      <option value="España">España</option>
+                      <option value="México">México</option>
+                      <option value="Perú">Perú</option>
+                    </select>
+                  </div>
+                  <div style="display: flex; flex-direction: column; gap: 6px;"><label for="p-mail" style="font-size: 13px; font-weight: 900;">Correo</label><input id="p-mail" class="cy-input" type="email" value="{{draftEmail}}" onChange="{{onEmail}}" style="height: 46px; box-sizing: border-box; padding: 0 12px; border-radius: 12px; border: 2px solid var(--line-strong); background: var(--card); font-family: inherit; font-size: 15px; font-weight: 700; color: var(--ink);"></div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px;">
+                  <button type="button" onClick="{{cancel}}" style="height: 46px; padding: 0 18px; border-radius: 12px; border: 2px solid var(--line-2); background: var(--card); font-family: inherit; font-size: 14px; font-weight: 900; color: var(--ink-2); cursor: pointer;">Cancelar</button>
+                  <button type="button" class="cy-btn" onClick="{{save}}" style="height: 46px; padding: 0 22px; border-radius: 12px; border: 0; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; font-family: inherit; font-size: 14px; font-weight: 900; color: #FFFFFF; cursor: pointer;">Guardar cambios</button>
+                </div>
+              </form>
+            </sc-if>
+          </section>
+
+          <section aria-labelledby="hist-t" style="padding: 22px 24px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px;">
+            <h2 id="hist-t" style="margin: 0 0 8px; font-size: 18px; font-weight: 900;">Historial de actividad</h2>
+            <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column;">
+              <sc-for list="{{activity}}" as="a" hint-placeholder-count="5">
+                <li style="display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line-soft);">
+                  <span style="width: 36px; height: 36px; flex: none; border-radius: 10px; display: flex; align-items: center; justify-content: center; {{a.tile}}">
+                    <sc-if value="{{a.isLesson}}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                    <sc-if value="{{a.isBadge}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M18 2H6v7a6 6 0 0 0 12 0z"></path></svg></sc-if>
+                    <sc-if value="{{a.isModule}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"></path><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"></path></svg></sc-if>
+                  </span>
+                  <span style="flex: 1; display: flex; flex-direction: column;"><strong style="font-size: 14px; font-weight: 900;">{{a.title}}</strong><span style="font-size: 12px; font-weight: 700; color: var(--ink-3);">{{a.when}} · {{a.sub}}</span></span>
+                  <sc-if value="{{a.hasXp}}" hint-placeholder-val="{{ true }}"><span style="font-size: 13px; font-weight: 900; color: var(--g-text);">+{{a.xp}} XP</span></sc-if>
+                </li>
+              </sc-for>
+              <sc-if value="{{noActivity}}" hint-placeholder-val="{{ false }}"><li style="padding: 12px 0; font-size: 14px; font-weight: 700; color: var(--ink-3);">Aún no hay actividad. Tu primera lección aparecerá aquí.</li></sc-if>
+            </ol>
+          </section>
+
+          <section aria-labelledby="aj-t" style="padding: 22px 24px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <h2 id="aj-t" style="margin: 0; font-size: 18px; font-weight: 900;">Ajustes rápidos</h2>
+              <a href="Ajustes.dc.html" style="font-size: 14px; font-weight: 900; text-decoration: none;">Todos los ajustes</a>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line-soft);">
+              <span style="flex: 1; display: flex; flex-direction: column;"><strong id="n-lbl" style="font-size: 15px; font-weight: 900;">Recordatorio diario</strong><span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">Todos los días a las {{hour}}</span></span>
+              <button type="button" role="switch" aria-checked="{{notif}}" aria-labelledby="n-lbl" onClick="{{toggleNotif}}" style="position: relative; width: 52px; height: 30px; flex: none; border-radius: 999px; border: 0; cursor: pointer; {{notifTrack}}"><span style="position: absolute; top: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 3px rgba(0,0,0,0.25); transition: left .2s ease; {{notifKnob}}"></span></button>
+            </div>
+            <a href="Ajustes.dc.html" style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line-soft); text-decoration: none; color: var(--ink);">
+              <span style="flex: 1; display: flex; flex-direction: column;"><strong style="font-size: 15px; font-weight: 900;">Apariencia</strong><span style="font-size: 13px; font-weight: 700; color: var(--ink-3);">{{themeLabel}}</span></span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="stroke: var(--ink-2);"><path d="m9 6 6 6-6 6"></path></svg>
+            </a>
+            <a href="Main.dc.html" onClick="{{logout}}" style="margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 12px; background: var(--r50); border: 1px solid var(--r200); color: var(--r-text3); font-size: 15px; font-weight: 900; text-decoration: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg>
+              Cerrar sesión
+            </a>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1160}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { editing: false, saved: false, dName: '', dUser: '', dCountry: '', dEmail: '', error: '', photoMsg: '', photoErr: false };
+  }
+  loadPhoto(file) {
+    const S = window.CodyuStore;
+    if (!file) return;
+    if (!/^image\//.test(file.type)) { this.setState({ photoMsg: 'Ese archivo no es una imagen. Elige una foto JPG o PNG.', photoErr: true }); return; }
+    if (file.size > 20 * 1024 * 1024) { this.setState({ photoMsg: 'La imagen pesa más de 20 MB. Elige una más liviana.', photoErr: true }); return; }
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const size = 256, side = Math.min(img.naturalWidth, img.naturalHeight);
+      const sx = (img.naturalWidth - side) / 2, sy = (img.naturalHeight - side) / 2;
+      const cv = document.createElement('canvas');
+      cv.width = size; cv.height = size;
+      const ctx = cv.getContext('2d');
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, size, size);
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, sx, sy, side, side, 0, 0, size, size);
+      URL.revokeObjectURL(url);
+      S.updateProfile({ avatar: cv.toDataURL('image/jpeg', 0.86), avatarSource: 'user' });
+      this.setState({ photoMsg: 'Foto actualizada.', photoErr: false });
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); this.setState({ photoMsg: 'No pude abrir esa imagen. Prueba con otra.', photoErr: true }); };
+    img.src = url;
+  }
+  renderVals() {
+    const s = this.state;
+    const S = window.CodyuStore;
+    const me = S.me(), st = S.stats(), set = S.settings();
+    const notifOn = !!set.t.diario;
+    const kinds = { lesson: 'background: var(--g100); color: var(--g-text);', badge: 'background: var(--o100); color: #EA580C;', module: 'background: var(--p100); color: var(--p-text);' };
+    const act = S.activity(6);
+    const courses = S.courses().filter((c) => c.started || c.active).map((c) => ({ title: c.title, glyph: c.glyph, pct: c.pct, pctW: Math.max(c.pct, 2) + '%', tile: 'background: ' + c.tileBg + '; color: ' + c.tileFg + ';' }));
+    return {
+      name: me.name, user: me.user, country: me.country, email: me.email, initial: me.initial,
+      photo: me.avatar, hasPhoto: !!me.avatar, noPhoto: !me.avatar,
+      photoAria: me.avatar ? 'Cambiar foto de perfil' : 'Subir foto de perfil',
+      photoAction: me.avatar ? 'Cambiar foto' : 'Subir foto',
+      pickPhoto: () => { const el = document.getElementById('foto-perfil'); if (el) { el.value = ''; el.click(); } },
+      onPhoto: (e) => { const f = e.target.files && e.target.files[0]; e.target.value = ''; this.loadPhoto(f); },
+      removePhoto: () => { S.updateProfile({ avatar: '' }); this.setState({ photoMsg: 'Quitaste tu foto.', photoErr: false }); },
+      hasPhotoMsg: !!s.photoMsg, photoMsg: s.photoMsg, photoMsgColor: s.photoErr ? 'color: var(--r-text);' : 'color: var(--g-text);',
+      level: st.level, streakLabel: st.streak + (st.streak === 1 ? ' día de racha' : ' días de racha'), sinceMonth: me.sinceMonth, sinceLabel: me.sinceLabel,
+      xp: st.xp, xpPct: Math.max(st.levelPct, 2) + '%', lessons: st.lessonsTotal, lessonsPct: Math.max(S.course().pct, 2) + '%',
+      badges: st.badges, badgesPct: Math.round(st.badges / 8 * 100) + '%', goal: set.goal, hour: set.hour,
+      themeLabel: set.theme === 'oscuro' ? 'Modo oscuro' : set.theme === 'sistema' ? 'Según el sistema' : 'Modo claro',
+      courses,
+      activity: act.map((a) => ({ title: a.title, sub: a.sub, when: a.when, xp: a.xp, hasXp: a.xp > 0, isLesson: a.kind === 'lesson', isBadge: a.kind === 'badge', isModule: a.kind === 'module', tile: kinds[a.kind] || kinds.lesson })),
+      noActivity: act.length === 0,
+      draftEmail: s.dEmail,
+      onEmail: (e) => this.setState({ dEmail: e.target.value }),
+      logout: () => S.logout(),
+      editing: s.editing, viewing: !s.editing, saved: s.saved && !s.editing,
+      editRing: s.editing ? 'box-shadow: 0 0 0 3px var(--g200);' : '',
+      draftName: s.dName, draftUser: s.dUser, draftCountry: s.dCountry,
+      yes: true,
+      onName: (e) => this.setState({ dName: e.target.value }),
+      onUser: (e) => this.setState({ dUser: e.target.value }),
+      onCountry: (e) => this.setState({ dCountry: e.target.value }),
+      startEdit: () => this.setState({ editing: true, saved: false, dName: me.name, dUser: me.user, dCountry: me.country, dEmail: me.email }),
+      cancel: () => this.setState({ editing: false }),
+      save: () => { S.updateProfile({ name: s.dName, user: s.dUser, country: s.dCountry, email: s.dEmail }); this.setState({ editing: false, saved: true }); },
+      notif: notifOn,
+      notifTrack: notifOn ? 'background: #7A1A35;' : 'background: #B0A4A9;',
+      notifKnob: notifOn ? 'left: 25px;' : 'left: 3px;',
+      toggleNotif: () => { S.setToggle('diario', !notifOn); this.forceUpdate(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

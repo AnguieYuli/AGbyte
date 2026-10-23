@@ -1,0 +1,69 @@
+AGbyte en Java
+==============
+
+Es la misma app AGbyte (mismas pantallas, cursos, editor, ejercicios e inicio con Google),
+pero el programa que la abre está escrito en Java en lugar de Python.
+
+Qué necesitas
+-------------
+- El JDK de Java 17 o más nuevo (recomendado: JDK 21). Si no lo tienes, los archivos .bat
+  te ofrecen instalarlo con un clic (Eclipse Temurin, gratis).
+- Para ejecutar código en el editor, AGbyte usa lo que tengas instalado:
+    Python y SQL  -> Python (python.org). SQL usa el SQLite que trae Python.
+    Java          -> tu JDK (o el Java que va dentro de AGbyte.exe).
+    C++           -> g++ (por ejemplo el de Code::Blocks / MinGW).
+    JavaScript, HTML y CSS se ejecutan dentro de la app.
+  Si falta alguno, AGbyte lo ejecuta en línea (Wandbox) cuando hay internet.
+
+Forma 1: con doble clic
+-----------------------
+- "Abrir AGbyte (Java).bat"  -> compila el código y abre AGbyte en su propia ventana.
+- "Crear AGbyte (Java).bat"  -> crea dist\AGbyte\AGbyte.exe (con su propio Java dentro)
+                                y un acceso "AGbyte (Java)" en tu Escritorio.
+  Importante: AGbyte.exe necesita las carpetas que tiene al lado (app y runtime).
+  Si lo quieres en otro sitio, mueve la carpeta dist\AGbyte completa.
+
+Forma 2: desde un IDE
+---------------------
+- IntelliJ IDEA: File > Open > elige la carpeta AGbyte-Java (la que tiene pom.xml)
+  > Open as Project. Abre src/main/java/pe/agbyte/AGbyteANYU.java y pulsa el triángulo verde.
+- Eclipse: File > Import > Maven > Existing Maven Projects > elige esta carpeta.
+  Clic derecho en AGbyteANYU.java > Run As > Java Application.
+- NetBeans: File > Open Project > elige esta carpeta > Run.
+- Terminal con Maven:  mvn package   (crea target\AGbyte.jar)
+                       java -jar target\AGbyte.jar
+
+Opciones al ejecutar:
+  (sin opciones)   abre AGbyte en su propia ventana (Edge o Chrome en modo app)
+  --navegador      lo abre en tu navegador normal
+  --servidor       solo el servidor local, sin ventana (para pruebas)
+
+Cómo está hecho (src/main/java/pe/agbyte)
+-----------------------------------------
+  AGbyteANYU.java       Punto de entrada: inicia el servidor y abre la ventana.
+  ServidorANYU.java     Servidor local en http://127.0.0.1:47615 (solo accesible desde tu PC).
+                        Entrega las pantallas y la API: /api/run, /api/info, /api/token,
+                        /api/google/..., /api/open y /oauth/google.
+  EjecutorANYU.java     Ejecuta el código del editor (Python, Java, C++ y SQL) con límite de tiempo.
+  GoogleLoginANYU.java  "Continuar con Google" (flujo oficial para apps de escritorio con PKCE).
+  VentanaANYU.java      Abre la ventana de AGbyte y la ventanita de control.
+  JsonANYU.java         Lee y escribe JSON (sin librerías externas).
+  SistemaANYU.java      Carpetas, búsqueda de programas instalados y registro de errores.
+
+  src/main/resources/web       Las pantallas de la app (HTML, CSS y JavaScript).
+  src/main/resources/sql_ejecutor.py   Ayudante que ejecuta SQL con SQLite.
+
+Todas las clases, métodos y variables llevan las iniciales ANYU al final
+(las constantes en mayúsculas, con _ANYU: PUERTO_ANYU). Solo main conserva su nombre,
+porque Java necesita que el método de inicio se llame así.
+
+No usa librerías externas: solo Java estándar.
+
+Tu progreso
+-----------
+- AGbyte guarda tu progreso en este PC (%LOCALAPPDATA%\AGbyte\ventana).
+- La primera vez que abres la versión Java, copia el progreso que tenías en AGbyte.exe
+  (la versión de Python), así no empiezas de cero. Después, cada versión guarda el suyo.
+- La cuenta de Google se configura una sola vez y la comparten las dos versiones
+  (%LOCALAPPDATA%\AGbyte\google-oauth.json).
+- Si algo falla, el detalle queda en %LOCALAPPDATA%\AGbyte\agbyte-java.log

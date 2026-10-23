@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Editor de código</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-run{transition:background-color .15s ease}
+.cy-run:hover{background-color:#9B2242!important}
+.cy-cta{transition:background-color .15s ease}.cy-cta:hover{background-color:#5E1229!important}
+.cy-cont:hover{background-color:#FFFFFF!important}
+.cy-tab:hover{color:#F3EAEE!important}
+.cy-code{outline:none}
+.cy-code::selection{background:rgba(240,139,168,.32)}
+.cy-code:focus{box-shadow:inset 0 0 0 2px rgba(240,139,168,.32)}
+.cy-stdin:focus{outline:2px solid #2563EB;outline-offset:1px}
+:focus-visible{outline:2px solid #60A5FA;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="editor" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="normal" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1240px; box-sizing: border-box; padding: 20px 32px 48px; display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+        <nav aria-label="Ruta de navegación" style="font-size: 13px; font-weight: 800; color: var(--ink-4);">AGbyte <span aria-hidden="true" style="margin: 0 6px; color: var(--ink-5);">/</span> <span style="color: var(--g-text);">Editor de código</span></nav>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; color: var(--ink-3);">
+          <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--card); border: 1px solid var(--line);">
+            <span aria-hidden="true" style="padding: 1px 6px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; {{tile}}">{{glyph}}</span>
+            {{courseName}} · se ejecuta con {{runner}}
+          </span>
+          <a href="Lecciones.dc.html" style="font-weight: 900; text-decoration: none;">Cambiar lenguaje</a>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch;">
+        <section aria-label="Editor" style="flex: 3 1 560px; min-width: 0; border-radius: 20px; background: #241B20; box-shadow: 0 10px 30px rgba(31,20,24,0.12); overflow: hidden; display: flex; flex-direction: column;">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 12px 0 16px; background: #2E2329;">
+            <span aria-hidden="true" style="display: flex; gap: 6px; padding-bottom: 10px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #F87171;"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #FBBF24;"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #E07A97;"></span></span>
+            <div role="tablist" aria-label="Archivos" style="display: flex; gap: 2px; align-self: flex-end;">
+              <sc-for list="{{tabs}}" as="tb" hint-placeholder-count="2">
+                <button type="button" role="tab" class="cy-tab" onClick="{{tb.pick}}" aria-selected="{{tb.on}}" style="display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; border: 0; border-radius: 10px 10px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; cursor: pointer; {{tb.style}}">
+                  <span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; {{tb.dot}}"></span>
+                  {{tb.label}}
+                </button>
+              </sc-for>
+            </div>
+            <span style="flex: 1;"></span>
+            <button type="button" onClick="{{resetFile}}" title="Vuelve al código original de este archivo" style="height: 36px; margin-bottom: 8px; padding: 0 12px; border-radius: 10px; border: 1px solid #4D3A44; background: transparent; font-family: inherit; font-size: 13px; font-weight: 800; color: #DCCED4; cursor: pointer;">Restablecer</button>
+            <button type="button" class="cy-run" onClick="{{run}}" disabled="{{running}}" title="Ctrl + Enter" style="display: inline-flex; align-items: center; gap: 8px; height: 36px; margin-bottom: 8px; padding: 0 16px; border-radius: 10px; border: 0; background: #7A1A35; font-family: inherit; font-size: 14px; font-weight: 900; color: #FFFFFF; cursor: pointer;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"></path></svg>
+              {{runLabel}}
+            </button>
+          </div>
+
+          <sc-if value="{{isReto}}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 16px; background: #3A1F2A; border-bottom: 1px solid #4E2B3A; font-size: 13px; font-weight: 800; color: #F9D3DF;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>
+              <span style="flex: 1 1 240px;">{{retoText}}</span>
+              <div role="group" aria-label="Retos" style="display: flex; gap: 6px;">
+                <sc-for list="{{retoChips}}" as="rc" hint-placeholder-count="4">
+                  <button type="button" onClick="{{rc.pick}}" aria-label="{{rc.aria}}" aria-current="{{rc.current}}" title="{{rc.aria}}" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 9px; font-family: inherit; font-size: 13px; font-weight: 900; cursor: pointer; {{rc.style}}">{{rc.mark}}</button>
+                </sc-for>
+              </div>
+            </div>
+            <sc-if value="{{hasLockMsg}}" hint-placeholder-val="{{ false }}"><div role="status" style="padding: 8px 16px; background: #2E2329; font-size: 13px; font-weight: 800; color: #F9D3DF;">{{lockMsg}}</div></sc-if>
+            <sc-if value="{{retoDone}}" hint-placeholder-val="{{ false }}">
+              <div role="status" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 10px 16px; background: #4A0E22; color: #F7CCD8;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+                <span style="flex: 1 1 200px; font-size: 13px; font-weight: 800;"><strong style="font-weight: 900; color: #FFFFFF;">Reto superado.</strong> {{retoDoneText}}</span>
+                <button type="button" class="cy-cont" onClick="{{cta}}" style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 10px; border: 0; background: #F7CCD8; font-family: inherit; font-size: 13px; font-weight: 900; color: #4A0E22; cursor: pointer;">{{ctaLabel}} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+              </div>
+            </sc-if>
+          </sc-if>
+
+          <div style="position: relative; flex: 1 1 auto; height: 460px; overflow: hidden; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 22px;">
+            <div aria-hidden="true" style="position: absolute; left: 0; top: 0; right: 0; padding: 14px 16px 14px 60px; pointer-events: none; color: #F3EAEE; transform: {{codeShift}};">
+              <sc-for list="{{rows}}" as="ln" hint-placeholder-count="12">
+                <div style="height: 22px; margin-left: -60px; padding-left: 60px; white-space: pre; {{ln.bg}}"><sc-for list="{{ln.toks}}" as="tk"><span style="color: {{tk.c}};">{{tk.t}}</span></sc-for>&#8203;</div>
+              </sc-for>
+            </div>
+            <div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 48px; padding-top: 14px; background: #241B20; transform: {{gutterShift}};">
+              <sc-for list="{{rows}}" as="ln" hint-placeholder-count="12">
+                <div style="height: 22px; padding-right: 12px; text-align: right; font-size: 12px; {{ln.numColor}}">{{ln.n}}</div>
+              </sc-for>
+            </div>
+            <label for="codigo" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Código de {{fileName}}</label>
+            <textarea id="codigo" class="cy-code" value="{{code}}" onChange="{{onCode}}" onKeyDown="{{onKey}}" onScroll="{{onScroll}}" wrap="off" spellcheck="false" autocomplete="off" autocapitalize="off" style="position: relative; display: block; width: 100%; height: 460px; box-sizing: border-box; margin: 0; padding: 14px 16px 14px 60px; border: 0; resize: none; background: transparent; color: transparent; caret-color: #F8FAFC; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 22px; letter-spacing: 0; tab-size: 2; white-space: pre; overflow: auto;"></textarea>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 8px 16px; background: #2E2329; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C3B3BA;">
+            <span>{{fileName}} · {{lineCount}} líneas · guardado en tu PC</span>
+            <span>Tab: sangría · Ctrl + Enter: {{runLabel}}</span>
+          </div>
+        </section>
+
+        <div style="flex: 2 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+          <sc-if value="{{isWeb}}" hint-placeholder-val="{{ false }}">
+            <section aria-labelledby="prev-t" style="border-radius: 20px; background: var(--card); border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column;">
+              <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line);">
+                <span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #B02A50;"></span>
+                <h2 id="prev-t" style="margin: 0; font-size: 14px; font-weight: 900;">Vista previa</h2>
+                <span style="flex: 1;"></span>
+                <span style="font-size: 12px; font-weight: 800; color: var(--ink-4);">Se actualiza al escribir</span>
+              </div>
+              <iframe title="Vista previa de tu página" src="{{previewUrl}}" sandbox="allow-scripts" style="width: 100%; height: 380px; border: 0; background: #FFFFFF;"></iframe>
+            </section>
+          </sc-if>
+
+          <sc-if value="{{isRunnable}}" hint-placeholder-val="{{ true }}">
+            <section aria-labelledby="consola-t" style="border-radius: 20px; background: #1A1317; overflow: hidden; display: flex; flex-direction: column; min-height: 260px; {{consoleBorder}}">
+              <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #241B20;">
+                <span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; {{consoleDot}}"></span>
+                <h2 id="consola-t" style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: #DCCED4;">Consola</h2>
+                <span style="flex: 1;"></span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #A08E97;">{{runMeta}}</span>
+                <button type="button" onClick="{{clear}}" style="height: 30px; padding: 0 10px; border-radius: 8px; border: 1px solid #4D3A44; background: transparent; font-family: inherit; font-size: 12px; font-weight: 800; color: #DCCED4; cursor: pointer;">Limpiar</button>
+              </div>
+              <div role="log" aria-live="polite" style="flex: 1; max-height: 340px; overflow: auto; padding: 14px 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 21px;">
+                <sc-if value="{{idle}}" hint-placeholder-val="{{ true }}"><span style="color: #C3B3BA;">Pulsa {{runLabel}} (o Ctrl + Enter) para ver el resultado.</span></sc-if>
+                <sc-if value="{{running}}" hint-placeholder-val="{{ false }}"><span style="color: #FDE68A;">Ejecutando…</span></sc-if>
+                <sc-for list="{{out}}" as="o" hint-placeholder-count="2">
+                  <div style="white-space: pre-wrap; word-break: break-word; color: {{o.c}};">{{o.t}}</div>
+                </sc-for>
+              </div>
+            </section>
+
+            <section aria-labelledby="stdin-t" style="padding: 16px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px;">
+              <h2 id="stdin-t" style="margin: 0; font-size: 14px; font-weight: 900;">{{stdinTitle}}</h2>
+              <p style="margin: 0; font-size: 13px; line-height: 1.45; font-weight: 700; color: var(--ink-3);">{{stdinHelp}}</p>
+              <sc-if value="{{hasStdin}}" hint-placeholder-val="{{ true }}">
+                <label for="stdin" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Entrada del programa</label>
+                <textarea id="stdin" class="cy-stdin" value="{{stdin}}" onChange="{{onStdin}}" rows="3" spellcheck="false" placeholder="Ana&#10;17" style="width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line-strong); background: var(--sunken); font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink); resize: vertical;"></textarea>
+              </sc-if>
+            </section>
+          </sc-if>
+
+          <section aria-label="Ayuda de Cody" style="padding: 18px 20px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <dc-import name="Cody" size="64" mood="{{mood}}" hint-size="64px,64px"></dc-import>
+              <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                <strong style="font-size: 15px; font-weight: 900;">{{codyTitle}}</strong>
+                <span style="font-size: 14px; line-height: 1.45; font-weight: 700; color: var(--ink-2);">{{codyMsg}}</span>
+              </div>
+            </div>
+            <sc-if value="{{canFix}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="padding: 10px 12px; border-radius: 12px; background: #241B20; font-family: 'JetBrains Mono', monospace; font-size: 13px; white-space: pre; color: #F3EAEE; overflow-x: auto;"><sc-for list="{{fixToks}}" as="tk"><span style="color: {{tk.c}};">{{tk.t}}</span></sc-for></div>
+                <button type="button" onClick="{{applyFix}}" style="height: 44px; border-radius: 12px; border: 2px solid var(--line-2); background: var(--card); font-family: inherit; font-size: 14px; font-weight: 900; color: var(--g-text); cursor: pointer;">Ver solución en la línea {{fixLine}}</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{hasCta}}" hint-placeholder-val="{{ false }}">
+              <button type="button" class="cy-cta" onClick="{{cta}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 14px; border: 0; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; font-family: inherit; font-size: 15px; font-weight: 900; color: #FFFFFF; cursor: pointer;">{{ctaLabel}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+            </sc-if>
+            <a href="Chat-Cody.dc.html" style="font-size: 14px; font-weight: 900; text-decoration: none;">Pregúntale algo más a Cody</a>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const S = window.CodyuStore;
+    const cid = S ? S.me().course : 'python';
+    this.cid = cid;
+    const retos = S ? S.retos(cid) : [];
+    const done = S ? S.exerciseDoneIds(cid) : {};
+    let ri = retos.findIndex((x, i) => !done[S.retoId(i)]);
+    if (ri < 0) ri = Math.max(0, retos.length - 1);
+    const E = S ? S.EDITOR[cid] : null;
+    let main = '';
+    if (S) {
+      const def = E.main.lines.join('\n') + '\n';
+      main = S.getCode(cid, 'main', def);
+      if (main !== def && main.replace(/\bAlex\b/g, S.codeName()) === def) main = def; // código guardado sin cambios: usa tu nombre
+    }
+    this.state = { file: 'main', ri, sx: 0, sy: 0, running: false, result: null, stdin: '', runner: '…', main, err: this.retoCode(ri) };
+    this.lastPreview = { key: null, url: '' };
+    this.refRuns = {};
+  }
+  errKey(i) { return i === 0 ? 'err' : 'err' + (i + 1); }
+  retoDefault(i) { const R = window.CodyuStore.retos(this.cid)[i]; return R ? R.lines.join('\n') + '\n' : ''; }
+  retoCode(i) {
+    const S = window.CodyuStore;
+    if (!S) return '';
+    const def = this.retoDefault(i);
+    const saved = S.getCode(this.cid, this.errKey(i), def);
+    return saved !== def && saved.replace(/\bAlex\b/g, S.codeName()) === def ? def : saved;
+  }
+  componentDidMount() {
+    const S = window.CodyuStore;
+    if (!S) return;
+    S.runtimeInfo().then((info) => {
+      const map = { python: 'python', java: 'java', cpp: 'cpp', sql: 'sql' };
+      let label = 'AGbyte';
+      if (this.cid === 'javascript') label = 'JavaScript integrado';
+      else if (this.cid === 'html' || this.cid === 'css') label = 'vista previa integrada';
+      else if (info && info[map[this.cid]]) label = info[map[this.cid]];
+      else label = 'el ejecutor de AGbyte';
+      this.setState({ runner: label });
+    });
+  }
+  componentWillUnmount() {
+    if (this.lastPreview.url) { try { URL.revokeObjectURL(this.lastPreview.url); } catch (e) { /* nada */ } }
+  }
+  setCode(text) {
+    const S = window.CodyuStore, f = this.state.file;
+    this.setState({ [f]: text, result: f === 'err' ? null : this.state.result });
+    if (S) S.saveCode(this.cid, f === 'err' ? this.errKey(this.state.ri) : f, text);
+  }
+  openReto(i) {
+    this.setState({ file: 'err', ri: i, err: this.retoCode(i), result: null, sx: 0, sy: 0, lockMsg: '' });
+  }
+  isUnlocked(i) {
+    const S = window.CodyuStore, done = S.exerciseDoneIds(this.cid);
+    return i === 0 || !!done[S.retoId(i - 1)] || !!done[S.retoId(i)];
+  }
+  preview(code) {
+    const cid = this.cid;
+    const key = cid + '|' + code;
+    if (this.lastPreview.key === key) return this.lastPreview.url;
+    let html = code;
+    if (cid === 'css') {
+      html = '<!doctype html><html><head><meta charset="utf-8"><style>body{font-family:system-ui,sans-serif;padding:16px}</style><style>' + code.replace(/<\/style/gi, '') + '</style></head><body>' +
+        '<h1 id="titulo">Hola, soy ' + window.CodyuStore.codeName() + '</h1><p>Estoy aprendiendo CSS con AGbyte.</p><p class="nota">Este es un párrafo con la clase nota.</p>' +
+        '<ul><li>Colores</li><li>Tipografía</li><li>Flexbox</li></ul><button>Un botón</button><div class="caja">Una caja</div></body></html>';
+    } else if (!/<html[\s>]/i.test(code)) {
+      html = '<!doctype html><html><head><meta charset="utf-8"><style>body{font-family:system-ui,sans-serif;padding:16px}</style></head><body>' + code + '</body></html>';
+    }
+    const url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+    const old = this.lastPreview.url;
+    this.lastPreview = { key, url };
+    if (old) setTimeout(() => { try { URL.revokeObjectURL(old); } catch (e) { /* nada */ } }, 2000);
+    return url;
+  }
+  webRetoOk(code, R) {
+    // Arreglado = aparece la línea corregida más veces y la línea con error menos veces que en el original.
+    const n = (l) => String(l).replace(/\s+/g, '').toLowerCase();
+    const count = (lines, x) => lines.filter((l) => l === x).length;
+    const mine = code.split('\n').map(n), orig = R.lines.map(n);
+    const fixed = n(R.fixed), broken = n(R.lines[R.line - 1]);
+    return count(mine, fixed) > count(orig, fixed) && (!broken || count(mine, broken) < count(orig, broken));
+  }
+  doRun() {
+    const S = window.CodyuStore;
+    if (!S || this.state.running) return;
+    const f = this.state.file, code = this.state[f], ri = this.state.ri;
+    const R = S.retos(this.cid)[ri];
+    const id = S.retoId(ri);
+    if (this.cid === 'html' || this.cid === 'css') {
+      if (f === 'err') {
+        const ok = this.webRetoOk(code, R);
+        const first = ok ? S.solveExercise(this.cid, id) : false;
+        this.setState({ result: { ok, web: true, first } });
+      } else {
+        this.setState({ result: { ok: true, web: true } });
+        S.editorRun();
+      }
+      return;
+    }
+    this.setState({ running: true, result: null });
+    const jobs = [S.run(this.cid, code, this.state.stdin)];
+    if (f === 'err') {
+      const ls = R.lines.slice();
+      ls[R.line - 1] = R.fixed;
+      jobs.push(this.refRuns[ri] ? Promise.resolve(this.refRuns[ri]) : S.run(this.cid, ls.join('\n') + '\n', '').then((x) => { if (x.ok) this.refRuns[ri] = x; return x; }));
+    }
+    Promise.all(jobs).then(([r, ref]) => {
+      let retoOk = false;
+      if (f === 'err') retoOk = r.ok && !!ref && ref.ok && S.norm(r.stdout) === S.norm(ref.stdout);
+      r.first = retoOk ? S.solveExercise(this.cid, id) : false;
+      r.retoOk = retoOk;
+      if (r.ok || r.stdout) S.editorRun();
+      this.setState({ running: false, result: r, expected: ref && ref.ok ? S.norm(ref.stdout) : '' });
+    });
+  }
+  renderVals() {
+    const S = window.CodyuStore;
+    if (!S) return {};
+    const s = this.state, cid = this.cid, C = S.COURSES[cid], E = S.EDITOR[cid], lang = S.lang(cid);
+    const retos = S.retos(cid), R = retos[s.ri], nR = retos.length;
+    const doneIds = S.exerciseDoneIds(cid);
+    const retoDone = !!doneIds[S.retoId(s.ri)];
+    const exList = S.exercises(cid);
+    const exPending = exList.filter((x) => !doneIds[x.id]).length;
+    const nextReto = retos.findIndex((x, i) => !doneIds[S.retoId(i)]);
+    const isWeb = cid === 'html' || cid === 'css';
+    const f = s.file, code = s[f];
+    const r = s.result;
+    const errLine = r && !r.ok && !r.web ? S.errorLine(cid, r.stderr) : 0;
+    const lines = code.split('\n');
+    const rows = lines.map((l, i) => ({
+      n: i + 1,
+      toks: S.tokenize(l, lang),
+      bg: errLine === i + 1 ? 'background: rgba(244,63,94,0.18); box-shadow: inset 3px 0 0 #F97066;' : '',
+      numColor: errLine === i + 1 ? 'color: #FDA29B;' : 'color: #8A7680;'
+    }));
+    const out = [];
+    if (r && !r.web) {
+      if (S.norm(r.stdout)) r.stdout.replace(/\s+$/, '').split('\n').forEach((t) => out.push({ t, c: '#F3EAEE' }));
+      if (r.stderr) r.stderr.replace(/\s+$/, '').split('\n').forEach((t) => out.push({ t, c: '#FDA29B' }));
+      if (!r.stdout && !r.stderr && r.ok) out.push({ t: '(El programa terminó sin mostrar nada)', c: '#C3B3BA' });
+      if (r.ok) out.push({ t: '— Terminado en ' + (r.ms / 1000).toFixed(2).replace('.', ',') + ' s', c: '#F0A9BD' });
+    }
+    const isReto = f === 'err';
+    const failed = r && !r.ok;
+    const solvedNow = isReto && r && (r.web ? r.ok : r.retoOk);
+    // A dónde lleva «Continuar»
+    let cta = null;
+    const goEx = { label: exPending ? 'Continuar con los ejercicios' : 'Ver tus ejercicios', act: () => { window.location.href = 'Ejercicio.dc.html'; } };
+    const course = S.course(cid);
+    const goLesson = course.finished
+      ? { label: 'Practicar otro lenguaje', act: () => { window.location.href = 'Lecciones.dc.html'; } }
+      : { label: 'Continuar: ' + course.current.title, act: () => { window.location.href = 'Leccion-Teoria.dc.html?c=' + cid + '&l=' + course.current.g; } };
+    if (isReto && (retoDone || solvedNow)) {
+      if (s.ri < nR - 1) cta = { label: 'Continuar: reto ' + (s.ri + 2) + ' de ' + nR, act: () => this.openReto(s.ri + 1) };
+      else if (nextReto >= 0) cta = { label: 'Continuar: reto ' + (nextReto + 1) + ' pendiente', act: () => this.openReto(nextReto) };
+      else cta = exPending ? goEx : goLesson;
+    } else if (!isReto && r && r.ok) {
+      cta = exPending ? goEx : (nextReto >= 0 ? { label: 'Continuar: reto ' + (nextReto + 1) + ' de ' + nR, act: () => this.openReto(nextReto) } : goLesson);
+    }
+    let mood = 'feliz', codyTitle = 'Cody dice', codyMsg = isWeb ? 'Escribe y mira el resultado al instante en la vista previa.' : 'Escribe tu código y pulsa Ejecutar. Equivocarse también es aprender.';
+    if (isReto) { mood = 'piensa'; codyTitle = 'Reto ' + (s.ri + 1) + ': encuentra el error'; codyMsg = isWeb ? 'Este código tiene un error. Corrígelo y pulsa Comprobar.' : 'Este código tiene un error. Ejecútalo, lee la consola y corrígelo.'; }
+    if (isReto && retoDone && !r) { mood = 'celebra'; codyTitle = 'Ya superaste este reto'; codyMsg = 'Puedes repetirlo o pulsar Continuar.'; }
+    if (r && r.ok && !isReto) { mood = 'celebra'; codyTitle = '¡Funciona!'; codyMsg = isWeb ? 'Tu página se ve en la vista previa. Prueba cambiar un texto o un color.' : (exPending ? 'Tu programa se ejecutó sin errores. Cuando quieras, sigue con los ejercicios.' : nextReto >= 0 ? 'Tu programa se ejecutó sin errores. Cuando quieras, sigue con los retos.' : 'Tu programa se ejecutó sin errores. Ya hiciste los ejercicios y los retos: sigue con la próxima lección.'); }
+    if (failed && !isReto) { mood = 'piensa'; codyTitle = errLine ? 'Casi… revisa la línea ' + errLine : 'Casi… revisa la consola'; codyMsg = 'Lee el mensaje en rojo: dice qué pasó. Corrige y vuelve a ejecutar.'; }
+    if (solvedNow) { mood = 'celebra'; codyTitle = '¡Reto superado!'; codyMsg = 'Encontraste y arreglaste el error.' + (r.first ? ' +15 XP.' : ''); }
+    if (isReto && failed) { mood = 'piensa'; codyTitle = 'Casi… revisa la línea ' + R.line; codyMsg = R.hint; }
+    if (isReto && r && r.ok && !r.web && !r.retoOk) { mood = 'piensa'; codyTitle = 'Ya no hay error, pero…'; codyMsg = 'La salida no es la esperada. Se esperaba: ' + (s.expected || '').split('\n').slice(0, 4).join(' / '); }
+    const tabs = [{ id: 'main', label: E.main.name }, { id: 'err', label: 'reto ' + (s.ri + 1) + ' · ' + R.name }].map((t) => {
+      const on = s.file === t.id;
+      return {
+        ...t, on,
+        style: on ? 'background: #241B20; color: #F3EAEE;' : 'background: transparent; color: #C3B3BA;',
+        dot: t.id === 'err' ? (retoDone ? 'background: #E07A97;' : 'background: #F97066;') : 'background: #E07A97;',
+        pick: () => this.setState({ file: t.id, result: null, sx: 0, sy: 0, lockMsg: '' })
+      };
+    });
+    const retoChips = retos.map((x, i) => {
+      const d = !!doneIds[S.retoId(i)], open = this.isUnlocked(i), on = i === s.ri;
+      return {
+        mark: d ? '✓' : String(i + 1), current: on ? 'true' : undefined,
+        aria: 'Reto ' + (i + 1) + (d ? ', superado' : open ? '' : ', bloqueado: supera el anterior'),
+        style: on ? 'background: #F7CCD8; color: #4A0E22; border: 2px solid #F7CCD8;' : d ? 'background: #7A1A35; color: #FFFFFF; border: 2px solid #7A1A35;' : open ? 'background: transparent; color: #F9D3DF; border: 2px solid #8A5A6E;' : 'background: transparent; color: #8A7680; border: 2px dashed #5E4A54; cursor: not-allowed;',
+        pick: () => { if (open) this.openReto(i); else this.setState({ lockMsg: 'Supera el reto ' + i + ' para desbloquear el reto ' + (i + 1) + '.' }); }
+      };
+    });
+    const stdinHelp = {
+      python: 'Si tu programa usa input(), escribe aquí los datos, uno por línea.',
+      java: 'Si tu programa usa Scanner, escribe aquí los datos, uno por línea.',
+      cpp: 'Si tu programa usa cin, escribe aquí los datos, uno por línea.',
+      javascript: 'Si tu programa usa prompt(), escribe aquí las respuestas, una por línea.',
+      sql: 'Tablas de ejemplo: frutas (id, nombre, precio, stock), clientes (id, nombre, ciudad) y pedidos (id, cliente_id, fruta_id, cantidad, fecha). Puedes crear tablas nuevas: todo se reinicia en cada ejecución.'
+    }[cid] || '';
+    return {
+      glyph: C.glyph, tile: 'background: ' + C.tileBg + '; color: ' + C.tileFg + ';', courseName: C.name, runner: s.runner,
+      tabs, rows, code, fileName: isReto ? R.name : E.main.name, lineCount: lines.length,
+      codeShift: 'translate(' + (-s.sx) + 'px, ' + (-s.sy) + 'px)', gutterShift: 'translateY(' + (-s.sy) + 'px)',
+      isReto, retoDone: retoDone || !!solvedNow, retoChips,
+      hasLockMsg: !!s.lockMsg && isReto, lockMsg: s.lockMsg || '',
+      retoText: 'Reto ' + (s.ri + 1) + ' de ' + nR + ': ' + (isWeb ? 'este código tiene un error. Corrígelo y pulsa Comprobar.' : 'este programa tiene un error. Corrígelo y ejecútalo hasta obtener la salida correcta.') + ' (+15 XP)',
+      retoDoneText: s.ri < nR - 1 ? 'El reto ' + (s.ri + 2) + ' ya está desbloqueado.' : (nextReto >= 0 ? 'Te queda el reto ' + (nextReto + 1) + '.' : 'Superaste los ' + nR + ' retos de ' + C.name + '.' + (exPending ? '' : ' Sigue con tu próxima lección.')),
+      hasCta: !!cta, ctaLabel: cta ? cta.label : '', cta: () => { if (cta) cta.act(); },
+      isWeb, isRunnable: !isWeb,
+      previewUrl: isWeb ? this.preview(code) : '',
+      runLabel: isWeb ? (isReto ? 'Comprobar' : 'Guardar') : 'Ejecutar',
+      running: s.running, idle: !s.running && !r, out,
+      runMeta: r && r.runner ? r.runner : '',
+      consoleBorder: failed ? 'border: 2px solid #F97066;' : 'border: 2px solid #1A1317;',
+      consoleDot: s.running ? 'background: #FBBF24;' : failed ? 'background: #F97066;' : r ? 'background: #E07A97;' : 'background: #8A7680;',
+      stdinTitle: cid === 'sql' ? 'Datos para practicar' : 'Entrada del programa',
+      stdinHelp, hasStdin: cid !== 'sql', stdin: s.stdin,
+      onStdin: (e) => this.setState({ stdin: e.target.value }),
+      mood, codyTitle, codyMsg,
+      canFix: isReto && !retoDone && !solvedNow && !!r,
+      fixLine: R.line, fixToks: S.tokenize(R.fixed, lang),
+      applyFix: () => {
+        const ls = this.state.err.split('\n');
+        ls[R.line - 1] = R.fixed;
+        this.setCode(ls.join('\n'));
+      },
+      onCode: (e) => this.setCode(e.target.value),
+      onScroll: (e) => this.setState({ sx: e.target.scrollLeft, sy: e.target.scrollTop }),
+      onKey: (e) => {
+        const el = e.target, v = el.value, a = el.selectionStart, b = el.selectionEnd;
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); this.doRun(); return; }
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          el.setRangeText('  ', a, b, 'end');
+          this.setCode(el.value);
+          return;
+        }
+        if (e.key === 'Enter' && !e.shiftKey) {
+          const lineStart = v.lastIndexOf('\n', a - 1) + 1;
+          const cur = v.slice(lineStart, a);
+          let indent = (cur.match(/^\s*/) || [''])[0];
+          if (/[:{(\[]\s*$/.test(cur)) indent += '  ';
+          e.preventDefault();
+          const ins = '\n' + indent;
+          el.setRangeText(ins, a, b, 'end');
+          this.setCode(el.value);
+        }
+      },
+      run: () => this.doRun(),
+      clear: () => this.setState({ result: null }),
+      resetFile: () => {
+        if (s.file === 'main') {
+          S.resetCode(cid, 'main');
+          this.setState({ main: E.main.lines.join('\n') + '\n', result: null });
+        } else {
+          S.resetCode(cid, this.errKey(s.ri));
+          this.setState({ err: this.retoDefault(s.ri), result: null });
+        }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

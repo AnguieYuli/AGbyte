@@ -1,0 +1,166 @@
+/* AGbyte — colores de la interfaz (vino y granate). Claro por defecto; html[data-theme="dark"] activa el modo oscuro. */
+:root {
+  color-scheme: light;
+  --bg: #F8F5F6;
+  --card: #FFFFFF;
+  --sunken: #FAF7F8;
+  --muted-bg: #F2EDEF;
+  --track: #F4EFF1;
+  --track-2: #E9E1E4;
+  --track-3: #EDE6E9;
+  --seg: #EFE9EB;
+  --bubble: #F5EFF1;
+  --tint-g: #FFFAFB;
+  --tint-r: #FFFBF8;
+  --tint-new: #FDF6F8;
+
+  --ink: #1F1418;
+  --ink-1: #2F2328;
+  --ink-2: #4A3D43;
+  --ink-3: #56484E;
+  --ink-4: #685A60;
+  --ink-5: #B0A4A9;
+
+  --line: #EDE6E9;
+  --line-soft: #F2EDEF;
+  --line-2: #DFD4D8;
+  --line-3: #E4DADE;
+  --line-4: #E9E1E4;
+  --line-strong: #D5C8CD;
+
+  /* Marca: vino y granate */
+  --g50: #FCF2F5;
+  --g100: #F9E1E8;
+  --g200: #F2C4D2;
+  --g300: #E59AB2;
+  --g-text: #8A1C3D;
+  --g-num: #A3264D;
+  --g-ink: #4F0F24;
+
+  --o50: #FFF7ED;
+  --o100: #FFEDD5;
+  --o200: #FED7AA;
+  --o-text: #C2410C;
+  --o-num: #EA580C;
+  --o-ink: #7C2D12;
+
+  --a100: #FEF3C7;
+  --a-text: #92400E;
+  --p100: #EDE9FE;
+  --p200: #DDD6FE;
+  --p-text: #6D28D9;
+  --b100: #DBEAFE;
+  --b200: #BFDBFE;
+  --b-text: #1D4ED8;
+  /* Errores: rojo cálido, distinto del vino */
+  --r50: #FFF4EF;
+  --r200: #FDCBB8;
+  --r-text: #B42318;
+  --pk100: #FCE7F3;
+  --pk-text: #9D174D;
+  --slate-text: #475569;
+  --shadow-soft: rgba(31, 20, 24, 0.05);
+  --p50: #F3E8FF;
+  --ink-4b: #716368;
+  --g-hover: #6B1530;
+  --o-ink2: #9A3412;
+  --o-ink3: #431407;
+  --a-text2: #A16207;
+  --p-text2: #5B21B6;
+  --p-text3: #4C1D95;
+  --p-num: #7C3AED;
+  --b-text2: #1E40AF;
+  --b-text3: #1E3A8A;
+  --r-text2: #912018;
+  --r-text3: #D92D20;
+  --r300: #F9A58A;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #140E11;
+  --card: #1E161A;
+  --sunken: #191215;
+  --muted-bg: #281E23;
+  --track: #30252A;
+  --track-2: #3A2C33;
+  --track-3: #30252A;
+  --seg: #140E11;
+  --bubble: #281E23;
+  --tint-g: #24161C;
+  --tint-r: #261714;
+  --tint-new: #2A1820;
+
+  --ink: #F4EBEF;
+  --ink-1: #E8DCE1;
+  --ink-2: #D2C3CA;
+  --ink-3: #BBA9B1;
+  --ink-4: #A6939C;
+  --ink-5: #705E67;
+
+  --line: #30252A;
+  --line-soft: #281E23;
+  --line-2: #46363E;
+  --line-3: #46363E;
+  --line-4: #3A2C33;
+  --line-strong: #594651;
+
+  --g50: #2A1219;
+  --g100: #3E1A26;
+  --g200: #582337;
+  --g300: #7A3150;
+  --g-text: #F08BA8;
+  --g-num: #F08BA8;
+  --g-ink: #F9CFDB;
+
+  --o50: #24180D;
+  --o100: #3A2410;
+  --o200: #7C2D12;
+  --o-text: #FDBA74;
+  --o-num: #FDBA74;
+  --o-ink: #FED7AA;
+
+  --a100: #3B2A0B;
+  --a-text: #FCD34D;
+  --p100: #241B3D;
+  --p200: #4C1D95;
+  --p-text: #C4B5FD;
+  --b100: #172554;
+  --b200: #1E3A8A;
+  --b-text: #93C5FD;
+  --r50: #2B1410;
+  --r200: #7A2A1A;
+  --r-text: #FDA58F;
+  --pk100: #4A1D35;
+  --pk-text: #FBCFE8;
+  --slate-text: #CBD5E1;
+  --shadow-soft: rgba(0, 0, 0, 0.3);
+  --p50: #241B3D;
+  --ink-4b: #A6939C;
+  --g-hover: #F6B3C6;
+  --o-ink2: #FED7AA;
+  --o-ink3: #FFEDD5;
+  --a-text2: #FCD34D;
+  --p-text2: #C4B5FD;
+  --p-text3: #DDD6FE;
+  --p-num: #C4B5FD;
+  --b-text2: #93C5FD;
+  --b-text3: #BFDBFE;
+  --r-text2: #FECDC2;
+  --r-text3: #FDA58F;
+  --r300: #9A3412;
+}
+
+html, body { background: var(--bg); }
+::selection { background: #F2C4D2; }
+:root[data-theme="dark"] ::selection { background: #7A3150; }
+:root[data-theme="dark"] ::placeholder { color: #917F87; }
+:root[data-theme="dark"] input, :root[data-theme="dark"] select { color: var(--ink) !important; }
+
+/* Ajustes › Sonido y accesibilidad */
+:root[data-motion="reduce"] *, :root[data-motion="reduce"] *::before, :root[data-motion="reduce"] *::after {
+  transition: none !important;
+  animation: none !important;
+}
+:root[data-contrast="high"] { --ink-3: #2F2328; --ink-4: #3A2E33; --line: #B0A4A9; --line-soft: #CEC3C7; }
+:root[data-theme="dark"][data-contrast="high"] { --ink-3: #EEE2E7; --ink-4: #DACFD4; --line: #705E67; --line-soft: #594651; }

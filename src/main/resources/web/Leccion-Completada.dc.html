@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>AGbyte · Lección completada</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<link rel="stylesheet" href="./codyu-theme.css">
+<script src="./codyu-store.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:var(--bg)}
+a{color:var(--g-text)}a:hover{color:var(--g-hover)}
+.cy-nav:hover{background-color:var(--g50)}
+.cy-btn{transition:background-color .15s ease}
+.cy-btn:hover{background-color:#5E1229!important}
+.cy-sec:hover{background-color:var(--g50)!important}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; align-items: stretch; background: var(--bg); font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);">
+  <div style="flex: 1 1 240px; background: var(--card); border-right: 1px solid var(--line);">
+    <dc-import name="Sidebar" active="lecciones" theme="light" hint-size="248px,900px"></dc-import>
+  </div>
+
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <dc-import name="Topbar" theme="light" bell="normal" hint-size="100%,72px"></dc-import>
+
+    <main style="width: 100%; max-width: 1160px; box-sizing: border-box; padding: 32px 32px 48px; display: flex; justify-content: center;">
+      <section aria-labelledby="done-title" style="position: relative; overflow: hidden; width: 100%; max-width: 760px; box-sizing: border-box; padding: 36px 36px 32px; border-radius: 28px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(31,20,24,0.06); display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center;">
+        <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 190px; background: linear-gradient(180deg, var(--g100) 0%, transparent 100%);"></div>
+        <div aria-hidden="true" style="position: absolute; left: 12%; top: 40px; width: 10px; height: 10px; border-radius: 3px; background: #F97316; transform: rotate(20deg);"></div>
+        <div aria-hidden="true" style="position: absolute; right: 16%; top: 64px; width: 12px; height: 12px; border-radius: 50%; background: #8B5CF6;"></div>
+        <div aria-hidden="true" style="position: absolute; left: 22%; top: 120px; width: 8px; height: 8px; border-radius: 50%; background: #B02A50;"></div>
+        <div aria-hidden="true" style="position: absolute; right: 24%; top: 26px; width: 9px; height: 9px; border-radius: 2px; background: #FBBF24; transform: rotate(-15deg);"></div>
+
+        <div style="position: relative;">
+          <dc-import name="Cody" size="150" mood="celebra" hint-size="150px,150px"></dc-import>
+        </div>
+        <div style="position: relative; display: flex; flex-direction: column; gap: 6px;">
+          <h1 id="done-title" style="margin: 0; font-size: 34px; line-height: 1.15; font-weight: 900; letter-spacing: -0.02em;">{{heading}}</h1>
+          <span style="font-size: 16px; font-weight: 700; color: var(--ink-2);">{{sub}}</span>
+        </div>
+
+        <sc-if value="{{hasResult}}" hint-placeholder-val="{{ true }}">
+          <ul style="list-style: none; margin: 0; padding: 0; width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
+            <li style="border-radius: 18px; border: 2px solid #B02A50; overflow: hidden; display: flex; flex-direction: column;">
+              <span style="padding: 6px; background: #7A1A35; color: #FFFFFF; font-size: 12px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;">XP ganado</span>
+              <span style="padding: 14px 8px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 26px; font-weight: 900; color: var(--g-text);"><svg width="20" height="20" viewBox="0 0 24 24" fill="#B02A50" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>+{{xp}}</span>
+            </li>
+            <li style="border-radius: 18px; border: 2px solid #3B82F6; overflow: hidden; display: flex; flex-direction: column;">
+              <span style="padding: 6px; background: #2563EB; color: #FFFFFF; font-size: 12px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;">Aciertos</span>
+              <span style="padding: 14px 8px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 26px; font-weight: 900; color: var(--b-text);">{{score}}</span>
+            </li>
+            <li style="border-radius: 18px; border: 2px solid #8B5CF6; overflow: hidden; display: flex; flex-direction: column;">
+              <span style="padding: 6px; background: #7C3AED; color: #FFFFFF; font-size: 12px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;">Tiempo</span>
+              <span style="padding: 14px 8px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 26px; font-weight: 900; color: var(--p-text);">{{time}}</span>
+            </li>
+            <li style="border-radius: 18px; border: 2px solid #F97316; overflow: hidden; display: flex; flex-direction: column;">
+              <span style="padding: 6px; background: #C2410C; color: #FFFFFF; font-size: 12px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase;">Racha</span>
+              <span style="padding: 14px 8px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 26px; font-weight: 900; color: var(--o-text);"><svg width="20" height="20" viewBox="0 0 24 24" fill="#F97316" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>{{streak}}</span>
+            </li>
+          </ul>
+
+          <sc-for list="{{banners}}" as="bn" hint-placeholder-count="0">
+            <div role="status" style="width: 100%; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 16px; text-align: left; {{bn.style}}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M18 2H6v7a6 6 0 0 0 12 0z"></path></svg>
+              <strong style="font-size: 15px; font-weight: 900;">{{bn.text}}</strong>
+            </div>
+          </sc-for>
+
+          <div style="width: 100%; display: flex; flex-wrap: wrap; gap: 12px; text-align: left;">
+            <div style="flex: 1 1 260px; padding: 16px 18px; border-radius: 18px; background: var(--o50); border: 1px solid var(--o200); display: flex; flex-direction: column; gap: 10px;">
+              <strong style="font-size: 15px; font-weight: 900; color: var(--o-ink);">{{streakTitle}}</strong>
+              <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; text-align: center;">
+                <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+                  <span style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: var(--o-ink);"><span style="width: 24px; height: 24px; border-radius: 50%; {{d.style}}"></span>{{d.label}}</span>
+                </sc-for>
+              </div>
+            </div>
+            <div style="flex: 1 1 260px; padding: 16px 18px; border-radius: 18px; background: var(--sunken); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 900;"><span>Meta de hoy</span><span style="color: var(--ink-2);">{{todayMin}} de {{goal}} min</span></div>
+                <div style="height: 10px; border-radius: 999px; background: var(--track-3); overflow: hidden;"><div style="height: 100%; border-radius: 999px; background: #F97316; width: {{goalPct}};"></div></div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 900;"><span>Módulo {{module}}</span><span style="color: var(--ink-2);">{{modDone}} de {{modOf}}</span></div>
+                <div style="height: 10px; border-radius: 999px; background: var(--track-3); overflow: hidden;"><div style="height: 100%; border-radius: 999px; background: #B02A50; width: {{modPct}};"></div></div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="width: 100%; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+          <a href="Inicio.dc.html" class="cy-sec" style="flex: 1 1 200px; display: flex; align-items: center; justify-content: center; height: 54px; border-radius: 14px; border: 2px solid var(--line-2); background: var(--card); box-shadow: 0 4px 0 var(--line-4); color: var(--ink); font-size: 15px; font-weight: 900; text-decoration: none; box-sizing: border-box;">Volver al inicio</a>
+          <a href="{{nextHref}}" class="cy-btn" style="flex: 2 1 300px; display: flex; align-items: center; justify-content: center; gap: 8px; height: 54px; border-radius: 14px; background: #7A1A35; box-shadow: 0 4px 0 #4A0E22; color: #FFFFFF; font-size: 16px; font-weight: 900; text-decoration: none;">{{nextLabel}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const S = window.CodyuStore;
+    const r = S ? S.lastResult() : null;
+    if (!S || !r) {
+      return { heading: '¡Buen trabajo!', sub: 'Completa una lección para ver tus resultados aquí.', hasResult: false, nextHref: 'Leccion-Teoria.dc.html', nextLabel: 'Ir a mi lección' };
+    }
+    const st = S.stats();
+    const mm = Math.floor(r.seconds / 60), ss = r.seconds % 60;
+    const banners = [];
+    if (r.levelUp) banners.push({ text: '¡Subiste al nivel ' + r.level + '!', style: 'background: var(--p50); border: 1px solid var(--p200); color: var(--p-text2);' });
+    r.badges.forEach((b) => banners.push({ text: 'Insignia desbloqueada: ' + b, style: 'background: var(--a100); border: 1px solid #FCD34D; color: var(--a-text);' }));
+    const goalPct = Math.min(100, Math.round(st.todayMin / Math.max(1, st.goal) * 100));
+    return {
+      heading: r.isNew ? '¡Lección completada!' : '¡Repaso completado!',
+      sub: r.title + ' · ' + r.module + ' en ' + r.courseName,
+      hasResult: true,
+      xp: r.xp, score: r.correct + '/' + r.total, time: mm + ':' + (ss < 10 ? '0' : '') + ss,
+      streak: r.streak + (r.streak === 1 ? ' día' : ' días'),
+      banners,
+      streakTitle: r.streakUp ? '¡Racha extendida a ' + r.streak + (r.streak === 1 ? ' día!' : ' días!') : 'Racha de ' + r.streak + (r.streak === 1 ? ' día' : ' días') + ' · hoy ya practicaste',
+      week: S.week().map((d) => ({ label: d.label, style: d.done ? (d.isToday ? 'background: #C2410C; box-shadow: 0 0 0 3px var(--o200);' : 'background: #F97316;') : 'background: var(--o200);' })),
+      todayMin: st.todayMin, goal: st.goal, goalPct: goalPct + '%',
+      module: r.module, modDone: r.moduleDone, modOf: r.moduleOf, modPct: Math.round(r.moduleDone / Math.max(1, r.moduleOf) * 100) + '%',
+      nextHref: r.next ? 'Leccion-Teoria.dc.html?c=' + r.course : 'Lecciones.dc.html',
+      nextLabel: r.next ? 'Siguiente: ' + r.next : 'Ver todas las lecciones'
+    };
+  }
+}
+</script>
+</body>
+</html>
