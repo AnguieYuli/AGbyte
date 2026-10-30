@@ -1,0 +1,970 @@
+{
+  "id": "java",
+  "name": "Java",
+  "title": "Java: de cero a avanzado",
+  "glyph": "Jv",
+  "tileBg": "#DC2626",
+  "tileFg": "#FFFFFF",
+  "ext": "java",
+  "blurb": "Apps Android, empresas y backend con Spring Boot.",
+  "modules": [
+    {
+      "title": "Fundamentos",
+      "desc": "Sintaxis, variables, tipos de datos y operadores.",
+      "lessons": [
+        "¿Qué es Java?",
+        "Tu primer programa",
+        "Variables",
+        "Tipos de datos",
+        "Operadores",
+        "Mini proyecto: Ficha personal"
+      ]
+    },
+    {
+      "title": "Condicionales y ciclos",
+      "desc": "Decisiones y repeticiones con if, switch, for y while.",
+      "lessons": [
+        "if y else",
+        "switch",
+        "Bucle for",
+        "Bucle while",
+        "Mini proyecto: Tabla de multiplicar"
+      ]
+    },
+    {
+      "title": "Métodos",
+      "desc": "Parámetros, retorno, sobrecarga y recursividad.",
+      "lessons": [
+        "Crear métodos",
+        "Parámetros y retorno",
+        "Sobrecarga de métodos",
+        "Recursividad",
+        "Mini proyecto: Calculadora"
+      ]
+    },
+    {
+      "title": "Programación orientada a objetos",
+      "desc": "Clases, objetos, constructores, herencia e interfaces.",
+      "lessons": [
+        "Clases y objetos",
+        "Constructores",
+        "Herencia",
+        "Interfaces",
+        "Mini proyecto: Cuenta bancaria"
+      ]
+    },
+    {
+      "title": "Estructuras de datos",
+      "desc": "Arreglos, listas, conjuntos y mapas.",
+      "lessons": [
+        "Arreglos",
+        "Listas con ArrayList",
+        "Conjuntos con HashSet",
+        "Mapas con HashMap",
+        "Mini proyecto: Inventario"
+      ]
+    },
+    {
+      "title": "Manejo de errores",
+      "desc": "Excepciones y bloques try-catch.",
+      "lessons": [
+        "¿Qué es una excepción?",
+        "try y catch",
+        "finally y throw",
+        "Tus propias excepciones"
+      ]
+    },
+    {
+      "title": "Temas avanzados",
+      "desc": "Genéricos, colecciones, streams, lambdas y programación concurrente.",
+      "lessons": [
+        "Genéricos",
+        "Colecciones",
+        "Lambdas",
+        "Streams",
+        "Programación concurrente"
+      ]
+    },
+    {
+      "title": "Herramientas",
+      "desc": "JVM, JDK, Maven o Gradle y JUnit.",
+      "lessons": [
+        "JVM y JDK",
+        "Maven y Gradle",
+        "Pruebas con JUnit"
+      ]
+    },
+    {
+      "title": "Especialización",
+      "desc": "Aplicaciones empresariales, APIs REST y backend con Spring Boot.",
+      "lessons": [
+        "Aplicaciones empresariales",
+        "¿Qué es una API REST?",
+        "Tu primera API con Spring Boot",
+        "Proyecto final: API de tareas"
+      ]
+    }
+  ],
+  "lessons": {
+    "¿Qué es Java?": {
+      "paras": [
+        [
+          "Java es un lenguaje muy usado en apps Android, sistemas de bancos y videojuegos como Minecraft."
+        ],
+        [
+          "Para mostrar texto usamos ",
+          {
+            "c": "System.out.println()"
+          },
+          ". Todo programa vive dentro de una clase y empieza en el método ",
+          {
+            "c": "main"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "Main.java",
+        "lines": [
+          "public class Main {",
+          "  public static void main(String[] args) {",
+          "    System.out.println(\"¡Hola, mundo!\");",
+          "  }",
+          "}"
+        ],
+        "output": [
+          "¡Hola, mundo!"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un nombre y ejecuta",
+        "file": "Prueba.java",
+        "choices": [
+          "Ana",
+          "Luis",
+          "Sofía"
+        ],
+        "lines": [
+          "System.out.println(\"Hola, {v}\");"
+        ],
+        "output": "Hola, {v}"
+      },
+      "remember": [
+        [
+          "Cada instrucción termina con ",
+          {
+            "c": ";"
+          },
+          "."
+        ],
+        [
+          "Las llaves ",
+          {
+            "c": "{ }"
+          },
+          " agrupan el código de la clase y de main."
+        ],
+        [
+          "Java distingue mayúsculas: ",
+          {
+            "c": "System"
+          },
+          " empieza con S mayúscula."
+        ]
+      ],
+      "tip": "println agrega un salto de línea al final; print escribe sin saltar de línea.",
+      "quiz": [
+        {
+          "prompt": "¿Qué instrucción muestra texto en Java?",
+          "code": [
+            "// Elige la correcta"
+          ],
+          "options": [
+            "System.out.println()",
+            "print()",
+            "console.log()",
+            "echo"
+          ],
+          "answer": 0,
+          "explain": "En Java se usa System.out.println() para mostrar una línea de texto."
+        },
+        {
+          "prompt": "¿Dónde empieza a ejecutarse un programa en Java?",
+          "code": [
+            "public static void main(String[] args)"
+          ],
+          "options": [
+            "En el método main",
+            "En la última línea",
+            "En el primer comentario",
+            "En cualquier llave"
+          ],
+          "answer": 0,
+          "explain": "Java siempre empieza por el método main."
+        },
+        {
+          "prompt": "¿Qué le falta a esta línea?",
+          "code": [
+            "System.out.println(\"Hola\")"
+          ],
+          "options": [
+            "Un ; al final",
+            "Unas llaves",
+            "Nada",
+            "La palabra print"
+          ],
+          "answer": 0,
+          "explain": "Cada instrucción en Java termina con punto y coma."
+        }
+      ]
+    },
+    "Tu primer programa": {
+      "paras": [
+        [
+          "Todo programa en Java vive dentro de una ",
+          {
+            "b": "clase"
+          },
+          " y empieza a ejecutarse en el método ",
+          {
+            "c": "main"
+          },
+          ". El nombre del archivo debe coincidir con el de la clase: ",
+          {
+            "c": "Main.java"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "System.out.println()"
+          },
+          " muestra un texto y salta de línea; ",
+          {
+            "c": "System.out.print()"
+          },
+          " lo muestra sin saltar."
+        ]
+      ],
+      "example": {
+        "file": "Main.java",
+        "lines": [
+          "public class Main {",
+          "  public static void main(String[] args) {",
+          "    System.out.println(\"¡Hola!\");",
+          "    System.out.print(\"Aprendo \");",
+          "    System.out.println(\"Java\");",
+          "    System.out.println(7 + 3);",
+          "  }",
+          "}"
+        ],
+        "output": [
+          "¡Hola!",
+          "Aprendo Java",
+          "10"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un lenguaje",
+        "file": "Main.java",
+        "choices": [
+          "Java",
+          "Python",
+          "C++"
+        ],
+        "lines": [
+          "System.out.print(\"Me gusta \");",
+          "System.out.println(\"{v}\");"
+        ],
+        "output": "Me gusta {v}"
+      },
+      "remember": [
+        [
+          "Cada instrucción termina con ",
+          {
+            "c": ";"
+          },
+          "."
+        ],
+        [
+          "Las llaves ",
+          {
+            "c": "{ }"
+          },
+          " abren y cierran bloques."
+        ],
+        [
+          {
+            "c": "println"
+          },
+          " salta de línea; ",
+          {
+            "c": "print"
+          },
+          " no."
+        ]
+      ],
+      "tip": "Si ves «class Main is public, should be declared in a file named Main.java», revisa el nombre del archivo.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "System.out.print(\"A\");",
+            "System.out.print(\"B\");"
+          ],
+          "options": [
+            "AB",
+            "A B",
+            "A y B en dos líneas",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "print no salta de línea, así que todo queda junto: AB."
+        },
+        {
+          "prompt": "¿Dónde empieza a ejecutarse un programa Java?",
+          "code": [
+            "public static void main(String[] args)"
+          ],
+          "options": [
+            "En el método main",
+            "En la primera llave",
+            "En el último println",
+            "En cualquier método"
+          ],
+          "answer": 0,
+          "explain": "Java siempre empieza por main."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "System.out.println(2 + 2);"
+          ],
+          "options": [
+            "4",
+            "2 + 2",
+            "22",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Sin comillas, Java calcula: 2 + 2 = 4."
+        }
+      ]
+    },
+    "Variables": {
+      "paras": [
+        [
+          "En Java debes indicar el ",
+          {
+            "b": "tipo"
+          },
+          " de cada variable al crearla: ",
+          {
+            "c": "int edad = 17;"
+          },
+          ". Después puedes cambiar su valor, pero no su tipo."
+        ],
+        [
+          "Usa ",
+          {
+            "c": "final"
+          },
+          " para valores que nunca cambian, como ",
+          {
+            "c": "final double IGV = 0.18;"
+          },
+          "."
+        ]
+      ],
+      "diagram": {
+        "parts": [
+          {
+            "t": "int",
+            "label": "el tipo",
+            "kind": "op"
+          },
+          {
+            "t": "edad",
+            "label": "el nombre",
+            "kind": "name"
+          },
+          {
+            "t": "17",
+            "label": "el valor",
+            "kind": "value"
+          }
+        ],
+        "caption": "int edad = 17;"
+      },
+      "example": {
+        "file": "Main.java",
+        "lines": [
+          "public class Main {",
+          "  public static void main(String[] args) {",
+          "    String nombre = \"Ana\";",
+          "    int edad = 17;",
+          "    edad = edad + 1;",
+          "    final double IGV = 0.18;",
+          "    System.out.println(nombre + \" tiene \" + edad + \" años\");",
+          "    System.out.println(\"IGV: \" + IGV);",
+          "  }",
+          "}"
+        ],
+        "output": [
+          "Ana tiene 18 años",
+          "IGV: 0.18"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige tu ciudad",
+        "file": "Main.java",
+        "choices": [
+          "Lima",
+          "Cusco",
+          "Piura"
+        ],
+        "lines": [
+          "String ciudad = \"{v}\";",
+          "System.out.println(\"Vivo en \" + ciudad);"
+        ],
+        "output": "Vivo en {v}"
+      },
+      "remember": [
+        [
+          "Forma: ",
+          {
+            "c": "tipo nombre = valor;"
+          },
+          "."
+        ],
+        [
+          "Con ",
+          {
+            "c": "+"
+          },
+          " unes textos y variables."
+        ],
+        [
+          {
+            "c": "final"
+          },
+          " crea una constante."
+        ]
+      ],
+      "tip": "Los nombres de variables en Java se escriben en camelCase: precioTotal, notaFinal.",
+      "quiz": [
+        {
+          "prompt": "¿Cuál declaración es correcta en Java?",
+          "code": [
+            "// Elige una"
+          ],
+          "options": [
+            "int puntos = 10;",
+            "puntos = 10",
+            "var puntos: 10;",
+            "int puntos == 10;"
+          ],
+          "answer": 0,
+          "explain": "Tipo, nombre, = valor y punto y coma."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "int x = 5;",
+            "x = x * 2;",
+            "System.out.println(x);"
+          ],
+          "options": [
+            "5",
+            "10",
+            "x * 2",
+            "25"
+          ],
+          "answer": 1,
+          "explain": "x pasa de 5 a 10."
+        },
+        {
+          "prompt": "¿Qué hace final?",
+          "code": [
+            "final int MAX = 3;"
+          ],
+          "options": [
+            "Impide cambiar el valor",
+            "Termina el programa",
+            "Borra la variable",
+            "La hace pública"
+          ],
+          "answer": 0,
+          "explain": "Una variable final no puede cambiar después de asignarse."
+        }
+      ]
+    },
+    "Tipos de datos": {
+      "paras": [
+        [
+          "Java tiene tipos ",
+          {
+            "b": "primitivos"
+          },
+          ": ",
+          {
+            "c": "int"
+          },
+          " (enteros), ",
+          {
+            "c": "double"
+          },
+          " (decimales), ",
+          {
+            "c": "char"
+          },
+          " (un carácter entre comillas simples) y ",
+          {
+            "c": "boolean"
+          },
+          " (",
+          {
+            "c": "true"
+          },
+          "/",
+          {
+            "c": "false"
+          },
+          "). ",
+          {
+            "c": "String"
+          },
+          " guarda texto."
+        ],
+        [
+          "Puedes convertir: ",
+          {
+            "c": "(int) 3.9"
+          },
+          " da 3 y ",
+          {
+            "c": "Integer.parseInt(\"20\")"
+          },
+          " convierte texto en número."
+        ]
+      ],
+      "example": {
+        "file": "Main.java",
+        "lines": [
+          "public class Main {",
+          "  public static void main(String[] args) {",
+          "    int unidades = 3;",
+          "    double precio = 4.5;",
+          "    char talla = 'M';",
+          "    boolean oferta = true;",
+          "    System.out.println(unidades * precio);",
+          "    System.out.println(talla + \" \" + oferta);",
+          "    System.out.println((int) 9.99);",
+          "    System.out.println(Integer.parseInt(\"20\") + 5);",
+          "  }",
+          "}"
+        ],
+        "output": [
+          "13.5",
+          "M true",
+          "9",
+          "25"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un decimal para convertir a int",
+        "file": "Main.java",
+        "choices": [
+          "2.3",
+          "7.9",
+          "10.5"
+        ],
+        "lines": [
+          "double d = {v};",
+          "System.out.println((int) d);"
+        ],
+        "outputs": {
+          "2.3": "2",
+          "7.9": "7",
+          "10.5": "10"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "char"
+          },
+          " usa comillas simples: ",
+          {
+            "c": "'A'"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "(int)"
+          },
+          " corta los decimales, no redondea."
+        ],
+        [
+          {
+            "c": "String"
+          },
+          " va con S mayúscula."
+        ]
+      ],
+      "tip": "Para redondear de verdad usa Math.round(7.9), que da 8.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "System.out.println((int) 5.99);"
+          ],
+          "options": [
+            "5",
+            "6",
+            "5.99",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "El cast a int corta los decimales: 5."
+        },
+        {
+          "prompt": "¿Qué tipo usarías para guardar 3.75?",
+          "code": [
+            "___ precio = 3.75;"
+          ],
+          "options": [
+            "double",
+            "int",
+            "char",
+            "boolean"
+          ],
+          "answer": 0,
+          "explain": "double guarda números con decimales."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "System.out.println(Integer.parseInt(\"8\") * 2);"
+          ],
+          "options": [
+            "16",
+            "88",
+            "8",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "parseInt convierte \"8\" en el número 8; 8 × 2 = 16."
+        }
+      ]
+    },
+    "Operadores": {
+      "paras": [
+        [
+          "Java usa ",
+          {
+            "c": "+ - * /"
+          },
+          " y ",
+          {
+            "c": "%"
+          },
+          " (resto). Ojo: entre enteros, ",
+          {
+            "c": "/"
+          },
+          " descarta los decimales. ",
+          {
+            "c": "x++"
+          },
+          " suma 1 y ",
+          {
+            "c": "x += 5"
+          },
+          " suma 5."
+        ],
+        [
+          "Para comparar: ",
+          {
+            "c": "== != < > <= >="
+          },
+          ". Para combinar condiciones: ",
+          {
+            "c": "&&"
+          },
+          " (y), ",
+          {
+            "c": "||"
+          },
+          " (o), ",
+          {
+            "c": "!"
+          },
+          " (no)."
+        ]
+      ],
+      "example": {
+        "file": "Main.java",
+        "lines": [
+          "public class Main {",
+          "  public static void main(String[] args) {",
+          "    System.out.println(7 / 2);",
+          "    System.out.println(7.0 / 2);",
+          "    System.out.println(7 % 2);",
+          "    int x = 5;",
+          "    x++;",
+          "    x += 10;",
+          "    System.out.println(x);",
+          "    System.out.println(x > 10 && x < 20);",
+          "  }",
+          "}"
+        ],
+        "output": [
+          "3",
+          "3.5",
+          "1",
+          "16",
+          "true"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un número y mira si es par",
+        "file": "Main.java",
+        "choices": [
+          "6",
+          "9",
+          "14"
+        ],
+        "lines": [
+          "int n = {v};",
+          "System.out.println(n % 2 == 0);"
+        ],
+        "outputs": {
+          "6": "true",
+          "9": "false",
+          "14": "true"
+        }
+      },
+      "remember": [
+        [
+          "Entre enteros, ",
+          {
+            "c": "7 / 2"
+          },
+          " es ",
+          {
+            "c": "3"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "%"
+          },
+          " da el resto."
+        ],
+        [
+          {
+            "c": "&&"
+          },
+          " exige ambas condiciones; ",
+          {
+            "c": "||"
+          },
+          " solo una."
+        ]
+      ],
+      "tip": "Para comparar textos en Java usa nombre.equals(\"Ana\"), no ==.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "System.out.println(10 / 4);"
+          ],
+          "options": [
+            "2",
+            "2.5",
+            "3",
+            "2.0"
+          ],
+          "answer": 0,
+          "explain": "Entre enteros la división descarta decimales: 2."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "int a = 3;",
+            "a++;",
+            "a++;",
+            "System.out.println(a);"
+          ],
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "answer": 2,
+          "explain": "Cada ++ suma 1: 3 → 4 → 5."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "System.out.println(5 > 3 || 1 > 2);"
+          ],
+          "options": [
+            "true",
+            "false",
+            "1",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Con || basta que una condición sea verdadera."
+        }
+      ]
+    },
+    "Mini proyecto: Ficha personal": {
+      "paras": [
+        [
+          "Vas a crear una ",
+          {
+            "b": "ficha personal"
+          },
+          " que muestre tus datos ordenados: nombre, edad, ciudad, altura y si estudias."
+        ],
+        [
+          "Usarás variables de varios tipos y ",
+          {
+            "c": "System.out.printf"
+          },
+          ", que permite dar formato: ",
+          {
+            "c": "%s"
+          },
+          " para texto, ",
+          {
+            "c": "%d"
+          },
+          " para enteros y ",
+          {
+            "c": "%.2f"
+          },
+          " para decimales con 2 cifras."
+        ]
+      ],
+      "example": {
+        "file": "Main.java",
+        "lines": [
+          "public class Main {",
+          "  public static void main(String[] args) {",
+          "    String nombre = \"Alex\";",
+          "    int edad = 17;",
+          "    String ciudad = \"Arequipa\";",
+          "    double altura = 1.68;",
+          "    boolean estudia = true;",
+          "    System.out.println(\"=== Ficha personal ===\");",
+          "    System.out.printf(\"Nombre: %s%n\", nombre);",
+          "    System.out.printf(\"Edad: %d años%n\", edad);",
+          "    System.out.printf(\"Ciudad: %s%n\", ciudad);",
+          "    System.out.printf(\"Altura: %.2f m%n\", altura);",
+          "    System.out.println(\"Estudia: \" + (estudia ? \"sí\" : \"no\"));",
+          "  }",
+          "}"
+        ],
+        "output": [
+          "=== Ficha personal ===",
+          "Nombre: Alex",
+          "Edad: 17 años",
+          "Ciudad: Arequipa",
+          "Altura: 1.68 m",
+          "Estudia: sí"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige tu altura",
+        "file": "Main.java",
+        "choices": [
+          "1.5",
+          "1.725",
+          "1.8"
+        ],
+        "lines": [
+          "double altura = {v};",
+          "System.out.printf(\"Altura: %.2f m%n\", altura);"
+        ],
+        "outputs": {
+          "1.5": "Altura: 1.50 m",
+          "1.725": "Altura: 1.73 m",
+          "1.8": "Altura: 1.80 m"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "%n"
+          },
+          " en printf es un salto de línea."
+        ],
+        [
+          {
+            "c": "%.2f"
+          },
+          " muestra 2 decimales."
+        ],
+        [
+          {
+            "c": "condición ? a : b"
+          },
+          " elige entre dos valores."
+        ]
+      ],
+      "tip": "Reto: cópialo en el editor y agrega tu comida favorita y tu número de la suerte.",
+      "quiz": [
+        {
+          "prompt": "¿Qué formato usarías para un entero en printf?",
+          "code": [
+            "System.out.printf(\"Edad: ___\", 17);"
+          ],
+          "options": [
+            "%d",
+            "%s",
+            "%.2f",
+            "%e"
+          ],
+          "answer": 0,
+          "explain": "%d es para enteros."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "System.out.printf(\"%.1f%n\", 2.36);"
+          ],
+          "options": [
+            "2.4",
+            "2.3",
+            "2.36",
+            "2"
+          ],
+          "answer": 0,
+          "explain": "%.1f redondea a un decimal: 2.4."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "boolean b = false;",
+            "System.out.println(b ? \"sí\" : \"no\");"
+          ],
+          "options": [
+            "no",
+            "sí",
+            "false",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Como b es false, se elige el segundo valor: \"no\"."
+        }
+      ]
+    }
+  }
+}

@@ -12,7 +12,7 @@
 <body>
 <x-dc>
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./fonts.css">
 <style>
 body{margin:0;background:var(--bg)}
 a{color:var(--g-text)}a:hover{color:var(--g-hover)}
@@ -90,14 +90,6 @@ a{color:var(--g-text)}a:hover{color:var(--g-hover)}
         <sc-if value="{{noTerms}}" hint-placeholder-val="{{ false }}">
           <span role="button" aria-disabled="true" style="display: flex; align-items: center; justify-content: center; height: 52px; border-radius: 14px; background: var(--track-2); color: var(--ink-3); font-size: 16px; font-weight: 900;">Acepta los términos para continuar</span>
         </sc-if>
-
-        <div style="display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 800; color: var(--ink-4b);">
-          <span style="flex: 1; height: 1px; background: var(--line-3);"></span>
-          o
-          <span style="flex: 1; height: 1px; background: var(--line-3);"></span>
-        </div>
-
-        <dc-import name="GoogleConnect" mode="login" label="Registrarme con Google" hint-size="100%,52px"></dc-import>
 
         <p style="margin: 4px 0 0; text-align: center; font-size: 14px; font-weight: 700; color: var(--ink-3);">¿Ya tienes cuenta? <a href="Login.dc.html" style="font-weight: 900; text-decoration: none;">Inicia sesión</a></p>
       </form>

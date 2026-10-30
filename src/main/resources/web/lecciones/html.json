@@ -1,0 +1,624 @@
+{
+  "id": "html",
+  "name": "HTML",
+  "title": "HTML: estructura de páginas web",
+  "glyph": "</>",
+  "tileBg": "#C2410C",
+  "tileFg": "#FFFFFF",
+  "ext": "html",
+  "blurb": "La estructura de toda página web.",
+  "modules": [
+    {
+      "title": "Estructura básica",
+      "desc": "Las etiquetas html, head, body y title.",
+      "lessons": [
+        "¿Qué es HTML?",
+        "Tu primera página",
+        "html, head y body",
+        "La etiqueta title"
+      ]
+    },
+    {
+      "title": "Textos",
+      "desc": "Etiquetas de texto, títulos, párrafos y comentarios.",
+      "lessons": [
+        "Títulos",
+        "Párrafos",
+        "Negrita y cursiva",
+        "Comentarios"
+      ]
+    },
+    {
+      "title": "Enlaces, imágenes y listas",
+      "desc": "Enlaces, imágenes, rutas y listas.",
+      "lessons": [
+        "Enlaces",
+        "Imágenes",
+        "Rutas de archivos",
+        "Listas",
+        "Mini proyecto: Galería"
+      ]
+    },
+    {
+      "title": "Tablas",
+      "desc": "Tablas, filas y celdas.",
+      "lessons": [
+        "Tablas",
+        "Filas y celdas",
+        "Encabezados de tabla",
+        "Mini proyecto: Horario de clases"
+      ]
+    },
+    {
+      "title": "Formularios",
+      "desc": "Formularios, campos, botones y validación.",
+      "lessons": [
+        "Formularios",
+        "Campos de texto",
+        "Botones",
+        "Validación",
+        "Mini proyecto: Formulario de contacto"
+      ]
+    },
+    {
+      "title": "HTML semántico",
+      "desc": "Las etiquetas header, nav, main, section, article y footer.",
+      "lessons": [
+        "¿Qué es el HTML semántico?",
+        "header y nav",
+        "main y section",
+        "article y footer"
+      ]
+    },
+    {
+      "title": "Multimedia",
+      "desc": "Audio, video, iframe y contenido incrustado.",
+      "lessons": [
+        "Audio",
+        "Video",
+        "iframe",
+        "Contenido incrustado"
+      ]
+    },
+    {
+      "title": "Accesibilidad y metadatos",
+      "desc": "Accesibilidad, atributos globales y metadatos.",
+      "lessons": [
+        "Accesibilidad",
+        "Texto alternativo",
+        "Atributos globales",
+        "Metadatos"
+      ]
+    },
+    {
+      "title": "SEO y buenas prácticas",
+      "desc": "SEO básico, estructura correcta y buenas prácticas.",
+      "lessons": [
+        "SEO básico",
+        "Estructura correcta",
+        "Buenas prácticas",
+        "Proyecto final: Tu página personal"
+      ]
+    }
+  ],
+  "lessons": {
+    "¿Qué es HTML?": {
+      "paras": [
+        [
+          "HTML es el lenguaje que describe el contenido de una página web: títulos, párrafos, imágenes y enlaces."
+        ],
+        [
+          "Cada parte va dentro de etiquetas. ",
+          {
+            "c": "<h1>"
+          },
+          " abre un título y ",
+          {
+            "c": "</h1>"
+          },
+          " lo cierra. ",
+          {
+            "c": "<p>"
+          },
+          " crea un párrafo."
+        ]
+      ],
+      "example": {
+        "file": "index.html",
+        "lines": [
+          "<h1>¡Hola, mundo!</h1>",
+          "<p>Estoy aprendiendo HTML</p>"
+        ],
+        "output": [
+          "[Título] ¡Hola, mundo!",
+          "[Párrafo] Estoy aprendiendo HTML"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un nombre y mira la página",
+        "file": "prueba.html",
+        "choices": [
+          "Ana",
+          "Luis",
+          "Sofía"
+        ],
+        "lines": [
+          "<h1>Hola, {v}</h1>"
+        ],
+        "output": "[Título] Hola, {v}"
+      },
+      "remember": [
+        [
+          "Casi todas las etiquetas se abren y se cierran: ",
+          {
+            "c": "<p>…</p>"
+          },
+          "."
+        ],
+        [
+          "La etiqueta de cierre lleva una barra: ",
+          {
+            "c": "</h1>"
+          },
+          "."
+        ],
+        [
+          "Hay seis niveles de título: de ",
+          {
+            "c": "<h1>"
+          },
+          " a ",
+          {
+            "c": "<h6>"
+          },
+          "."
+        ]
+      ],
+      "tip": "Guarda tu archivo como .html y ábrelo con doble clic: tu navegador lo mostrará.",
+      "quiz": [
+        {
+          "prompt": "¿Qué etiqueta crea el título principal?",
+          "code": [
+            "<!-- Elige la etiqueta -->"
+          ],
+          "options": [
+            "<h1>",
+            "<p>",
+            "<title1>",
+            "<big>"
+          ],
+          "answer": 0,
+          "explain": "<h1> es el título más importante de la página."
+        },
+        {
+          "prompt": "¿Cuál está bien cerrada?",
+          "code": [
+            "<!-- Solo una es correcta -->"
+          ],
+          "options": [
+            "<p>Hola</p>",
+            "<p>Hola<p>",
+            "</p>Hola<p>",
+            "<p>Hola</>"
+          ],
+          "answer": 0,
+          "explain": "Se abre con <p> y se cierra con </p>, con barra."
+        },
+        {
+          "prompt": "¿Qué hace la etiqueta <p>?",
+          "code": [
+            "<p>Me gusta programar</p>"
+          ],
+          "options": [
+            "Crea un párrafo",
+            "Inserta una imagen",
+            "Crea un enlace",
+            "Pone el texto en negrita"
+          ],
+          "answer": 0,
+          "explain": "<p> viene de «paragraph»: un párrafo de texto."
+        }
+      ]
+    },
+    "Tu primera página": {
+      "paras": [
+        [
+          "Una página web es un archivo de texto con extensión ",
+          {
+            "c": ".html"
+          },
+          ". Empieza con ",
+          {
+            "c": "<!DOCTYPE html>"
+          },
+          ", que le dice al navegador que es HTML moderno."
+        ],
+        [
+          "Dentro pones etiquetas como ",
+          {
+            "c": "<h1>"
+          },
+          " para el título y ",
+          {
+            "c": "<p>"
+          },
+          " para los párrafos. Guarda el archivo y ábrelo con doble clic: tu navegador lo mostrará."
+        ]
+      ],
+      "example": {
+        "file": "index.html",
+        "lines": [
+          "<!DOCTYPE html>",
+          "<html>",
+          "  <body>",
+          "    <h1>Mi primera página</h1>",
+          "    <p>¡Hola! Me llamo Alex.</p>",
+          "    <p>Estoy aprendiendo HTML con AGbyte.</p>",
+          "  </body>",
+          "</html>"
+        ],
+        "output": [
+          "[Título] Mi primera página",
+          "[Párrafo] ¡Hola! Me llamo Alex.",
+          "[Párrafo] Estoy aprendiendo HTML con AGbyte."
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige tu pasatiempo",
+        "file": "index.html",
+        "choices": [
+          "el fútbol",
+          "la música",
+          "los videojuegos"
+        ],
+        "lines": [
+          "<h1>Sobre mí</h1>",
+          "<p>Me encanta {v}.</p>"
+        ],
+        "output": "[Título] Sobre mí\n[Párrafo] Me encanta {v}."
+      },
+      "remember": [
+        [
+          "La primera línea es ",
+          {
+            "c": "<!DOCTYPE html>"
+          },
+          "."
+        ],
+        [
+          "Guarda con extensión ",
+          {
+            "c": ".html"
+          },
+          "."
+        ],
+        [
+          "Lo que ves en la página va dentro de ",
+          {
+            "c": "<body>"
+          },
+          "."
+        ]
+      ],
+      "tip": "Pulsa F5 en el navegador cada vez que guardes cambios para verlos.",
+      "quiz": [
+        {
+          "prompt": "¿Qué extensión tiene un archivo HTML?",
+          "code": [
+            "index.___"
+          ],
+          "options": [
+            ".html",
+            ".txt",
+            ".py",
+            ".doc"
+          ],
+          "answer": 0,
+          "explain": "Las páginas web se guardan como .html."
+        },
+        {
+          "prompt": "¿Qué va en la primera línea?",
+          "code": [
+            "<!-- línea 1 -->"
+          ],
+          "options": [
+            "<!DOCTYPE html>",
+            "<body>",
+            "<h1>",
+            "<end>"
+          ],
+          "answer": 0,
+          "explain": "DOCTYPE indica que el documento es HTML moderno."
+        },
+        {
+          "prompt": "¿Cómo ves tu página?",
+          "code": [
+            "index.html"
+          ],
+          "options": [
+            "Abriéndola en un navegador",
+            "Imprimiéndola",
+            "Con la calculadora",
+            "No se puede ver"
+          ],
+          "answer": 0,
+          "explain": "El navegador interpreta el HTML y lo muestra."
+        }
+      ]
+    },
+    "html, head y body": {
+      "paras": [
+        [
+          "Todo documento tiene tres partes: ",
+          {
+            "c": "<html>"
+          },
+          " envuelve todo; ",
+          {
+            "c": "<head>"
+          },
+          " guarda información para el navegador (título, idioma, estilos) y ",
+          {
+            "c": "<body>"
+          },
+          " guarda lo que se ve."
+        ],
+        [
+          "En ",
+          {
+            "c": "<head>"
+          },
+          " suele ir ",
+          {
+            "c": "<meta charset=\"utf-8\">"
+          },
+          " para que las tildes y la ñ se vean bien."
+        ]
+      ],
+      "diagram": {
+        "parts": [
+          {
+            "t": "<head>",
+            "label": "lo que no se ve",
+            "kind": "name"
+          },
+          {
+            "t": "+",
+            "label": "dentro de <html>",
+            "kind": "op"
+          },
+          {
+            "t": "<body>",
+            "label": "lo que se ve",
+            "kind": "value"
+          }
+        ],
+        "caption": "Cabeza para el navegador, cuerpo para las personas."
+      },
+      "example": {
+        "file": "index.html",
+        "lines": [
+          "<!DOCTYPE html>",
+          "<html lang=\"es\">",
+          "  <head>",
+          "    <meta charset=\"utf-8\">",
+          "    <title>Mi sitio</title>",
+          "  </head>",
+          "  <body>",
+          "    <h1>Bienvenidos</h1>",
+          "    <p>Contenido de la página.</p>",
+          "  </body>",
+          "</html>"
+        ],
+        "output": [
+          "[Pestaña] Mi sitio",
+          "[Título] Bienvenidos",
+          "[Párrafo] Contenido de la página."
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige dónde poner un párrafo",
+        "file": "index.html",
+        "choices": [
+          "<body>",
+          "<head>"
+        ],
+        "lines": [
+          "<!-- Pones <p>Hola</p> dentro de {v} -->"
+        ],
+        "outputs": {
+          "<body>": "[Párrafo] Hola  → se ve en la página",
+          "<head>": "No se ve: el <head> es solo para el navegador"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "<head>"
+          },
+          ": título, idioma, estilos."
+        ],
+        [
+          {
+            "c": "<body>"
+          },
+          ": todo lo visible."
+        ],
+        [
+          {
+            "c": "lang=\"es\""
+          },
+          " indica que la página está en español."
+        ]
+      ],
+      "tip": "Usa sangría para que se note qué etiqueta está dentro de cuál.",
+      "quiz": [
+        {
+          "prompt": "¿Dónde va el contenido visible?",
+          "code": [
+            "<html> ... </html>"
+          ],
+          "options": [
+            "En <body>",
+            "En <head>",
+            "Fuera de <html>",
+            "En <title>"
+          ],
+          "answer": 0,
+          "explain": "Lo que ves en la página va dentro de <body>."
+        },
+        {
+          "prompt": "¿Para qué sirve <meta charset=\"utf-8\">?",
+          "code": [
+            "<meta charset=\"utf-8\">"
+          ],
+          "options": [
+            "Para que se vean bien las tildes y la ñ",
+            "Para poner un título",
+            "Para crear un enlace",
+            "Para cambiar colores"
+          ],
+          "answer": 0,
+          "explain": "utf-8 permite mostrar todos los caracteres del español."
+        },
+        {
+          "prompt": "¿Qué etiqueta envuelve a head y body?",
+          "code": [
+            "<___>",
+            "  <head>…</head>",
+            "  <body>…</body>",
+            "</___>"
+          ],
+          "options": [
+            "html",
+            "page",
+            "main",
+            "doc"
+          ],
+          "answer": 0,
+          "explain": "<html> es la raíz del documento."
+        }
+      ]
+    },
+    "La etiqueta title": {
+      "paras": [
+        [
+          {
+            "c": "<title>"
+          },
+          " va dentro de ",
+          {
+            "c": "<head>"
+          },
+          " y define el texto que aparece en la ",
+          {
+            "b": "pestaña del navegador"
+          },
+          ", en favoritos y en los resultados de Google."
+        ],
+        [
+          "No se ve dentro de la página. Escribe títulos cortos y claros, por ejemplo «Recetas de Ana · Postres»."
+        ]
+      ],
+      "example": {
+        "file": "index.html",
+        "lines": [
+          "<!DOCTYPE html>",
+          "<html lang=\"es\">",
+          "  <head>",
+          "    <meta charset=\"utf-8\">",
+          "    <title>Recetas de Ana · Postres</title>",
+          "  </head>",
+          "  <body>",
+          "    <h1>Postres fáciles</h1>",
+          "  </body>",
+          "</html>"
+        ],
+        "output": [
+          "[Pestaña] Recetas de Ana · Postres",
+          "[Título] Postres fáciles"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige el título de la pestaña",
+        "file": "index.html",
+        "choices": [
+          "Mi blog",
+          "Tienda de frutas",
+          "Portafolio"
+        ],
+        "lines": [
+          "<title>{v}</title>"
+        ],
+        "output": "[Pestaña] {v}"
+      },
+      "remember": [
+        [
+          {
+            "c": "<title>"
+          },
+          " va en ",
+          {
+            "c": "<head>"
+          },
+          ", no en ",
+          {
+            "c": "<body>"
+          },
+          "."
+        ],
+        [
+          "Se ve en la pestaña, no en la página."
+        ],
+        [
+          "Un buen título ayuda a que te encuentren en buscadores."
+        ]
+      ],
+      "tip": "Cada página de tu sitio debería tener un título distinto que describa su contenido.",
+      "quiz": [
+        {
+          "prompt": "¿Dónde se ve el texto de <title>?",
+          "code": [
+            "<title>Mi sitio</title>"
+          ],
+          "options": [
+            "En la pestaña del navegador",
+            "En el centro de la página",
+            "Al pie de la página",
+            "En ningún lado"
+          ],
+          "answer": 0,
+          "explain": "El título aparece en la pestaña y en los favoritos."
+        },
+        {
+          "prompt": "¿Dentro de qué etiqueta va <title>?",
+          "code": [
+            "<___><title>…</title></___>"
+          ],
+          "options": [
+            "head",
+            "body",
+            "p",
+            "h1"
+          ],
+          "answer": 0,
+          "explain": "<title> es información para el navegador: va en <head>."
+        },
+        {
+          "prompt": "¿Cuál es mejor título?",
+          "code": [
+            "<!-- Elige uno -->"
+          ],
+          "options": [
+            "Tienda Mango · Frutas frescas",
+            "Página",
+            "asdf",
+            "Título"
+          ],
+          "answer": 0,
+          "explain": "Debe describir el contenido de forma corta y clara."
+        }
+      ]
+    }
+  }
+}

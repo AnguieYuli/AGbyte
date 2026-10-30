@@ -12,7 +12,7 @@
 <body>
 <x-dc>
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./fonts.css">
 <style>
 body{margin:0;background:var(--bg)}
 a{color:var(--g-text)}a:hover{color:var(--g-hover)}
@@ -55,10 +55,6 @@ a{color:var(--g-text)}a:hover{color:var(--g-hover)}
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line-soft);">
               <span style="flex: 1 1 240px; display: flex; flex-direction: column;"><strong style="font-size: 15px; font-weight: 900;">{{name}}</strong><span style="font-size: 14px; font-weight: 700; color: var(--ink-2);">{{email}} · {{user}}</span></span>
               <a href="Perfil.dc.html" class="cy-sec" style="height: 40px; padding: 0 14px; display: inline-flex; align-items: center; box-sizing: border-box; border-radius: 10px; border: 2px solid var(--line-2); background: var(--card); font-size: 13px; font-weight: 900; color: var(--g-text); text-decoration: none;">Editar perfil</a>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--line-soft);">
-              <span style="display: flex; flex-direction: column;"><strong style="font-size: 15px; font-weight: 900;">Cuenta de Google</strong><span style="font-size: 14px; line-height: 1.45; font-weight: 700; color: var(--ink-2);">Conéctala para entrar con un clic y usar tu foto de Google.</span></span>
-              <div style="max-width: 420px;"><dc-import name="GoogleConnect" mode="link" label="Conectar con Google" hint-size="100%,52px"></dc-import></div>
             </div>
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 0 2px;">
               <span style="flex: 1 1 240px; display: flex; flex-direction: column;"><strong style="font-size: 15px; font-weight: 900;">Dónde se guarda tu progreso</strong><span style="font-size: 14px; line-height: 1.45; font-weight: 700; color: var(--ink-2);">En este equipo. Tus lecciones, XP, racha y ajustes siguen aquí cuando vuelvas a abrir AGbyte.</span></span>

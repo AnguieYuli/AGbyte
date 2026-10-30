@@ -1,0 +1,661 @@
+{
+  "id": "css",
+  "name": "CSS",
+  "title": "CSS: diseño y presentación",
+  "glyph": "CSS",
+  "tileBg": "#DB2777",
+  "tileFg": "#FFFFFF",
+  "ext": "css",
+  "blurb": "Colores, diseño y animaciones para tus páginas.",
+  "modules": [
+    {
+      "title": "Introducción a CSS",
+      "desc": "Selectores, propiedades, valores y formas de aplicar CSS.",
+      "lessons": [
+        "¿Qué es CSS?",
+        "Selectores",
+        "Propiedades y valores",
+        "Formas de aplicar CSS"
+      ]
+    },
+    {
+      "title": "Colores y texto",
+      "desc": "Colores, fondos, tipografía y unidades.",
+      "lessons": [
+        "Colores",
+        "Fondos",
+        "Tipografía",
+        "Unidades"
+      ]
+    },
+    {
+      "title": "Modelo de caja",
+      "desc": "margin, padding y border.",
+      "lessons": [
+        "El modelo de caja",
+        "margin",
+        "padding",
+        "border",
+        "Mini proyecto: Tarjeta de perfil"
+      ]
+    },
+    {
+      "title": "Posicionamiento",
+      "desc": "display, position, overflow y z-index.",
+      "lessons": [
+        "display",
+        "position",
+        "overflow",
+        "z-index"
+      ]
+    },
+    {
+      "title": "Flexbox y CSS Grid",
+      "desc": "Ordena elementos en filas, columnas y cuadrículas.",
+      "lessons": [
+        "Flexbox",
+        "Alinear con Flexbox",
+        "CSS Grid",
+        "Áreas de Grid",
+        "Mini proyecto: Galería"
+      ]
+    },
+    {
+      "title": "Diseño adaptable",
+      "desc": "Media queries y enfoque responsive.",
+      "lessons": [
+        "¿Qué es el diseño responsive?",
+        "Media queries",
+        "Mobile first",
+        "Mini proyecto: Página adaptable"
+      ]
+    },
+    {
+      "title": "Selectores avanzados",
+      "desc": "Pseudoclases, pseudoelementos y selectores avanzados.",
+      "lessons": [
+        "Pseudoclases",
+        "Pseudoelementos",
+        "Selectores avanzados"
+      ]
+    },
+    {
+      "title": "Animación",
+      "desc": "Transiciones, transformaciones y animaciones.",
+      "lessons": [
+        "Transiciones",
+        "Transformaciones",
+        "Animaciones con keyframes",
+        "Mini proyecto: Botón animado"
+      ]
+    },
+    {
+      "title": "Buenas prácticas",
+      "desc": "Variables CSS, especificidad y organización.",
+      "lessons": [
+        "Variables CSS",
+        "Especificidad",
+        "Organiza tu CSS"
+      ]
+    },
+    {
+      "title": "Frameworks (opcional)",
+      "desc": "Bootstrap y Tailwind CSS.",
+      "lessons": [
+        "Bootstrap",
+        "Tailwind CSS",
+        "Proyecto final: Landing page"
+      ]
+    }
+  ],
+  "lessons": {
+    "¿Qué es CSS?": {
+      "paras": [
+        [
+          "HTML arma la estructura de una página y CSS le da estilo: colores, tamaños, espacios y posiciones."
+        ],
+        [
+          "Una regla CSS tiene un selector, que dice a qué elementos se aplica, y entre llaves una o más propiedades con su valor: ",
+          {
+            "c": "h1 { color: green; }"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "estilos.css",
+        "lines": [
+          "h1 {",
+          "  color: green;",
+          "  font-size: 32px;",
+          "}",
+          "p {",
+          "  color: gray;",
+          "}"
+        ],
+        "output": [
+          "[Título] verde y de 32 px",
+          "[Párrafo] gris"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un color para el título",
+        "file": "prueba.css",
+        "choices": [
+          "green",
+          "purple",
+          "orange"
+        ],
+        "lines": [
+          "h1 { color: {v}; }"
+        ],
+        "outputs": {
+          "green": "[Título] ahora es verde",
+          "purple": "[Título] ahora es morado",
+          "orange": "[Título] ahora es naranja"
+        }
+      },
+      "remember": [
+        [
+          "El selector va primero: ",
+          {
+            "c": "h1"
+          },
+          ", ",
+          {
+            "c": "p"
+          },
+          ", ",
+          {
+            "c": ".clase"
+          },
+          "."
+        ],
+        [
+          "Las propiedades van entre llaves ",
+          {
+            "c": "{ }"
+          },
+          "."
+        ],
+        [
+          "Cada propiedad termina con ",
+          {
+            "c": ";"
+          },
+          "."
+        ]
+      ],
+      "tip": "Si un estilo no se aplica, revisa los dos puntos y el punto y coma: es el error más común en CSS.",
+      "quiz": [
+        {
+          "prompt": "¿Para qué sirve CSS?",
+          "code": [
+            "/* Elige la respuesta */"
+          ],
+          "options": [
+            "Para dar estilo a una página",
+            "Para guardar datos",
+            "Para hacer cálculos",
+            "Para crear bases de datos"
+          ],
+          "answer": 0,
+          "explain": "CSS controla cómo se ve una página: colores, tamaños y posiciones."
+        },
+        {
+          "prompt": "¿Cuál de estas reglas está bien escrita?",
+          "code": [
+            "/* Solo una es correcta */"
+          ],
+          "options": [
+            "p { color: red; }",
+            "p ( color = red )",
+            "{ p color: red }",
+            "p: color red;"
+          ],
+          "answer": 0,
+          "explain": "Selector, llaves, propiedad, dos puntos, valor y punto y coma."
+        },
+        {
+          "prompt": "En esta regla, ¿cuál es el selector?",
+          "code": [
+            "h1 { color: blue; }"
+          ],
+          "options": [
+            "h1",
+            "color",
+            "blue",
+            "{ }"
+          ],
+          "answer": 0,
+          "explain": "El selector indica a qué elementos se aplica la regla: aquí, a todos los h1."
+        }
+      ]
+    },
+    "Selectores": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "selector"
+          },
+          " indica a qué elementos se aplica el estilo. Por etiqueta: ",
+          {
+            "c": "p { }"
+          },
+          ". Por clase: ",
+          {
+            "c": ".nota { }"
+          },
+          " (con punto). Por id: ",
+          {
+            "c": "#titulo { }"
+          },
+          " (con numeral)."
+        ],
+        [
+          "Las clases se pueden repetir en muchos elementos; un id debe ser único en la página."
+        ]
+      ],
+      "example": {
+        "file": "estilos.css",
+        "lines": [
+          "p {",
+          "  color: gray;",
+          "}",
+          ".nota {",
+          "  color: crimson;",
+          "}",
+          "#titulo {",
+          "  font-size: 40px;",
+          "}"
+        ],
+        "output": [
+          "[Todos los <p>] gris",
+          "[class=\"nota\"] rojo carmesí",
+          "[id=\"titulo\"] 40 px"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige el selector",
+        "file": "estilos.css",
+        "choices": [
+          "p",
+          ".nota",
+          "#titulo"
+        ],
+        "lines": [
+          "{v} {",
+          "  color: crimson;",
+          "}"
+        ],
+        "outputs": {
+          "p": "Todos los párrafos se ponen carmesí",
+          ".nota": "Solo los elementos con class=\"nota\"",
+          "#titulo": "Solo el elemento con id=\"titulo\""
+        }
+      },
+      "remember": [
+        [
+          "Etiqueta: ",
+          {
+            "c": "p"
+          },
+          "; clase: ",
+          {
+            "c": ".nombre"
+          },
+          "; id: ",
+          {
+            "c": "#nombre"
+          },
+          "."
+        ],
+        [
+          "Una clase se reutiliza; un id es único."
+        ],
+        [
+          "En el HTML: ",
+          {
+            "c": "class=\"nota\""
+          },
+          " y ",
+          {
+            "c": "id=\"titulo\""
+          },
+          "."
+        ]
+      ],
+      "tip": "Prefiere clases para dar estilos: son más fáciles de reutilizar que los id.",
+      "quiz": [
+        {
+          "prompt": "¿Qué selector elige elementos con class=\"boton\"?",
+          "code": [
+            "___ { color: white; }"
+          ],
+          "options": [
+            ".boton",
+            "#boton",
+            "boton",
+            "*boton"
+          ],
+          "answer": 0,
+          "explain": "Las clases se seleccionan con punto."
+        },
+        {
+          "prompt": "¿Qué selector elige el elemento con id=\"menu\"?",
+          "code": [
+            "___ { display: flex; }"
+          ],
+          "options": [
+            "#menu",
+            ".menu",
+            "menu",
+            "@menu"
+          ],
+          "answer": 0,
+          "explain": "Los id se seleccionan con numeral (#)."
+        },
+        {
+          "prompt": "¿Qué afecta el selector h2?",
+          "code": [
+            "h2 { color: navy; }"
+          ],
+          "options": [
+            "Todos los <h2>",
+            "Solo el primer <h2>",
+            "Las clases h2",
+            "Nada"
+          ],
+          "answer": 0,
+          "explain": "Un selector de etiqueta afecta a todas esas etiquetas."
+        }
+      ]
+    },
+    "Propiedades y valores": {
+      "paras": [
+        [
+          "Dentro de las llaves escribes ",
+          {
+            "b": "propiedad: valor;"
+          },
+          ". La propiedad es lo que cambias (color, tamaño, fondo) y el valor es cómo lo quieres."
+        ],
+        [
+          "Cada declaración termina con ",
+          {
+            "c": ";"
+          },
+          ". Si olvidas uno, el navegador puede ignorar esa línea y la siguiente."
+        ]
+      ],
+      "diagram": {
+        "parts": [
+          {
+            "t": "color",
+            "label": "propiedad",
+            "kind": "name"
+          },
+          {
+            "t": ":",
+            "label": "separa",
+            "kind": "op"
+          },
+          {
+            "t": "crimson",
+            "label": "valor",
+            "kind": "value"
+          }
+        ],
+        "caption": "color: crimson;"
+      },
+      "example": {
+        "file": "estilos.css",
+        "lines": [
+          "h1 {",
+          "  color: white;",
+          "  background-color: #7A1A35;",
+          "  font-size: 32px;",
+          "  padding: 12px;",
+          "  text-align: center;",
+          "}"
+        ],
+        "output": [
+          "[Título] letras blancas sobre fondo vino",
+          "[Título] 32 px, con relleno de 12 px y centrado"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un color de fondo",
+        "file": "estilos.css",
+        "choices": [
+          "crimson",
+          "gold",
+          "navy"
+        ],
+        "lines": [
+          "body {",
+          "  background-color: {v};",
+          "}"
+        ],
+        "output": "El fondo de la página se pone {v}"
+      },
+      "remember": [
+        [
+          "Forma: ",
+          {
+            "c": "propiedad: valor;"
+          },
+          "."
+        ],
+        [
+          "Los colores pueden ser nombres (",
+          {
+            "c": "red"
+          },
+          ") o códigos (",
+          {
+            "c": "#7A1A35"
+          },
+          ")."
+        ],
+        [
+          "Los tamaños llevan unidad: ",
+          {
+            "c": "16px"
+          },
+          "."
+        ]
+      ],
+      "tip": "En el editor de AGbyte (CSS) la vista previa cambia al instante: experimenta con valores.",
+      "quiz": [
+        {
+          "prompt": "¿Qué está mal aquí?",
+          "code": [
+            "p {",
+            "  color red;",
+            "}"
+          ],
+          "options": [
+            "Faltan los dos puntos",
+            "Sobran las llaves",
+            "red no es un color",
+            "Nada"
+          ],
+          "answer": 0,
+          "explain": "Se escribe color: red; con dos puntos."
+        },
+        {
+          "prompt": "¿Qué propiedad cambia el color del fondo?",
+          "code": [
+            "___: gold;"
+          ],
+          "options": [
+            "background-color",
+            "color",
+            "font-color",
+            "fill"
+          ],
+          "answer": 0,
+          "explain": "background-color es el fondo; color es el texto."
+        },
+        {
+          "prompt": "¿Con qué termina cada declaración?",
+          "code": [
+            "font-size: 20px___"
+          ],
+          "options": [
+            ";",
+            ".",
+            ",",
+            ":"
+          ],
+          "answer": 0,
+          "explain": "Cada declaración termina en punto y coma."
+        }
+      ]
+    },
+    "Formas de aplicar CSS": {
+      "paras": [
+        [
+          "Hay tres formas: ",
+          {
+            "b": "en línea"
+          },
+          " con el atributo ",
+          {
+            "c": "style=\"...\""
+          },
+          "; ",
+          {
+            "b": "interna"
+          },
+          " con ",
+          {
+            "c": "<style>"
+          },
+          " en el ",
+          {
+            "c": "<head>"
+          },
+          "; y ",
+          {
+            "b": "externa"
+          },
+          " con un archivo ",
+          {
+            "c": ".css"
+          },
+          " enlazado con ",
+          {
+            "c": "<link>"
+          },
+          "."
+        ],
+        [
+          "La externa es la mejor: un solo archivo da estilo a todas tus páginas y mantiene el HTML limpio."
+        ]
+      ],
+      "example": {
+        "file": "index.html",
+        "lines": [
+          "<head>",
+          "  <link rel=\"stylesheet\" href=\"estilos.css\">",
+          "  <style>",
+          "    h1 { color: navy; }",
+          "  </style>",
+          "</head>",
+          "<body>",
+          "  <h1>Título azul</h1>",
+          "  <p style=\"color: crimson;\">Párrafo carmesí</p>",
+          "</body>"
+        ],
+        "output": [
+          "[Título] azul marino (CSS interno)",
+          "[Párrafo] carmesí (CSS en línea)",
+          "estilos.css se aplica a toda la página (CSS externo)"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige la forma de aplicar CSS",
+        "file": "index.html",
+        "choices": [
+          "en línea",
+          "interna",
+          "externa"
+        ],
+        "lines": [
+          "<!-- CSS {v} -->"
+        ],
+        "outputs": {
+          "en línea": "<p style=\"color: red;\">…</p>  → solo ese elemento",
+          "interna": "<style> p { color: red; } </style>  → solo esta página",
+          "externa": "<link rel=\"stylesheet\" href=\"estilos.css\">  → todas tus páginas"
+        }
+      },
+      "remember": [
+        [
+          "Externa: la recomendada."
+        ],
+        [
+          {
+            "c": "<link>"
+          },
+          " va en el ",
+          {
+            "c": "<head>"
+          },
+          "."
+        ],
+        [
+          "Si hay conflicto, gana el estilo en línea."
+        ]
+      ],
+      "tip": "Usa el estilo en línea solo para pruebas rápidas; luego pásalo a tu archivo .css.",
+      "quiz": [
+        {
+          "prompt": "¿Qué etiqueta enlaza un archivo CSS externo?",
+          "code": [
+            "<___ rel=\"stylesheet\" href=\"estilos.css\">"
+          ],
+          "options": [
+            "link",
+            "style",
+            "css",
+            "a"
+          ],
+          "answer": 0,
+          "explain": "<link rel=\"stylesheet\"> enlaza la hoja de estilos."
+        },
+        {
+          "prompt": "¿Cuál es la forma recomendada para un sitio con varias páginas?",
+          "code": [
+            "/* Elige una */"
+          ],
+          "options": [
+            "CSS externo",
+            "CSS en línea",
+            "CSS interno en cada página",
+            "Sin CSS"
+          ],
+          "answer": 0,
+          "explain": "Un archivo externo da estilo a todas las páginas a la vez."
+        },
+        {
+          "prompt": "¿Dónde va la etiqueta <style>?",
+          "code": [
+            "<style> … </style>"
+          ],
+          "options": [
+            "En el <head>",
+            "Al final del archivo CSS",
+            "Dentro de un <p>",
+            "En la pestaña"
+          ],
+          "answer": 0,
+          "explain": "El CSS interno se escribe dentro de <style> en el <head>."
+        }
+      ]
+    }
+  }
+}

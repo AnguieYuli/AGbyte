@@ -1,0 +1,916 @@
+{
+  "id": "javascript",
+  "name": "JavaScript",
+  "title": "JavaScript: de cero a avanzado",
+  "glyph": "JS",
+  "tileBg": "#FACC15",
+  "tileFg": "#422006",
+  "ext": "js",
+  "blurb": "El lenguaje de la web: da vida a las páginas.",
+  "modules": [
+    {
+      "title": "Fundamentos",
+      "desc": "Variables con let y const, tipos y operadores.",
+      "lessons": [
+        "¿Qué es JavaScript?",
+        "Tu primer console.log()",
+        "let y const",
+        "Tipos de datos",
+        "Operadores",
+        "Mini proyecto: Saludo"
+      ]
+    },
+    {
+      "title": "Control de flujo",
+      "desc": "Condiciones, ciclos y funciones.",
+      "lessons": [
+        "if y else",
+        "switch",
+        "Bucles for y while",
+        "Funciones",
+        "Funciones flecha",
+        "Mini proyecto: Adivina el número"
+      ]
+    },
+    {
+      "title": "Datos",
+      "desc": "Arrays, objetos, métodos y desestructuración.",
+      "lessons": [
+        "Arrays",
+        "Métodos de arrays",
+        "Objetos",
+        "Desestructuración",
+        "Mini proyecto: Lista de compras"
+      ]
+    },
+    {
+      "title": "Conceptos importantes",
+      "desc": "Alcance, closures, this y prototipos.",
+      "lessons": [
+        "Alcance (scope)",
+        "Closures",
+        "La palabra this",
+        "Prototipos"
+      ]
+    },
+    {
+      "title": "El DOM",
+      "desc": "Seleccionar y modificar elementos HTML.",
+      "lessons": [
+        "¿Qué es el DOM?",
+        "Seleccionar elementos",
+        "Cambiar textos y estilos",
+        "Crear elementos",
+        "Mini proyecto: Contador"
+      ]
+    },
+    {
+      "title": "Eventos",
+      "desc": "Clics, formularios, teclado y validaciones.",
+      "lessons": [
+        "Eventos de clic",
+        "Formularios",
+        "Eventos de teclado",
+        "Validaciones",
+        "Mini proyecto: Formulario de registro"
+      ]
+    },
+    {
+      "title": "Asincronía",
+      "desc": "Callbacks, promesas, async/await y Fetch API.",
+      "lessons": [
+        "Callbacks",
+        "Promesas",
+        "async y await",
+        "Fetch API",
+        "Mini proyecto: El clima"
+      ]
+    },
+    {
+      "title": "Temas avanzados",
+      "desc": "Módulos, clases, manejo de errores y almacenamiento web.",
+      "lessons": [
+        "Módulos",
+        "Clases",
+        "Manejo de errores",
+        "Almacenamiento web"
+      ]
+    },
+    {
+      "title": "Especialización",
+      "desc": "Node.js, Express, React y aplicaciones web interactivas.",
+      "lessons": [
+        "Node.js",
+        "Express",
+        "React",
+        "Proyecto final: App interactiva"
+      ]
+    }
+  ],
+  "lessons": {
+    "¿Qué es JavaScript?": {
+      "paras": [
+        [
+          "JavaScript es el lenguaje que da vida a las páginas web: botones que responden, mensajes, juegos y animaciones."
+        ],
+        [
+          "Para mostrar un mensaje usamos ",
+          {
+            "c": "console.log()"
+          },
+          ". El texto va entre comillas y cada instrucción termina con ",
+          {
+            "c": ";"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "main.js",
+        "lines": [
+          "console.log(\"¡Hola, mundo!\");",
+          "console.log(\"Estoy aprendiendo JavaScript\");"
+        ],
+        "output": [
+          "¡Hola, mundo!",
+          "Estoy aprendiendo JavaScript"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un nombre y ejecuta",
+        "file": "prueba.js",
+        "choices": [
+          "Ana",
+          "Luis",
+          "Sofía"
+        ],
+        "lines": [
+          "console.log(\"Hola, {v}\");"
+        ],
+        "output": "Hola, {v}"
+      },
+      "remember": [
+        [
+          {
+            "c": "console.log()"
+          },
+          " muestra mensajes en la consola."
+        ],
+        [
+          "JavaScript distingue mayúsculas: ",
+          {
+            "c": "Console.Log"
+          },
+          " no funciona."
+        ],
+        [
+          "Termina cada instrucción con ",
+          {
+            "c": ";"
+          },
+          "."
+        ]
+      ],
+      "tip": "Abre la consola de cualquier navegador con F12: ahí aparecen tus console.log().",
+      "quiz": [
+        {
+          "prompt": "¿Qué hace console.log()?",
+          "code": [
+            "console.log(\"Hola\");"
+          ],
+          "options": [
+            "Muestra un mensaje en la consola",
+            "Crea un botón",
+            "Guarda un archivo",
+            "Cierra la página"
+          ],
+          "answer": 0,
+          "explain": "console.log() escribe en la consola lo que pongas entre paréntesis."
+        },
+        {
+          "prompt": "¿Cuál de estas líneas está bien escrita?",
+          "code": [
+            "// Elige la correcta"
+          ],
+          "options": [
+            "console.log(\"Hola\");",
+            "console.log(Hola\");",
+            "Console.Log(\"Hola\");",
+            "log.console(\"Hola\");"
+          ],
+          "answer": 0,
+          "explain": "Todo en minúsculas, con punto entre console y log, y el texto entre comillas."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(\"5\" + \"5\");"
+          ],
+          "options": [
+            "55",
+            "10",
+            "\"5\" + \"5\"",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Con comillas son textos, y + entre textos los une: \"55\"."
+        }
+      ]
+    },
+    "Tu primer console.log()": {
+      "paras": [
+        [
+          {
+            "c": "console.log()"
+          },
+          " puede mostrar textos, números o varias cosas a la vez separadas por comas; las muestra con un espacio entre ellas."
+        ],
+        [
+          "Sin comillas, JavaScript ",
+          {
+            "b": "calcula"
+          },
+          ": ",
+          {
+            "c": "console.log(6 * 7)"
+          },
+          " muestra 42. Cada ",
+          {
+            "c": "console.log"
+          },
+          " escribe en una línea nueva."
+        ]
+      ],
+      "example": {
+        "file": "main.js",
+        "lines": [
+          "console.log(\"Hola\");",
+          "console.log(\"Tengo\", 17, \"años\");",
+          "console.log(6 * 7);"
+        ],
+        "output": [
+          "Hola",
+          "Tengo 17 años",
+          "42"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un número",
+        "file": "prueba.js",
+        "choices": [
+          "4",
+          "9",
+          "15"
+        ],
+        "lines": [
+          "console.log(\"El triple de {v} es\", {v} * 3);"
+        ],
+        "outputs": {
+          "4": "El triple de 4 es 12",
+          "9": "El triple de 9 es 27",
+          "15": "El triple de 15 es 45"
+        }
+      },
+      "remember": [
+        [
+          "Los textos van entre comillas dobles o simples."
+        ],
+        [
+          "Las comas separan valores con un espacio."
+        ],
+        [
+          "Sin comillas, JavaScript calcula."
+        ]
+      ],
+      "tip": "En el editor de AGbyte, la consola muestra todo lo que escribas con console.log().",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(\"Nivel\", 3);"
+          ],
+          "options": [
+            "Nivel 3",
+            "Nivel3",
+            "\"Nivel\", 3",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Las comas separan los valores con un espacio."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(10 - 4);"
+          ],
+          "options": [
+            "6",
+            "10 - 4",
+            "104",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Sin comillas se calcula la operación: 6."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(\"10 - 4\");"
+          ],
+          "options": [
+            "10 - 4",
+            "6",
+            "\"10 - 4\"",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Entre comillas es texto: se muestra tal cual."
+        }
+      ]
+    },
+    "let y const": {
+      "paras": [
+        [
+          "Las variables se declaran con ",
+          {
+            "c": "let"
+          },
+          " (si su valor va a cambiar) o ",
+          {
+            "c": "const"
+          },
+          " (si no cambiará). Por ejemplo: ",
+          {
+            "c": "let puntos = 0;"
+          },
+          "."
+        ],
+        [
+          "Si intentas cambiar una ",
+          {
+            "c": "const"
+          },
+          ", JavaScript da un error. Evita ",
+          {
+            "c": "var"
+          },
+          ": es la forma antigua y tiene comportamientos confusos."
+        ]
+      ],
+      "diagram": {
+        "parts": [
+          {
+            "t": "let",
+            "label": "puede cambiar",
+            "kind": "op"
+          },
+          {
+            "t": "puntos",
+            "label": "el nombre",
+            "kind": "name"
+          },
+          {
+            "t": "0",
+            "label": "el valor",
+            "kind": "value"
+          }
+        ],
+        "caption": "let puntos = 0;"
+      },
+      "example": {
+        "file": "main.js",
+        "lines": [
+          "const nombre = \"Ana\";",
+          "let puntos = 0;",
+          "puntos = puntos + 10;",
+          "puntos += 5;",
+          "console.log(nombre, \"tiene\", puntos, \"puntos\");"
+        ],
+        "output": [
+          "Ana tiene 15 puntos"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige cuántos puntos ganar",
+        "file": "prueba.js",
+        "choices": [
+          "5",
+          "20",
+          "50"
+        ],
+        "lines": [
+          "let puntos = 10;",
+          "puntos += {v};",
+          "console.log(\"Puntos:\", puntos);"
+        ],
+        "outputs": {
+          "5": "Puntos: 15",
+          "20": "Puntos: 30",
+          "50": "Puntos: 60"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "let"
+          },
+          " para valores que cambian."
+        ],
+        [
+          {
+            "c": "const"
+          },
+          " para valores fijos."
+        ],
+        [
+          {
+            "c": "x += 5"
+          },
+          " es lo mismo que ",
+          {
+            "c": "x = x + 5"
+          },
+          "."
+        ]
+      ],
+      "tip": "Regla práctica: usa const por defecto y cámbialo a let solo si necesitas reasignar.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "let a = 2;",
+            "a = a * 5;",
+            "console.log(a);"
+          ],
+          "options": [
+            "2",
+            "10",
+            "25",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "a pasa de 2 a 10."
+        },
+        {
+          "prompt": "¿Qué pasa con este código?",
+          "code": [
+            "const x = 1;",
+            "x = 2;"
+          ],
+          "options": [
+            "Da un error",
+            "x vale 2",
+            "x vale 1",
+            "x vale 3"
+          ],
+          "answer": 0,
+          "explain": "Una const no se puede reasignar: TypeError."
+        },
+        {
+          "prompt": "¿Qué palabra usarías para un contador que sube?",
+          "code": [
+            "___ contador = 0;"
+          ],
+          "options": [
+            "let",
+            "const",
+            "fixed",
+            "static"
+          ],
+          "answer": 0,
+          "explain": "El contador cambia, así que se declara con let."
+        }
+      ]
+    },
+    "Tipos de datos": {
+      "paras": [
+        [
+          "Los tipos básicos son: ",
+          {
+            "c": "number"
+          },
+          " (enteros y decimales), ",
+          {
+            "c": "string"
+          },
+          " (texto), ",
+          {
+            "c": "boolean"
+          },
+          " (",
+          {
+            "c": "true"
+          },
+          "/",
+          {
+            "c": "false"
+          },
+          "), ",
+          {
+            "c": "undefined"
+          },
+          " (sin valor) y ",
+          {
+            "c": "null"
+          },
+          " (vacío a propósito)."
+        ],
+        [
+          {
+            "c": "typeof"
+          },
+          " te dice el tipo. Para convertir texto en número usa ",
+          {
+            "c": "Number(\"20\")"
+          },
+          " y para lo contrario ",
+          {
+            "c": "String(20)"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "main.js",
+        "lines": [
+          "let edad = 17;",
+          "let nombre = \"Luis\";",
+          "let activo = true;",
+          "let apodo;",
+          "console.log(typeof edad, typeof nombre, typeof activo);",
+          "console.log(apodo);",
+          "console.log(Number(\"20\") + 5, \"20\" + 5);"
+        ],
+        "output": [
+          "number string boolean",
+          "undefined",
+          "25 205"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un valor y mira su tipo",
+        "file": "prueba.js",
+        "choices": [
+          "42",
+          "\"42\"",
+          "false"
+        ],
+        "lines": [
+          "console.log(typeof {v});"
+        ],
+        "outputs": {
+          "42": "number",
+          "\"42\"": "string",
+          "false": "boolean"
+        }
+      },
+      "remember": [
+        [
+          "Enteros y decimales son ",
+          {
+            "c": "number"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "\"20\" + 5"
+          },
+          " une textos: ",
+          {
+            "c": "\"205\""
+          },
+          "."
+        ],
+        [
+          "Una variable sin valor es ",
+          {
+            "c": "undefined"
+          },
+          "."
+        ]
+      ],
+      "tip": "Number(\"hola\") da NaN («no es un número»). Revisa los datos antes de calcular.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(typeof 3.5);"
+          ],
+          "options": [
+            "number",
+            "float",
+            "decimal",
+            "string"
+          ],
+          "answer": 0,
+          "explain": "En JavaScript todos los números son number."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(\"3\" + 4);"
+          ],
+          "options": [
+            "34",
+            "7",
+            "\"3\" + 4",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Si uno es texto, + une: \"34\"."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(Number(\"3\") + 4);"
+          ],
+          "options": [
+            "7",
+            "34",
+            "NaN",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Number convierte \"3\" en 3, y 3 + 4 = 7."
+        }
+      ]
+    },
+    "Operadores": {
+      "paras": [
+        [
+          "Aritméticos: ",
+          {
+            "c": "+ - * / % **"
+          },
+          ". A diferencia de Java, ",
+          {
+            "c": "7 / 2"
+          },
+          " da 3.5. Comparación: usa ",
+          {
+            "c": "==="
+          },
+          " (igual en valor y tipo) y ",
+          {
+            "c": "!=="
+          },
+          "."
+        ],
+        [
+          "Lógicos: ",
+          {
+            "c": "&&"
+          },
+          " (y), ",
+          {
+            "c": "||"
+          },
+          " (o), ",
+          {
+            "c": "!"
+          },
+          " (no). Y ",
+          {
+            "c": "x++"
+          },
+          " suma 1 a una variable."
+        ]
+      ],
+      "example": {
+        "file": "main.js",
+        "lines": [
+          "console.log(7 / 2, 7 % 2, 2 ** 4);",
+          "console.log(5 == \"5\", 5 === \"5\");",
+          "let edad = 16;",
+          "console.log(edad >= 18 || edad === 16);",
+          "edad++;",
+          "console.log(edad);"
+        ],
+        "output": [
+          "3.5 1 16",
+          "true false",
+          "true",
+          "17"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un número y mira si es par",
+        "file": "prueba.js",
+        "choices": [
+          "10",
+          "7",
+          "22"
+        ],
+        "lines": [
+          "const n = {v};",
+          "console.log(n % 2 === 0 ? \"par\" : \"impar\");"
+        ],
+        "outputs": {
+          "7": "impar",
+          "10": "par",
+          "22": "par"
+        }
+      },
+      "remember": [
+        [
+          "Usa siempre ",
+          {
+            "c": "==="
+          },
+          " en vez de ",
+          {
+            "c": "=="
+          },
+          "."
+        ],
+        [
+          {
+            "c": "**"
+          },
+          " es potencia: ",
+          {
+            "c": "2 ** 3"
+          },
+          " = 8."
+        ],
+        [
+          {
+            "c": "cond ? a : b"
+          },
+          " elige entre dos valores."
+        ]
+      ],
+      "tip": "== convierte tipos antes de comparar y puede sorprenderte. === no lo hace.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(9 / 2);"
+          ],
+          "options": [
+            "4.5",
+            "4",
+            "5",
+            "4.0"
+          ],
+          "answer": 0,
+          "explain": "En JavaScript la división da decimales: 4.5."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(3 === \"3\");"
+          ],
+          "options": [
+            "false",
+            "true",
+            "3",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "=== compara también el tipo: number no es string."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "console.log(true && !false);"
+          ],
+          "options": [
+            "true",
+            "false",
+            "undefined",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "!false es true, y true && true es true."
+        }
+      ]
+    },
+    "Mini proyecto: Saludo": {
+      "paras": [
+        [
+          "Crearás un programa que ",
+          {
+            "b": "saluda según la hora"
+          },
+          ": «Buenos días», «Buenas tardes» o «Buenas noches», con el nombre de la persona."
+        ],
+        [
+          "Usarás variables, comparaciones y ",
+          {
+            "b": "plantillas de texto"
+          },
+          ": entre comillas invertidas puedes meter variables con ",
+          {
+            "c": "${nombre}"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "saludo.js",
+        "lines": [
+          "const nombre = \"Sofía\";",
+          "const hora = 15;",
+          "let saludo = \"Buenas noches\";",
+          "if (hora < 12) saludo = \"Buenos días\";",
+          "else if (hora < 19) saludo = \"Buenas tardes\";",
+          "console.log(`${saludo}, ${nombre}!`);",
+          "console.log(`Son las ${hora}:00`);"
+        ],
+        "output": [
+          "Buenas tardes, Sofía!",
+          "Son las 15:00"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige la hora",
+        "file": "prueba.js",
+        "choices": [
+          "9",
+          "15",
+          "21"
+        ],
+        "lines": [
+          "const hora = {v};",
+          "let s = \"Buenas noches\";",
+          "if (hora < 12) s = \"Buenos días\";",
+          "else if (hora < 19) s = \"Buenas tardes\";",
+          "console.log(s);"
+        ],
+        "outputs": {
+          "9": "Buenos días",
+          "15": "Buenas tardes",
+          "21": "Buenas noches"
+        }
+      },
+      "remember": [
+        [
+          "Las plantillas usan comillas invertidas: ",
+          {
+            "c": "`Hola ${x}`"
+          },
+          "."
+        ],
+        [
+          "Revisa las condiciones de la más pequeña a la más grande."
+        ],
+        [
+          "Para la hora real: ",
+          {
+            "c": "new Date().getHours()"
+          },
+          "."
+        ]
+      ],
+      "tip": "Reto: cambia const hora = 15 por new Date().getHours() y ejecútalo a distintas horas.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "const x = 5;",
+            "console.log(`x vale ${x * 2}`);"
+          ],
+          "options": [
+            "x vale 10",
+            "x vale ${x * 2}",
+            "x vale 5",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Dentro de ${ } se calcula la expresión: 10."
+        },
+        {
+          "prompt": "¿Qué comillas usan las plantillas de texto?",
+          "code": [
+            "// Elige una"
+          ],
+          "options": [
+            "Invertidas `",
+            "Dobles \"",
+            "Simples '",
+            "Ninguna"
+          ],
+          "answer": 0,
+          "explain": "Solo las comillas invertidas permiten ${ }."
+        },
+        {
+          "prompt": "¿Qué muestra si hora = 11?",
+          "code": [
+            "if (hora < 12) console.log(\"mañana\");",
+            "else console.log(\"tarde\");"
+          ],
+          "options": [
+            "mañana",
+            "tarde",
+            "nada",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "11 es menor que 12."
+        }
+      ]
+    }
+  }
+}

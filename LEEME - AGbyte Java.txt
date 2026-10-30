@@ -1,8 +1,13 @@
 AGbyte en Java
 ==============
 
-Es la misma app AGbyte (mismas pantallas, cursos, editor, ejercicios e inicio con Google),
+Es la misma app AGbyte (mismas pantallas, cursos, editor, ejercicios y progreso),
 pero el programa que la abre está escrito en Java en lugar de Python.
+
+AGbyte funciona completamente sin internet: no usa ninguna API externa. El inicio de
+sesión es solo local (nombre y correo guardados en este equipo) y el editor ejecuta
+el código con lo que tengas instalado en tu PC; si falta algo, lo dice claramente en
+vez de mandar tu código a un servicio en línea.
 
 Qué necesitas
 -------------
@@ -13,7 +18,7 @@ Qué necesitas
     Java          -> tu JDK (o el Java que va dentro de AGbyte.exe).
     C++           -> g++ (por ejemplo el de Code::Blocks / MinGW).
     JavaScript, HTML y CSS se ejecutan dentro de la app.
-  Si falta alguno, AGbyte lo ejecuta en línea (Wandbox) cuando hay internet.
+  Si falta alguno, AGbyte te dice qué instalar: nunca envía tu código a internet.
 
 Forma 1: con doble clic
 -----------------------
@@ -42,15 +47,18 @@ Cómo está hecho (src/main/java/pe/agbyte)
 -----------------------------------------
   AGbyteANYU.java       Punto de entrada: inicia el servidor y abre la ventana.
   ServidorANYU.java     Servidor local en http://127.0.0.1:47615 (solo accesible desde tu PC).
-                        Entrega las pantallas y la API: /api/run, /api/info, /api/token,
-                        /api/google/..., /api/open y /oauth/google.
-  EjecutorANYU.java     Ejecuta el código del editor (Python, Java, C++ y SQL) con límite de tiempo.
-  GoogleLoginANYU.java  "Continuar con Google" (flujo oficial para apps de escritorio con PKCE).
+                        Entrega las pantallas y la API: /api/run, /api/info, /api/token.
+  EjecutorANYU.java     Ejecuta el código del editor (Python, Java, C++ y SQL) con límite de tiempo,
+                        siempre con lo instalado en tu PC (sin servicios en línea).
   VentanaANYU.java      Abre la ventana de AGbyte y la ventanita de control.
   JsonANYU.java         Lee y escribe JSON (sin librerías externas).
   SistemaANYU.java      Carpetas, búsqueda de programas instalados y registro de errores.
 
-  src/main/resources/web       Las pantallas de la app (HTML, CSS y JavaScript).
+  src/main/resources/web            Las pantallas de la app (HTML, CSS y JavaScript).
+  src/main/resources/web/fonts      Nunito y JetBrains Mono, incluidas en el programa (sin Google Fonts).
+  src/main/resources/web/lecciones  Cursos y lecciones en JSON. Para agregar, editar o eliminar
+                                     lecciones, edita estos archivos: no hace falta tocar código.
+                                     Guía completa en web/lecciones/README.txt.
   src/main/resources/sql_ejecutor.py   Ayudante que ejecuta SQL con SQLite.
 
 Todas las clases, métodos y variables llevan las iniciales ANYU al final
@@ -64,6 +72,4 @@ Tu progreso
 - AGbyte guarda tu progreso en este PC (%LOCALAPPDATA%\AGbyte\ventana).
 - La primera vez que abres la versión Java, copia el progreso que tenías en AGbyte.exe
   (la versión de Python), así no empiezas de cero. Después, cada versión guarda el suyo.
-- La cuenta de Google se configura una sola vez y la comparten las dos versiones
-  (%LOCALAPPDATA%\AGbyte\google-oauth.json).
 - Si algo falla, el detalle queda en %LOCALAPPDATA%\AGbyte\agbyte-java.log

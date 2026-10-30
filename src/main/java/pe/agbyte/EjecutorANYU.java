@@ -3,16 +3,10 @@ package pe.agbyte;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.ProxySelector;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -25,8 +19,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * Ejecuta el código del editor: Python, Java y C++ con los programas instalados en tu PC
- * (o en línea con Wandbox si faltan) y SQL con el SQLite que trae Python.
+ * Ejecuta el código del editor: Python, Java y C++ con los programas instalados en tu PC,
+ * y SQL con el SQLite que trae Python. Todo corre en tu equipo: si falta el intérprete o
+ * compilador de un lenguaje, AGbyte lo dice claramente en vez de mandar tu código a internet.
  * JavaScript, HTML y CSS se ejecutan dentro de la app, no aquí.
  */
 public final class EjecutorANYU {
@@ -34,13 +29,11 @@ public final class EjecutorANYU {
     private static final int MAX_SALIDA_ANYU = 64 * 1024;
     private static final int TIEMPO_EJECUCION_ANYU = 8;
     private static final int TIEMPO_COMPILACION_ANYU = 40;
-    private static final String WANDBOX_ANYU = "https://wandbox.org/api";
 
     private static List<String> pythonCmdANYU;
     private static Path javaExeANYU;
     private static Path gppExeANYU;
     private static boolean buscadoANYU;
-    private static List<Object> compiladoresWandboxANYU;
     private static Path ayudanteSqlANYU;
 
     private EjecutorANYU() {
@@ -140,7 +133,7 @@ public final class EjecutorANYU {
     }
 
     private static Map<String, Object> pythonANYU(String codigoANYU, String entradaANYU) {
-        if (pythonCmdANYU == null) return enLineaANYU("python", codigoANYU, entradaANYU);
+        if (pythonCmdANYU == null) return sinHerramientaANYU("No encontré Python instalado en tu PC. Instálalo desde python.org y vuelve a abrir AGbyte.");
         return conCarpetaANYU(dANYU -> {
             Files.writeString(dANYU.resolve("main.py"), codigoANYU, StandardCharsets.UTF_8);
             List<String> cmdANYU = new ArrayList<>(pythonCmdANYU);
@@ -154,7 +147,7 @@ public final class EjecutorANYU {
     }
 
     private static Map<String, Object> javaANYU(String codigoANYU, String entradaANYU) {
-        if (javaExeANYU == null) return enLineaANYU("java", codigoANYU, entradaANYU);
+        if (javaExeANYU == null) return sinHerramientaANYU("No encontré un JDK de Java instalado en tu PC. Instala uno (por ejemplo Eclipse Temurin) y vuelve a abrir AGbyte.");
         return conCarpetaANYU(dANYU -> {
             Matcher mANYU = Pattern.compile("public\\s+class\\s+(\\w+)").matcher(codigoANYU);
             String nombreANYU = (mANYU.find() ? mANYU.group(1) : "Main") + ".java";
@@ -172,7 +165,7 @@ public final class EjecutorANYU {
     }
 
     private static Map<String, Object> cppANYU(String codigoANYU, String entradaANYU) {
-        if (gppExeANYU == null) return enLineaANYU("cpp", codigoANYU, entradaANYU);
+        if (gppExeANYU == null) return sinHerramientaANYU("No encontré g++ instalado en tu PC. Instala MinGW (o el g++ de tu sistema) y vuelve a abrir AGbyte.");
         return conCarpetaANYU(dANYU -> {
             Files.writeString(dANYU.resolve("main.cpp"), codigoANYU, StandardCharsets.UTF_8);
             Path exeANYU = dANYU.resolve(SistemaANYU.WINDOWS_ANYU ? "main.exe" : "main");
@@ -194,9 +187,7 @@ public final class EjecutorANYU {
 
     private static Map<String, Object> sqlANYU(String codigoANYU) {
         if (pythonCmdANYU == null) {
-            Map<String, Object> rANYU = resultadoANYU(-1, "", "Para ejecutar SQL, AGbyte usa el SQLite que viene con Python. Instala Python desde python.org y vuelve a abrir AGbyte.", 0, false);
-            rANYU.put("runner", "sin ejecutor");
-            return rANYU;
+            return sinHerramientaANYU("Para ejecutar SQL, AGbyte usa el SQLite que viene con Python. Instala Python desde python.org y vuelve a abrir AGbyte.");
         }
         return conCarpetaANYU(dANYU -> {
             Files.writeString(dANYU.resolve("consulta.sql"), codigoANYU, StandardCharsets.UTF_8);
@@ -225,63 +216,13 @@ public final class EjecutorANYU {
         return ayudanteSqlANYU;
     }
 
-    // ------------------------------------------------------------------ en línea (Wandbox)
+    // ------------------------------------------------------------------ sin herramienta instalada
 
-    private static Map<String, Object> enLineaANYU(String lenguajeANYU, String codigoANYU, String entradaANYU) {
-        long inicioANYU = System.currentTimeMillis();
-        String etiquetaANYU = Map.of("python", "Python", "java", "Java", "cpp", "C++").get(lenguajeANYU);
-        try {
-            String compiladorANYU = compiladorWandboxANYU(lenguajeANYU);
-            if (compiladorANYU == null) throw new IOException("sin compilador");
-            Map<String, Object> cuerpoANYU = new LinkedHashMap<>();
-            cuerpoANYU.put("code", codigoANYU);
-            cuerpoANYU.put("compiler", compiladorANYU);
-            cuerpoANYU.put("stdin", entradaANYU);
-            cuerpoANYU.put("save", false);
-            if (lenguajeANYU.equals("cpp")) cuerpoANYU.put("options", "c++17");
-            HttpRequest reqANYU = HttpRequest.newBuilder(URI.create(WANDBOX_ANYU + "/compile.json")).timeout(Duration.ofSeconds(30))
-                    .header("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(JsonANYU.stringifyANYU(cuerpoANYU))).build();
-            HttpResponse<String> respANYU = clienteANYU().send(reqANYU, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
-            Map<String, Object> resANYU = JsonANYU.objetoANYU(respANYU.body());
-            String errANYU = JsonANYU.textoANYU(resANYU, "compiler_error") + JsonANYU.textoANYU(resANYU, "program_error");
-            int codeANYU = 0;
-            try {
-                codeANYU = Integer.parseInt(JsonANYU.textoANYU(resANYU, "status").isEmpty() ? "0" : JsonANYU.textoANYU(resANYU, "status"));
-            } catch (NumberFormatException eANYU) {
-                codeANYU = 1;
-            }
-            Map<String, Object> rANYU = resultadoANYU(codeANYU, recortarANYU(JsonANYU.textoANYU(resANYU, "program_output")), recortarANYU(errANYU), (int) (System.currentTimeMillis() - inicioANYU), false);
-            rANYU.put("runner", etiquetaANYU + " en línea (Wandbox)");
-            return rANYU;
-        } catch (Exception eANYU) {
-            SistemaANYU.logANYU("Wandbox: " + eANYU);
-            Map<String, Object> rANYU = resultadoANYU(-1, "", "No encontré " + etiquetaANYU + " instalado en tu PC y no pude conectarme a internet para ejecutarlo en línea.", 0, false);
-            rANYU.put("runner", "sin ejecutor");
-            return rANYU;
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private static String compiladorWandboxANYU(String lenguajeANYU) throws IOException, InterruptedException {
-        if (compiladoresWandboxANYU == null) {
-            HttpRequest reqANYU = HttpRequest.newBuilder(URI.create(WANDBOX_ANYU + "/list.json")).timeout(Duration.ofSeconds(10)).GET().build();
-            compiladoresWandboxANYU = (List<Object>) JsonANYU.parseANYU(clienteANYU().send(reqANYU, HttpResponse.BodyHandlers.ofString()).body());
-        }
-        String quieroANYU = Map.of("python", "Python", "java", "Java", "cpp", "C++").get(lenguajeANYU);
-        List<String> nombresANYU = new ArrayList<>();
-        for (Object oANYU : compiladoresWandboxANYU) {
-            Map<String, Object> cANYU = (Map<String, Object>) oANYU;
-            if (quieroANYU.equals(cANYU.get("language"))) nombresANYU.add(String.valueOf(cANYU.get("name")));
-        }
-        List<String> preferidosANYU = nombresANYU.stream().filter(nANYU -> lenguajeANYU.equals("python") ? nANYU.startsWith("cpython-3") : !lenguajeANYU.equals("cpp") || nANYU.startsWith("gcc"))
-                .collect(Collectors.toList());
-        if (!preferidosANYU.isEmpty()) return preferidosANYU.get(0);
-        return nombresANYU.isEmpty() ? null : nombresANYU.get(0);
-    }
-
-    static HttpClient clienteANYU() {
-        return HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).followRedirects(HttpClient.Redirect.NORMAL)
-                .proxy(ProxySelector.getDefault()).build();
+    /** Todo se ejecuta en tu PC: si falta el intérprete/compilador, se avisa en vez de usar internet. */
+    private static Map<String, Object> sinHerramientaANYU(String mensajeANYU) {
+        Map<String, Object> rANYU = resultadoANYU(-1, "", mensajeANYU, 0, false);
+        rANYU.put("runner", "sin ejecutor");
+        return rANYU;
     }
 
     // ------------------------------------------------------------------ procesos

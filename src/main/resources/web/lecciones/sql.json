@@ -1,0 +1,640 @@
+{
+  "id": "sql",
+  "name": "SQL",
+  "title": "SQL: bases de datos",
+  "glyph": "SQL",
+  "tileBg": "#334155",
+  "tileFg": "#FFFFFF",
+  "ext": "sql",
+  "blurb": "Consulta y ordena datos como un analista.",
+  "modules": [
+    {
+      "title": "Conceptos",
+      "desc": "Tablas, registros, campos, claves y relaciones.",
+      "lessons": [
+        "¿Qué es una base de datos?",
+        "Tablas, registros y campos",
+        "Claves primarias y foráneas",
+        "Relaciones entre tablas"
+      ]
+    },
+    {
+      "title": "Consultas",
+      "desc": "SELECT, WHERE, ORDER BY, DISTINCT y LIMIT.",
+      "lessons": [
+        "Tu primera consulta",
+        "WHERE",
+        "ORDER BY",
+        "DISTINCT",
+        "LIMIT"
+      ]
+    },
+    {
+      "title": "Filtros",
+      "desc": "AND, OR, IN, BETWEEN, LIKE y NULL.",
+      "lessons": [
+        "AND y OR",
+        "IN y BETWEEN",
+        "LIKE",
+        "Valores NULL"
+      ]
+    },
+    {
+      "title": "Funciones",
+      "desc": "COUNT, SUM, AVG, MIN y MAX.",
+      "lessons": [
+        "COUNT",
+        "SUM y AVG",
+        "MIN y MAX",
+        "Mini proyecto: Reporte de ventas"
+      ]
+    },
+    {
+      "title": "Agrupación",
+      "desc": "GROUP BY y HAVING.",
+      "lessons": [
+        "GROUP BY",
+        "HAVING",
+        "Mini proyecto: Ventas por mes"
+      ]
+    },
+    {
+      "title": "Relaciones",
+      "desc": "INNER JOIN, LEFT JOIN y RIGHT JOIN.",
+      "lessons": [
+        "INNER JOIN",
+        "LEFT JOIN",
+        "RIGHT JOIN",
+        "Mini proyecto: Pedidos y clientes"
+      ]
+    },
+    {
+      "title": "Manipulación",
+      "desc": "INSERT, UPDATE y DELETE.",
+      "lessons": [
+        "INSERT",
+        "UPDATE",
+        "DELETE"
+      ]
+    },
+    {
+      "title": "Definición",
+      "desc": "CREATE, ALTER y DROP.",
+      "lessons": [
+        "CREATE TABLE",
+        "ALTER TABLE",
+        "DROP"
+      ]
+    },
+    {
+      "title": "Nivel avanzado",
+      "desc": "Subconsultas, CTE, vistas, índices y funciones de ventana.",
+      "lessons": [
+        "Subconsultas",
+        "CTE con WITH",
+        "Vistas",
+        "Índices",
+        "Funciones de ventana"
+      ]
+    },
+    {
+      "title": "Administración",
+      "desc": "Transacciones, normalización, permisos, seguridad y optimización.",
+      "lessons": [
+        "Transacciones",
+        "Normalización",
+        "Permisos y seguridad",
+        "Optimización"
+      ]
+    },
+    {
+      "title": "Motores para practicar",
+      "desc": "MySQL, PostgreSQL y SQL Server.",
+      "lessons": [
+        "MySQL",
+        "PostgreSQL",
+        "SQL Server",
+        "Proyecto final: Base de datos de una tienda"
+      ]
+    }
+  ],
+  "lessons": {
+    "¿Qué es una base de datos?": {
+      "paras": [
+        [
+          "Una base de datos guarda información ordenada en tablas, como una hoja de cálculo: cada fila es un registro y cada columna un dato."
+        ],
+        [
+          "Con SQL le haces preguntas. ",
+          {
+            "c": "SELECT"
+          },
+          " elige columnas y ",
+          {
+            "c": "FROM"
+          },
+          " dice de qué tabla."
+        ]
+      ],
+      "example": {
+        "file": "consulta.sql",
+        "lines": [
+          "SELECT nombre, precio",
+          "FROM frutas;"
+        ],
+        "output": [
+          "nombre   | precio",
+          "---------+-------",
+          "mango    | 3.50",
+          "fresa    | 6.00",
+          "maracuyá | 4.20",
+          "plátano  | 2.00",
+          "uva      | 8.50",
+          "(5 filas)"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige una columna y ejecuta",
+        "file": "prueba.sql",
+        "choices": [
+          "nombre",
+          "precio",
+          "stock"
+        ],
+        "lines": [
+          "SELECT {v} FROM frutas;"
+        ],
+        "outputs": {
+          "nombre": "nombre\n--------\nmango\nfresa\nmaracuyá\nplátano\nuva\n(5 filas)",
+          "precio": "precio\n------\n3.50\n6.00\n4.20\n2.00\n8.50\n(5 filas)",
+          "stock": "stock\n-----\n24\n10\n15\n40\n5\n(5 filas)"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "SELECT"
+          },
+          " va primero y ",
+          {
+            "c": "FROM"
+          },
+          " después."
+        ],
+        [
+          "El asterisco ",
+          {
+            "c": "*"
+          },
+          " trae todas las columnas."
+        ],
+        [
+          "Termina la consulta con ",
+          {
+            "c": ";"
+          },
+          "."
+        ]
+      ],
+      "tip": "SQL no distingue mayúsculas en sus palabras clave, pero escribirlas en mayúsculas ayuda a leer.",
+      "quiz": [
+        {
+          "prompt": "¿Qué palabra elige las columnas?",
+          "code": [
+            "??? nombre FROM frutas;"
+          ],
+          "options": [
+            "SELECT",
+            "FROM",
+            "TABLE",
+            "GET"
+          ],
+          "answer": 0,
+          "explain": "SELECT dice qué columnas quieres ver."
+        },
+        {
+          "prompt": "¿Qué indica FROM frutas?",
+          "code": [
+            "SELECT * FROM frutas;"
+          ],
+          "options": [
+            "La tabla de donde salen los datos",
+            "Que se borre la tabla",
+            "El orden de las filas",
+            "Que se cree la tabla"
+          ],
+          "answer": 0,
+          "explain": "FROM indica la tabla que consultas."
+        },
+        {
+          "prompt": "¿Qué consulta trae todas las columnas?",
+          "code": [
+            "-- Elige la correcta"
+          ],
+          "options": [
+            "SELECT * FROM frutas;",
+            "SELECT ALL frutas;",
+            "GET * frutas;",
+            "FROM frutas SELECT *;"
+          ],
+          "answer": 0,
+          "explain": "El asterisco * significa «todas las columnas»."
+        }
+      ]
+    },
+    "Tablas, registros y campos": {
+      "paras": [
+        [
+          "Una base de datos guarda la información en ",
+          {
+            "b": "tablas"
+          },
+          ". Cada ",
+          {
+            "b": "campo"
+          },
+          " (columna) es un dato, como nombre o ciudad, y cada ",
+          {
+            "b": "registro"
+          },
+          " (fila) es un elemento completo, como un cliente."
+        ],
+        [
+          "Con ",
+          {
+            "c": "SELECT * FROM tabla;"
+          },
+          " ves todos los campos y registros. El asterisco significa «todas las columnas»."
+        ]
+      ],
+      "example": {
+        "file": "consulta.sql",
+        "lines": [
+          "-- Todos los clientes",
+          "SELECT * FROM clientes;"
+        ],
+        "output": [
+          "id | nombre | ciudad",
+          "---+--------+---------",
+          "1  | Ana    | Lima",
+          "2  | Luis   | Arequipa",
+          "3  | Sofía  | Cusco",
+          "4  | Diego  | Lima",
+          "(4 filas)"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige qué campo ver del cliente 1",
+        "file": "consulta.sql",
+        "choices": [
+          "nombre",
+          "ciudad",
+          "id"
+        ],
+        "lines": [
+          "SELECT {v} FROM clientes WHERE id = 1;"
+        ],
+        "outputs": {
+          "nombre": "nombre\n------\nAna\n(1 fila)",
+          "ciudad": "ciudad\n------\nLima\n(1 fila)",
+          "id": "id\n--\n1\n(1 fila)"
+        }
+      },
+      "remember": [
+        [
+          "Tabla = conjunto de datos de un mismo tipo."
+        ],
+        [
+          "Campo = columna; registro = fila."
+        ],
+        [
+          "Cada consulta termina con ",
+          {
+            "c": ";"
+          },
+          "."
+        ]
+      ],
+      "tip": "En el editor, la tabla clientes tiene 4 registros: pruébala con SELECT * FROM clientes;",
+      "quiz": [
+        {
+          "prompt": "En una tabla de alumnos, ¿qué es un registro?",
+          "code": [
+            "-- alumnos(id, nombre, nota)"
+          ],
+          "options": [
+            "Un alumno completo (una fila)",
+            "La columna nota",
+            "El nombre de la tabla",
+            "La base de datos"
+          ],
+          "answer": 0,
+          "explain": "Un registro es una fila: todos los datos de un alumno."
+        },
+        {
+          "prompt": "¿Qué significa * en SELECT * FROM frutas?",
+          "code": [
+            "SELECT * FROM frutas;"
+          ],
+          "options": [
+            "Todas las columnas",
+            "Multiplicar",
+            "Solo la primera columna",
+            "Ninguna columna"
+          ],
+          "answer": 0,
+          "explain": "El asterisco pide todas las columnas."
+        },
+        {
+          "prompt": "La tabla clientes tiene id, nombre y ciudad. ¿Cuántos campos son?",
+          "code": [
+            "-- clientes(id, nombre, ciudad)"
+          ],
+          "options": [
+            "3",
+            "4",
+            "1",
+            "2"
+          ],
+          "answer": 0,
+          "explain": "Cada columna es un campo: id, nombre y ciudad."
+        }
+      ]
+    },
+    "Claves primarias y foráneas": {
+      "paras": [
+        [
+          "La ",
+          {
+            "b": "clave primaria"
+          },
+          " (PRIMARY KEY) identifica cada registro de forma única, como el ",
+          {
+            "c": "id"
+          },
+          " de un cliente. No se repite ni puede estar vacía."
+        ],
+        [
+          "Una ",
+          {
+            "b": "clave foránea"
+          },
+          " es un campo que apunta a la clave primaria de otra tabla. En ",
+          {
+            "c": "pedidos"
+          },
+          ", el campo ",
+          {
+            "c": "cliente_id"
+          },
+          " dice qué cliente hizo cada pedido."
+        ]
+      ],
+      "diagram": {
+        "parts": [
+          {
+            "t": "pedidos.cliente_id",
+            "label": "clave foránea",
+            "kind": "name"
+          },
+          {
+            "t": "→",
+            "label": "apunta a",
+            "kind": "op"
+          },
+          {
+            "t": "clientes.id",
+            "label": "clave primaria",
+            "kind": "value"
+          }
+        ],
+        "caption": "Cada pedido sabe de qué cliente es."
+      },
+      "example": {
+        "file": "consulta.sql",
+        "lines": [
+          "-- Pedidos del cliente con id 1 (Ana)",
+          "SELECT * FROM pedidos",
+          "WHERE cliente_id = 1;"
+        ],
+        "output": [
+          "id | cliente_id | fruta_id | cantidad | fecha",
+          "---+------------+----------+----------+-----------",
+          "1  | 1          | 1        | 3        | 2026-10-01",
+          "2  | 1          | 2        | 1        | 2026-10-03",
+          "(2 filas)"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un cliente",
+        "file": "consulta.sql",
+        "choices": [
+          "1",
+          "2",
+          "4"
+        ],
+        "lines": [
+          "SELECT id, cantidad FROM pedidos",
+          "WHERE cliente_id = {v};"
+        ],
+        "outputs": {
+          "1": "id | cantidad\n---+---------\n1  | 3\n2  | 1\n(2 filas)",
+          "2": "id | cantidad\n---+---------\n3  | 6\n(1 fila)",
+          "4": "id | cantidad\n---+---------\n5  | 5\n(1 fila)"
+        }
+      },
+      "remember": [
+        [
+          "Clave primaria: única por registro."
+        ],
+        [
+          "Clave foránea: apunta a otra tabla."
+        ],
+        [
+          "Así se evitan datos repetidos."
+        ]
+      ],
+      "tip": "Por convención, las claves foráneas se llaman como la tabla en singular + _id: cliente_id.",
+      "quiz": [
+        {
+          "prompt": "¿Qué característica tiene una clave primaria?",
+          "code": [
+            "id INTEGER PRIMARY KEY"
+          ],
+          "options": [
+            "No se repite",
+            "Siempre es texto",
+            "Puede estar vacía",
+            "Se repite en cada fila"
+          ],
+          "answer": 0,
+          "explain": "Identifica cada registro de forma única."
+        },
+        {
+          "prompt": "En pedidos, ¿qué es fruta_id?",
+          "code": [
+            "-- pedidos(id, cliente_id, fruta_id, ...)"
+          ],
+          "options": [
+            "Una clave foránea a frutas",
+            "La clave primaria de pedidos",
+            "El precio",
+            "El nombre de la fruta"
+          ],
+          "answer": 0,
+          "explain": "fruta_id apunta al id de la tabla frutas."
+        },
+        {
+          "prompt": "¿Para qué sirven las claves foráneas?",
+          "code": [
+            "-- Elige una"
+          ],
+          "options": [
+            "Para relacionar tablas",
+            "Para ordenar resultados",
+            "Para borrar datos",
+            "Para cambiar contraseñas"
+          ],
+          "answer": 0,
+          "explain": "Conectan un registro con otro de otra tabla."
+        }
+      ]
+    },
+    "Relaciones entre tablas": {
+      "paras": [
+        [
+          "Las tablas se ",
+          {
+            "b": "relacionan"
+          },
+          " a través de sus claves. Un cliente puede tener muchos pedidos: es una relación ",
+          {
+            "b": "uno a muchos"
+          },
+          "."
+        ],
+        [
+          "Con ",
+          {
+            "c": "JOIN"
+          },
+          " juntas tablas relacionadas en una sola consulta: indicas qué campos coinciden con ",
+          {
+            "c": "ON"
+          },
+          ". Lo verás a fondo en el módulo de JOIN."
+        ]
+      ],
+      "example": {
+        "file": "consulta.sql",
+        "lines": [
+          "-- ¿Qué frutas pidió Ana?",
+          "SELECT c.nombre, f.nombre AS fruta, p.cantidad",
+          "FROM pedidos p",
+          "JOIN clientes c ON c.id = p.cliente_id",
+          "JOIN frutas f ON f.id = p.fruta_id",
+          "WHERE c.nombre = 'Ana';"
+        ],
+        "output": [
+          "nombre | fruta | cantidad",
+          "-------+-------+---------",
+          "Ana    | mango | 3",
+          "Ana    | fresa | 1",
+          "(2 filas)"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un cliente",
+        "file": "consulta.sql",
+        "choices": [
+          "Luis",
+          "Sofía",
+          "Diego"
+        ],
+        "lines": [
+          "SELECT f.nombre AS fruta, p.cantidad",
+          "FROM pedidos p",
+          "JOIN clientes c ON c.id = p.cliente_id",
+          "JOIN frutas f ON f.id = p.fruta_id",
+          "WHERE c.nombre = '{v}';"
+        ],
+        "outputs": {
+          "Luis": "fruta   | cantidad\n--------+---------\nplátano | 6\n(1 fila)",
+          "Sofía": "fruta    | cantidad\n---------+---------\nmaracuyá | 2\n(1 fila)",
+          "Diego": "fruta | cantidad\n------+---------\nmango | 5\n(1 fila)"
+        }
+      },
+      "remember": [
+        [
+          "Uno a muchos: un cliente, muchos pedidos."
+        ],
+        [
+          {
+            "c": "JOIN ... ON"
+          },
+          " une tablas por sus claves."
+        ],
+        [
+          "Los alias (",
+          {
+            "c": "p"
+          },
+          ", ",
+          {
+            "c": "c"
+          },
+          ", ",
+          {
+            "c": "f"
+          },
+          ") acortan los nombres."
+        ]
+      ],
+      "tip": "Dibuja tus tablas con flechas entre las claves: entenderás las relaciones de un vistazo.",
+      "quiz": [
+        {
+          "prompt": "¿Qué tipo de relación hay entre clientes y pedidos?",
+          "code": [
+            "-- un cliente puede tener muchos pedidos"
+          ],
+          "options": [
+            "Uno a muchos",
+            "Uno a uno",
+            "Ninguna",
+            "Muchos a ninguno"
+          ],
+          "answer": 0,
+          "explain": "Cada cliente puede tener varios pedidos."
+        },
+        {
+          "prompt": "¿Qué palabra une tablas en una consulta?",
+          "code": [
+            "SELECT ... FROM pedidos ___ clientes ON ..."
+          ],
+          "options": [
+            "JOIN",
+            "UNION",
+            "LINK",
+            "WITH"
+          ],
+          "answer": 0,
+          "explain": "JOIN combina filas de tablas relacionadas."
+        },
+        {
+          "prompt": "¿Qué indica ON en un JOIN?",
+          "code": [
+            "JOIN clientes c ON c.id = p.cliente_id"
+          ],
+          "options": [
+            "Qué campos deben coincidir",
+            "El orden del resultado",
+            "Cuántas filas mostrar",
+            "El nombre de la tabla"
+          ],
+          "answer": 0,
+          "explain": "ON dice qué columnas conectan ambas tablas."
+        }
+      ]
+    }
+  }
+}

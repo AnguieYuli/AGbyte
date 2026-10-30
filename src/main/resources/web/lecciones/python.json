@@ -1,0 +1,7591 @@
+{
+  "id": "python",
+  "name": "Python",
+  "title": "Python: de cero a avanzado",
+  "glyph": "py",
+  "tileBg": "#3776AB",
+  "tileFg": "#FFE873",
+  "ext": "py",
+  "blurb": "Claro, versátil y perfecto para empezar.",
+  "modules": [
+    {
+      "title": "Fundamentos",
+      "desc": "Variables, tipos de datos, operadores, entrada y salida.",
+      "lessons": [
+        "¿Qué es programar?",
+        "Tu primer print()",
+        "¿Qué es una variable?",
+        "Declarar variables",
+        "Tipos de datos",
+        "Operadores",
+        "Entrada con input()",
+        "Mini proyecto: Calculadora"
+      ]
+    },
+    {
+      "title": "Control de flujo",
+      "desc": "Decisiones y repeticiones con if, elif, else, for y while.",
+      "lessons": [
+        "if y else",
+        "elif",
+        "Condiciones combinadas",
+        "Bucle for",
+        "Bucle while",
+        "break y continue",
+        "Mini proyecto: Adivina el número"
+      ]
+    },
+    {
+      "title": "Estructuras de datos",
+      "desc": "Listas, tuplas, conjuntos y diccionarios.",
+      "lessons": [
+        "Listas",
+        "Métodos de listas",
+        "Tuplas",
+        "Conjuntos",
+        "Diccionarios",
+        "Recorrer colecciones",
+        "Mini proyecto: Agenda de contactos"
+      ]
+    },
+    {
+      "title": "Funciones",
+      "desc": "Parámetros, argumentos, retorno y funciones lambda.",
+      "lessons": [
+        "Definir funciones",
+        "Parámetros y argumentos",
+        "return",
+        "Valores por defecto",
+        "Funciones lambda",
+        "Mini proyecto: Conversor de unidades"
+      ]
+    },
+    {
+      "title": "Programación modular",
+      "desc": "Módulos, paquetes e importaciones.",
+      "lessons": [
+        "¿Qué es un módulo?",
+        "import y from",
+        "Crea tus propios módulos",
+        "Paquetes",
+        "Mini proyecto: Tu propia librería"
+      ]
+    },
+    {
+      "title": "Programación orientada a objetos",
+      "desc": "Clases, objetos, herencia, encapsulamiento y polimorfismo.",
+      "lessons": [
+        "Clases y objetos",
+        "Atributos y métodos",
+        "El constructor __init__",
+        "Herencia",
+        "Encapsulamiento",
+        "Polimorfismo",
+        "Mini proyecto: Mascota virtual"
+      ]
+    },
+    {
+      "title": "Temas avanzados",
+      "desc": "Excepciones, archivos, iteradores, generadores, decoradores y expresiones regulares.",
+      "lessons": [
+        "Excepciones con try y except",
+        "Leer y escribir archivos",
+        "Iteradores",
+        "Generadores",
+        "Decoradores",
+        "Expresiones regulares"
+      ]
+    },
+    {
+      "title": "Herramientas",
+      "desc": "pip, entornos virtuales, Git, pruebas y APIs.",
+      "lessons": [
+        "pip y paquetes",
+        "Entornos virtuales",
+        "Git básico",
+        "Pruebas con pytest",
+        "Consumir una API"
+      ]
+    },
+    {
+      "title": "Especialización",
+      "desc": "Automatización, análisis de datos, inteligencia artificial y desarrollo web.",
+      "lessons": [
+        "Automatiza tareas",
+        "Análisis de datos con pandas",
+        "Introducción a la inteligencia artificial",
+        "Desarrollo web con Flask",
+        "Proyecto final"
+      ]
+    }
+  ],
+  "lessons": {
+    "¿Qué es programar?": {
+      "paras": [
+        [
+          "Programar es escribir instrucciones para que la computadora las siga, una por una y en orden."
+        ],
+        [
+          "En Python, la instrucción ",
+          {
+            "c": "print()"
+          },
+          " muestra un mensaje en la pantalla. Lo que escribas entre comillas aparece tal cual."
+        ]
+      ],
+      "example": {
+        "file": "hola.py",
+        "lines": [
+          "print(\"¡Hola, mundo!\")",
+          "print(\"Estoy aprendiendo Python\")"
+        ],
+        "output": [
+          "¡Hola, mundo!",
+          "Estoy aprendiendo Python"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un nombre y ejecuta",
+        "file": "prueba.py",
+        "choices": [
+          "Ana",
+          "Luis",
+          "Sofía"
+        ],
+        "lines": [
+          "print(\"Hola, {v}\")"
+        ],
+        "output": "Hola, {v}"
+      },
+      "remember": [
+        [
+          "El texto va entre comillas: ",
+          {
+            "c": "\"Hola\""
+          },
+          "."
+        ],
+        [
+          "Las instrucciones como print llevan paréntesis."
+        ],
+        [
+          "Python lee tu código de arriba hacia abajo."
+        ]
+      ],
+      "tip": "Si algo falla, revisa primero las comillas y los paréntesis. Son los errores más comunes.",
+      "quiz": [
+        {
+          "prompt": "¿Qué hace print() en Python?",
+          "code": [
+            "print(\"Hola\")"
+          ],
+          "options": [
+            "Muestra un mensaje en pantalla",
+            "Imprime en una impresora",
+            "Borra la pantalla",
+            "Guarda un archivo"
+          ],
+          "answer": 0,
+          "explain": "print() muestra en la pantalla lo que pongas entre paréntesis."
+        },
+        {
+          "prompt": "¿Cuál de estas líneas está bien escrita?",
+          "code": [
+            "# Elige la correcta"
+          ],
+          "options": [
+            "print(\"Hola\")",
+            "print(Hola\")",
+            "Print[\"Hola\"]",
+            "print \"Hola\""
+          ],
+          "answer": 0,
+          "explain": "print va en minúsculas, con paréntesis y el texto entre comillas."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(\"2 + 3\")"
+          ],
+          "options": [
+            "2 + 3",
+            "5",
+            "\"2 + 3\"",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Entre comillas es texto: Python lo muestra tal cual, sin calcular."
+        }
+      ]
+    },
+    "Tu primer print()": {
+      "paras": [
+        [
+          "Con ",
+          {
+            "c": "print()"
+          },
+          " puedes mostrar textos, números y hasta varias cosas a la vez. Si separas los valores con comas, Python los muestra en la misma línea con un espacio entre ellos."
+        ],
+        [
+          "Cada ",
+          {
+            "c": "print()"
+          },
+          " termina con un salto de línea, así que dos ",
+          {
+            "c": "print"
+          },
+          " seguidos aparecen en dos líneas distintas."
+        ]
+      ],
+      "example": {
+        "file": "saludo.py",
+        "lines": [
+          "print(\"Hola\")",
+          "print(\"Tengo\", 17, \"años\")",
+          "print(10 + 5)"
+        ],
+        "output": [
+          "Hola",
+          "Tengo 17 años",
+          "15"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un número y ejecuta",
+        "file": "prueba.py",
+        "choices": [
+          "3",
+          "7",
+          "12"
+        ],
+        "lines": [
+          "print(\"El doble de {v} es\", {v} * 2)"
+        ],
+        "outputs": {
+          "3": "El doble de 3 es 6",
+          "7": "El doble de 7 es 14",
+          "12": "El doble de 12 es 24"
+        }
+      },
+      "remember": [
+        [
+          "Los textos van entre comillas; los números, sin comillas."
+        ],
+        [
+          "Las comas separan valores: ",
+          {
+            "c": "print(\"Edad:\", 17)"
+          },
+          "."
+        ],
+        [
+          "Sin comillas, Python calcula: ",
+          {
+            "c": "print(2 + 3)"
+          },
+          " muestra 5."
+        ]
+      ],
+      "tip": "Usa print() para ver qué está pasando en tu programa: es la herramienta favorita para encontrar errores.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(\"Tengo\", 3, \"gatos\")"
+          ],
+          "options": [
+            "Tengo 3 gatos",
+            "Tengo3gatos",
+            "\"Tengo\", 3, \"gatos\"",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Las comas separan los valores y Python pone un espacio entre ellos."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(4 * 5)"
+          ],
+          "options": [
+            "4 * 5",
+            "20",
+            "45",
+            "9"
+          ],
+          "answer": 1,
+          "explain": "Sin comillas, Python calcula la operación: 4 × 5 = 20."
+        },
+        {
+          "prompt": "¿Cuántas líneas aparecen en pantalla?",
+          "code": [
+            "print(\"Uno\")",
+            "print(\"Dos\")"
+          ],
+          "options": [
+            "Una",
+            "Dos",
+            "Ninguna",
+            "Tres"
+          ],
+          "answer": 1,
+          "explain": "Cada print() termina con un salto de línea."
+        }
+      ]
+    },
+    "¿Qué es una variable?": {
+      "paras": [
+        [
+          "Imagina una ",
+          {
+            "b": "caja con etiqueta"
+          },
+          ": por fuera tiene un nombre y por dentro guarda un valor. Eso es una variable."
+        ],
+        [
+          "Cuando usas el nombre de la variable, Python busca la caja y usa lo que hay dentro. Si guardas algo nuevo, lo anterior se reemplaza."
+        ]
+      ],
+      "diagram": {
+        "parts": [
+          {
+            "t": "puntos",
+            "label": "la etiqueta",
+            "kind": "name"
+          },
+          {
+            "t": "=",
+            "label": "«guarda»",
+            "kind": "op"
+          },
+          {
+            "t": "100",
+            "label": "lo que hay dentro",
+            "kind": "value"
+          }
+        ],
+        "caption": "La caja «puntos» guarda 100."
+      },
+      "example": {
+        "file": "caja.py",
+        "lines": [
+          "puntos = 100",
+          "print(puntos)",
+          "puntos = 150",
+          "print(puntos)"
+        ],
+        "output": [
+          "100",
+          "150"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige tu comida favorita",
+        "file": "prueba.py",
+        "choices": [
+          "ceviche",
+          "lomo saltado",
+          "ají de gallina"
+        ],
+        "lines": [
+          "comida = \"{v}\"",
+          "print(\"Mi comida favorita es\", comida)"
+        ],
+        "output": "Mi comida favorita es {v}"
+      },
+      "remember": [
+        [
+          "Una variable tiene un nombre y un valor."
+        ],
+        [
+          "Al usar el nombre, obtienes el valor guardado."
+        ],
+        [
+          "Si guardas un valor nuevo, el anterior se pierde."
+        ]
+      ],
+      "tip": "Elige nombres que expliquen qué guardan: precio es mejor que p.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "vidas = 3",
+            "vidas = 2",
+            "print(vidas)"
+          ],
+          "options": [
+            "3",
+            "2",
+            "3 2",
+            "5"
+          ],
+          "answer": 1,
+          "explain": "La segunda línea reemplaza el valor: ahora vidas guarda 2."
+        },
+        {
+          "prompt": "¿Qué es una variable?",
+          "code": [
+            "# Elige la mejor descripción"
+          ],
+          "options": [
+            "Un nombre que guarda un valor",
+            "Un error del programa",
+            "Un tipo de número",
+            "Una instrucción para imprimir"
+          ],
+          "answer": 0,
+          "explain": "Es como una caja con etiqueta: el nombre y el valor que guarda."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "ciudad = \"Cusco\"",
+            "print(\"Vivo en\", ciudad)"
+          ],
+          "options": [
+            "Vivo en ciudad",
+            "Vivo en Cusco",
+            "Vivo en \"Cusco\"",
+            "Cusco"
+          ],
+          "answer": 1,
+          "explain": "Sin comillas, ciudad es la variable: Python muestra su valor, Cusco."
+        }
+      ]
+    },
+    "Declarar variables": {
+      "paras": [
+        [
+          "Una ",
+          {
+            "b": "variable"
+          },
+          " es un nombre que guarda un valor para usarlo después. En Python la creas así: escribes el nombre, el signo ",
+          {
+            "c": "="
+          },
+          " y el valor."
+        ],
+        [
+          "No necesitas palabras como ",
+          {
+            "c": "var"
+          },
+          " o ",
+          {
+            "c": "int"
+          },
+          ": Python deduce el tipo por el valor que le das."
+        ]
+      ],
+      "diagram": {
+        "parts": [
+          {
+            "t": "edad",
+            "label": "el nombre",
+            "kind": "name"
+          },
+          {
+            "t": "=",
+            "label": "«guarda»",
+            "kind": "op"
+          },
+          {
+            "t": "17",
+            "label": "el valor",
+            "kind": "value"
+          }
+        ],
+        "caption": "Se lee: «edad guarda 17»."
+      },
+      "example": {
+        "file": "ejemplo.py",
+        "lines": [
+          "nombre = \"Alex\"",
+          "edad = 17",
+          "precio = 4.50",
+          "print(nombre, \"tiene\", edad, \"años\")"
+        ],
+        "output": [
+          "Alex tiene 17 años"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige una fruta y ejecuta",
+        "file": "prueba.py",
+        "choices": [
+          "mango",
+          "chirimoya",
+          "maracuyá"
+        ],
+        "lines": [
+          "fruta = \"{v}\"",
+          "print(\"Me gusta el\", fruta)"
+        ],
+        "output": "Me gusta el {v}"
+      },
+      "remember": [
+        [
+          "El nombre va a la izquierda del ",
+          {
+            "c": "="
+          },
+          " y el valor a la derecha."
+        ],
+        [
+          "Puedes cambiar el valor cuando quieras: ",
+          {
+            "c": "edad = 18"
+          },
+          "."
+        ],
+        [
+          "Python distingue mayúsculas: ",
+          {
+            "c": "Edad"
+          },
+          " y ",
+          {
+            "c": "edad"
+          },
+          " son distintas."
+        ]
+      ],
+      "tip": "Truco: lee el = como «guarda». Así nunca lo confundirás con ==.",
+      "quiz": [
+        {
+          "prompt": "¿Cuál es la forma correcta de declarar una variable en Python?",
+          "code": [
+            "# Elige la opción correcta",
+            "x = 10",
+            "var x = 10"
+          ],
+          "options": [
+            "x = 10",
+            "var x = 10",
+            "int x = 10",
+            "x := 10"
+          ],
+          "answer": 0,
+          "explain": "En Python basta con nombre = valor. No hace falta var ni int."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "nombre = \"Ana\"",
+            "nombre = \"Luis\"",
+            "print(nombre)"
+          ],
+          "options": [
+            "Ana",
+            "Luis",
+            "Ana Luis",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "La segunda línea reemplaza el valor: la variable solo guarda el último, \"Luis\"."
+        },
+        {
+          "prompt": "¿Cuál de estos nombres de variable es válido?",
+          "code": [
+            "# Solo uno funciona en Python",
+            "??? = 17"
+          ],
+          "options": [
+            "2edad",
+            "mi-edad",
+            "mi_edad",
+            "mi edad"
+          ],
+          "answer": 2,
+          "explain": "Un nombre no puede empezar con número ni llevar guiones o espacios. Usa guion bajo: mi_edad."
+        }
+      ]
+    },
+    "Tipos de datos": {
+      "paras": [
+        [
+          "Cada valor tiene un ",
+          {
+            "b": "tipo"
+          },
+          ". Los más usados son: ",
+          {
+            "c": "int"
+          },
+          " (enteros), ",
+          {
+            "c": "float"
+          },
+          " (decimales), ",
+          {
+            "c": "str"
+          },
+          " (texto) y ",
+          {
+            "c": "bool"
+          },
+          " (",
+          {
+            "c": "True"
+          },
+          " o ",
+          {
+            "c": "False"
+          },
+          ")."
+        ],
+        [
+          "La función ",
+          {
+            "c": "type()"
+          },
+          " te dice el tipo de un valor. Y puedes convertir entre tipos con ",
+          {
+            "c": "int()"
+          },
+          ", ",
+          {
+            "c": "float()"
+          },
+          " y ",
+          {
+            "c": "str()"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "tipos.py",
+        "lines": [
+          "edad = 17",
+          "precio = 3.5",
+          "nombre = \"Ana\"",
+          "activo = True",
+          "print(type(edad), type(precio))",
+          "print(type(nombre), type(activo))",
+          "print(int(\"20\") + 5)"
+        ],
+        "output": [
+          "<class 'int'> <class 'float'>",
+          "<class 'str'> <class 'bool'>",
+          "25"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un valor y mira su tipo",
+        "file": "prueba.py",
+        "choices": [
+          "42",
+          "4.2",
+          "\"42\""
+        ],
+        "lines": [
+          "print(type({v}))"
+        ],
+        "outputs": {
+          "42": "<class 'int'>",
+          "4.2": "<class 'float'>",
+          "\"42\"": "<class 'str'>"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "17"
+          },
+          " es int, ",
+          {
+            "c": "17.0"
+          },
+          " es float y ",
+          {
+            "c": "\"17\""
+          },
+          " es str."
+        ],
+        [
+          {
+            "c": "True"
+          },
+          " y ",
+          {
+            "c": "False"
+          },
+          " van con mayúscula inicial."
+        ],
+        [
+          "Convierte texto a número con ",
+          {
+            "c": "int(\"20\")"
+          },
+          " o ",
+          {
+            "c": "float(\"3.5\")"
+          },
+          "."
+        ]
+      ],
+      "tip": "\"5\" + \"5\" da \"55\" porque son textos. Convierte con int() si quieres sumar.",
+      "quiz": [
+        {
+          "prompt": "¿De qué tipo es \"3.14\"?",
+          "code": [
+            "valor = \"3.14\""
+          ],
+          "options": [
+            "float",
+            "int",
+            "str",
+            "bool"
+          ],
+          "answer": 2,
+          "explain": "Está entre comillas, así que es texto (str), aunque parezca número."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(int(\"8\") + 2)"
+          ],
+          "options": [
+            "82",
+            "10",
+            "\"8\"2",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "int(\"8\") convierte el texto en el número 8; 8 + 2 = 10."
+        },
+        {
+          "prompt": "¿Cuál es un valor bool?",
+          "code": [
+            "# Elige uno"
+          ],
+          "options": [
+            "\"True\"",
+            "True",
+            "true",
+            "1.0"
+          ],
+          "answer": 1,
+          "explain": "True (sin comillas y con T mayúscula) es un booleano."
+        }
+      ]
+    },
+    "Operadores": {
+      "paras": [
+        [
+          "Python calcula con ",
+          {
+            "c": "+"
+          },
+          ", ",
+          {
+            "c": "-"
+          },
+          ", ",
+          {
+            "c": "*"
+          },
+          " y ",
+          {
+            "c": "/"
+          },
+          ". También tiene ",
+          {
+            "c": "//"
+          },
+          " (división entera), ",
+          {
+            "c": "%"
+          },
+          " (resto) y ",
+          {
+            "c": "**"
+          },
+          " (potencia)."
+        ],
+        [
+          "Para comparar usa ",
+          {
+            "c": "=="
+          },
+          ", ",
+          {
+            "c": "!="
+          },
+          ", ",
+          {
+            "c": "<"
+          },
+          ", ",
+          {
+            "c": ">"
+          },
+          ", ",
+          {
+            "c": "<="
+          },
+          " y ",
+          {
+            "c": ">="
+          },
+          ". Una comparación siempre da ",
+          {
+            "c": "True"
+          },
+          " o ",
+          {
+            "c": "False"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "operadores.py",
+        "lines": [
+          "print(7 / 2)",
+          "print(7 // 2)",
+          "print(7 % 2)",
+          "print(2 ** 3)",
+          "print(5 > 3, 5 == 3)"
+        ],
+        "output": [
+          "3.5",
+          "3",
+          "1",
+          "8",
+          "True False"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un número y mira si es par",
+        "file": "prueba.py",
+        "choices": [
+          "8",
+          "13",
+          "20"
+        ],
+        "lines": [
+          "print({v} % 2 == 0)"
+        ],
+        "outputs": {
+          "8": "True",
+          "13": "False",
+          "20": "True"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "/"
+          },
+          " siempre da decimal; ",
+          {
+            "c": "//"
+          },
+          " quita los decimales."
+        ],
+        [
+          {
+            "c": "%"
+          },
+          " da el resto: sirve para saber si un número es par."
+        ],
+        [
+          {
+            "c": "="
+          },
+          " guarda; ",
+          {
+            "c": "=="
+          },
+          " compara."
+        ]
+      ],
+      "tip": "Python respeta el orden de las matemáticas: primero * y /, luego + y -. Usa paréntesis para ir a lo seguro.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(10 % 3)"
+          ],
+          "options": [
+            "3",
+            "1",
+            "3.33",
+            "0"
+          ],
+          "answer": 1,
+          "explain": "10 entre 3 da 3 y sobra 1: el resto es 1."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(2 + 3 * 4)"
+          ],
+          "options": [
+            "20",
+            "14",
+            "24",
+            "9"
+          ],
+          "answer": 1,
+          "explain": "Primero se multiplica (3 × 4 = 12) y luego se suma: 2 + 12 = 14."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(4 != 4)"
+          ],
+          "options": [
+            "True",
+            "False",
+            "0",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "!= pregunta si son distintos. 4 y 4 son iguales, así que da False."
+        }
+      ]
+    },
+    "Entrada con input()": {
+      "paras": [
+        [
+          {
+            "c": "input()"
+          },
+          " detiene el programa y espera a que la persona escriba algo. Lo que escriba se guarda como ",
+          {
+            "b": "texto"
+          },
+          "."
+        ],
+        [
+          "Si necesitas un número, conviértelo con ",
+          {
+            "c": "int()"
+          },
+          " o ",
+          {
+            "c": "float()"
+          },
+          ". En el editor de AGbyte escribe tus respuestas en «Entrada del programa»."
+        ]
+      ],
+      "example": {
+        "file": "entrada.py",
+        "stdin": "Ana\n15",
+        "lines": [
+          "nombre = input(\"¿Cómo te llamas? \")",
+          "edad = int(input(\"¿Cuántos años tienes? \"))",
+          "print(\"Hola,\", nombre)",
+          "print(\"El próximo año tendrás\", edad + 1)"
+        ],
+        "output": [
+          "¿Cómo te llamas? Ana",
+          "¿Cuántos años tienes? 15",
+          "Hola, Ana",
+          "El próximo año tendrás 16"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige lo que escribe el usuario",
+        "file": "prueba.py",
+        "choices": [
+          "Lima",
+          "Arequipa",
+          "Trujillo"
+        ],
+        "lines": [
+          "ciudad = input(\"¿Dónde vives? \")",
+          "print(\"¡Saludos a\", ciudad + \"!\")"
+        ],
+        "output": "¿Dónde vives? {v}\n¡Saludos a {v}!",
+        "outputs": {
+          "Lima": "¡Saludos a Lima!",
+          "Arequipa": "¡Saludos a Arequipa!",
+          "Trujillo": "¡Saludos a Trujillo!"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "input()"
+          },
+          " siempre devuelve texto."
+        ],
+        [
+          "Para sumar, convierte: ",
+          {
+            "c": "int(input())"
+          },
+          "."
+        ],
+        [
+          "El texto entre paréntesis es la pregunta que ve el usuario."
+        ]
+      ],
+      "tip": "Deja un espacio al final de la pregunta: input(\"Nombre: \") se ve más ordenado.",
+      "quiz": [
+        {
+          "prompt": "¿De qué tipo es lo que devuelve input()?",
+          "code": [
+            "dato = input(\"Escribe: \")"
+          ],
+          "options": [
+            "int",
+            "str",
+            "float",
+            "bool"
+          ],
+          "answer": 1,
+          "explain": "input() siempre devuelve texto (str), aunque escribas números."
+        },
+        {
+          "prompt": "Si el usuario escribe 4, ¿qué muestra?",
+          "code": [
+            "n = input()",
+            "print(n + n)"
+          ],
+          "options": [
+            "8",
+            "44",
+            "n + n",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "n es el texto \"4\", y \"4\" + \"4\" une los textos: 44."
+        },
+        {
+          "prompt": "¿Cómo pides un número para hacer cálculos?",
+          "code": [
+            "# Elige la línea correcta"
+          ],
+          "options": [
+            "n = int(input(\"Número: \"))",
+            "n = input(int(\"Número: \"))",
+            "n = number(input())",
+            "int n = input()"
+          ],
+          "answer": 0,
+          "explain": "Primero input() lee el texto y luego int() lo convierte en número."
+        }
+      ]
+    },
+    "Mini proyecto: Calculadora": {
+      "paras": [
+        [
+          "¡Hora de juntar todo! Una calculadora ",
+          {
+            "b": "pide dos números"
+          },
+          ", hace las operaciones y muestra los resultados."
+        ],
+        [
+          "Usarás ",
+          {
+            "c": "input()"
+          },
+          " para leer, ",
+          {
+            "c": "float()"
+          },
+          " para convertir, operadores para calcular y ",
+          {
+            "c": "print()"
+          },
+          " para mostrar."
+        ]
+      ],
+      "example": {
+        "file": "calculadora.py",
+        "stdin": "8\n2",
+        "lines": [
+          "a = float(input(\"Primer número: \"))",
+          "b = float(input(\"Segundo número: \"))",
+          "print(\"Suma:\", a + b)",
+          "print(\"Resta:\", a - b)",
+          "print(\"Multiplicación:\", a * b)",
+          "print(\"División:\", a / b)"
+        ],
+        "output": [
+          "Primer número: 8",
+          "Segundo número: 2",
+          "Suma: 10.0",
+          "Resta: 6.0",
+          "Multiplicación: 16.0",
+          "División: 4.0"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige la operación",
+        "file": "prueba.py",
+        "choices": [
+          "+",
+          "-",
+          "*"
+        ],
+        "lines": [
+          "a = 12",
+          "b = 4",
+          "print(a {v} b)"
+        ],
+        "outputs": {
+          "+": "16",
+          "-": "8",
+          "*": "48"
+        }
+      },
+      "remember": [
+        [
+          "Usa ",
+          {
+            "c": "float()"
+          },
+          " para aceptar decimales como 2.5."
+        ],
+        [
+          "Divide entre cero y Python dará un error: lo resolverás más adelante con ",
+          {
+            "c": "if"
+          },
+          "."
+        ],
+        [
+          "Llévalo al editor y agrégale la potencia con ",
+          {
+            "c": "**"
+          },
+          "."
+        ]
+      ],
+      "tip": "Reto: copia la calculadora en el editor, escribe dos números en «Entrada del programa» y pulsa Ejecutar.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra si a = 9.0 y b = 3.0?",
+          "code": [
+            "print(\"División:\", a / b)"
+          ],
+          "options": [
+            "División: 3",
+            "División: 3.0",
+            "División: 27.0",
+            "División: 6.0"
+          ],
+          "answer": 1,
+          "explain": "/ siempre da un decimal: 9.0 / 3.0 = 3.0."
+        },
+        {
+          "prompt": "¿Por qué se usa float(input())?",
+          "code": [
+            "a = float(input(\"Número: \"))"
+          ],
+          "options": [
+            "Para convertir el texto en número decimal",
+            "Para mostrar el número",
+            "Para borrar la entrada",
+            "Para redondear"
+          ],
+          "answer": 0,
+          "explain": "input() da texto; float() lo convierte en un número con decimales."
+        },
+        {
+          "prompt": "¿Qué operador calcula la potencia?",
+          "code": [
+            "# 2 elevado a 3"
+          ],
+          "options": [
+            "^",
+            "**",
+            "//",
+            "pow"
+          ],
+          "answer": 1,
+          "explain": "** eleva a una potencia: 2 ** 3 = 8."
+        }
+      ]
+    },
+    "if y else": {
+      "paras": [
+        [
+          "Con ",
+          {
+            "c": "if"
+          },
+          " el programa ",
+          {
+            "b": "toma decisiones"
+          },
+          ": si la condición es verdadera, ejecuta el bloque de abajo. Con ",
+          {
+            "c": "else"
+          },
+          " indicas qué hacer si no se cumple."
+        ],
+        [
+          "Fíjate en los dos puntos ",
+          {
+            "c": ":"
+          },
+          " y en la ",
+          {
+            "b": "sangría"
+          },
+          " (los espacios al inicio): así Python sabe qué líneas pertenecen a cada bloque."
+        ]
+      ],
+      "example": {
+        "file": "nota.py",
+        "lines": [
+          "nota = 14",
+          "if nota >= 11:",
+          "    print(\"Aprobaste\")",
+          "else:",
+          "    print(\"A estudiar un poco más\")"
+        ],
+        "output": [
+          "Aprobaste"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige la temperatura",
+        "file": "prueba.py",
+        "choices": [
+          "30",
+          "18",
+          "8"
+        ],
+        "lines": [
+          "temp = {v}",
+          "if temp > 25:",
+          "    print(\"Hace calor\")",
+          "else:",
+          "    print(\"No hace calor\")"
+        ],
+        "outputs": {
+          "8": "No hace calor",
+          "18": "No hace calor",
+          "30": "Hace calor"
+        }
+      },
+      "remember": [
+        [
+          "Después de la condición van dos puntos: ",
+          {
+            "c": "if x > 5:"
+          },
+          "."
+        ],
+        [
+          "El bloque va con sangría (4 espacios o un Tab)."
+        ],
+        [
+          {
+            "c": "else"
+          },
+          " no lleva condición."
+        ]
+      ],
+      "tip": "Si ves «IndentationError», revisa los espacios al inicio de las líneas.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "dinero = 5",
+            "if dinero >= 10:",
+            "    print(\"Compro\")",
+            "else:",
+            "    print(\"Ahorro\")"
+          ],
+          "options": [
+            "Compro",
+            "Ahorro",
+            "Compro Ahorro",
+            "Nada"
+          ],
+          "answer": 1,
+          "explain": "5 no es mayor o igual que 10, así que se ejecuta el else."
+        },
+        {
+          "prompt": "¿Qué le falta a esta línea?",
+          "code": [
+            "if edad >= 18"
+          ],
+          "options": [
+            "Dos puntos al final",
+            "Un punto y coma",
+            "Paréntesis",
+            "Nada"
+          ],
+          "answer": 0,
+          "explain": "En Python, if termina con dos puntos: if edad >= 18:"
+        },
+        {
+          "prompt": "¿Cómo sabe Python qué líneas van dentro del if?",
+          "code": [
+            "if x > 0:",
+            "    print(\"positivo\")"
+          ],
+          "options": [
+            "Por la sangría",
+            "Por las llaves { }",
+            "Por el punto y coma",
+            "Por las comillas"
+          ],
+          "answer": 0,
+          "explain": "Python usa la sangría (los espacios al inicio) para agrupar el código."
+        }
+      ]
+    },
+    "elif": {
+      "paras": [
+        [
+          "Cuando hay más de dos caminos usa ",
+          {
+            "c": "elif"
+          },
+          " (abreviatura de «else if»). Python revisa las condiciones ",
+          {
+            "b": "de arriba hacia abajo"
+          },
+          " y ejecuta solo la primera que se cumple."
+        ],
+        [
+          "Puedes poner tantos ",
+          {
+            "c": "elif"
+          },
+          " como necesites y, al final, un ",
+          {
+            "c": "else"
+          },
+          " para todo lo demás."
+        ]
+      ],
+      "example": {
+        "file": "semaforo.py",
+        "lines": [
+          "color = \"amarillo\"",
+          "if color == \"verde\":",
+          "    print(\"Avanza\")",
+          "elif color == \"amarillo\":",
+          "    print(\"Precaución\")",
+          "else:",
+          "    print(\"Detente\")"
+        ],
+        "output": [
+          "Precaución"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige tu nota",
+        "file": "prueba.py",
+        "choices": [
+          "19",
+          "14",
+          "8"
+        ],
+        "lines": [
+          "nota = {v}",
+          "if nota >= 18:",
+          "    print(\"Excelente\")",
+          "elif nota >= 11:",
+          "    print(\"Aprobado\")",
+          "else:",
+          "    print(\"Desaprobado\")"
+        ],
+        "outputs": {
+          "8": "Desaprobado",
+          "14": "Aprobado",
+          "19": "Excelente"
+        }
+      },
+      "remember": [
+        [
+          "Solo se ejecuta el primer bloque cuya condición sea verdadera."
+        ],
+        [
+          {
+            "c": "elif"
+          },
+          " lleva condición; ",
+          {
+            "c": "else"
+          },
+          " no."
+        ],
+        [
+          "El orden importa: pon primero las condiciones más exigentes."
+        ]
+      ],
+      "tip": "Compara textos con ==: color == \"verde\". Un solo = guardaría el valor.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "n = 0",
+            "if n > 0:",
+            "    print(\"positivo\")",
+            "elif n < 0:",
+            "    print(\"negativo\")",
+            "else:",
+            "    print(\"cero\")"
+          ],
+          "options": [
+            "positivo",
+            "negativo",
+            "cero",
+            "Nada"
+          ],
+          "answer": 2,
+          "explain": "0 no es mayor ni menor que 0, así que se ejecuta el else."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "x = 20",
+            "if x > 5:",
+            "    print(\"A\")",
+            "elif x > 10:",
+            "    print(\"B\")"
+          ],
+          "options": [
+            "A",
+            "B",
+            "A y B",
+            "Nada"
+          ],
+          "answer": 0,
+          "explain": "La primera condición ya se cumple, así que Python no revisa las demás."
+        },
+        {
+          "prompt": "¿Qué significa elif?",
+          "code": [
+            "# elif ..."
+          ],
+          "options": [
+            "else if: «si no, si…»",
+            "el final del if",
+            "un error",
+            "else for"
+          ],
+          "answer": 0,
+          "explain": "elif revisa otra condición cuando las anteriores no se cumplieron."
+        }
+      ]
+    },
+    "Condiciones combinadas": {
+      "paras": [
+        [
+          "Puedes unir condiciones con ",
+          {
+            "c": "and"
+          },
+          " (las dos deben cumplirse), ",
+          {
+            "c": "or"
+          },
+          " (basta una) y negarlas con ",
+          {
+            "c": "not"
+          },
+          "."
+        ],
+        [
+          "Así escribes reglas como «entra si tiene entrada ",
+          {
+            "b": "y"
+          },
+          " es mayor de edad» en una sola línea."
+        ]
+      ],
+      "example": {
+        "file": "cine.py",
+        "lines": [
+          "edad = 16",
+          "con_adulto = True",
+          "if edad >= 18 or con_adulto:",
+          "    print(\"Puedes entrar\")",
+          "if edad >= 18 and not con_adulto:",
+          "    print(\"Entras solo\")"
+        ],
+        "output": [
+          "Puedes entrar"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: ¿hace sol?",
+        "file": "prueba.py",
+        "choices": [
+          "True",
+          "False"
+        ],
+        "lines": [
+          "sol = {v}",
+          "fin_de_semana = True",
+          "if sol and fin_de_semana:",
+          "    print(\"¡A la playa!\")",
+          "else:",
+          "    print(\"Plan en casa\")"
+        ],
+        "outputs": {
+          "True": "¡A la playa!",
+          "False": "Plan en casa"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "and"
+          },
+          ": verdadero solo si ambas lo son."
+        ],
+        [
+          {
+            "c": "or"
+          },
+          ": verdadero si al menos una lo es."
+        ],
+        [
+          {
+            "c": "not"
+          },
+          " invierte: ",
+          {
+            "c": "not True"
+          },
+          " es ",
+          {
+            "c": "False"
+          },
+          "."
+        ]
+      ],
+      "tip": "Para rangos puedes escribir 1 <= x <= 10: Python lo entiende.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(True and False)"
+          ],
+          "options": [
+            "True",
+            "False",
+            "TrueFalse",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "Con and, ambas deben ser verdaderas. Una es False, así que da False."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(False or True)"
+          ],
+          "options": [
+            "True",
+            "False",
+            "None",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Con or basta que una sea verdadera."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "x = 7",
+            "print(1 <= x <= 5)"
+          ],
+          "options": [
+            "True",
+            "False",
+            "7",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "7 no está entre 1 y 5, así que la comparación da False."
+        }
+      ]
+    },
+    "Bucle for": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "bucle"
+          },
+          " repite código. Con ",
+          {
+            "c": "for"
+          },
+          " recorres una secuencia: cada vuelta, la variable toma el siguiente valor."
+        ],
+        [
+          {
+            "c": "range(1, 6)"
+          },
+          " genera 1, 2, 3, 4 y 5 (el último número no se incluye). También puedes recorrer los caracteres de un texto."
+        ]
+      ],
+      "example": {
+        "file": "tabla.py",
+        "lines": [
+          "for i in range(1, 6):",
+          "    print(\"3 x\", i, \"=\", 3 * i)"
+        ],
+        "output": [
+          "3 x 1 = 3",
+          "3 x 2 = 6",
+          "3 x 3 = 9",
+          "3 x 4 = 12",
+          "3 x 5 = 15"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige una palabra",
+        "file": "prueba.py",
+        "choices": [
+          "sol",
+          "luna",
+          "mar"
+        ],
+        "lines": [
+          "for letra in \"{v}\":",
+          "    print(letra)"
+        ],
+        "outputs": {
+          "sol": "s\no\nl",
+          "luna": "l\nu\nn\na",
+          "mar": "m\na\nr"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "range(5)"
+          },
+          " va de 0 a 4."
+        ],
+        [
+          {
+            "c": "range(1, 6)"
+          },
+          " va de 1 a 5."
+        ],
+        [
+          "No olvides los dos puntos y la sangría."
+        ]
+      ],
+      "tip": "range(0, 10, 2) cuenta de 2 en 2: 0, 2, 4, 6, 8.",
+      "quiz": [
+        {
+          "prompt": "¿Cuántas veces se repite?",
+          "code": [
+            "for i in range(4):",
+            "    print(\"Hola\")"
+          ],
+          "options": [
+            "3",
+            "4",
+            "5",
+            "Infinitas"
+          ],
+          "answer": 1,
+          "explain": "range(4) genera 0, 1, 2 y 3: cuatro vueltas."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "total = 0",
+            "for n in range(1, 4):",
+            "    total = total + n",
+            "print(total)"
+          ],
+          "options": [
+            "3",
+            "6",
+            "10",
+            "4"
+          ],
+          "answer": 1,
+          "explain": "Suma 1 + 2 + 3 = 6."
+        },
+        {
+          "prompt": "¿Qué números genera range(2, 5)?",
+          "code": [
+            "list(range(2, 5))"
+          ],
+          "options": [
+            "2, 3, 4",
+            "2, 3, 4, 5",
+            "3, 4, 5",
+            "2, 5"
+          ],
+          "answer": 0,
+          "explain": "Empieza en 2 y se detiene antes del 5."
+        }
+      ]
+    },
+    "Bucle while": {
+      "paras": [
+        [
+          {
+            "c": "while"
+          },
+          " repite ",
+          {
+            "b": "mientras"
+          },
+          " la condición sea verdadera. Es útil cuando no sabes cuántas vueltas darás."
+        ],
+        [
+          "Asegúrate de que algo cambie dentro del bucle; si la condición nunca se vuelve falsa, tendrás un ",
+          {
+            "b": "bucle infinito"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "cuenta.py",
+        "lines": [
+          "n = 3",
+          "while n > 0:",
+          "    print(n)",
+          "    n = n - 1",
+          "print(\"¡Despegue!\")"
+        ],
+        "output": [
+          "3",
+          "2",
+          "1",
+          "¡Despegue!"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige desde dónde contar",
+        "file": "prueba.py",
+        "choices": [
+          "2",
+          "4",
+          "5"
+        ],
+        "lines": [
+          "n = {v}",
+          "while n > 0:",
+          "    print(n)",
+          "    n -= 1"
+        ],
+        "outputs": {
+          "2": "2\n1",
+          "4": "4\n3\n2\n1",
+          "5": "5\n4\n3\n2\n1"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "while"
+          },
+          " revisa la condición antes de cada vuelta."
+        ],
+        [
+          {
+            "c": "n -= 1"
+          },
+          " es lo mismo que ",
+          {
+            "c": "n = n - 1"
+          },
+          "."
+        ],
+        [
+          "Si el programa no termina, revisa que la condición cambie."
+        ]
+      ],
+      "tip": "En AGbyte, un bucle infinito se detiene solo a los pocos segundos. ¡Tranquilo!",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "x = 1",
+            "while x < 10:",
+            "    x = x * 2",
+            "print(x)"
+          ],
+          "options": [
+            "8",
+            "16",
+            "10",
+            "2"
+          ],
+          "answer": 1,
+          "explain": "x vale 1, 2, 4, 8 y luego 16; 16 ya no es menor que 10."
+        },
+        {
+          "prompt": "¿Qué problema tiene este código?",
+          "code": [
+            "n = 5",
+            "while n > 0:",
+            "    print(n)"
+          ],
+          "options": [
+            "Es un bucle infinito",
+            "Le falta print",
+            "No hace nada",
+            "Está perfecto"
+          ],
+          "answer": 0,
+          "explain": "n nunca cambia, así que n > 0 siempre es verdadero."
+        },
+        {
+          "prompt": "¿Cuándo conviene while en vez de for?",
+          "code": [
+            "# Elige la mejor respuesta"
+          ],
+          "options": [
+            "Cuando no sabes cuántas vueltas habrá",
+            "Siempre",
+            "Para recorrer un texto",
+            "Nunca"
+          ],
+          "answer": 0,
+          "explain": "while repite mientras se cumpla una condición, sin un número fijo de vueltas."
+        }
+      ]
+    },
+    "break y continue": {
+      "paras": [
+        [
+          {
+            "c": "break"
+          },
+          " ",
+          {
+            "b": "sale"
+          },
+          " del bucle al instante. ",
+          {
+            "c": "continue"
+          },
+          " ",
+          {
+            "b": "salta"
+          },
+          " el resto de la vuelta actual y pasa a la siguiente."
+        ],
+        [
+          "Sirven para detener una búsqueda cuando ya encontraste lo que querías o para ignorar valores que no te interesan."
+        ]
+      ],
+      "example": {
+        "file": "saltos.py",
+        "lines": [
+          "for n in range(1, 10):",
+          "    if n == 3:",
+          "        continue",
+          "    if n == 6:",
+          "        break",
+          "    print(n)"
+        ],
+        "output": [
+          "1",
+          "2",
+          "4",
+          "5"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige dónde detenerte",
+        "file": "prueba.py",
+        "choices": [
+          "2",
+          "4",
+          "5"
+        ],
+        "lines": [
+          "for n in range(1, 10):",
+          "    if n == {v}:",
+          "        break",
+          "    print(n)"
+        ],
+        "outputs": {
+          "2": "1",
+          "4": "1\n2\n3",
+          "5": "1\n2\n3\n4"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "break"
+          },
+          " termina todo el bucle."
+        ],
+        [
+          {
+            "c": "continue"
+          },
+          " solo salta la vuelta actual."
+        ],
+        [
+          "Ambos se usan dentro de un ",
+          {
+            "c": "for"
+          },
+          " o un ",
+          {
+            "c": "while"
+          },
+          "."
+        ]
+      ],
+      "tip": "while True: con un break adentro es una forma común de repetir hasta que el usuario acierte.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "for n in range(1, 6):",
+            "    if n == 4:",
+            "        break",
+            "    print(n)"
+          ],
+          "options": [
+            "1 2 3 (en líneas)",
+            "1 2 3 4 5",
+            "4",
+            "1 2 3 5"
+          ],
+          "answer": 0,
+          "explain": "Al llegar a 4, break termina el bucle: solo se muestran 1, 2 y 3."
+        },
+        {
+          "prompt": "¿Qué hace continue?",
+          "code": [
+            "continue"
+          ],
+          "options": [
+            "Salta a la siguiente vuelta",
+            "Termina el programa",
+            "Repite la vuelta actual",
+            "Sale del bucle"
+          ],
+          "answer": 0,
+          "explain": "continue ignora lo que queda de la vuelta y pasa a la siguiente."
+        },
+        {
+          "prompt": "¿Cuántos números muestra?",
+          "code": [
+            "for n in range(5):",
+            "    if n % 2 == 0:",
+            "        continue",
+            "    print(n)"
+          ],
+          "options": [
+            "2",
+            "3",
+            "5",
+            "0"
+          ],
+          "answer": 0,
+          "explain": "Salta los pares (0, 2, 4) y muestra 1 y 3: dos números."
+        }
+      ]
+    },
+    "Mini proyecto: Adivina el número": {
+      "paras": [
+        [
+          "Vamos a crear un juego: el programa guarda un ",
+          {
+            "b": "número secreto"
+          },
+          " y el jugador intenta adivinarlo. Después de cada intento, le das una pista: «más alto» o «más bajo»."
+        ],
+        [
+          "Usarás ",
+          {
+            "c": "while"
+          },
+          ", ",
+          {
+            "c": "if/elif/else"
+          },
+          ", ",
+          {
+            "c": "input()"
+          },
+          " y ",
+          {
+            "c": "break"
+          },
+          ". Para un número al azar, usa ",
+          {
+            "c": "random.randint(1, 20)"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "adivina.py",
+        "stdin": "10\n15\n13",
+        "lines": [
+          "secreto = 13",
+          "intentos = 0",
+          "while True:",
+          "    n = int(input(\"Tu número: \"))",
+          "    intentos += 1",
+          "    if n < secreto:",
+          "        print(\"Más alto\")",
+          "    elif n > secreto:",
+          "        print(\"Más bajo\")",
+          "    else:",
+          "        print(\"¡Ganaste en\", intentos, \"intentos!\")",
+          "        break"
+        ],
+        "output": [
+          "Tu número: 10",
+          "Más alto",
+          "Tu número: 15",
+          "Más bajo",
+          "Tu número: 13",
+          "¡Ganaste en 3 intentos!"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige tu intento (el secreto es 13)",
+        "file": "prueba.py",
+        "choices": [
+          "9",
+          "13",
+          "18"
+        ],
+        "lines": [
+          "secreto = 13",
+          "n = {v}",
+          "if n < secreto:",
+          "    print(\"Más alto\")",
+          "elif n > secreto:",
+          "    print(\"Más bajo\")",
+          "else:",
+          "    print(\"¡Adivinaste!\")"
+        ],
+        "outputs": {
+          "9": "Más alto",
+          "13": "¡Adivinaste!",
+          "18": "Más bajo"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "while True:"
+          },
+          " repite hasta encontrar un ",
+          {
+            "c": "break"
+          },
+          "."
+        ],
+        [
+          "Cuenta los intentos con una variable que sube de uno en uno."
+        ],
+        [
+          "Con ",
+          {
+            "c": "import random"
+          },
+          " el secreto cambia en cada partida."
+        ]
+      ],
+      "tip": "Reto: cópialo en el editor, cambia secreto = 13 por random.randint(1, 20) y agrega import random al inicio.",
+      "quiz": [
+        {
+          "prompt": "Si el secreto es 13 y escribes 20, ¿qué pista sale?",
+          "code": [
+            "if n < secreto:",
+            "    print(\"Más alto\")",
+            "elif n > secreto:",
+            "    print(\"Más bajo\")"
+          ],
+          "options": [
+            "Más alto",
+            "Más bajo",
+            "¡Ganaste!",
+            "Nada"
+          ],
+          "answer": 1,
+          "explain": "20 es mayor que 13, así que la pista es «Más bajo»."
+        },
+        {
+          "prompt": "¿Qué detiene el bucle while True?",
+          "code": [
+            "while True:",
+            "    ..."
+          ],
+          "options": [
+            "break",
+            "else",
+            "continue",
+            "print"
+          ],
+          "answer": 0,
+          "explain": "while True repite para siempre hasta que se ejecuta break."
+        },
+        {
+          "prompt": "¿Qué hace intentos += 1?",
+          "code": [
+            "intentos += 1"
+          ],
+          "options": [
+            "Suma 1 a intentos",
+            "Pone intentos en 1",
+            "Compara con 1",
+            "Resta 1"
+          ],
+          "answer": 0,
+          "explain": "+= 1 es una forma corta de escribir intentos = intentos + 1."
+        }
+      ]
+    },
+    "Listas": {
+      "paras": [
+        [
+          "Una ",
+          {
+            "b": "lista"
+          },
+          " guarda varios valores en orden, entre corchetes y separados por comas: ",
+          {
+            "c": "[\"mango\", \"fresa\", \"uva\"]"
+          },
+          "."
+        ],
+        [
+          "Cada elemento tiene una ",
+          {
+            "b": "posición"
+          },
+          " (índice) que empieza en ",
+          {
+            "c": "0"
+          },
+          ". Con ",
+          {
+            "c": "len()"
+          },
+          " sabes cuántos elementos tiene y con índices negativos cuentas desde el final."
+        ]
+      ],
+      "diagram": {
+        "parts": [
+          {
+            "t": "\"mango\"",
+            "label": "posición 0",
+            "kind": "value"
+          },
+          {
+            "t": "\"fresa\"",
+            "label": "posición 1",
+            "kind": "value"
+          },
+          {
+            "t": "\"uva\"",
+            "label": "posición 2",
+            "kind": "value"
+          }
+        ],
+        "caption": "frutas[0] es \"mango\"; frutas[-1] es \"uva\"."
+      },
+      "example": {
+        "file": "listas.py",
+        "lines": [
+          "frutas = [\"mango\", \"fresa\", \"uva\"]",
+          "print(frutas[0])",
+          "print(frutas[-1])",
+          "print(len(frutas))",
+          "frutas[1] = \"piña\"",
+          "print(frutas)"
+        ],
+        "output": [
+          "mango",
+          "uva",
+          "3",
+          "['mango', 'piña', 'uva']"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige una posición",
+        "file": "prueba.py",
+        "choices": [
+          "0",
+          "1",
+          "2"
+        ],
+        "lines": [
+          "colores = [\"rojo\", \"verde\", \"azul\"]",
+          "print(colores[{v}])"
+        ],
+        "outputs": {
+          "0": "rojo",
+          "1": "verde",
+          "2": "azul"
+        }
+      },
+      "remember": [
+        [
+          "Los índices empiezan en ",
+          {
+            "c": "0"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "lista[-1]"
+          },
+          " es el último elemento."
+        ],
+        [
+          "Las listas se pueden cambiar: ",
+          {
+            "c": "lista[0] = \"nuevo\""
+          },
+          "."
+        ]
+      ],
+      "tip": "Si pides una posición que no existe verás «IndexError». Revisa len() de tu lista.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "n = [10, 20, 30]",
+            "print(n[1])"
+          ],
+          "options": [
+            "10",
+            "20",
+            "30",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "Los índices empiezan en 0, así que la posición 1 es el segundo elemento: 20."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "letras = [\"a\", \"b\", \"c\", \"d\"]",
+            "print(len(letras))"
+          ],
+          "options": [
+            "3",
+            "4",
+            "5",
+            "d"
+          ],
+          "answer": 1,
+          "explain": "len() cuenta los elementos: hay 4."
+        },
+        {
+          "prompt": "¿Cómo obtienes el último elemento de una lista?",
+          "code": [
+            "datos = [5, 8, 2]"
+          ],
+          "options": [
+            "datos[-1]",
+            "datos[3]",
+            "datos[last]",
+            "datos(-1)"
+          ],
+          "answer": 0,
+          "explain": "Los índices negativos cuentan desde el final: -1 es el último."
+        }
+      ]
+    },
+    "Métodos de listas": {
+      "paras": [
+        [
+          "Las listas traen herramientas propias llamadas ",
+          {
+            "b": "métodos"
+          },
+          ": ",
+          {
+            "c": "append()"
+          },
+          " agrega al final, ",
+          {
+            "c": "insert()"
+          },
+          " agrega en una posición, ",
+          {
+            "c": "remove()"
+          },
+          " quita un valor y ",
+          {
+            "c": "pop()"
+          },
+          " saca el último."
+        ],
+        [
+          "También puedes ordenar con ",
+          {
+            "c": "sort()"
+          },
+          " y preguntar si algo está en la lista con ",
+          {
+            "c": "in"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "compras.py",
+        "lines": [
+          "compras = [\"pan\", \"leche\"]",
+          "compras.append(\"huevos\")",
+          "compras.insert(0, \"café\")",
+          "compras.remove(\"leche\")",
+          "print(compras)",
+          "print(\"pan\" in compras)",
+          "nums = [5, 2, 9]",
+          "nums.sort()",
+          "print(nums)"
+        ],
+        "output": [
+          "['café', 'pan', 'huevos']",
+          "True",
+          "[2, 5, 9]"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige qué agregar",
+        "file": "prueba.py",
+        "choices": [
+          "palta",
+          "queso",
+          "arroz"
+        ],
+        "lines": [
+          "lista = [\"pan\"]",
+          "lista.append(\"{v}\")",
+          "print(lista)"
+        ],
+        "output": "['pan', '{v}']"
+      },
+      "remember": [
+        [
+          {
+            "c": "append(x)"
+          },
+          " agrega al final."
+        ],
+        [
+          {
+            "c": "remove(x)"
+          },
+          " quita la primera aparición de x."
+        ],
+        [
+          {
+            "c": "x in lista"
+          },
+          " da ",
+          {
+            "c": "True"
+          },
+          " o ",
+          {
+            "c": "False"
+          },
+          "."
+        ]
+      ],
+      "tip": "sort() ordena la lista original. Si quieres una copia ordenada usa sorted(lista).",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "a = [1, 2]",
+            "a.append(3)",
+            "print(a)"
+          ],
+          "options": [
+            "[1, 2, 3]",
+            "[3, 1, 2]",
+            "[1, 2]",
+            "3"
+          ],
+          "answer": 0,
+          "explain": "append agrega el valor al final de la lista."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "a = [4, 1, 3]",
+            "a.sort()",
+            "print(a)"
+          ],
+          "options": [
+            "[4, 1, 3]",
+            "[1, 3, 4]",
+            "[4, 3, 1]",
+            "None"
+          ],
+          "answer": 1,
+          "explain": "sort() ordena de menor a mayor."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "a = [\"x\", \"y\"]",
+            "print(\"z\" in a)"
+          ],
+          "options": [
+            "True",
+            "False",
+            "z",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "\"z\" no está en la lista, así que in da False."
+        }
+      ]
+    },
+    "Tuplas": {
+      "paras": [
+        [
+          "Una ",
+          {
+            "b": "tupla"
+          },
+          " es como una lista, pero ",
+          {
+            "b": "no se puede cambiar"
+          },
+          " después de crearla. Se escribe entre paréntesis: ",
+          {
+            "c": "(10, 20)"
+          },
+          "."
+        ],
+        [
+          "Son ideales para datos fijos, como coordenadas o una fecha. Además puedes ",
+          {
+            "b": "desempaquetarlas"
+          },
+          " en varias variables a la vez."
+        ]
+      ],
+      "example": {
+        "file": "tuplas.py",
+        "lines": [
+          "punto = (3, 7)",
+          "print(punto[0])",
+          "x, y = punto",
+          "print(\"x =\", x, \"y =\", y)",
+          "fecha = (21, \"octubre\", 2026)",
+          "print(len(fecha))"
+        ],
+        "output": [
+          "3",
+          "x = 3 y = 7",
+          "3"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un día",
+        "file": "prueba.py",
+        "choices": [
+          "lunes",
+          "viernes",
+          "domingo"
+        ],
+        "lines": [
+          "dia, hora = (\"{v}\", 9)",
+          "print(\"Clase el\", dia, \"a las\", hora)"
+        ],
+        "output": "Clase el {v} a las 9"
+      },
+      "remember": [
+        [
+          "Las tuplas usan paréntesis: ",
+          {
+            "c": "(1, 2)"
+          },
+          "."
+        ],
+        [
+          "No puedes cambiar sus valores (son inmutables)."
+        ],
+        [
+          "Desempaqueta así: ",
+          {
+            "c": "a, b = (1, 2)"
+          },
+          "."
+        ]
+      ],
+      "tip": "Para intercambiar dos variables en Python basta con: a, b = b, a",
+      "quiz": [
+        {
+          "prompt": "¿Qué pasa si haces t[0] = 5 con una tupla?",
+          "code": [
+            "t = (1, 2)",
+            "t[0] = 5"
+          ],
+          "options": [
+            "Da un error",
+            "Cambia el valor",
+            "Crea otra tupla",
+            "No pasa nada"
+          ],
+          "answer": 0,
+          "explain": "Las tuplas no se pueden modificar; Python muestra un TypeError."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "a, b = (5, 9)",
+            "print(b)"
+          ],
+          "options": [
+            "5",
+            "9",
+            "(5, 9)",
+            "14"
+          ],
+          "answer": 1,
+          "explain": "Al desempaquetar, a toma 5 y b toma 9."
+        },
+        {
+          "prompt": "¿Cuál es una tupla?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "[1, 2]",
+            "(1, 2)",
+            "{1, 2}",
+            "\"1, 2\""
+          ],
+          "answer": 1,
+          "explain": "Las tuplas se escriben con paréntesis."
+        }
+      ]
+    },
+    "Conjuntos": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "conjunto"
+          },
+          " (",
+          {
+            "c": "set"
+          },
+          ") guarda valores ",
+          {
+            "b": "sin repetir"
+          },
+          " y sin orden fijo. Se escribe entre llaves: ",
+          {
+            "c": "{1, 2, 3}"
+          },
+          "."
+        ],
+        [
+          "Sirve para quitar duplicados y para comparar grupos: ",
+          {
+            "c": "|"
+          },
+          " une, ",
+          {
+            "c": "&"
+          },
+          " da lo común y ",
+          {
+            "c": "-"
+          },
+          " lo que está en uno y no en el otro."
+        ]
+      ],
+      "example": {
+        "file": "conjuntos.py",
+        "lines": [
+          "numeros = [1, 2, 2, 3, 3, 3]",
+          "unicos = set(numeros)",
+          "print(unicos)",
+          "a = {1, 2, 3}",
+          "b = {2, 3, 4}",
+          "print(a & b)",
+          "print(len(a | b))"
+        ],
+        "output": [
+          "{1, 2, 3}",
+          "{2, 3}",
+          "4"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un número para agregar",
+        "file": "prueba.py",
+        "choices": [
+          "1",
+          "5",
+          "9"
+        ],
+        "lines": [
+          "s = {1, 5}",
+          "s.add({v})",
+          "print(len(s))"
+        ],
+        "outputs": {
+          "1": "2",
+          "5": "2",
+          "9": "3"
+        }
+      },
+      "remember": [
+        [
+          "Un set no guarda repetidos."
+        ],
+        [
+          {
+            "c": "set(lista)"
+          },
+          " quita duplicados de una lista."
+        ],
+        [
+          "Un set vacío se crea con ",
+          {
+            "c": "set()"
+          },
+          ", no con ",
+          {
+            "c": "{}"
+          },
+          "."
+        ]
+      ],
+      "tip": "Los sets no tienen posiciones: no puedes pedir s[0].",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(len({4, 4, 4, 5}))"
+          ],
+          "options": [
+            "4",
+            "2",
+            "1",
+            "3"
+          ],
+          "answer": 1,
+          "explain": "Los repetidos se eliminan: quedan 4 y 5, dos elementos."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "a = {1, 2}",
+            "b = {2, 3}",
+            "print(a & b)"
+          ],
+          "options": [
+            "{2}",
+            "{1, 2, 3}",
+            "{1, 3}",
+            "set()"
+          ],
+          "answer": 0,
+          "explain": "& da los elementos que están en ambos: solo el 2."
+        },
+        {
+          "prompt": "¿Para qué sirve más un set?",
+          "code": [
+            "# Elige la mejor respuesta"
+          ],
+          "options": [
+            "Quitar repetidos",
+            "Guardar en orden",
+            "Guardar texto largo",
+            "Hacer bucles"
+          ],
+          "answer": 0,
+          "explain": "Su gran ventaja es que no guarda valores repetidos."
+        }
+      ]
+    },
+    "Diccionarios": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "diccionario"
+          },
+          " guarda pares ",
+          {
+            "b": "clave: valor"
+          },
+          ". En vez de buscar por posición, buscas por la clave: ",
+          {
+            "c": "alumno[\"nombre\"]"
+          },
+          "."
+        ],
+        [
+          "Puedes agregar o cambiar valores con ",
+          {
+            "c": "dicc[\"clave\"] = valor"
+          },
+          " y usar ",
+          {
+            "c": "get()"
+          },
+          " para leer sin error si la clave no existe."
+        ]
+      ],
+      "diagram": {
+        "parts": [
+          {
+            "t": "\"nombre\"",
+            "label": "la clave",
+            "kind": "name"
+          },
+          {
+            "t": ":",
+            "label": "separa",
+            "kind": "op"
+          },
+          {
+            "t": "\"Ana\"",
+            "label": "el valor",
+            "kind": "value"
+          }
+        ],
+        "caption": "alumno[\"nombre\"] devuelve \"Ana\"."
+      },
+      "example": {
+        "file": "alumno.py",
+        "lines": [
+          "alumno = {\"nombre\": \"Ana\", \"edad\": 15}",
+          "print(alumno[\"nombre\"])",
+          "alumno[\"edad\"] = 16",
+          "alumno[\"ciudad\"] = \"Lima\"",
+          "print(alumno)",
+          "print(alumno.get(\"correo\", \"sin correo\"))"
+        ],
+        "output": [
+          "Ana",
+          "{'nombre': 'Ana', 'edad': 16, 'ciudad': 'Lima'}",
+          "sin correo"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un producto",
+        "file": "prueba.py",
+        "choices": [
+          "pan",
+          "leche",
+          "queso"
+        ],
+        "lines": [
+          "precios = {\"pan\": 0.5, \"leche\": 4.2, \"queso\": 12.0}",
+          "print(precios[\"{v}\"])"
+        ],
+        "outputs": {
+          "pan": "0.5",
+          "leche": "4.2",
+          "queso": "12.0"
+        }
+      },
+      "remember": [
+        [
+          "Las claves van a la izquierda de los dos puntos."
+        ],
+        [
+          "Cada clave es única: si la repites, se reemplaza el valor."
+        ],
+        [
+          {
+            "c": "dicc.get(\"x\", 0)"
+          },
+          " devuelve 0 si \"x\" no existe."
+        ]
+      ],
+      "tip": "Piensa en un diccionario como una ficha: cada campo (clave) tiene su dato (valor).",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "d = {\"a\": 1, \"b\": 2}",
+            "print(d[\"b\"])"
+          ],
+          "options": [
+            "1",
+            "2",
+            "b",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "La clave \"b\" guarda el valor 2."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "d = {\"x\": 5}",
+            "d[\"x\"] = 7",
+            "print(d)"
+          ],
+          "options": [
+            "{'x': 5}",
+            "{'x': 7}",
+            "{'x': 5, 'x': 7}",
+            "7"
+          ],
+          "answer": 1,
+          "explain": "Asignar a una clave existente reemplaza su valor."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "d = {\"a\": 1}",
+            "print(d.get(\"z\", 0))"
+          ],
+          "options": [
+            "0",
+            "None",
+            "z",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "get devuelve el valor por defecto (0) cuando la clave no existe."
+        }
+      ]
+    },
+    "Recorrer colecciones": {
+      "paras": [
+        [
+          "Con ",
+          {
+            "c": "for"
+          },
+          " puedes recorrer listas, tuplas, sets y diccionarios. ",
+          {
+            "c": "enumerate()"
+          },
+          " te da la posición y el valor a la vez."
+        ],
+        [
+          "En un diccionario, ",
+          {
+            "c": ".items()"
+          },
+          " te entrega cada clave con su valor para que trabajes con ambos."
+        ]
+      ],
+      "example": {
+        "file": "recorrer.py",
+        "lines": [
+          "frutas = [\"mango\", \"fresa\"]",
+          "for i, f in enumerate(frutas, 1):",
+          "    print(i, f)",
+          "stock = {\"mango\": 24, \"uva\": 5}",
+          "for fruta, cantidad in stock.items():",
+          "    print(fruta, \"->\", cantidad)"
+        ],
+        "output": [
+          "1 mango",
+          "2 fresa",
+          "mango -> 24",
+          "uva -> 5"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un mínimo de stock",
+        "file": "prueba.py",
+        "choices": [
+          "5",
+          "10",
+          "20"
+        ],
+        "lines": [
+          "stock = {\"mango\": 24, \"uva\": 5, \"pera\": 12}",
+          "for f, c in stock.items():",
+          "    if c >= {v}:",
+          "        print(f)"
+        ],
+        "outputs": {
+          "5": "mango\nuva\npera",
+          "10": "mango\npera",
+          "20": "mango"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "for x in lista:"
+          },
+          " recorre los valores."
+        ],
+        [
+          {
+            "c": "enumerate(lista)"
+          },
+          " da (posición, valor)."
+        ],
+        [
+          {
+            "c": "dicc.items()"
+          },
+          " da (clave, valor)."
+        ]
+      ],
+      "tip": "Para sumar todos los números de una lista existe sum(lista). ¡Pruébalo!",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "total = 0",
+            "for n in [3, 4, 5]:",
+            "    total += n",
+            "print(total)"
+          ],
+          "options": [
+            "12",
+            "345",
+            "5",
+            "3"
+          ],
+          "answer": 0,
+          "explain": "Suma 3 + 4 + 5 = 12."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "for i, x in enumerate([\"a\", \"b\"]):",
+            "    print(i, x)"
+          ],
+          "options": [
+            "0 a / 1 b (en líneas)",
+            "1 a / 2 b (en líneas)",
+            "a b",
+            "0 1"
+          ],
+          "answer": 0,
+          "out": "0 a\n1 b",
+          "explain": "enumerate empieza en 0 si no le indicas otro número."
+        },
+        {
+          "prompt": "¿Qué te da .items() en un diccionario?",
+          "code": [
+            "d.items()"
+          ],
+          "options": [
+            "Pares clave y valor",
+            "Solo las claves",
+            "Solo los valores",
+            "La cantidad"
+          ],
+          "answer": 0,
+          "explain": "items() entrega cada clave junto con su valor."
+        }
+      ]
+    },
+    "Mini proyecto: Agenda de contactos": {
+      "paras": [
+        [
+          "Vas a crear una ",
+          {
+            "b": "agenda"
+          },
+          ": un diccionario donde la clave es el nombre y el valor es el teléfono."
+        ],
+        [
+          "Podrás agregar contactos, buscar uno con ",
+          {
+            "c": "get()"
+          },
+          " y mostrar todos ordenados con ",
+          {
+            "c": "sorted()"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "agenda.py",
+        "lines": [
+          "agenda = {}",
+          "agenda[\"Ana\"] = \"987 654 321\"",
+          "agenda[\"Luis\"] = \"912 345 678\"",
+          "agenda[\"Carla\"] = \"955 111 222\"",
+          "print(\"Contactos:\", len(agenda))",
+          "for nombre in sorted(agenda):",
+          "    print(nombre, \"-\", agenda[nombre])",
+          "print(agenda.get(\"Pedro\", \"No está en tu agenda\"))"
+        ],
+        "output": [
+          "Contactos: 3",
+          "Ana - 987 654 321",
+          "Carla - 955 111 222",
+          "Luis - 912 345 678",
+          "No está en tu agenda"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige a quién buscar",
+        "file": "prueba.py",
+        "choices": [
+          "Ana",
+          "Luis",
+          "Pedro"
+        ],
+        "lines": [
+          "agenda = {\"Ana\": \"987 654 321\", \"Luis\": \"912 345 678\"}",
+          "print(agenda.get(\"{v}\", \"No encontrado\"))"
+        ],
+        "outputs": {
+          "Ana": "987 654 321",
+          "Luis": "912 345 678",
+          "Pedro": "No encontrado"
+        }
+      },
+      "remember": [
+        [
+          "Un diccionario vacío se crea con ",
+          {
+            "c": "{}"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "sorted(agenda)"
+          },
+          " ordena las claves alfabéticamente."
+        ],
+        [
+          "Para borrar: ",
+          {
+            "c": "del agenda[\"Luis\"]"
+          },
+          "."
+        ]
+      ],
+      "tip": "Reto: agrega un menú con input() para elegir entre «agregar», «buscar» y «salir».",
+      "quiz": [
+        {
+          "prompt": "¿Cómo agregas a Sofía a la agenda?",
+          "code": [
+            "agenda = {}"
+          ],
+          "options": [
+            "agenda[\"Sofía\"] = \"999\"",
+            "agenda.append(\"Sofía\")",
+            "agenda + \"Sofía\"",
+            "add(agenda, \"Sofía\")"
+          ],
+          "answer": 0,
+          "explain": "En un diccionario se agrega asignando a una clave nueva."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "a = {\"Luis\": 1, \"Ana\": 2}",
+            "print(sorted(a))"
+          ],
+          "options": [
+            "['Ana', 'Luis']",
+            "['Luis', 'Ana']",
+            "[1, 2]",
+            "{'Ana': 2}"
+          ],
+          "answer": 0,
+          "explain": "sorted() devuelve las claves ordenadas alfabéticamente."
+        },
+        {
+          "prompt": "¿Qué hace del agenda[\"Ana\"]?",
+          "code": [
+            "del agenda[\"Ana\"]"
+          ],
+          "options": [
+            "Borra el contacto de Ana",
+            "Busca a Ana",
+            "Cambia el número",
+            "Muestra a Ana"
+          ],
+          "answer": 0,
+          "explain": "del elimina la clave y su valor del diccionario."
+        }
+      ]
+    },
+    "Definir funciones": {
+      "paras": [
+        [
+          "Una ",
+          {
+            "b": "función"
+          },
+          " es un bloque de código con nombre que puedes usar muchas veces. Se crea con ",
+          {
+            "c": "def"
+          },
+          ", el nombre, paréntesis y dos puntos."
+        ],
+        [
+          "Definirla no la ejecuta: tienes que ",
+          {
+            "b": "llamarla"
+          },
+          " escribiendo su nombre con paréntesis, por ejemplo ",
+          {
+            "c": "saludar()"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "funciones.py",
+        "lines": [
+          "def saludar():",
+          "    print(\"¡Hola!\")",
+          "    print(\"Bienvenido a AGbyte\")",
+          "",
+          "saludar()",
+          "saludar()"
+        ],
+        "output": [
+          "¡Hola!",
+          "Bienvenido a AGbyte",
+          "¡Hola!",
+          "Bienvenido a AGbyte"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige cuántas veces llamarla",
+        "file": "prueba.py",
+        "choices": [
+          "1",
+          "2",
+          "3"
+        ],
+        "lines": [
+          "def aplaudir():",
+          "    print(\"👏\")",
+          "",
+          "for _ in range({v}):",
+          "    aplaudir()"
+        ],
+        "outputs": {
+          "1": "👏",
+          "2": "👏\n👏",
+          "3": "👏\n👏\n👏"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "def nombre():"
+          },
+          " crea la función."
+        ],
+        [
+          "El cuerpo va con sangría."
+        ],
+        [
+          "Para usarla, llámala: ",
+          {
+            "c": "nombre()"
+          },
+          "."
+        ]
+      ],
+      "tip": "Si copias el mismo código dos veces, probablemente debería ser una función.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def hola():",
+            "    print(\"Hola\")"
+          ],
+          "options": [
+            "Hola",
+            "Nada",
+            "hola",
+            "Un error"
+          ],
+          "answer": 1,
+          "out": "",
+          "explain": "La función se define pero nunca se llama, así que no se muestra nada."
+        },
+        {
+          "prompt": "¿Qué palabra crea una función en Python?",
+          "code": [
+            "___ mi_funcion():"
+          ],
+          "options": [
+            "def",
+            "function",
+            "func",
+            "fun"
+          ],
+          "answer": 0,
+          "explain": "En Python las funciones se definen con def."
+        },
+        {
+          "prompt": "¿Cuántas veces se muestra «Hola»?",
+          "code": [
+            "def f():",
+            "    print(\"Hola\")",
+            "f()",
+            "f()",
+            "f()"
+          ],
+          "options": [
+            "1",
+            "3",
+            "0",
+            "2"
+          ],
+          "answer": 1,
+          "explain": "La función se llama tres veces."
+        }
+      ]
+    },
+    "Parámetros y argumentos": {
+      "paras": [
+        [
+          "Los ",
+          {
+            "b": "parámetros"
+          },
+          " son variables que la función recibe entre paréntesis. Los valores que le pasas al llamarla se llaman ",
+          {
+            "b": "argumentos"
+          },
+          "."
+        ],
+        [
+          "Así la misma función trabaja con datos distintos. Si tiene varios parámetros, sepáralos con comas."
+        ]
+      ],
+      "example": {
+        "file": "parametros.py",
+        "lines": [
+          "def saludar(nombre, ciudad):",
+          "    print(\"Hola,\", nombre, \"de\", ciudad)",
+          "",
+          "saludar(\"Ana\", \"Lima\")",
+          "saludar(\"Luis\", \"Puno\")",
+          "saludar(ciudad=\"Ica\", nombre=\"Sofía\")"
+        ],
+        "output": [
+          "Hola, Ana de Lima",
+          "Hola, Luis de Puno",
+          "Hola, Sofía de Ica"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un nombre",
+        "file": "prueba.py",
+        "choices": [
+          "Ana",
+          "Luis",
+          "Sofía"
+        ],
+        "lines": [
+          "def felicitar(nombre):",
+          "    print(\"¡Feliz cumpleaños,\", nombre + \"!\")",
+          "",
+          "felicitar(\"{v}\")"
+        ],
+        "output": "¡Feliz cumpleaños, {v}!"
+      },
+      "remember": [
+        [
+          "Parámetro: el nombre en la definición. Argumento: el valor al llamar."
+        ],
+        [
+          "El orden de los argumentos importa."
+        ],
+        [
+          "Puedes nombrarlos al llamar: ",
+          {
+            "c": "f(ciudad=\"Ica\")"
+          },
+          "."
+        ]
+      ],
+      "tip": "Si olvidas un argumento verás «missing 1 required positional argument».",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def doble(n):",
+            "    print(n * 2)",
+            "doble(7)"
+          ],
+          "options": [
+            "7",
+            "14",
+            "n * 2",
+            "72"
+          ],
+          "answer": 1,
+          "explain": "n recibe 7, y 7 × 2 = 14."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def resta(a, b):",
+            "    print(a - b)",
+            "resta(b=2, a=10)"
+          ],
+          "options": [
+            "8",
+            "-8",
+            "12",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Con argumentos nombrados el orden no importa: a = 10 y b = 2."
+        },
+        {
+          "prompt": "En def area(base, altura):, ¿qué son base y altura?",
+          "code": [
+            "def area(base, altura):"
+          ],
+          "options": [
+            "Parámetros",
+            "Argumentos",
+            "Funciones",
+            "Listas"
+          ],
+          "answer": 0,
+          "explain": "Los nombres que aparecen en la definición son parámetros."
+        }
+      ]
+    },
+    "return": {
+      "paras": [
+        [
+          {
+            "c": "return"
+          },
+          " hace que la función ",
+          {
+            "b": "devuelva"
+          },
+          " un resultado. Ese valor puedes guardarlo en una variable o usarlo en otra operación."
+        ],
+        [
+          "Cuando se ejecuta ",
+          {
+            "c": "return"
+          },
+          ", la función termina en ese momento. Si no hay return, la función devuelve ",
+          {
+            "c": "None"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "return.py",
+        "lines": [
+          "def area(base, altura):",
+          "    return base * altura",
+          "",
+          "a = area(8, 5)",
+          "print(a)",
+          "print(area(2, 3) + area(1, 1))"
+        ],
+        "output": [
+          "40",
+          "7"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un precio",
+        "file": "prueba.py",
+        "choices": [
+          "10",
+          "50",
+          "80"
+        ],
+        "lines": [
+          "def con_igv(precio):",
+          "    return precio * 1.18",
+          "",
+          "print(round(con_igv({v}), 2))"
+        ],
+        "outputs": {
+          "10": "11.8",
+          "50": "59.0",
+          "80": "94.4"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "return"
+          },
+          " entrega un valor y termina la función."
+        ],
+        [
+          "Guarda el resultado: ",
+          {
+            "c": "x = f()"
+          },
+          "."
+        ],
+        [
+          "print() muestra; return devuelve. No son lo mismo."
+        ]
+      ],
+      "tip": "Prefiere return a print dentro de las funciones: así puedes reutilizar el resultado.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def f(x):",
+            "    return x + 1",
+            "print(f(4) * 2)"
+          ],
+          "options": [
+            "10",
+            "9",
+            "5",
+            "8"
+          ],
+          "answer": 0,
+          "explain": "f(4) devuelve 5, y 5 × 2 = 10."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def f():",
+            "    print(\"A\")",
+            "print(f())"
+          ],
+          "options": [
+            "A",
+            "A y luego None",
+            "None",
+            "Nada"
+          ],
+          "answer": 1,
+          "out": "A\nNone",
+          "explain": "f() muestra A, y como no tiene return, devuelve None, que también se muestra."
+        },
+        {
+          "prompt": "¿Qué pasa con el código después de return?",
+          "code": [
+            "def f():",
+            "    return 1",
+            "    print(\"hola\")"
+          ],
+          "options": [
+            "No se ejecuta",
+            "Se ejecuta primero",
+            "Da un error",
+            "Se repite"
+          ],
+          "answer": 0,
+          "explain": "return termina la función: lo que viene después no se ejecuta."
+        }
+      ]
+    },
+    "Valores por defecto": {
+      "paras": [
+        [
+          "Un parámetro puede tener un ",
+          {
+            "b": "valor por defecto"
+          },
+          ": si no le pasas ese argumento, la función usa el valor indicado."
+        ],
+        [
+          "Se escribe con ",
+          {
+            "c": "="
+          },
+          " en la definición. Los parámetros con valor por defecto van ",
+          {
+            "b": "al final"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "defecto.py",
+        "lines": [
+          "def saludar(nombre, saludo=\"Hola\"):",
+          "    print(saludo + \",\", nombre)",
+          "",
+          "saludar(\"Ana\")",
+          "saludar(\"Luis\", \"Buenos días\")"
+        ],
+        "output": [
+          "Hola, Ana",
+          "Buenos días, Luis"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige la potencia",
+        "file": "prueba.py",
+        "choices": [
+          "2",
+          "3",
+          "4"
+        ],
+        "lines": [
+          "def potencia(base, exp=2):",
+          "    return base ** exp",
+          "",
+          "print(potencia(3), potencia(3, {v}))"
+        ],
+        "outputs": {
+          "2": "9 9",
+          "3": "9 27",
+          "4": "9 81"
+        }
+      },
+      "remember": [
+        [
+          "Se define así: ",
+          {
+            "c": "def f(x, y=10):"
+          },
+          "."
+        ],
+        [
+          "Si pasas el argumento, reemplaza al valor por defecto."
+        ],
+        [
+          "Primero los parámetros sin valor por defecto."
+        ]
+      ],
+      "tip": "print() usa valores por defecto: sep=\" \" y end=\"\\n\". Prueba print(\"a\", \"b\", sep=\"-\").",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def f(x, y=3):",
+            "    return x + y",
+            "print(f(2))"
+          ],
+          "options": [
+            "5",
+            "2",
+            "3",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "y toma su valor por defecto 3; 2 + 3 = 5."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def f(x, y=3):",
+            "    return x + y",
+            "print(f(2, 10))"
+          ],
+          "options": [
+            "5",
+            "12",
+            "13",
+            "23"
+          ],
+          "answer": 1,
+          "explain": "El argumento 10 reemplaza al valor por defecto: 2 + 10 = 12."
+        },
+        {
+          "prompt": "¿Cuál definición es correcta?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "def f(a=1, b):",
+            "def f(a, b=1):",
+            "def f(=1 a, b):",
+            "def f(a b=1):"
+          ],
+          "answer": 1,
+          "explain": "Los parámetros con valor por defecto van al final."
+        }
+      ]
+    },
+    "Funciones lambda": {
+      "paras": [
+        [
+          "Una ",
+          {
+            "c": "lambda"
+          },
+          " es una función pequeña de ",
+          {
+            "b": "una sola expresión"
+          },
+          ", escrita en una línea: ",
+          {
+            "c": "lambda x: x * 2"
+          },
+          "."
+        ],
+        [
+          "Se usan mucho como argumento de otras funciones, por ejemplo para indicar cómo ordenar con ",
+          {
+            "c": "sorted(..., key=...)"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "lambda.py",
+        "lines": [
+          "doble = lambda x: x * 2",
+          "print(doble(6))",
+          "frutas = [(\"uva\", 8.5), (\"mango\", 3.5), (\"fresa\", 6.0)]",
+          "baratas = sorted(frutas, key=lambda f: f[1])",
+          "print(baratas[0])",
+          "print(list(map(lambda n: n ** 2, [1, 2, 3])))"
+        ],
+        "output": [
+          "12",
+          "('mango', 3.5)",
+          "[1, 4, 9]"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige cómo ordenar las palabras",
+        "file": "prueba.py",
+        "choices": [
+          "len",
+          "-len",
+          "str.lower"
+        ],
+        "lines": [
+          "palabras = [\"Sol\", \"ave\", \"Montaña\"]",
+          "print(sorted(palabras, key=lambda p: {v}(p)))"
+        ],
+        "outputs": {
+          "len": "['Sol', 'ave', 'Montaña']",
+          "-len": "['Montaña', 'Sol', 'ave']",
+          "str.lower": "['ave', 'Montaña', 'Sol']"
+        }
+      },
+      "remember": [
+        [
+          "Forma: ",
+          {
+            "c": "lambda parámetros: resultado"
+          },
+          "."
+        ],
+        [
+          "No lleva ",
+          {
+            "c": "return"
+          },
+          ": devuelve la expresión directamente."
+        ],
+        [
+          "Úsalas para cosas cortas; para lo demás, ",
+          {
+            "c": "def"
+          },
+          "."
+        ]
+      ],
+      "tip": "filter(lambda n: n % 2 == 0, lista) se queda solo con los pares.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "f = lambda a, b: a + b",
+            "print(f(3, 4))"
+          ],
+          "options": [
+            "7",
+            "34",
+            "lambda",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "La lambda suma sus dos parámetros: 3 + 4 = 7."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(sorted([3, 1, 2], key=lambda x: -x))"
+          ],
+          "options": [
+            "[1, 2, 3]",
+            "[3, 2, 1]",
+            "[-3, -2, -1]",
+            "[3, 1, 2]"
+          ],
+          "answer": 1,
+          "explain": "Ordena según -x, así que los más grandes quedan primero."
+        },
+        {
+          "prompt": "¿Qué palabra NO se usa en una lambda?",
+          "code": [
+            "lambda x: x + 1"
+          ],
+          "options": [
+            "return",
+            "lambda",
+            "los dos puntos",
+            "el parámetro"
+          ],
+          "answer": 0,
+          "explain": "La lambda devuelve su expresión sin escribir return."
+        }
+      ]
+    },
+    "Mini proyecto: Conversor de unidades": {
+      "paras": [
+        [
+          "Crearás un ",
+          {
+            "b": "conversor"
+          },
+          " con funciones: una para pasar de Celsius a Fahrenheit, otra de kilómetros a millas y otra de soles a dólares."
+        ],
+        [
+          "Cada función recibe un valor, hace el cálculo y lo ",
+          {
+            "b": "devuelve con return"
+          },
+          ". Con ",
+          {
+            "c": "round()"
+          },
+          " muestras solo dos decimales."
+        ]
+      ],
+      "example": {
+        "file": "conversor.py",
+        "lines": [
+          "def c_a_f(c):",
+          "    return c * 9 / 5 + 32",
+          "",
+          "def km_a_millas(km):",
+          "    return km * 0.621371",
+          "",
+          "def soles_a_dolares(soles, tasa=3.75):",
+          "    return soles / tasa",
+          "",
+          "print(c_a_f(25), \"°F\")",
+          "print(round(km_a_millas(10), 2), \"millas\")",
+          "print(round(soles_a_dolares(100), 2), \"dólares\")"
+        ],
+        "output": [
+          "77.0 °F",
+          "6.21 millas",
+          "26.67 dólares"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige la temperatura",
+        "file": "prueba.py",
+        "choices": [
+          "0",
+          "20",
+          "100"
+        ],
+        "lines": [
+          "def c_a_f(c):",
+          "    return c * 9 / 5 + 32",
+          "",
+          "print(c_a_f({v}))"
+        ],
+        "outputs": {
+          "0": "32.0",
+          "20": "68.0",
+          "100": "212.0"
+        }
+      },
+      "remember": [
+        [
+          "Una función por cada conversión: código ordenado."
+        ],
+        [
+          {
+            "c": "round(x, 2)"
+          },
+          " deja dos decimales."
+        ],
+        [
+          "El tipo de cambio puede ser un valor por defecto."
+        ]
+      ],
+      "tip": "Reto: pide la temperatura con input() y muestra el resultado convertido.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(round(3.14159, 2))"
+          ],
+          "options": [
+            "3.14",
+            "3.1",
+            "3.15",
+            "3"
+          ],
+          "answer": 0,
+          "explain": "round(x, 2) redondea a dos decimales."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def km_a_m(km):",
+            "    return km * 1000",
+            "print(km_a_m(3))"
+          ],
+          "options": [
+            "3000",
+            "300",
+            "0.003",
+            "3"
+          ],
+          "answer": 0,
+          "explain": "3 km × 1000 = 3000 metros."
+        },
+        {
+          "prompt": "¿Por qué usar return en el conversor?",
+          "code": [
+            "def c_a_f(c):",
+            "    return c * 9 / 5 + 32"
+          ],
+          "options": [
+            "Para reutilizar el resultado",
+            "Para mostrarlo en pantalla",
+            "Para repetir la función",
+            "Porque es obligatorio"
+          ],
+          "answer": 0,
+          "explain": "Con return puedes guardar o seguir calculando con el resultado."
+        }
+      ]
+    },
+    "¿Qué es un módulo?": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "módulo"
+          },
+          " es un archivo de Python con funciones y variables listas para usar. Python trae muchos: ",
+          {
+            "c": "math"
+          },
+          " para matemáticas, ",
+          {
+            "c": "random"
+          },
+          " para azar y ",
+          {
+            "c": "datetime"
+          },
+          " para fechas."
+        ],
+        [
+          "Para usar un módulo lo ",
+          {
+            "b": "importas"
+          },
+          " con ",
+          {
+            "c": "import"
+          },
+          " y luego escribes ",
+          {
+            "c": "modulo.funcion()"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "modulos.py",
+        "lines": [
+          "import math",
+          "print(math.sqrt(16))",
+          "print(round(math.pi, 2))",
+          "print(math.floor(7.9), math.ceil(7.1))"
+        ],
+        "output": [
+          "4.0",
+          "3.14",
+          "7 8"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige una función de math",
+        "file": "prueba.py",
+        "choices": [
+          "math.sqrt(81)",
+          "math.floor(7.8)",
+          "math.ceil(7.2)"
+        ],
+        "lines": [
+          "import math",
+          "print({v})"
+        ],
+        "outputs": {
+          "math.sqrt(81)": "9.0",
+          "math.floor(7.8)": "7",
+          "math.ceil(7.2)": "8"
+        }
+      },
+      "remember": [
+        [
+          "Importa una vez, al inicio del archivo."
+        ],
+        [
+          "Usa el nombre del módulo y un punto: ",
+          {
+            "c": "math.sqrt(9)"
+          },
+          "."
+        ],
+        [
+          "Python trae cientos de módulos: es su «biblioteca estándar»."
+        ]
+      ],
+      "tip": "Escribe help(math) en Python para ver todo lo que trae un módulo.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "import math",
+            "print(math.sqrt(49))"
+          ],
+          "options": [
+            "7",
+            "7.0",
+            "49",
+            "2401"
+          ],
+          "answer": 1,
+          "explain": "sqrt calcula la raíz cuadrada y devuelve un decimal: 7.0."
+        },
+        {
+          "prompt": "¿Qué módulo usarías para números al azar?",
+          "code": [
+            "import ___"
+          ],
+          "options": [
+            "random",
+            "math",
+            "azar",
+            "numbers"
+          ],
+          "answer": 0,
+          "explain": "random genera números al azar, por ejemplo random.randint(1, 6)."
+        },
+        {
+          "prompt": "¿Qué es un módulo?",
+          "code": [
+            "# Elige la mejor descripción"
+          ],
+          "options": [
+            "Un archivo con código reutilizable",
+            "Un error de Python",
+            "Un tipo de variable",
+            "Un bucle especial"
+          ],
+          "answer": 0,
+          "explain": "Un módulo es un archivo .py con funciones que puedes importar."
+        }
+      ]
+    },
+    "import y from": {
+      "paras": [
+        [
+          "Hay varias formas de importar: ",
+          {
+            "c": "import math"
+          },
+          " trae todo el módulo; ",
+          {
+            "c": "from math import sqrt"
+          },
+          " trae solo lo que necesitas y lo usas sin el prefijo."
+        ],
+        [
+          "Con ",
+          {
+            "c": "as"
+          },
+          " le das un apodo más corto: ",
+          {
+            "c": "import statistics as st"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "importar.py",
+        "lines": [
+          "from math import sqrt, pi",
+          "import statistics as st",
+          "print(sqrt(25))",
+          "print(round(pi * 2, 2))",
+          "print(st.mean([4, 8, 6]))"
+        ],
+        "output": [
+          "5.0",
+          "6.28",
+          "6"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige qué importar",
+        "file": "prueba.py",
+        "choices": [
+          "sqrt",
+          "floor",
+          "ceil"
+        ],
+        "lines": [
+          "from math import {v}",
+          "print({v}(10.5))"
+        ],
+        "outputs": {
+          "sqrt": "3.24037034920393",
+          "floor": "10",
+          "ceil": "11"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "import m"
+          },
+          " → usas ",
+          {
+            "c": "m.f()"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "from m import f"
+          },
+          " → usas ",
+          {
+            "c": "f()"
+          },
+          " directo."
+        ],
+        [
+          {
+            "c": "import m as x"
+          },
+          " → usas ",
+          {
+            "c": "x.f()"
+          },
+          "."
+        ]
+      ],
+      "tip": "Evita from modulo import *: no sabrás de dónde viene cada nombre.",
+      "quiz": [
+        {
+          "prompt": "Con from math import sqrt, ¿cómo llamas a la función?",
+          "code": [
+            "from math import sqrt"
+          ],
+          "options": [
+            "sqrt(9)",
+            "math.sqrt(9)",
+            "math(9)",
+            "import sqrt(9)"
+          ],
+          "answer": 0,
+          "explain": "Al importar con from, usas el nombre directamente."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "import math as m",
+            "print(m.floor(3.9))"
+          ],
+          "options": [
+            "3",
+            "4",
+            "3.9",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "m es un apodo de math; floor redondea hacia abajo: 3."
+        },
+        {
+          "prompt": "¿Para qué sirve as?",
+          "code": [
+            "import statistics as st"
+          ],
+          "options": [
+            "Para darle un apodo",
+            "Para importar todo",
+            "Para borrar el módulo",
+            "Para crear un módulo"
+          ],
+          "answer": 0,
+          "explain": "as crea un nombre corto para el módulo."
+        }
+      ]
+    },
+    "Crea tus propios módulos": {
+      "paras": [
+        [
+          "Cualquier archivo ",
+          {
+            "c": ".py"
+          },
+          " que escribas puede ser un módulo. Si guardas funciones en ",
+          {
+            "c": "saludos.py"
+          },
+          ", desde otro archivo de la misma carpeta escribes ",
+          {
+            "c": "import saludos"
+          },
+          "."
+        ],
+        [
+          "El bloque ",
+          {
+            "c": "if __name__ == \"__main__\":"
+          },
+          " se ejecuta solo cuando corres ese archivo directamente, no cuando lo importas. Es ideal para pruebas."
+        ]
+      ],
+      "example": {
+        "file": "saludos.py + main.py",
+        "norun": true,
+        "lines": [
+          "# --- saludos.py ---",
+          "def hola(nombre):",
+          "    return \"Hola, \" + nombre",
+          "",
+          "# --- main.py (misma carpeta) ---",
+          "import saludos",
+          "print(saludos.hola(\"Ana\"))"
+        ],
+        "output": [
+          "Hola, Ana"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige a quién saludar con tu módulo",
+        "file": "main.py",
+        "norun": true,
+        "choices": [
+          "Ana",
+          "Luis",
+          "Sofía"
+        ],
+        "lines": [
+          "import saludos",
+          "print(saludos.hola(\"{v}\"))"
+        ],
+        "output": "Hola, {v}"
+      },
+      "remember": [
+        [
+          "El nombre del archivo es el nombre del módulo (sin ",
+          {
+            "c": ".py"
+          },
+          ")."
+        ],
+        [
+          "Ambos archivos deben estar en la misma carpeta."
+        ],
+        [
+          {
+            "c": "__name__"
+          },
+          " vale ",
+          {
+            "c": "\"__main__\""
+          },
+          " solo en el archivo que ejecutas."
+        ]
+      ],
+      "tip": "No llames a tu archivo math.py o random.py: taparías los módulos de Python.",
+      "quiz": [
+        {
+          "prompt": "Si tu archivo se llama utiles.py, ¿cómo lo importas?",
+          "code": [
+            "# misma carpeta"
+          ],
+          "options": [
+            "import utiles",
+            "import utiles.py",
+            "from utiles.py",
+            "include utiles"
+          ],
+          "answer": 0,
+          "explain": "Se importa con el nombre del archivo, sin la extensión .py."
+        },
+        {
+          "prompt": "¿Cuándo se ejecuta el bloque if __name__ == \"__main__\":?",
+          "code": [
+            "if __name__ == \"__main__\":",
+            "    pruebas()"
+          ],
+          "options": [
+            "Al ejecutar ese archivo directamente",
+            "Siempre",
+            "Al importarlo",
+            "Nunca"
+          ],
+          "answer": 0,
+          "explain": "Solo cuando corres ese archivo, no cuando otro lo importa."
+        },
+        {
+          "prompt": "¿Por qué separar el código en módulos?",
+          "code": [
+            "# Elige la mejor razón"
+          ],
+          "options": [
+            "Para ordenarlo y reutilizarlo",
+            "Para que sea más lento",
+            "Porque Python lo exige",
+            "Para ocultar errores"
+          ],
+          "answer": 0,
+          "explain": "Los módulos ordenan tu proyecto y te dejan reutilizar funciones."
+        }
+      ]
+    },
+    "Paquetes": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "paquete"
+          },
+          " es una carpeta que agrupa varios módulos. Antes llevaba un archivo ",
+          {
+            "c": "__init__.py"
+          },
+          " (hoy es opcional, pero sigue siendo buena práctica)."
+        ],
+        [
+          "Importas sus módulos con puntos: ",
+          {
+            "c": "from tienda.precios import con_igv"
+          },
+          ". Así organizas proyectos grandes por temas."
+        ]
+      ],
+      "example": {
+        "file": "estructura del proyecto",
+        "norun": true,
+        "lines": [
+          "# tienda/",
+          "#   __init__.py",
+          "#   precios.py   -> def con_igv(p): return p * 1.18",
+          "#   stock.py",
+          "# main.py",
+          "from tienda.precios import con_igv",
+          "print(round(con_igv(100), 2))"
+        ],
+        "output": [
+          "118.0"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un módulo del paquete",
+        "file": "main.py",
+        "norun": true,
+        "choices": [
+          "precios",
+          "stock",
+          "clientes"
+        ],
+        "lines": [
+          "import tienda.{v}",
+          "print(\"Importé tienda.{v}\")"
+        ],
+        "output": "Importé tienda.{v}"
+      },
+      "remember": [
+        [
+          "Paquete = carpeta; módulo = archivo."
+        ],
+        [
+          "Se navega con puntos: ",
+          {
+            "c": "paquete.modulo"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "__init__.py"
+          },
+          " marca la carpeta como paquete."
+        ]
+      ],
+      "tip": "Los paquetes que instalas con pip (como requests) son paquetes como estos, hechos por otras personas.",
+      "quiz": [
+        {
+          "prompt": "¿Qué es un paquete en Python?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "Una carpeta con módulos",
+            "Un solo archivo",
+            "Una función",
+            "Una variable global"
+          ],
+          "answer": 0,
+          "explain": "Un paquete agrupa varios módulos dentro de una carpeta."
+        },
+        {
+          "prompt": "¿Cómo importas con_igv del módulo precios dentro del paquete tienda?",
+          "code": [
+            "# tienda/precios.py"
+          ],
+          "options": [
+            "from tienda.precios import con_igv",
+            "import con_igv from tienda",
+            "from precios.tienda import con_igv",
+            "import tienda/precios"
+          ],
+          "answer": 0,
+          "explain": "Se escribe paquete.modulo y luego lo que importas."
+        },
+        {
+          "prompt": "¿Qué archivo suele marcar una carpeta como paquete?",
+          "code": [
+            "tienda/"
+          ],
+          "options": [
+            "__init__.py",
+            "main.py",
+            "paquete.py",
+            "setup.txt"
+          ],
+          "answer": 0,
+          "explain": "__init__.py le dice a Python que la carpeta es un paquete."
+        }
+      ]
+    },
+    "Mini proyecto: Tu propia librería": {
+      "paras": [
+        [
+          "Crearás ",
+          {
+            "c": "mates.py"
+          },
+          ", una librería con funciones útiles: saber si un número es par, calcular el promedio y el factorial."
+        ],
+        [
+          "Al final, el bloque ",
+          {
+            "c": "if __name__ == \"__main__\":"
+          },
+          " prueba que todo funcione. Luego podrás importarla desde cualquier programa."
+        ]
+      ],
+      "example": {
+        "file": "mates.py",
+        "lines": [
+          "def es_par(n):",
+          "    return n % 2 == 0",
+          "",
+          "def promedio(numeros):",
+          "    return sum(numeros) / len(numeros)",
+          "",
+          "def factorial(n):",
+          "    resultado = 1",
+          "    for i in range(2, n + 1):",
+          "        resultado *= i",
+          "    return resultado",
+          "",
+          "if __name__ == \"__main__\":",
+          "    print(es_par(10), es_par(7))",
+          "    print(promedio([12, 15, 18]))",
+          "    print(factorial(5))"
+        ],
+        "output": [
+          "True False",
+          "15.0",
+          "120"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un número para el factorial",
+        "file": "prueba.py",
+        "choices": [
+          "3",
+          "4",
+          "6"
+        ],
+        "lines": [
+          "def factorial(n):",
+          "    r = 1",
+          "    for i in range(2, n + 1):",
+          "        r *= i",
+          "    return r",
+          "",
+          "print(factorial({v}))"
+        ],
+        "outputs": {
+          "3": "6",
+          "4": "24",
+          "6": "720"
+        }
+      },
+      "remember": [
+        [
+          "Una buena librería tiene funciones pequeñas con nombres claros."
+        ],
+        [
+          "Prueba tus funciones en el bloque ",
+          {
+            "c": "__main__"
+          },
+          "."
+        ],
+        [
+          "Desde otro archivo: ",
+          {
+            "c": "from mates import promedio"
+          },
+          "."
+        ]
+      ],
+      "tip": "Reto: agrega a mates.py una función es_primo(n) y pruébala.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def es_par(n):",
+            "    return n % 2 == 0",
+            "print(es_par(8))"
+          ],
+          "options": [
+            "True",
+            "False",
+            "0",
+            "8"
+          ],
+          "answer": 0,
+          "explain": "8 % 2 es 0, así que la función devuelve True."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(sum([2, 4, 6]) / 3)"
+          ],
+          "options": [
+            "4.0",
+            "12",
+            "4",
+            "6.0"
+          ],
+          "answer": 0,
+          "explain": "La suma es 12 y 12 / 3 = 4.0."
+        },
+        {
+          "prompt": "¿Cuánto es el factorial de 4?",
+          "code": [
+            "4! = 4 × 3 × 2 × 1"
+          ],
+          "options": [
+            "10",
+            "24",
+            "16",
+            "12"
+          ],
+          "answer": 1,
+          "explain": "4 × 3 × 2 × 1 = 24."
+        }
+      ]
+    },
+    "Clases y objetos": {
+      "paras": [
+        [
+          "Una ",
+          {
+            "b": "clase"
+          },
+          " es un molde y un ",
+          {
+            "b": "objeto"
+          },
+          " es algo creado con ese molde. La clase ",
+          {
+            "c": "Perro"
+          },
+          " describe a todos los perros; ",
+          {
+            "c": "firulais"
+          },
+          " es un perro concreto."
+        ],
+        [
+          "Se crea la clase con ",
+          {
+            "c": "class"
+          },
+          " y el objeto llamando a la clase como si fuera una función: ",
+          {
+            "c": "Perro()"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "clases.py",
+        "lines": [
+          "class Perro:",
+          "    def ladrar(self):",
+          "        print(\"¡Guau!\")",
+          "",
+          "firulais = Perro()",
+          "boby = Perro()",
+          "firulais.ladrar()",
+          "boby.ladrar()",
+          "print(type(firulais).__name__)"
+        ],
+        "output": [
+          "¡Guau!",
+          "¡Guau!",
+          "Perro"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un sonido",
+        "file": "prueba.py",
+        "choices": [
+          "Miau",
+          "Muu",
+          "Pío"
+        ],
+        "lines": [
+          "class Animal:",
+          "    def sonido(self):",
+          "        print(\"{v}\")",
+          "",
+          "Animal().sonido()"
+        ],
+        "output": "{v}"
+      },
+      "remember": [
+        [
+          "Los nombres de clases empiezan con mayúscula: ",
+          {
+            "c": "Perro"
+          },
+          "."
+        ],
+        [
+          "Creas un objeto con ",
+          {
+            "c": "Clase()"
+          },
+          "."
+        ],
+        [
+          "Puedes crear muchos objetos con la misma clase."
+        ]
+      ],
+      "tip": "Piensa en la clase como el plano de una casa, y en los objetos como las casas construidas.",
+      "quiz": [
+        {
+          "prompt": "¿Qué palabra crea una clase?",
+          "code": [
+            "___ Gato:"
+          ],
+          "options": [
+            "class",
+            "def",
+            "object",
+            "new"
+          ],
+          "answer": 0,
+          "explain": "Las clases se definen con class."
+        },
+        {
+          "prompt": "¿Cómo creas un objeto de la clase Gato?",
+          "code": [
+            "class Gato:",
+            "    pass"
+          ],
+          "options": [
+            "michi = Gato()",
+            "michi = new Gato",
+            "michi = class Gato",
+            "Gato michi"
+          ],
+          "answer": 0,
+          "explain": "Se llama a la clase con paréntesis: Gato()."
+        },
+        {
+          "prompt": "¿Qué relación hay entre clase y objeto?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "La clase es el molde; el objeto, lo creado con él",
+            "Son lo mismo",
+            "El objeto crea la clase",
+            "No se relacionan"
+          ],
+          "answer": 0,
+          "explain": "La clase describe; los objetos son ejemplos concretos."
+        }
+      ]
+    },
+    "Atributos y métodos": {
+      "paras": [
+        [
+          "Los ",
+          {
+            "b": "atributos"
+          },
+          " son los datos de un objeto (su color, su batería) y los ",
+          {
+            "b": "métodos"
+          },
+          " son las acciones que puede hacer (cargar, encender)."
+        ],
+        [
+          "Dentro de los métodos, ",
+          {
+            "c": "self"
+          },
+          " representa al propio objeto: ",
+          {
+            "c": "self.bateria"
+          },
+          " es la batería de ese celular."
+        ]
+      ],
+      "example": {
+        "file": "celular.py",
+        "lines": [
+          "class Celular:",
+          "    marca = \"Genérico\"",
+          "    bateria = 20",
+          "",
+          "    def cargar(self, cuanto):",
+          "        self.bateria = min(100, self.bateria + cuanto)",
+          "",
+          "mi_cel = Celular()",
+          "mi_cel.marca = \"Zeta\"",
+          "mi_cel.cargar(50)",
+          "print(mi_cel.marca, mi_cel.bateria)",
+          "mi_cel.cargar(50)",
+          "print(mi_cel.bateria)"
+        ],
+        "output": [
+          "Zeta 70",
+          "100"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige cuánto cargar",
+        "file": "prueba.py",
+        "choices": [
+          "10",
+          "40",
+          "90"
+        ],
+        "lines": [
+          "class Celular:",
+          "    bateria = 20",
+          "    def cargar(self, cuanto):",
+          "        self.bateria = min(100, self.bateria + cuanto)",
+          "",
+          "c = Celular()",
+          "c.cargar({v})",
+          "print(c.bateria)"
+        ],
+        "outputs": {
+          "10": "30",
+          "40": "60",
+          "90": "100"
+        }
+      },
+      "remember": [
+        [
+          "Atributo = dato; método = acción."
+        ],
+        [
+          "Los métodos llevan ",
+          {
+            "c": "self"
+          },
+          " como primer parámetro."
+        ],
+        [
+          "Accedes con punto: ",
+          {
+            "c": "objeto.atributo"
+          },
+          ", ",
+          {
+            "c": "objeto.metodo()"
+          },
+          "."
+        ]
+      ],
+      "tip": "self no se escribe al llamar: c.cargar(10), no c.cargar(c, 10).",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "class Caja:",
+            "    lleno = False",
+            "c = Caja()",
+            "c.lleno = True",
+            "print(c.lleno)"
+          ],
+          "options": [
+            "True",
+            "False",
+            "lleno",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Cambiamos el atributo de ese objeto a True."
+        },
+        {
+          "prompt": "¿Qué representa self dentro de un método?",
+          "code": [
+            "def cargar(self, cuanto):"
+          ],
+          "options": [
+            "Al objeto que usa el método",
+            "A la clase entera",
+            "A Python",
+            "A un número"
+          ],
+          "answer": 0,
+          "explain": "self es el propio objeto sobre el que trabaja el método."
+        },
+        {
+          "prompt": "En un objeto «auto», ¿qué sería un método?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "acelerar()",
+            "color",
+            "marca",
+            "año"
+          ],
+          "answer": 0,
+          "explain": "Los métodos son acciones; color, marca y año son atributos."
+        }
+      ]
+    },
+    "El constructor __init__": {
+      "paras": [
+        [
+          "El método ",
+          {
+            "c": "__init__"
+          },
+          " es el ",
+          {
+            "b": "constructor"
+          },
+          ": se ejecuta automáticamente al crear el objeto y sirve para darle sus valores iniciales."
+        ],
+        [
+          "Los argumentos que pasas al crear el objeto llegan a ",
+          {
+            "c": "__init__"
+          },
+          ": ",
+          {
+            "c": "Alumno(\"Ana\", 17)"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "alumno.py",
+        "lines": [
+          "class Alumno:",
+          "    def __init__(self, nombre, nota):",
+          "        self.nombre = nombre",
+          "        self.nota = nota",
+          "",
+          "    def aprobo(self):",
+          "        return self.nota >= 11",
+          "",
+          "a = Alumno(\"Ana\", 17)",
+          "b = Alumno(\"Luis\", 9)",
+          "print(a.nombre, a.aprobo())",
+          "print(b.nombre, b.aprobo())"
+        ],
+        "output": [
+          "Ana True",
+          "Luis False"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige la nota",
+        "file": "prueba.py",
+        "choices": [
+          "8",
+          "11",
+          "20"
+        ],
+        "lines": [
+          "class Alumno:",
+          "    def __init__(self, nombre, nota):",
+          "        self.nombre = nombre",
+          "        self.nota = nota",
+          "",
+          "a = Alumno(\"Sofía\", {v})",
+          "print(a.nombre, \"aprobó:\", a.nota >= 11)"
+        ],
+        "outputs": {
+          "8": "Sofía aprobó: False",
+          "11": "Sofía aprobó: True",
+          "20": "Sofía aprobó: True"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "__init__"
+          },
+          " lleva dos guiones bajos a cada lado."
+        ],
+        [
+          "Guarda los datos en ",
+          {
+            "c": "self.algo"
+          },
+          " para usarlos en otros métodos."
+        ],
+        [
+          "Se ejecuta solo al crear el objeto."
+        ]
+      ],
+      "tip": "Agrega un método __str__ para decidir cómo se ve tu objeto con print().",
+      "quiz": [
+        {
+          "prompt": "¿Cuándo se ejecuta __init__?",
+          "code": [
+            "p = Producto(\"pan\", 0.5)"
+          ],
+          "options": [
+            "Al crear el objeto",
+            "Al borrar el objeto",
+            "Al llamar print",
+            "Nunca solo"
+          ],
+          "answer": 0,
+          "explain": "El constructor se ejecuta automáticamente al crear el objeto."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "class P:",
+            "    def __init__(self, x):",
+            "        self.x = x * 2",
+            "print(P(5).x)"
+          ],
+          "options": [
+            "5",
+            "10",
+            "x",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "El constructor guarda x * 2, es decir 10."
+        },
+        {
+          "prompt": "¿Cómo se escribe el constructor?",
+          "code": [
+            "# Elige uno"
+          ],
+          "options": [
+            "def __init__(self):",
+            "def init(self):",
+            "def _init_(self):",
+            "def constructor():"
+          ],
+          "answer": 0,
+          "explain": "Son dos guiones bajos antes y después: __init__."
+        }
+      ]
+    },
+    "Herencia": {
+      "paras": [
+        [
+          "Con la ",
+          {
+            "b": "herencia"
+          },
+          " una clase hija recibe todo lo de una clase padre y puede agregar o cambiar cosas: ",
+          {
+            "c": "class Gato(Animal):"
+          },
+          "."
+        ],
+        [
+          "Si la hija redefine un método, usa su propia versión. Con ",
+          {
+            "c": "super()"
+          },
+          " llamas al método del padre."
+        ]
+      ],
+      "example": {
+        "file": "herencia.py",
+        "lines": [
+          "class Animal:",
+          "    def __init__(self, nombre):",
+          "        self.nombre = nombre",
+          "    def presentarse(self):",
+          "        print(\"Soy\", self.nombre)",
+          "",
+          "class Gato(Animal):",
+          "    def presentarse(self):",
+          "        super().presentarse()",
+          "        print(\"y digo miau\")",
+          "",
+          "Animal(\"Tortuga\").presentarse()",
+          "Gato(\"Michi\").presentarse()"
+        ],
+        "output": [
+          "Soy Tortuga",
+          "Soy Michi",
+          "y digo miau"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige el animal",
+        "file": "prueba.py",
+        "choices": [
+          "Perro",
+          "Pato",
+          "Vaca"
+        ],
+        "lines": [
+          "class Animal:",
+          "    def sonido(self):",
+          "        return \"...\"",
+          "class Perro(Animal):",
+          "    def sonido(self):",
+          "        return \"Guau\"",
+          "class Pato(Animal):",
+          "    def sonido(self):",
+          "        return \"Cuac\"",
+          "class Vaca(Animal):",
+          "    pass",
+          "",
+          "print({v}().sonido())"
+        ],
+        "outputs": {
+          "Perro": "Guau",
+          "Pato": "Cuac",
+          "Vaca": "..."
+        }
+      },
+      "remember": [
+        [
+          "La clase padre va entre paréntesis: ",
+          {
+            "c": "class Hija(Padre):"
+          },
+          "."
+        ],
+        [
+          "La hija hereda atributos y métodos."
+        ],
+        [
+          {
+            "c": "super()"
+          },
+          " llama al método del padre."
+        ]
+      ],
+      "tip": "Usa herencia cuando puedas decir «un Gato ES UN Animal».",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "class A:",
+            "    def hola(self):",
+            "        return \"A\"",
+            "class B(A):",
+            "    pass",
+            "print(B().hola())"
+          ],
+          "options": [
+            "A",
+            "B",
+            "None",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "B no define hola, así que usa el de su padre A."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "class A:",
+            "    def hola(self):",
+            "        return \"A\"",
+            "class B(A):",
+            "    def hola(self):",
+            "        return \"B\"",
+            "print(B().hola())"
+          ],
+          "options": [
+            "A",
+            "B",
+            "AB",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "B redefine hola, así que se usa su propia versión."
+        },
+        {
+          "prompt": "¿Para qué sirve super()?",
+          "code": [
+            "super().presentarse()"
+          ],
+          "options": [
+            "Para llamar al método del padre",
+            "Para crear una clase",
+            "Para borrar al padre",
+            "Para salir del método"
+          ],
+          "answer": 0,
+          "explain": "super() da acceso a los métodos de la clase padre."
+        }
+      ]
+    },
+    "Encapsulamiento": {
+      "paras": [
+        [
+          "El ",
+          {
+            "b": "encapsulamiento"
+          },
+          " protege los datos de un objeto: en vez de cambiarlos directamente, usas métodos que revisan que todo esté bien."
+        ],
+        [
+          "En Python, un atributo que empieza con guion bajo (",
+          {
+            "c": "_saldo"
+          },
+          ") indica «uso interno». Con dos guiones (",
+          {
+            "c": "__pin"
+          },
+          ") Python lo oculta aún más."
+        ]
+      ],
+      "example": {
+        "file": "cuenta.py",
+        "lines": [
+          "class Cuenta:",
+          "    def __init__(self, saldo):",
+          "        self._saldo = saldo",
+          "",
+          "    def retirar(self, monto):",
+          "        if monto > self._saldo:",
+          "            print(\"Saldo insuficiente\")",
+          "        else:",
+          "            self._saldo -= monto",
+          "",
+          "    def ver_saldo(self):",
+          "        return self._saldo",
+          "",
+          "c = Cuenta(100)",
+          "c.retirar(150)",
+          "c.retirar(30)",
+          "print(c.ver_saldo())"
+        ],
+        "output": [
+          "Saldo insuficiente",
+          "70"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige cuánto retirar",
+        "file": "prueba.py",
+        "choices": [
+          "20",
+          "80",
+          "120"
+        ],
+        "lines": [
+          "class Cuenta:",
+          "    def __init__(self):",
+          "        self._saldo = 100",
+          "    def retirar(self, m):",
+          "        if m > self._saldo:",
+          "            return \"Saldo insuficiente\"",
+          "        self._saldo -= m",
+          "        return \"Te quedan \" + str(self._saldo)",
+          "",
+          "print(Cuenta().retirar({v}))"
+        ],
+        "outputs": {
+          "20": "Te quedan 80",
+          "80": "Te quedan 20",
+          "120": "Saldo insuficiente"
+        }
+      },
+      "remember": [
+        [
+          "Cambia los datos con métodos, no a mano."
+        ],
+        [
+          {
+            "c": "_dato"
+          },
+          ": «no lo toques desde fuera»."
+        ],
+        [
+          "Los métodos pueden validar antes de cambiar algo."
+        ]
+      ],
+      "tip": "El decorador @property te deja leer un atributo protegido como si fuera normal: c.saldo.",
+      "quiz": [
+        {
+          "prompt": "¿Qué indica un atributo como _saldo?",
+          "code": [
+            "self._saldo = 100"
+          ],
+          "options": [
+            "Que es de uso interno",
+            "Que es un error",
+            "Que es un número",
+            "Que es público"
+          ],
+          "answer": 0,
+          "explain": "El guion bajo es una convención: no lo uses desde fuera de la clase."
+        },
+        {
+          "prompt": "¿Por qué usar un método retirar() en vez de cambiar el saldo directamente?",
+          "code": [
+            "c.retirar(50)"
+          ],
+          "options": [
+            "Para validar que haya saldo",
+            "Porque es más corto",
+            "Porque Python no deja restar",
+            "No hay razón"
+          ],
+          "answer": 0,
+          "explain": "El método puede revisar las reglas antes de cambiar el dato."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "class C:",
+            "    def __init__(self):",
+            "        self._n = 1",
+            "    def subir(self):",
+            "        self._n += 1",
+            "c = C()",
+            "c.subir()",
+            "c.subir()",
+            "print(c._n)"
+          ],
+          "options": [
+            "1",
+            "2",
+            "3",
+            "Un error"
+          ],
+          "answer": 2,
+          "explain": "Empieza en 1 y sube dos veces: 3."
+        }
+      ]
+    },
+    "Polimorfismo": {
+      "paras": [
+        [
+          "El ",
+          {
+            "b": "polimorfismo"
+          },
+          " permite que objetos de clases distintas respondan al ",
+          {
+            "b": "mismo método"
+          },
+          " cada uno a su manera."
+        ],
+        [
+          "Así puedes recorrer una lista de figuras y pedirles a todas su ",
+          {
+            "c": "area()"
+          },
+          " sin preguntar de qué tipo es cada una."
+        ]
+      ],
+      "example": {
+        "file": "figuras.py",
+        "lines": [
+          "class Cuadrado:",
+          "    def __init__(self, lado):",
+          "        self.lado = lado",
+          "    def area(self):",
+          "        return self.lado ** 2",
+          "",
+          "class Rectangulo:",
+          "    def __init__(self, b, h):",
+          "        self.b, self.h = b, h",
+          "    def area(self):",
+          "        return self.b * self.h",
+          "",
+          "figuras = [Cuadrado(3), Rectangulo(2, 5)]",
+          "for f in figuras:",
+          "    print(type(f).__name__, f.area())"
+        ],
+        "output": [
+          "Cuadrado 9",
+          "Rectangulo 10"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige el instrumento",
+        "file": "prueba.py",
+        "choices": [
+          "Guitarra",
+          "Tambor",
+          "Flauta"
+        ],
+        "lines": [
+          "class Guitarra:",
+          "    def tocar(self): return \"tin tin\"",
+          "class Tambor:",
+          "    def tocar(self): return \"pum pum\"",
+          "class Flauta:",
+          "    def tocar(self): return \"fiu fiu\"",
+          "",
+          "print({v}().tocar())"
+        ],
+        "outputs": {
+          "Guitarra": "tin tin",
+          "Tambor": "pum pum",
+          "Flauta": "fiu fiu"
+        }
+      },
+      "remember": [
+        [
+          "Mismo nombre de método, comportamiento distinto."
+        ],
+        [
+          "Simplifica el código: un solo bucle para todos."
+        ],
+        [
+          "Funciona muy bien junto con la herencia."
+        ]
+      ],
+      "tip": "len() es polimórfica: funciona con textos, listas y diccionarios.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(len(\"hola\"), len([1, 2]))"
+          ],
+          "options": [
+            "4 2",
+            "2 4",
+            "6",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "len funciona con distintos tipos: 4 letras y 2 elementos."
+        },
+        {
+          "prompt": "¿Qué es el polimorfismo?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "Objetos distintos que responden al mismo método",
+            "Una clase con muchos atributos",
+            "Un tipo de bucle",
+            "Copiar una clase"
+          ],
+          "answer": 0,
+          "explain": "Cada clase implementa el mismo método a su manera."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "class A:",
+            "    def x(self): return 1",
+            "class B:",
+            "    def x(self): return 2",
+            "print(sum(o.x() for o in [A(), B(), B()]))"
+          ],
+          "options": [
+            "5",
+            "3",
+            "4",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "1 + 2 + 2 = 5: cada objeto responde con su versión de x()."
+        }
+      ]
+    },
+    "Mini proyecto: Mascota virtual": {
+      "paras": [
+        [
+          "Vas a crear una ",
+          {
+            "b": "mascota virtual"
+          },
+          " con una clase: tiene nombre, hambre y energía, y métodos para comer, jugar y ver su estado."
+        ],
+        [
+          "Los métodos cambian los atributos con reglas: jugar cansa y da hambre; comer quita el hambre. ¡Cuida que no llegue a 0 de energía!"
+        ]
+      ],
+      "example": {
+        "file": "mascota.py",
+        "lines": [
+          "class Mascota:",
+          "    def __init__(self, nombre):",
+          "        self.nombre = nombre",
+          "        self.hambre = 5",
+          "        self.energia = 5",
+          "",
+          "    def comer(self):",
+          "        self.hambre = max(0, self.hambre - 3)",
+          "",
+          "    def jugar(self):",
+          "        self.energia -= 2",
+          "        self.hambre += 1",
+          "",
+          "    def estado(self):",
+          "        print(self.nombre, \"| hambre:\", self.hambre, \"| energía:\", self.energia)",
+          "",
+          "p = Mascota(\"Pelusa\")",
+          "p.jugar()",
+          "p.comer()",
+          "p.estado()"
+        ],
+        "output": [
+          "Pelusa | hambre: 3 | energía: 3"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige qué hace tu mascota",
+        "file": "prueba.py",
+        "choices": [
+          "comer",
+          "jugar",
+          "estado"
+        ],
+        "lines": [
+          "class Mascota:",
+          "    def __init__(self):",
+          "        self.hambre, self.energia = 5, 5",
+          "    def comer(self):",
+          "        self.hambre = max(0, self.hambre - 3)",
+          "    def jugar(self):",
+          "        self.energia -= 2",
+          "        self.hambre += 1",
+          "    def estado(self):",
+          "        pass",
+          "",
+          "m = Mascota()",
+          "m.{v}()",
+          "print(\"hambre\", m.hambre, \"energía\", m.energia)"
+        ],
+        "outputs": {
+          "comer": "hambre 2 energía 5",
+          "jugar": "hambre 6 energía 3",
+          "estado": "hambre 5 energía 5"
+        }
+      },
+      "remember": [
+        [
+          "Los atributos guardan el estado de la mascota."
+        ],
+        [
+          "Los métodos cambian el estado con reglas."
+        ],
+        [
+          {
+            "c": "max(0, x)"
+          },
+          " evita valores negativos."
+        ]
+      ],
+      "tip": "Reto: agrega un método dormir() que suba la energía, y un aviso cuando el hambre pase de 8.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(max(0, 2 - 3))"
+          ],
+          "options": [
+            "-1",
+            "0",
+            "2",
+            "3"
+          ],
+          "answer": 1,
+          "explain": "max elige el mayor entre 0 y -1: 0."
+        },
+        {
+          "prompt": "Si la energía es 5 y juega dos veces, ¿cuánta energía queda?",
+          "code": [
+            "def jugar(self):",
+            "    self.energia -= 2"
+          ],
+          "options": [
+            "1",
+            "3",
+            "5",
+            "-1"
+          ],
+          "answer": 0,
+          "explain": "5 - 2 - 2 = 1."
+        },
+        {
+          "prompt": "¿Qué parte guarda el «estado» de la mascota?",
+          "code": [
+            "self.hambre",
+            "self.energia"
+          ],
+          "options": [
+            "Los atributos",
+            "Los métodos",
+            "La clase padre",
+            "El print"
+          ],
+          "answer": 0,
+          "explain": "Los atributos guardan los datos; los métodos los cambian."
+        }
+      ]
+    },
+    "Excepciones con try y except": {
+      "paras": [
+        [
+          "Cuando algo sale mal (dividir entre cero, convertir \"hola\" a número), Python lanza una ",
+          {
+            "b": "excepción"
+          },
+          " y el programa se detiene."
+        ],
+        [
+          "Con ",
+          {
+            "c": "try"
+          },
+          " intentas algo arriesgado y con ",
+          {
+            "c": "except"
+          },
+          " decides qué hacer si falla, sin que el programa se caiga. ",
+          {
+            "c": "finally"
+          },
+          " se ejecuta siempre."
+        ]
+      ],
+      "example": {
+        "file": "errores.py",
+        "lines": [
+          "datos = [\"10\", \"hola\", \"0\"]",
+          "for d in datos:",
+          "    try:",
+          "        n = int(d)",
+          "        print(100 / n)",
+          "    except ValueError:",
+          "        print(d, \"no es un número\")",
+          "    except ZeroDivisionError:",
+          "        print(\"No se puede dividir entre cero\")"
+        ],
+        "output": [
+          "10.0",
+          "hola no es un número",
+          "No se puede dividir entre cero"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige qué escribe el usuario",
+        "file": "prueba.py",
+        "choices": [
+          "25",
+          "veinte",
+          "4.5"
+        ],
+        "lines": [
+          "texto = \"{v}\"",
+          "try:",
+          "    print(\"Doble:\", int(texto) * 2)",
+          "except ValueError:",
+          "    print(\"Eso no es un número entero\")"
+        ],
+        "outputs": {
+          "25": "Doble: 50",
+          "veinte": "Eso no es un número entero",
+          "4.5": "Eso no es un número entero"
+        }
+      },
+      "remember": [
+        [
+          "Pon en ",
+          {
+            "c": "try"
+          },
+          " solo el código que puede fallar."
+        ],
+        [
+          "Atrapa errores concretos: ",
+          {
+            "c": "except ValueError:"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "finally"
+          },
+          " se ejecuta pase lo que pase."
+        ]
+      ],
+      "tip": "Lee el nombre del error en la consola: ValueError, TypeError, ZeroDivisionError… te dice qué pasó.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "try:",
+            "    print(5 / 0)",
+            "except ZeroDivisionError:",
+            "    print(\"Error\")"
+          ],
+          "options": [
+            "Error",
+            "0",
+            "inf",
+            "El programa se cae"
+          ],
+          "answer": 0,
+          "explain": "Dividir entre cero lanza ZeroDivisionError y el except lo atrapa."
+        },
+        {
+          "prompt": "¿Qué error da int(\"abc\")?",
+          "code": [
+            "int(\"abc\")"
+          ],
+          "options": [
+            "ValueError",
+            "TypeError",
+            "ZeroDivisionError",
+            "NameError"
+          ],
+          "answer": 0,
+          "explain": "El texto no representa un número: ValueError."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "try:",
+            "    x = int(\"7\")",
+            "except ValueError:",
+            "    x = 0",
+            "finally:",
+            "    print(\"listo\")",
+            "print(x)"
+          ],
+          "options": [
+            "listo y luego 7",
+            "7",
+            "0",
+            "listo y luego 0"
+          ],
+          "answer": 0,
+          "out": "listo\n7",
+          "explain": "No hay error, así que x = 7; finally siempre muestra «listo»."
+        }
+      ]
+    },
+    "Leer y escribir archivos": {
+      "paras": [
+        [
+          "Con ",
+          {
+            "c": "open()"
+          },
+          " abres un archivo. El modo ",
+          {
+            "c": "\"w\""
+          },
+          " escribe (borra lo anterior), ",
+          {
+            "c": "\"a\""
+          },
+          " agrega al final y ",
+          {
+            "c": "\"r\""
+          },
+          " lee."
+        ],
+        [
+          "Usa ",
+          {
+            "c": "with"
+          },
+          ": cierra el archivo solo cuando terminas, aunque haya un error. Indica ",
+          {
+            "c": "encoding=\"utf-8\""
+          },
+          " para que las tildes se guarden bien."
+        ]
+      ],
+      "example": {
+        "file": "archivos.py",
+        "lines": [
+          "with open(\"notas.txt\", \"w\", encoding=\"utf-8\") as f:",
+          "    f.write(\"Matemática: 17\\n\")",
+          "    f.write(\"Historia: 15\\n\")",
+          "",
+          "with open(\"notas.txt\", \"a\", encoding=\"utf-8\") as f:",
+          "    f.write(\"Inglés: 18\\n\")",
+          "",
+          "with open(\"notas.txt\", encoding=\"utf-8\") as f:",
+          "    for linea in f:",
+          "        print(linea.strip())"
+        ],
+        "output": [
+          "Matemática: 17",
+          "Historia: 15",
+          "Inglés: 18"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige el modo de apertura",
+        "file": "prueba.py",
+        "choices": [
+          "w",
+          "a"
+        ],
+        "lines": [
+          "with open(\"lista.txt\", \"w\") as f:",
+          "    f.write(\"pan\\n\")",
+          "with open(\"lista.txt\", \"{v}\") as f:",
+          "    f.write(\"leche\\n\")",
+          "print(open(\"lista.txt\").read().split())"
+        ],
+        "outputs": {
+          "w": "['leche']",
+          "a": "['pan', 'leche']"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "\"w\""
+          },
+          " sobrescribe; ",
+          {
+            "c": "\"a\""
+          },
+          " agrega; ",
+          {
+            "c": "\"r\""
+          },
+          " lee."
+        ],
+        [
+          {
+            "c": "with open(...) as f:"
+          },
+          " cierra el archivo por ti."
+        ],
+        [
+          {
+            "c": "linea.strip()"
+          },
+          " quita el salto de línea del final."
+        ]
+      ],
+      "tip": "Para datos con columnas, el módulo csv lee y escribe archivos que abre Excel.",
+      "quiz": [
+        {
+          "prompt": "¿Qué modo agrega texto al final sin borrar?",
+          "code": [
+            "open(\"log.txt\", ___)"
+          ],
+          "options": [
+            "\"a\"",
+            "\"w\"",
+            "\"r\"",
+            "\"x\""
+          ],
+          "answer": 0,
+          "explain": "\"a\" (append) agrega al final del archivo."
+        },
+        {
+          "prompt": "¿Qué ventaja tiene with open(...)?",
+          "code": [
+            "with open(\"datos.txt\") as f:"
+          ],
+          "options": [
+            "Cierra el archivo automáticamente",
+            "Lo hace más rápido",
+            "Lo borra al final",
+            "Lo cifra"
+          ],
+          "answer": 0,
+          "explain": "with se encarga de cerrar el archivo al terminar el bloque."
+        },
+        {
+          "prompt": "¿Qué pasa al abrir con \"w\" un archivo que ya tiene texto?",
+          "code": [
+            "open(\"notas.txt\", \"w\")"
+          ],
+          "options": [
+            "Se borra su contenido",
+            "Se agrega al final",
+            "Da un error",
+            "Solo se lee"
+          ],
+          "answer": 0,
+          "explain": "\"w\" empieza el archivo desde cero."
+        }
+      ]
+    },
+    "Iteradores": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "iterador"
+          },
+          " entrega los elementos de una colección ",
+          {
+            "b": "uno por uno"
+          },
+          ". Es lo que usa ",
+          {
+            "c": "for"
+          },
+          " por dentro."
+        ],
+        [
+          "Con ",
+          {
+            "c": "iter()"
+          },
+          " obtienes el iterador y con ",
+          {
+            "c": "next()"
+          },
+          " pides el siguiente. Cuando no quedan más, aparece ",
+          {
+            "c": "StopIteration"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "iteradores.py",
+        "lines": [
+          "colores = [\"rojo\", \"verde\", \"azul\"]",
+          "it = iter(colores)",
+          "print(next(it))",
+          "print(next(it))",
+          "print(next(it))",
+          "print(next(it, \"no quedan más\"))"
+        ],
+        "output": [
+          "rojo",
+          "verde",
+          "azul",
+          "no quedan más"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige cuántas veces llamar a next",
+        "file": "prueba.py",
+        "choices": [
+          "1",
+          "2",
+          "3"
+        ],
+        "lines": [
+          "it = iter(\"sol\")",
+          "for _ in range({v}):",
+          "    print(next(it))"
+        ],
+        "outputs": {
+          "1": "s",
+          "2": "s\no",
+          "3": "s\no\nl"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "iter(x)"
+          },
+          " crea el iterador."
+        ],
+        [
+          {
+            "c": "next(it)"
+          },
+          " da el siguiente elemento."
+        ],
+        [
+          {
+            "c": "next(it, valor)"
+          },
+          " evita el error al final."
+        ]
+      ],
+      "tip": "zip() y enumerate() también devuelven iteradores: se recorren una sola vez.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "it = iter([7, 8, 9])",
+            "next(it)",
+            "print(next(it))"
+          ],
+          "options": [
+            "7",
+            "8",
+            "9",
+            "Un error"
+          ],
+          "answer": 1,
+          "explain": "El primer next da 7 (sin mostrarlo) y el segundo da 8."
+        },
+        {
+          "prompt": "¿Qué error aparece cuando ya no quedan elementos?",
+          "code": [
+            "next(it)"
+          ],
+          "options": [
+            "StopIteration",
+            "IndexError",
+            "ValueError",
+            "EndError"
+          ],
+          "answer": 0,
+          "explain": "next lanza StopIteration cuando el iterador se agotó."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "for a, b in zip([1, 2], [\"x\", \"y\"]):",
+            "    print(a, b)"
+          ],
+          "options": [
+            "1 x / 2 y (en líneas)",
+            "1 2 x y",
+            "(1, 2)",
+            "Un error"
+          ],
+          "answer": 0,
+          "out": "1 x\n2 y",
+          "explain": "zip junta los elementos de ambas listas en pares."
+        }
+      ]
+    },
+    "Generadores": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "generador"
+          },
+          " es una función que usa ",
+          {
+            "c": "yield"
+          },
+          " en vez de ",
+          {
+            "c": "return"
+          },
+          ". Entrega un valor, se pausa, y continúa desde ahí la próxima vez."
+        ],
+        [
+          "Como produce los valores ",
+          {
+            "b": "a medida que se piden"
+          },
+          ", ahorra memoria: puedes recorrer millones de números sin guardarlos todos."
+        ]
+      ],
+      "example": {
+        "file": "generadores.py",
+        "lines": [
+          "def cuenta_regresiva(n):",
+          "    while n > 0:",
+          "        yield n",
+          "        n -= 1",
+          "",
+          "for x in cuenta_regresiva(3):",
+          "    print(x)",
+          "pares = (n for n in range(10) if n % 2 == 0)",
+          "print(sum(pares))"
+        ],
+        "output": [
+          "3",
+          "2",
+          "1",
+          "20"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige hasta dónde generar cuadrados",
+        "file": "prueba.py",
+        "choices": [
+          "3",
+          "4",
+          "5"
+        ],
+        "lines": [
+          "def cuadrados(n):",
+          "    for i in range(1, n + 1):",
+          "        yield i * i",
+          "",
+          "print(list(cuadrados({v})))"
+        ],
+        "outputs": {
+          "3": "[1, 4, 9]",
+          "4": "[1, 4, 9, 16]",
+          "5": "[1, 4, 9, 16, 25]"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "yield"
+          },
+          " entrega un valor y pausa la función."
+        ],
+        [
+          "Se recorre con ",
+          {
+            "c": "for"
+          },
+          " o se convierte con ",
+          {
+            "c": "list()"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "(x for x in ...)"
+          },
+          " es un generador en una línea."
+        ]
+      ],
+      "tip": "Un generador solo se puede recorrer una vez. Si lo necesitas de nuevo, vuelve a crearlo.",
+      "quiz": [
+        {
+          "prompt": "¿Qué palabra convierte una función en generador?",
+          "code": [
+            "def f():",
+            "    ___ 1"
+          ],
+          "options": [
+            "yield",
+            "return",
+            "gen",
+            "next"
+          ],
+          "answer": 0,
+          "explain": "yield hace que la función entregue valores uno por uno."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def f():",
+            "    yield 1",
+            "    yield 2",
+            "print(list(f()))"
+          ],
+          "options": [
+            "[1, 2]",
+            "1",
+            "2",
+            "[2]"
+          ],
+          "answer": 0,
+          "explain": "list() recoge todos los valores que entrega el generador."
+        },
+        {
+          "prompt": "¿Qué ventaja tienen los generadores?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "Ahorran memoria",
+            "Son más bonitos",
+            "Evitan errores siempre",
+            "Se recorren infinitas veces"
+          ],
+          "answer": 0,
+          "explain": "Producen cada valor cuando se necesita, sin guardarlos todos."
+        }
+      ]
+    },
+    "Decoradores": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "decorador"
+          },
+          " es una función que ",
+          {
+            "b": "envuelve"
+          },
+          " a otra para agregarle algo, sin cambiar su código. Se aplica con ",
+          {
+            "c": "@"
+          },
+          " encima de la función."
+        ],
+        [
+          "Se usan para medir tiempos, revisar permisos o registrar lo que pasa. Frameworks como Flask los usan para definir páginas."
+        ]
+      ],
+      "example": {
+        "file": "decoradores.py",
+        "lines": [
+          "def anunciar(funcion):",
+          "    def envoltura():",
+          "        print(\">> Empieza\", funcion.__name__)",
+          "        funcion()",
+          "        print(\">> Termina\")",
+          "    return envoltura",
+          "",
+          "@anunciar",
+          "def saludar():",
+          "    print(\"¡Hola!\")",
+          "",
+          "saludar()"
+        ],
+        "output": [
+          ">> Empieza saludar",
+          "¡Hola!",
+          ">> Termina"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige cuántas veces repetir",
+        "file": "prueba.py",
+        "choices": [
+          "1",
+          "2",
+          "3"
+        ],
+        "lines": [
+          "def repetir(funcion):",
+          "    def envoltura():",
+          "        for _ in range({v}):",
+          "            funcion()",
+          "    return envoltura",
+          "",
+          "@repetir",
+          "def hola():",
+          "    print(\"hola\")",
+          "",
+          "hola()"
+        ],
+        "outputs": {
+          "1": "hola",
+          "2": "hola\nhola",
+          "3": "hola\nhola\nhola"
+        }
+      },
+      "remember": [
+        [
+          "Un decorador recibe una función y devuelve otra."
+        ],
+        [
+          {
+            "c": "@decorador"
+          },
+          " va justo encima del ",
+          {
+            "c": "def"
+          },
+          "."
+        ],
+        [
+          "La función original sigue igual: solo se envuelve."
+        ]
+      ],
+      "tip": "@decorador encima de f es lo mismo que escribir f = decorador(f).",
+      "quiz": [
+        {
+          "prompt": "¿Qué símbolo aplica un decorador?",
+          "code": [
+            "___mi_decorador",
+            "def f(): ..."
+          ],
+          "options": [
+            "@",
+            "#",
+            "$",
+            "&"
+          ],
+          "answer": 0,
+          "explain": "El decorador se escribe con @ encima de la función."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "def mayus(f):",
+            "    def env():",
+            "        return f().upper()",
+            "    return env",
+            "@mayus",
+            "def saludo():",
+            "    return \"hola\"",
+            "print(saludo())"
+          ],
+          "options": [
+            "HOLA",
+            "hola",
+            "Hola",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "El decorador convierte en mayúsculas lo que devuelve la función."
+        },
+        {
+          "prompt": "¿Qué recibe un decorador?",
+          "code": [
+            "def decorador(___):"
+          ],
+          "options": [
+            "Una función",
+            "Un número",
+            "Una lista",
+            "Un archivo"
+          ],
+          "answer": 0,
+          "explain": "Un decorador recibe la función que va a envolver."
+        }
+      ]
+    },
+    "Expresiones regulares": {
+      "paras": [
+        [
+          "Las ",
+          {
+            "b": "expresiones regulares"
+          },
+          " son patrones para buscar texto. Con el módulo ",
+          {
+            "c": "re"
+          },
+          " puedes encontrar números, correos o validar formatos."
+        ],
+        [
+          {
+            "c": "\\d"
+          },
+          " significa «un dígito», ",
+          {
+            "c": "+"
+          },
+          " «uno o más» y ",
+          {
+            "c": "\\w"
+          },
+          " «letra, número o guion bajo». Escribe los patrones como ",
+          {
+            "c": "r\"...\""
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "regex.py",
+        "lines": [
+          "import re",
+          "texto = \"Pedí 3 mangos y 12 fresas por 20 soles\"",
+          "print(re.findall(r\"\\d+\", texto))",
+          "correo = \"ana@agbyte.pe\"",
+          "print(bool(re.fullmatch(r\"[\\w.]+@[\\w.]+\\.\\w+\", correo)))",
+          "print(re.sub(r\"\\d\", \"#\", \"Tel: 987\"))"
+        ],
+        "output": [
+          "['3', '12', '20']",
+          "True",
+          "Tel: ###"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un texto y busca los números",
+        "file": "prueba.py",
+        "choices": [
+          "Tengo 2 gatos",
+          "Año 2026",
+          "Sin números"
+        ],
+        "lines": [
+          "import re",
+          "print(re.findall(r\"\\d+\", \"{v}\"))"
+        ],
+        "outputs": {
+          "Tengo 2 gatos": "['2']",
+          "Año 2026": "['2026']",
+          "Sin números": "[]"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "re.findall()"
+          },
+          " devuelve todas las coincidencias."
+        ],
+        [
+          {
+            "c": "re.fullmatch()"
+          },
+          " valida que todo el texto cumpla el patrón."
+        ],
+        [
+          {
+            "c": "re.sub()"
+          },
+          " reemplaza lo que coincide."
+        ]
+      ],
+      "tip": "Prueba tus patrones de a poco: empieza simple y agrega piezas.",
+      "quiz": [
+        {
+          "prompt": "¿Qué significa \\d en una expresión regular?",
+          "code": [
+            "r\"\\d\""
+          ],
+          "options": [
+            "Un dígito",
+            "Una letra",
+            "Un espacio",
+            "Cualquier cosa"
+          ],
+          "answer": 0,
+          "explain": "\\d coincide con un dígito del 0 al 9."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "import re",
+            "print(re.findall(r\"\\d+\", \"a1b22c333\"))"
+          ],
+          "options": [
+            "['1', '22', '333']",
+            "['1', '2', '2', '3', '3', '3']",
+            "[1, 22, 333]",
+            "['a', 'b', 'c']"
+          ],
+          "answer": 0,
+          "explain": "\\d+ toma grupos de uno o más dígitos seguidos."
+        },
+        {
+          "prompt": "¿Qué función reemplaza texto con un patrón?",
+          "code": [
+            "import re"
+          ],
+          "options": [
+            "re.sub",
+            "re.find",
+            "re.replace",
+            "re.change"
+          ],
+          "answer": 0,
+          "explain": "re.sub(patrón, reemplazo, texto) sustituye las coincidencias."
+        }
+      ]
+    },
+    "pip y paquetes": {
+      "paras": [
+        [
+          {
+            "c": "pip"
+          },
+          " es el instalador de paquetes de Python. Con él descargas librerías hechas por la comunidad desde PyPI, como ",
+          {
+            "c": "requests"
+          },
+          " o ",
+          {
+            "c": "pandas"
+          },
+          "."
+        ],
+        [
+          "Se usa en la terminal (en Windows: «Símbolo del sistema» o PowerShell), no dentro de tu programa."
+        ]
+      ],
+      "example": {
+        "file": "terminal",
+        "norun": true,
+        "lines": [
+          "py -m pip install requests",
+          "py -m pip list",
+          "py -m pip install --upgrade requests",
+          "py -m pip uninstall requests"
+        ],
+        "output": [
+          "Successfully installed requests-2.32.3",
+          "Package    Version",
+          "requests   2.32.3",
+          "…"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un paquete para instalar",
+        "file": "terminal",
+        "norun": true,
+        "choices": [
+          "requests",
+          "pandas",
+          "flask"
+        ],
+        "lines": [
+          "py -m pip install {v}"
+        ],
+        "output": "Successfully installed {v}"
+      },
+      "remember": [
+        [
+          "En Windows usa ",
+          {
+            "c": "py -m pip install paquete"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "pip list"
+          },
+          " muestra lo instalado."
+        ],
+        [
+          "Busca paquetes en pypi.org."
+        ]
+      ],
+      "tip": "Guarda la lista de paquetes de tu proyecto con: py -m pip freeze > requirements.txt",
+      "quiz": [
+        {
+          "prompt": "¿Para qué sirve pip?",
+          "code": [
+            "pip install requests"
+          ],
+          "options": [
+            "Para instalar paquetes",
+            "Para ejecutar programas",
+            "Para crear clases",
+            "Para borrar Python"
+          ],
+          "answer": 0,
+          "explain": "pip descarga e instala librerías de PyPI."
+        },
+        {
+          "prompt": "¿Dónde se escribe pip install?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "En la terminal",
+            "Dentro de un print",
+            "En un archivo .txt",
+            "En el navegador"
+          ],
+          "answer": 0,
+          "explain": "pip es un programa de terminal."
+        },
+        {
+          "prompt": "¿Qué comando muestra los paquetes instalados?",
+          "code": [
+            "py -m pip ___"
+          ],
+          "options": [
+            "list",
+            "show-all",
+            "packages",
+            "ls"
+          ],
+          "answer": 0,
+          "explain": "pip list muestra los paquetes y sus versiones."
+        }
+      ]
+    },
+    "Entornos virtuales": {
+      "paras": [
+        [
+          "Un ",
+          {
+            "b": "entorno virtual"
+          },
+          " es una carpeta con su propio Python y sus propios paquetes. Así cada proyecto tiene sus versiones sin mezclarse con otros."
+        ],
+        [
+          "Se crea con ",
+          {
+            "c": "py -m venv .venv"
+          },
+          " y se activa antes de instalar paquetes. Cuando termines, ",
+          {
+            "c": "deactivate"
+          },
+          " lo apaga."
+        ]
+      ],
+      "example": {
+        "file": "terminal",
+        "norun": true,
+        "lines": [
+          "py -m venv .venv",
+          ".venv\\Scripts\\activate",
+          "(.venv) py -m pip install requests",
+          "(.venv) py -m pip freeze > requirements.txt",
+          "(.venv) deactivate"
+        ],
+        "output": [
+          "(.venv) aparece al inicio: el entorno está activo",
+          "requests queda instalado solo en este proyecto"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige tu sistema",
+        "file": "terminal",
+        "norun": true,
+        "choices": [
+          "Windows",
+          "Mac",
+          "Linux"
+        ],
+        "lines": [
+          "# Activar el entorno en {v}"
+        ],
+        "outputs": {
+          "Windows": ".venv\\Scripts\\activate",
+          "Mac": "source .venv/bin/activate",
+          "Linux": "source .venv/bin/activate"
+        }
+      },
+      "remember": [
+        [
+          "Un entorno por proyecto."
+        ],
+        [
+          "Actívalo antes de instalar paquetes."
+        ],
+        [
+          {
+            "c": "requirements.txt"
+          },
+          " guarda la lista para reinstalar luego."
+        ]
+      ],
+      "tip": "No subas la carpeta .venv a Git: con requirements.txt cualquiera puede recrearla.",
+      "quiz": [
+        {
+          "prompt": "¿Qué comando crea un entorno virtual?",
+          "code": [
+            "# en la carpeta del proyecto"
+          ],
+          "options": [
+            "py -m venv .venv",
+            "pip venv",
+            "python new env",
+            "venv create"
+          ],
+          "answer": 0,
+          "explain": "El módulo venv crea el entorno en la carpeta indicada."
+        },
+        {
+          "prompt": "¿Para qué sirve un entorno virtual?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "Separar los paquetes de cada proyecto",
+            "Hacer Python más rápido",
+            "Crear juegos",
+            "Navegar por internet"
+          ],
+          "answer": 0,
+          "explain": "Cada proyecto tiene sus propios paquetes y versiones."
+        },
+        {
+          "prompt": "¿Qué hace pip freeze > requirements.txt?",
+          "code": [
+            "pip freeze > requirements.txt"
+          ],
+          "options": [
+            "Guarda la lista de paquetes",
+            "Congela Python",
+            "Borra paquetes",
+            "Instala todo"
+          ],
+          "answer": 0,
+          "explain": "Escribe en un archivo los paquetes instalados y sus versiones."
+        }
+      ]
+    },
+    "Git básico": {
+      "paras": [
+        [
+          {
+            "b": "Git"
+          },
+          " guarda el historial de tu código: cada ",
+          {
+            "b": "commit"
+          },
+          " es una foto de tu proyecto a la que puedes volver."
+        ],
+        [
+          "El ciclo diario es: cambias archivos, los preparas con ",
+          {
+            "c": "git add"
+          },
+          ", los guardas con ",
+          {
+            "c": "git commit -m \"mensaje\""
+          },
+          " y los subes a GitHub con ",
+          {
+            "c": "git push"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "terminal",
+        "norun": true,
+        "lines": [
+          "git init",
+          "git add main.py",
+          "git commit -m \"Primera versión de la calculadora\"",
+          "git status",
+          "git log --oneline"
+        ],
+        "output": [
+          "Initialized empty Git repository",
+          "[main a1b2c3d] Primera versión de la calculadora",
+          "nothing to commit, working tree clean",
+          "a1b2c3d Primera versión de la calculadora"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un comando",
+        "file": "terminal",
+        "norun": true,
+        "choices": [
+          "git status",
+          "git log --oneline",
+          "git diff"
+        ],
+        "lines": [
+          "{v}"
+        ],
+        "outputs": {
+          "git status": "Muestra qué archivos cambiaron",
+          "git log --oneline": "Muestra la lista de commits",
+          "git diff": "Muestra las líneas que cambiaste"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "git add"
+          },
+          " prepara; ",
+          {
+            "c": "git commit"
+          },
+          " guarda."
+        ],
+        [
+          "Escribe mensajes claros: qué cambiaste y por qué."
+        ],
+        [
+          {
+            "c": "git status"
+          },
+          " es tu mejor amigo."
+        ]
+      ],
+      "tip": "Haz commits pequeños y seguidos: es más fácil volver atrás si algo se rompe.",
+      "quiz": [
+        {
+          "prompt": "¿Qué guarda un commit?",
+          "code": [
+            "git commit -m \"...\""
+          ],
+          "options": [
+            "Una foto del proyecto en ese momento",
+            "Un solo archivo para siempre",
+            "Una contraseña",
+            "Un paquete de pip"
+          ],
+          "answer": 0,
+          "explain": "Cada commit guarda el estado del proyecto para poder volver a él."
+        },
+        {
+          "prompt": "¿Qué comando prepara archivos antes del commit?",
+          "code": [
+            "git ___ main.py"
+          ],
+          "options": [
+            "add",
+            "push",
+            "init",
+            "log"
+          ],
+          "answer": 0,
+          "explain": "git add pone los cambios en el área de preparación."
+        },
+        {
+          "prompt": "¿Qué hace git push?",
+          "code": [
+            "git push"
+          ],
+          "options": [
+            "Sube tus commits a un servidor como GitHub",
+            "Borra el repositorio",
+            "Crea un commit",
+            "Descarga Python"
+          ],
+          "answer": 0,
+          "explain": "push envía tus commits al repositorio remoto."
+        }
+      ]
+    },
+    "Pruebas con pytest": {
+      "paras": [
+        [
+          "Las ",
+          {
+            "b": "pruebas automáticas"
+          },
+          " comprueban que tu código hace lo que debe. Con ",
+          {
+            "c": "assert"
+          },
+          " afirmas algo; si no se cumple, la prueba falla."
+        ],
+        [
+          {
+            "c": "pytest"
+          },
+          " busca funciones que empiezan con ",
+          {
+            "c": "test_"
+          },
+          " y las ejecuta todas con un solo comando: ",
+          {
+            "c": "py -m pytest"
+          },
+          ". Abajo las llamamos a mano para ver la idea."
+        ]
+      ],
+      "example": {
+        "file": "test_mates.py",
+        "lines": [
+          "def promedio(numeros):",
+          "    return sum(numeros) / len(numeros)",
+          "",
+          "def test_promedio():",
+          "    assert promedio([10, 20]) == 15",
+          "",
+          "def test_un_solo_numero():",
+          "    assert promedio([7]) == 7",
+          "",
+          "test_promedio()",
+          "test_un_solo_numero()",
+          "print(\"2 pruebas pasaron\")"
+        ],
+        "output": [
+          "2 pruebas pasaron"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige el resultado esperado",
+        "file": "prueba.py",
+        "choices": [
+          "15",
+          "16"
+        ],
+        "lines": [
+          "def promedio(n):",
+          "    return sum(n) / len(n)",
+          "try:",
+          "    assert promedio([10, 20]) == {v}",
+          "    print(\"La prueba pasó\")",
+          "except AssertionError:",
+          "    print(\"La prueba falló\")"
+        ],
+        "outputs": {
+          "15": "La prueba pasó",
+          "16": "La prueba falló"
+        }
+      },
+      "remember": [
+        [
+          "Las funciones de prueba empiezan con ",
+          {
+            "c": "test_"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "assert condición"
+          },
+          " falla si la condición es falsa."
+        ],
+        [
+          "Ejecuta todas con ",
+          {
+            "c": "py -m pytest"
+          },
+          "."
+        ]
+      ],
+      "tip": "Escribe una prueba cada vez que encuentres un error: así no vuelve a aparecer.",
+      "quiz": [
+        {
+          "prompt": "¿Qué hace assert 2 + 2 == 5?",
+          "code": [
+            "assert 2 + 2 == 5"
+          ],
+          "options": [
+            "Lanza un error (la prueba falla)",
+            "Muestra 4",
+            "No hace nada",
+            "Cambia 2 + 2 a 5"
+          ],
+          "answer": 0,
+          "explain": "La condición es falsa, así que assert lanza AssertionError."
+        },
+        {
+          "prompt": "¿Cómo debe llamarse una función para que pytest la ejecute?",
+          "code": [
+            "def ___():"
+          ],
+          "options": [
+            "test_suma",
+            "suma_prueba",
+            "prueba",
+            "check"
+          ],
+          "answer": 0,
+          "explain": "pytest busca funciones que empiecen con test_."
+        },
+        {
+          "prompt": "¿Qué comando ejecuta las pruebas?",
+          "code": [
+            "# en la terminal"
+          ],
+          "options": [
+            "py -m pytest",
+            "py test.txt",
+            "pip test",
+            "git test"
+          ],
+          "answer": 0,
+          "explain": "py -m pytest busca y ejecuta todas tus pruebas."
+        }
+      ]
+    },
+    "Consumir una API": {
+      "paras": [
+        [
+          "Una ",
+          {
+            "b": "API"
+          },
+          " es un servicio en internet que responde con datos, casi siempre en formato ",
+          {
+            "b": "JSON"
+          },
+          " (parecido a un diccionario de Python)."
+        ],
+        [
+          "Con el paquete ",
+          {
+            "c": "requests"
+          },
+          " haces la consulta: ",
+          {
+            "c": "requests.get(url).json()"
+          },
+          ". Aquí practicamos con una respuesta ya descargada usando el módulo ",
+          {
+            "c": "json"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "clima.py",
+        "lines": [
+          "import json",
+          "respuesta = '{\"ciudad\": \"Lima\", \"temp\": 19.5, \"dias\": [\"lun\", \"mar\"]}'",
+          "# Con internet sería: datos = requests.get(url).json()",
+          "datos = json.loads(respuesta)",
+          "print(datos[\"ciudad\"], datos[\"temp\"], \"°C\")",
+          "print(len(datos[\"dias\"]), \"días de pronóstico\")"
+        ],
+        "output": [
+          "Lima 19.5 °C",
+          "2 días de pronóstico"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige qué dato leer",
+        "file": "prueba.py",
+        "choices": [
+          "ciudad",
+          "temp",
+          "humedad"
+        ],
+        "lines": [
+          "import json",
+          "datos = json.loads('{\"ciudad\": \"Cusco\", \"temp\": 12, \"humedad\": 60}')",
+          "print(datos[\"{v}\"])"
+        ],
+        "outputs": {
+          "ciudad": "Cusco",
+          "temp": "12",
+          "humedad": "60"
+        }
+      },
+      "remember": [
+        [
+          "JSON se convierte en diccionarios y listas."
+        ],
+        [
+          {
+            "c": "json.loads(texto)"
+          },
+          " convierte texto JSON; ",
+          {
+            "c": "json.dumps(d)"
+          },
+          " hace lo contrario."
+        ],
+        [
+          "Revisa ",
+          {
+            "c": "respuesta.status_code"
+          },
+          ": 200 significa «todo bien»."
+        ]
+      ],
+      "tip": "Instala requests con: py -m pip install requests. Muchas APIs piden una clave gratuita.",
+      "quiz": [
+        {
+          "prompt": "¿En qué formato responden casi todas las APIs?",
+          "code": [
+            "# Elige uno"
+          ],
+          "options": [
+            "JSON",
+            "MP3",
+            "EXE",
+            "PNG"
+          ],
+          "answer": 0,
+          "explain": "JSON es el formato estándar de las APIs web."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "import json",
+            "d = json.loads('{\"a\": 5}')",
+            "print(d[\"a\"] + 1)"
+          ],
+          "options": [
+            "6",
+            "51",
+            "a1",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "json.loads crea un diccionario; d[\"a\"] es 5 y 5 + 1 = 6."
+        },
+        {
+          "prompt": "¿Qué código de estado HTTP significa «todo bien»?",
+          "code": [
+            "respuesta.status_code"
+          ],
+          "options": [
+            "200",
+            "404",
+            "500",
+            "301"
+          ],
+          "answer": 0,
+          "explain": "200 es OK; 404 es «no encontrado»."
+        }
+      ]
+    },
+    "Automatiza tareas": {
+      "paras": [
+        [
+          "Python es ideal para ",
+          {
+            "b": "automatizar"
+          },
+          " tareas repetitivas: crear o renombrar archivos, ordenar carpetas o generar reportes."
+        ],
+        [
+          "El módulo ",
+          {
+            "c": "pathlib"
+          },
+          " trabaja con archivos y carpetas de forma sencilla: ",
+          {
+            "c": "Path(\"carpeta\").glob(\"*.txt\")"
+          },
+          " encuentra todos los .txt."
+        ]
+      ],
+      "example": {
+        "file": "automatiza.py",
+        "lines": [
+          "from pathlib import Path",
+          "for i in range(1, 4):",
+          "    Path(f\"reporte_{i}.txt\").write_text(f\"Ventas del día {i}\")",
+          "",
+          "archivos = sorted(p.name for p in Path(\".\").glob(\"reporte_*.txt\"))",
+          "print(archivos)",
+          "print(Path(\"reporte_2.txt\").read_text())"
+        ],
+        "output": [
+          "['reporte_1.txt', 'reporte_2.txt', 'reporte_3.txt']",
+          "Ventas del día 2"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige cuántos archivos crear",
+        "file": "prueba.py",
+        "choices": [
+          "2",
+          "3",
+          "5"
+        ],
+        "lines": [
+          "from pathlib import Path",
+          "for i in range({v}):",
+          "    Path(f\"nota_{i}.txt\").write_text(\"hola\")",
+          "print(len(list(Path(\".\").glob(\"nota_*.txt\"))), \"archivos creados\")"
+        ],
+        "outputs": {
+          "2": "2 archivos creados",
+          "3": "3 archivos creados",
+          "5": "5 archivos creados"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "Path(...).write_text()"
+          },
+          " crea un archivo con texto."
+        ],
+        [
+          {
+            "c": "glob(\"*.txt\")"
+          },
+          " busca por patrón."
+        ],
+        [
+          "Prueba primero en una carpeta de práctica."
+        ]
+      ],
+      "tip": "Programa tus scripts con el Programador de tareas de Windows para que se ejecuten solos.",
+      "quiz": [
+        {
+          "prompt": "¿Qué hace Path(\".\").glob(\"*.pdf\")?",
+          "code": [
+            "from pathlib import Path"
+          ],
+          "options": [
+            "Busca los PDF de la carpeta actual",
+            "Borra los PDF",
+            "Crea un PDF",
+            "Abre un PDF"
+          ],
+          "answer": 0,
+          "explain": "glob devuelve los archivos que coinciden con el patrón."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "from pathlib import Path",
+            "print(Path(\"foto.png\").suffix)"
+          ],
+          "options": [
+            ".png",
+            "foto",
+            "png",
+            "foto.png"
+          ],
+          "answer": 0,
+          "explain": "suffix es la extensión del archivo, con el punto."
+        },
+        {
+          "prompt": "¿Qué tareas conviene automatizar?",
+          "code": [
+            "# Elige la mejor"
+          ],
+          "options": [
+            "Las repetitivas",
+            "Las que haces una sola vez",
+            "Ninguna",
+            "Solo las de juegos"
+          ],
+          "answer": 0,
+          "explain": "Automatizar ahorra más tiempo en las tareas que repites seguido."
+        }
+      ]
+    },
+    "Análisis de datos con pandas": {
+      "paras": [
+        [
+          {
+            "c": "pandas"
+          },
+          " es la librería más usada para analizar datos. Su estructura principal es el ",
+          {
+            "b": "DataFrame"
+          },
+          ": una tabla con filas y columnas, como una hoja de Excel."
+        ],
+        [
+          "Puedes leer archivos CSV o Excel, filtrar filas, ordenar y calcular promedios con muy pocas líneas. Se instala con ",
+          {
+            "c": "py -m pip install pandas"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "ventas.py",
+        "norun": true,
+        "lines": [
+          "import pandas as pd",
+          "df = pd.DataFrame({",
+          "    \"fruta\": [\"mango\", \"fresa\", \"uva\"],",
+          "    \"precio\": [3.5, 6.0, 8.5],",
+          "    \"vendidos\": [24, 10, 5]",
+          "})",
+          "df[\"total\"] = df[\"precio\"] * df[\"vendidos\"]",
+          "print(df.sort_values(\"total\", ascending=False))",
+          "print(\"Promedio:\", df[\"precio\"].mean())"
+        ],
+        "output": [
+          "   fruta  precio  vendidos  total",
+          "0  mango     3.5        24   84.0",
+          "1  fresa     6.0        10   60.0",
+          "2    uva     8.5         5   42.5",
+          "Promedio: 6.0"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige una columna para el promedio (sin pandas)",
+        "file": "prueba.py",
+        "choices": [
+          "precio",
+          "vendidos"
+        ],
+        "lines": [
+          "datos = {\"precio\": [3.5, 6.0, 8.5], \"vendidos\": [24, 10, 5]}",
+          "col = datos[\"{v}\"]",
+          "print(sum(col) / len(col))"
+        ],
+        "outputs": {
+          "precio": "6.0",
+          "vendidos": "13.0"
+        }
+      },
+      "remember": [
+        [
+          "Un DataFrame es una tabla; cada columna es una Serie."
+        ],
+        [
+          {
+            "c": "pd.read_csv(\"archivo.csv\")"
+          },
+          " carga datos de un CSV."
+        ],
+        [
+          {
+            "c": "df[df[\"precio\"] > 5]"
+          },
+          " filtra filas."
+        ]
+      ],
+      "tip": "Jupyter Notebook o Google Colab son geniales para explorar datos con pandas paso a paso.",
+      "quiz": [
+        {
+          "prompt": "¿Qué es un DataFrame?",
+          "code": [
+            "pd.DataFrame(...)"
+          ],
+          "options": [
+            "Una tabla de datos",
+            "Un gráfico",
+            "Un archivo de audio",
+            "Una función matemática"
+          ],
+          "answer": 0,
+          "explain": "Es una tabla con filas y columnas."
+        },
+        {
+          "prompt": "¿Cómo lees un archivo CSV con pandas?",
+          "code": [
+            "import pandas as pd"
+          ],
+          "options": [
+            "pd.read_csv(\"datos.csv\")",
+            "open.csv(\"datos\")",
+            "pd.csv.open()",
+            "read(\"datos.csv\")"
+          ],
+          "answer": 0,
+          "explain": "read_csv carga el archivo en un DataFrame."
+        },
+        {
+          "prompt": "¿Qué calcula df[\"precio\"].mean()?",
+          "code": [
+            "df[\"precio\"].mean()"
+          ],
+          "options": [
+            "El promedio de la columna precio",
+            "El precio más alto",
+            "La suma",
+            "La cantidad de filas"
+          ],
+          "answer": 0,
+          "explain": "mean() es el promedio."
+        }
+      ]
+    },
+    "Introducción a la inteligencia artificial": {
+      "paras": [
+        [
+          "La ",
+          {
+            "b": "inteligencia artificial"
+          },
+          " (IA) hace que las computadoras aprendan de ejemplos en lugar de seguir solo reglas escritas a mano."
+        ],
+        [
+          "Una idea sencilla es el «vecino más cercano»: para adivinar algo nuevo, busca el ejemplo conocido que más se le parece. Librerías como ",
+          {
+            "c": "scikit-learn"
+          },
+          " hacen esto (y mucho más) por ti."
+        ]
+      ],
+      "example": {
+        "file": "vecino.py",
+        "lines": [
+          "# Ejemplos: (horas de estudio, horas de sueño) -> resultado",
+          "ejemplos = [((1, 5), \"desaprueba\"), ((6, 8), \"aprueba\"),",
+          "            ((4, 7), \"aprueba\"), ((2, 4), \"desaprueba\")]",
+          "",
+          "def predecir(nuevo):",
+          "    def distancia(e):",
+          "        (a, b), _ = e",
+          "        return (a - nuevo[0]) ** 2 + (b - nuevo[1]) ** 2",
+          "    return min(ejemplos, key=distancia)[1]",
+          "",
+          "print(predecir((5, 7)))",
+          "print(predecir((1, 4)))"
+        ],
+        "output": [
+          "aprueba",
+          "desaprueba"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige cuántas horas estudias",
+        "file": "prueba.py",
+        "choices": [
+          "1",
+          "3",
+          "6"
+        ],
+        "lines": [
+          "ejemplos = [(1, \"desaprueba\"), (2, \"desaprueba\"), (4, \"aprueba\"), (6, \"aprueba\")]",
+          "horas = {v}",
+          "mas_cercano = min(ejemplos, key=lambda e: abs(e[0] - horas))",
+          "print(mas_cercano[1])"
+        ],
+        "outputs": {
+          "1": "desaprueba",
+          "3": "desaprueba",
+          "6": "aprueba"
+        }
+      },
+      "remember": [
+        [
+          "La IA aprende patrones a partir de datos."
+        ],
+        [
+          "Más y mejores ejemplos suelen dar mejores predicciones."
+        ],
+        [
+          "scikit-learn, TensorFlow y PyTorch son librerías populares."
+        ]
+      ],
+      "tip": "Una IA solo es tan buena como sus datos: si los ejemplos están sesgados, sus respuestas también.",
+      "quiz": [
+        {
+          "prompt": "¿De qué aprende un modelo de IA?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "De ejemplos (datos)",
+            "De la pantalla",
+            "Del teclado",
+            "De nada"
+          ],
+          "answer": 0,
+          "explain": "Los modelos encuentran patrones en los datos de ejemplo."
+        },
+        {
+          "prompt": "¿Qué hace el método del vecino más cercano?",
+          "code": [
+            "min(ejemplos, key=distancia)"
+          ],
+          "options": [
+            "Elige el ejemplo más parecido",
+            "Elige uno al azar",
+            "Promedia todo",
+            "Ordena alfabéticamente"
+          ],
+          "answer": 0,
+          "explain": "Predice usando el ejemplo conocido más cercano al nuevo."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "print(min([3, 9, 5], key=lambda x: abs(x - 8)))"
+          ],
+          "options": [
+            "9",
+            "3",
+            "5",
+            "8"
+          ],
+          "answer": 0,
+          "explain": "El más cercano a 8 es 9 (distancia 1)."
+        }
+      ]
+    },
+    "Desarrollo web con Flask": {
+      "paras": [
+        [
+          {
+            "c": "Flask"
+          },
+          " es un framework para crear páginas y APIs web con Python. Cada página es una función decorada con ",
+          {
+            "c": "@app.route(\"/ruta\")"
+          },
+          "."
+        ],
+        [
+          "Lo que la función devuelve es lo que ve el navegador. Se instala con ",
+          {
+            "c": "py -m pip install flask"
+          },
+          " y se ejecuta con ",
+          {
+            "c": "py app.py"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "app.py",
+        "norun": true,
+        "lines": [
+          "from flask import Flask",
+          "app = Flask(__name__)",
+          "",
+          "@app.route(\"/\")",
+          "def inicio():",
+          "    return \"<h1>¡Hola desde Flask!</h1>\"",
+          "",
+          "@app.route(\"/saludo/<nombre>\")",
+          "def saludo(nombre):",
+          "    return f\"Hola, {nombre}\"",
+          "",
+          "if __name__ == \"__main__\":",
+          "    app.run(debug=True)"
+        ],
+        "output": [
+          "* Running on http://127.0.0.1:5000",
+          "Abre esa dirección en tu navegador"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige qué dirección visitar",
+        "file": "navegador",
+        "norun": true,
+        "choices": [
+          "/",
+          "/saludo/Ana",
+          "/saludo/Luis"
+        ],
+        "lines": [
+          "http://127.0.0.1:5000{v}"
+        ],
+        "outputs": {
+          "/": "¡Hola desde Flask!",
+          "/saludo/Ana": "Hola, Ana",
+          "/saludo/Luis": "Hola, Luis"
+        }
+      },
+      "remember": [
+        [
+          "Cada ruta es una función con ",
+          {
+            "c": "@app.route"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "<nombre>"
+          },
+          " en la ruta llega como parámetro."
+        ],
+        [
+          {
+            "c": "debug=True"
+          },
+          " recarga solo al guardar cambios."
+        ]
+      ],
+      "tip": "Con render_template puedes devolver archivos HTML completos en vez de texto.",
+      "quiz": [
+        {
+          "prompt": "¿Qué indica @app.route(\"/contacto\")?",
+          "code": [
+            "@app.route(\"/contacto\")",
+            "def contacto(): ..."
+          ],
+          "options": [
+            "Qué dirección muestra esa función",
+            "El nombre del archivo",
+            "Un error",
+            "El puerto"
+          ],
+          "answer": 0,
+          "explain": "La ruta define en qué dirección del sitio se ejecuta la función."
+        },
+        {
+          "prompt": "¿Qué ve el navegador?",
+          "code": [
+            "def inicio():",
+            "    return \"Hola\""
+          ],
+          "options": [
+            "Lo que devuelve la función",
+            "El nombre de la función",
+            "El código Python",
+            "Nada"
+          ],
+          "answer": 0,
+          "explain": "Flask envía al navegador lo que la función devuelve."
+        },
+        {
+          "prompt": "¿Cómo instalas Flask?",
+          "code": [
+            "# en la terminal"
+          ],
+          "options": [
+            "py -m pip install flask",
+            "import flask install",
+            "git install flask",
+            "flask new"
+          ],
+          "answer": 0,
+          "explain": "Flask es un paquete: se instala con pip."
+        }
+      ]
+    },
+    "Proyecto final": {
+      "paras": [
+        [
+          "¡Llegaste al final! Tu proyecto: un ",
+          {
+            "b": "gestor de tareas"
+          },
+          " que usa todo lo aprendido: una clase, listas, funciones, bucles, archivos y manejo de errores."
+        ],
+        [
+          "Cópialo en el editor, ejecútalo y luego hazlo tuyo: agrega prioridades, fechas o un menú con ",
+          {
+            "c": "input()"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "tareas.py",
+        "lines": [
+          "class Tarea:",
+          "    def __init__(self, titulo):",
+          "        self.titulo = titulo",
+          "        self.hecha = False",
+          "",
+          "class Gestor:",
+          "    def __init__(self):",
+          "        self.tareas = []",
+          "    def agregar(self, titulo):",
+          "        self.tareas.append(Tarea(titulo))",
+          "    def completar(self, i):",
+          "        try:",
+          "            self.tareas[i].hecha = True",
+          "        except IndexError:",
+          "            print(\"No existe la tarea\", i)",
+          "    def mostrar(self):",
+          "        for i, t in enumerate(self.tareas):",
+          "            print(i, \"[x]\" if t.hecha else \"[ ]\", t.titulo)",
+          "",
+          "g = Gestor()",
+          "g.agregar(\"Estudiar Python\")",
+          "g.agregar(\"Hacer el reto\")",
+          "g.completar(0)",
+          "g.completar(5)",
+          "g.mostrar()"
+        ],
+        "output": [
+          "No existe la tarea 5",
+          "0 [x] Estudiar Python",
+          "1 [ ] Hacer el reto"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige qué tarea completar",
+        "file": "prueba.py",
+        "choices": [
+          "0",
+          "1",
+          "2"
+        ],
+        "lines": [
+          "tareas = [\"Leer\", \"Programar\"]",
+          "hechas = set()",
+          "i = {v}",
+          "if i < len(tareas):",
+          "    hechas.add(i)",
+          "    print(\"Completaste:\", tareas[i])",
+          "else:",
+          "    print(\"Esa tarea no existe\")"
+        ],
+        "outputs": {
+          "0": "Completaste: Leer",
+          "1": "Completaste: Programar",
+          "2": "Esa tarea no existe"
+        }
+      },
+      "remember": [
+        [
+          "Divide el problema en clases y funciones pequeñas."
+        ],
+        [
+          "Maneja los errores con ",
+          {
+            "c": "try/except"
+          },
+          "."
+        ],
+        [
+          "Guarda tus tareas en un archivo para no perderlas."
+        ]
+      ],
+      "tip": "¡Felicitaciones! Comparte tu proyecto en GitHub y elige tu siguiente especialización.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "hecha = True",
+            "print(\"[x]\" if hecha else \"[ ]\")"
+          ],
+          "options": [
+            "[x]",
+            "[ ]",
+            "True",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Es un if en una línea: como hecha es True, muestra [x]."
+        },
+        {
+          "prompt": "¿Qué error se atrapa al pedir una tarea que no existe?",
+          "code": [
+            "self.tareas[i]"
+          ],
+          "options": [
+            "IndexError",
+            "ValueError",
+            "KeyError",
+            "TypeError"
+          ],
+          "answer": 0,
+          "explain": "Pedir una posición fuera de la lista lanza IndexError."
+        },
+        {
+          "prompt": "¿Qué mejora agregarías para no perder las tareas al cerrar?",
+          "code": [
+            "# Elige una"
+          ],
+          "options": [
+            "Guardarlas en un archivo",
+            "Usar más print",
+            "Quitar la clase",
+            "Usar sets"
+          ],
+          "answer": 0,
+          "explain": "Guardar en un archivo (por ejemplo JSON) las conserva entre ejecuciones."
+        }
+      ]
+    }
+  }
+}

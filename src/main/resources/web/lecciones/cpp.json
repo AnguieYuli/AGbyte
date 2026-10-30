@@ -1,0 +1,813 @@
+{
+  "id": "cpp",
+  "name": "C++",
+  "title": "C++: de cero a avanzado",
+  "glyph": "C++",
+  "tileBg": "#7C3AED",
+  "tileFg": "#FFFFFF",
+  "ext": "cpp",
+  "blurb": "Rápido y potente: videojuegos y sistemas.",
+  "modules": [
+    {
+      "title": "Fundamentos",
+      "desc": "Sintaxis, variables, tipos, operadores y entrada/salida.",
+      "lessons": [
+        "¿Qué es C++?",
+        "Tu primer programa",
+        "Variables y tipos",
+        "Operadores",
+        "Entrada y salida"
+      ]
+    },
+    {
+      "title": "Condicionales, ciclos y funciones",
+      "desc": "Toma decisiones, repite y organiza tu código.",
+      "lessons": [
+        "if y else",
+        "switch",
+        "Bucles",
+        "Funciones",
+        "Mini proyecto: Calculadora"
+      ]
+    },
+    {
+      "title": "Arreglos, cadenas y matrices",
+      "desc": "Guarda varios valores y trabaja con texto.",
+      "lessons": [
+        "Arreglos",
+        "Cadenas",
+        "Matrices"
+      ]
+    },
+    {
+      "title": "Punteros, referencias y memoria",
+      "desc": "Cómo C++ usa la memoria.",
+      "lessons": [
+        "Direcciones de memoria",
+        "Punteros",
+        "Referencias"
+      ]
+    },
+    {
+      "title": "Programación estructurada",
+      "desc": "Programación estructurada y recursividad.",
+      "lessons": [
+        "Divide tu programa en partes",
+        "Recursividad",
+        "Mini proyecto: Torres de Hanói"
+      ]
+    },
+    {
+      "title": "Programación orientada a objetos",
+      "desc": "Clases, objetos, constructores, herencia y polimorfismo.",
+      "lessons": [
+        "Clases y objetos",
+        "Constructores",
+        "Herencia",
+        "Polimorfismo"
+      ]
+    },
+    {
+      "title": "La STL",
+      "desc": "vector, map, set, queue, stack y algoritmos.",
+      "lessons": [
+        "vector",
+        "map y set",
+        "queue y stack",
+        "Algoritmos de la STL"
+      ]
+    },
+    {
+      "title": "C++ moderno",
+      "desc": "Plantillas, lambdas, excepciones y movimiento de objetos.",
+      "lessons": [
+        "Plantillas",
+        "Lambdas",
+        "Excepciones",
+        "Movimiento de objetos"
+      ]
+    },
+    {
+      "title": "Gestión de recursos",
+      "desc": "RAII, smart pointers y memoria dinámica.",
+      "lessons": [
+        "Memoria dinámica",
+        "RAII",
+        "Smart pointers"
+      ]
+    },
+    {
+      "title": "Archivos y herramientas",
+      "desc": "Archivos, depuración, compilación y pruebas.",
+      "lessons": [
+        "Archivos",
+        "Depuración",
+        "Compilación",
+        "Pruebas"
+      ]
+    },
+    {
+      "title": "Especialización",
+      "desc": "Videojuegos, sistemas, simulaciones y aplicaciones de alto rendimiento.",
+      "lessons": [
+        "Videojuegos",
+        "Sistemas",
+        "Simulaciones",
+        "Proyecto final: Juego en consola"
+      ]
+    }
+  ],
+  "lessons": {
+    "¿Qué es C++?": {
+      "paras": [
+        [
+          "C++ es un lenguaje rápido que se usa en videojuegos, motores gráficos y programas que necesitan mucha velocidad."
+        ],
+        [
+          "Para mostrar texto usamos ",
+          {
+            "c": "std::cout"
+          },
+          " y el operador ",
+          {
+            "c": "<<"
+          },
+          ". Al inicio incluyes ",
+          {
+            "c": "<iostream>"
+          },
+          "."
+        ]
+      ],
+      "example": {
+        "file": "main.cpp",
+        "lines": [
+          "#include <iostream>",
+          "",
+          "int main() {",
+          "  std::cout << \"¡Hola, mundo!\" << std::endl;",
+          "  return 0;",
+          "}"
+        ],
+        "output": [
+          "¡Hola, mundo!"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un nombre y ejecuta",
+        "file": "prueba.cpp",
+        "choices": [
+          "Ana",
+          "Luis",
+          "Sofía"
+        ],
+        "lines": [
+          "std::cout << \"Hola, {v}\";"
+        ],
+        "output": "Hola, {v}"
+      },
+      "remember": [
+        [
+          {
+            "c": "#include <iostream>"
+          },
+          " permite usar cout."
+        ],
+        [
+          {
+            "c": "<<"
+          },
+          " envía el texto a la salida."
+        ],
+        [
+          "Cada instrucción termina con ",
+          {
+            "c": ";"
+          },
+          "."
+        ]
+      ],
+      "tip": "std::endl hace un salto de línea, igual que escribir \"\\n\".",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra texto en C++?",
+          "code": [
+            "// Elige la correcta"
+          ],
+          "options": [
+            "std::cout",
+            "print()",
+            "echo",
+            "System.out"
+          ],
+          "answer": 0,
+          "explain": "std::cout es la salida estándar de C++."
+        },
+        {
+          "prompt": "¿Qué librería necesitas para usar cout?",
+          "code": [
+            "#include <?>"
+          ],
+          "options": [
+            "<iostream>",
+            "<stdio.py>",
+            "<console>",
+            "<html>"
+          ],
+          "answer": 0,
+          "explain": "<iostream> trae las herramientas de entrada y salida."
+        },
+        {
+          "prompt": "¿Qué hace << en esta línea?",
+          "code": [
+            "std::cout << \"Hola\";"
+          ],
+          "options": [
+            "Envía el texto a la salida",
+            "Compara dos números",
+            "Comenta la línea",
+            "Termina el programa"
+          ],
+          "answer": 0,
+          "explain": "Con cout, << «empuja» el texto hacia la pantalla."
+        }
+      ]
+    },
+    "Tu primer programa": {
+      "paras": [
+        [
+          "Un programa en C++ empieza en la función ",
+          {
+            "c": "main()"
+          },
+          ". Antes incluyes las librerías que usarás: ",
+          {
+            "c": "#include <iostream>"
+          },
+          " para mostrar texto."
+        ],
+        [
+          "Con ",
+          {
+            "c": "std::cout <<"
+          },
+          " envías texto a la pantalla y con ",
+          {
+            "c": "std::endl"
+          },
+          " (o ",
+          {
+            "c": "\"\\n\""
+          },
+          ") saltas de línea. ",
+          {
+            "c": "return 0;"
+          },
+          " indica que todo terminó bien."
+        ]
+      ],
+      "example": {
+        "file": "main.cpp",
+        "lines": [
+          "#include <iostream>",
+          "",
+          "int main() {",
+          "  std::cout << \"¡Hola!\" << std::endl;",
+          "  std::cout << \"Aprendo \" << \"C++\" << \"\\n\";",
+          "  std::cout << 6 * 7 << std::endl;",
+          "  return 0;",
+          "}"
+        ],
+        "output": [
+          "¡Hola!",
+          "Aprendo C++",
+          "42"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un mensaje",
+        "file": "main.cpp",
+        "choices": [
+          "Hola",
+          "Buenas",
+          "Qué tal"
+        ],
+        "lines": [
+          "std::cout << \"{v}, mundo\" << std::endl;"
+        ],
+        "output": "{v}, mundo"
+      },
+      "remember": [
+        [
+          "Cada instrucción termina con ",
+          {
+            "c": ";"
+          },
+          "."
+        ],
+        [
+          "Puedes encadenar varios ",
+          {
+            "c": "<<"
+          },
+          " en una línea."
+        ],
+        [
+          "Sin ",
+          {
+            "c": "std::endl"
+          },
+          " o ",
+          {
+            "c": "\"\\n\""
+          },
+          " no hay salto de línea."
+        ]
+      ],
+      "tip": "Si ves «cout was not declared», te faltó #include <iostream> o el prefijo std::.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "std::cout << \"A\" << \"B\";"
+          ],
+          "options": [
+            "AB",
+            "A B",
+            "A y B en dos líneas",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Sin salto de línea ni espacios, todo sale junto: AB."
+        },
+        {
+          "prompt": "¿Qué librería necesitas para usar std::cout?",
+          "code": [
+            "#include <___>"
+          ],
+          "options": [
+            "iostream",
+            "stdio.py",
+            "console",
+            "string"
+          ],
+          "answer": 0,
+          "explain": "<iostream> trae cout y cin."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "std::cout << 3 + 4;"
+          ],
+          "options": [
+            "7",
+            "3 + 4",
+            "34",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "Sin comillas, C++ calcula: 7."
+        }
+      ]
+    },
+    "Variables y tipos": {
+      "paras": [
+        [
+          "En C++ declaras el tipo de cada variable: ",
+          {
+            "c": "int"
+          },
+          " (enteros), ",
+          {
+            "c": "double"
+          },
+          " (decimales), ",
+          {
+            "c": "char"
+          },
+          " (un carácter), ",
+          {
+            "c": "bool"
+          },
+          " (",
+          {
+            "c": "true"
+          },
+          "/",
+          {
+            "c": "false"
+          },
+          ") y ",
+          {
+            "c": "std::string"
+          },
+          " (texto, con ",
+          {
+            "c": "#include <string>"
+          },
+          ")."
+        ],
+        [
+          "Al mostrar un ",
+          {
+            "c": "bool"
+          },
+          " con cout verás ",
+          {
+            "c": "1"
+          },
+          " (true) o ",
+          {
+            "c": "0"
+          },
+          " (false)."
+        ]
+      ],
+      "example": {
+        "file": "main.cpp",
+        "lines": [
+          "#include <iostream>",
+          "#include <string>",
+          "",
+          "int main() {",
+          "  std::string nombre = \"Luis\";",
+          "  int edad = 16;",
+          "  double altura = 1.72;",
+          "  char inicial = 'L';",
+          "  bool estudia = true;",
+          "  edad = edad + 1;",
+          "  std::cout << nombre << \" (\" << inicial << \") tiene \" << edad << \" años\\n\";",
+          "  std::cout << altura << \" \" << estudia << std::endl;",
+          "  return 0;",
+          "}"
+        ],
+        "output": [
+          "Luis (L) tiene 17 años",
+          "1.72 1"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un número de vidas",
+        "file": "main.cpp",
+        "choices": [
+          "1",
+          "3",
+          "5"
+        ],
+        "lines": [
+          "int vidas = {v};",
+          "vidas = vidas - 1;",
+          "std::cout << \"Te quedan \" << vidas << \" vidas\" << std::endl;"
+        ],
+        "outputs": {
+          "1": "Te quedan 0 vidas",
+          "3": "Te quedan 2 vidas",
+          "5": "Te quedan 4 vidas"
+        }
+      },
+      "remember": [
+        [
+          "Forma: ",
+          {
+            "c": "tipo nombre = valor;"
+          },
+          "."
+        ],
+        [
+          {
+            "c": "char"
+          },
+          " usa comillas simples; ",
+          {
+            "c": "std::string"
+          },
+          ", dobles."
+        ],
+        [
+          "Un bool se muestra como 1 o 0."
+        ]
+      ],
+      "tip": "Inicializa siempre tus variables: en C++ una variable sin valor puede tener «basura».",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "bool listo = false;",
+            "std::cout << listo;"
+          ],
+          "options": [
+            "0",
+            "false",
+            "1",
+            "Un error"
+          ],
+          "answer": 0,
+          "explain": "cout muestra false como 0."
+        },
+        {
+          "prompt": "¿Qué tipo guarda un solo carácter?",
+          "code": [
+            "___ letra = 'A';"
+          ],
+          "options": [
+            "char",
+            "string",
+            "int",
+            "bool"
+          ],
+          "answer": 0,
+          "explain": "char guarda un carácter entre comillas simples."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "int x = 4;",
+            "x = x * x;",
+            "std::cout << x;"
+          ],
+          "options": [
+            "16",
+            "8",
+            "4",
+            "x * x"
+          ],
+          "answer": 0,
+          "explain": "x pasa a valer 4 × 4 = 16."
+        }
+      ]
+    },
+    "Operadores": {
+      "paras": [
+        [
+          "Aritméticos: ",
+          {
+            "c": "+ - * / %"
+          },
+          ". Entre enteros, ",
+          {
+            "c": "/"
+          },
+          " descarta los decimales: ",
+          {
+            "c": "7 / 2"
+          },
+          " es 3. Usa ",
+          {
+            "c": "7.0 / 2"
+          },
+          " para obtener 3.5."
+        ],
+        [
+          {
+            "c": "x++"
+          },
+          " suma 1 y ",
+          {
+            "c": "x += 5"
+          },
+          " suma 5. Las comparaciones (",
+          {
+            "c": "== != < >"
+          },
+          ") y los lógicos (",
+          {
+            "c": "&& || !"
+          },
+          ") devuelven 1 o 0 al mostrarlos."
+        ]
+      ],
+      "example": {
+        "file": "main.cpp",
+        "lines": [
+          "#include <iostream>",
+          "",
+          "int main() {",
+          "  std::cout << 7 / 2 << \" \" << 7.0 / 2 << \" \" << 7 % 2 << std::endl;",
+          "  int puntos = 10;",
+          "  puntos++;",
+          "  puntos += 4;",
+          "  std::cout << puntos << std::endl;",
+          "  std::cout << (puntos > 12 && puntos < 20) << std::endl;",
+          "  return 0;",
+          "}"
+        ],
+        "output": [
+          "3 3.5 1",
+          "15",
+          "1"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige un número y mira el resto entre 3",
+        "file": "main.cpp",
+        "choices": [
+          "9",
+          "10",
+          "11"
+        ],
+        "lines": [
+          "int n = {v};",
+          "std::cout << n % 3 << std::endl;"
+        ],
+        "outputs": {
+          "9": "0",
+          "10": "1",
+          "11": "2"
+        }
+      },
+      "remember": [
+        [
+          "Entre enteros, la división no tiene decimales."
+        ],
+        [
+          {
+            "c": "%"
+          },
+          " da el resto (solo con enteros)."
+        ],
+        [
+          "Pon paréntesis al mostrar comparaciones con cout."
+        ]
+      ],
+      "tip": "std::cout << std::boolalpha << true; muestra «true» en vez de 1.",
+      "quiz": [
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "std::cout << 9 / 4;"
+          ],
+          "options": [
+            "2",
+            "2.25",
+            "3",
+            "2.0"
+          ],
+          "answer": 0,
+          "explain": "Entre enteros la división descarta decimales: 2."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "int a = 1;",
+            "a += 2;",
+            "a++;",
+            "std::cout << a;"
+          ],
+          "options": [
+            "4",
+            "3",
+            "2",
+            "1"
+          ],
+          "answer": 0,
+          "explain": "1 + 2 = 3, y ++ lo lleva a 4."
+        },
+        {
+          "prompt": "¿Qué muestra este código?",
+          "code": [
+            "std::cout << (5 == 5);"
+          ],
+          "options": [
+            "1",
+            "true",
+            "5",
+            "0"
+          ],
+          "answer": 0,
+          "explain": "La comparación es verdadera y cout la muestra como 1."
+        }
+      ]
+    },
+    "Entrada y salida": {
+      "paras": [
+        [
+          "Con ",
+          {
+            "c": "std::cin >>"
+          },
+          " lees lo que escribe el usuario y lo guardas en una variable. Lee hasta el primer espacio."
+        ],
+        [
+          "Para leer una línea completa (con espacios) usa ",
+          {
+            "c": "std::getline(std::cin, texto)"
+          },
+          ". En AGbyte escribe tus datos en «Entrada del programa»."
+        ]
+      ],
+      "example": {
+        "file": "main.cpp",
+        "stdin": "Ana\n15",
+        "lines": [
+          "#include <iostream>",
+          "#include <string>",
+          "",
+          "int main() {",
+          "  std::string nombre;",
+          "  int edad;",
+          "  std::cout << \"¿Cómo te llamas? \";",
+          "  std::cin >> nombre;",
+          "  std::cout << \"¿Cuántos años tienes? \";",
+          "  std::cin >> edad;",
+          "  std::cout << \"Hola, \" << nombre << \". El próximo año tendrás \" << edad + 1 << std::endl;",
+          "  return 0;",
+          "}"
+        ],
+        "output": [
+          "¿Cómo te llamas? Ana",
+          "¿Cuántos años tienes? 15",
+          "Hola, Ana. El próximo año tendrás 16"
+        ]
+      },
+      "tryit": {
+        "label": "Pruébalo: elige lo que escribe el usuario",
+        "file": "main.cpp",
+        "choices": [
+          "4",
+          "10",
+          "25"
+        ],
+        "lines": [
+          "int n;",
+          "std::cin >> n;",
+          "std::cout << \"El doble es \" << n * 2 << std::endl;"
+        ],
+        "outputs": {
+          "4": "El doble es 8",
+          "10": "El doble es 20",
+          "25": "El doble es 50"
+        }
+      },
+      "remember": [
+        [
+          {
+            "c": "cin >>"
+          },
+          " lee una palabra o un número."
+        ],
+        [
+          {
+            "c": "getline"
+          },
+          " lee la línea completa."
+        ],
+        [
+          "Las flechas apuntan hacia donde va el dato: ",
+          {
+            "c": "cout <<"
+          },
+          ", ",
+          {
+            "c": "cin >>"
+          },
+          "."
+        ]
+      ],
+      "tip": "Si mezclas cin >> y getline, usa std::cin.ignore() antes del getline.",
+      "quiz": [
+        {
+          "prompt": "¿Qué lee std::cin >> nombre si escribes «Ana María»?",
+          "code": [
+            "std::cin >> nombre;"
+          ],
+          "options": [
+            "Ana",
+            "Ana María",
+            "María",
+            "Nada"
+          ],
+          "answer": 0,
+          "explain": "cin >> se detiene en el primer espacio."
+        },
+        {
+          "prompt": "¿Cómo lees una línea completa?",
+          "code": [
+            "std::string linea;"
+          ],
+          "options": [
+            "std::getline(std::cin, linea);",
+            "std::cin >> linea;",
+            "std::read(linea);",
+            "input(linea);"
+          ],
+          "answer": 0,
+          "explain": "getline lee hasta el final de la línea, con espacios."
+        },
+        {
+          "prompt": "¿Hacia dónde apuntan las flechas en cin?",
+          "code": [
+            "std::cin >> x;"
+          ],
+          "options": [
+            "Hacia la variable: >>",
+            "Hacia la pantalla: <<",
+            "No llevan flechas",
+            "Hacia ambos lados"
+          ],
+          "answer": 0,
+          "explain": "El dato va de cin hacia la variable: cin >> x."
+        }
+      ]
+    }
+  }
+}

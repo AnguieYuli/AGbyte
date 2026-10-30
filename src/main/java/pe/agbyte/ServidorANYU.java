@@ -15,7 +15,6 @@ import java.net.Proxy;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,9 +30,8 @@ import java.util.concurrent.Executors;
 /**
  * Servidor local de AGbyte (solo accesible desde tu PC, en http://127.0.0.1:47615).
  * Entrega las pantallas de la app y responde a su API:
- *   GET  /api/token, /api/info, /api/google/status
- *   POST /api/run, /api/google/start, /api/google/result, /api/google/config, /api/open
- *   GET  /oauth/google  (regreso del inicio de sesión con Google)
+ *   GET  /api/token, /api/info
+ *   POST /api/run
  * Se usa siempre el mismo puerto para que el progreso (guardado por la ventana) no se pierda.
  */
 public final class ServidorANYU {
@@ -41,8 +39,6 @@ public final class ServidorANYU {
     public static final int PUERTO_ANYU = 47615;
     private static final int MAX_CUERPO_ANYU = 512 * 1024;
     private static final Set<String> LENGUAJES_ANYU = Set.of("python", "java", "cpp", "sql");
-    private static final List<String> ENLACES_PERMITIDOS_ANYU = List.of("https://console.cloud.google.com/", "https://support.google.com/",
-            "https://myaccount.google.com/");
     private static final Map<String, String> TIPOS_ANYU = new HashMap<>();
 
     static {
@@ -131,9 +127,7 @@ public final class ServidorANYU {
         try {
             String rutaANYU = exANYU.getRequestURI().getPath();
             String metodoANYU = exANYU.getRequestMethod();
-            if (rutaANYU.startsWith("/oauth/google") && metodoANYU.equals("GET")) {
-                regresoGoogleANYU(exANYU);
-            } else if (rutaANYU.startsWith("/api/")) {
+            if (rutaANYU.startsWith("/api/")) {
                 if (metodoANYU.equals("GET")) apiGetANYU(exANYU, rutaANYU);
                 else if (metodoANYU.equals("POST")) apiPostANYU(exANYU, rutaANYU);
                 else jsonANYU(exANYU, 405, Map.of("error", "method not allowed"));
@@ -178,9 +172,6 @@ public final class ServidorANYU {
             case "/api/info":
                 jsonANYU(exANYU, 200, EjecutorANYU.infoANYU());
                 break;
-            case "/api/google/status":
-                jsonANYU(exANYU, 200, Map.of("configured", GoogleLoginANYU.configANYU() != null));
-                break;
             default:
                 jsonANYU(exANYU, 404, Map.of("error", "not found"));
         }
@@ -200,28 +191,6 @@ public final class ServidorANYU {
             String textoANYU = new String(datosANYU, StandardCharsets.UTF_8);
             Map<String, Object> cuerpoANYU = textoANYU.isBlank() ? new LinkedHashMap<>() : JsonANYU.objetoANYU(textoANYU);
             switch (rutaANYU) {
-                case "/api/google/start":
-                    jsonANYU(exANYU, 200, GoogleLoginANYU.iniciarANYU(puertoANYU));
-                    return;
-                case "/api/google/result":
-                    jsonANYU(exANYU, 200, GoogleLoginANYU.resultadoANYU(JsonANYU.textoANYU(cuerpoANYU, "state")));
-                    return;
-                case "/api/open": {
-                    String urlANYU = JsonANYU.textoANYU(cuerpoANYU, "url");
-                    if (ENLACES_PERMITIDOS_ANYU.stream().noneMatch(urlANYU::startsWith)) {
-                        jsonANYU(exANYU, 400, Map.of("error", "enlace no permitido"));
-                        return;
-                    }
-                    VentanaANYU.abrirEnNavegadorANYU(urlANYU);
-                    jsonANYU(exANYU, 200, Map.of("ok", true));
-                    return;
-                }
-                case "/api/google/config": {
-                    Map<String, String> cfgANYU = GoogleLoginANYU.guardarConfigANYU(cuerpoANYU);
-                    if (cfgANYU != null) jsonANYU(exANYU, 200, Map.of("configured", true));
-                    else jsonANYU(exANYU, 200, Map.of("configured", false, "error", "El ID de cliente no es válido. Debe terminar en .apps.googleusercontent.com"));
-                    return;
-                }
                 case "/api/run": {
                     Object lenguajeANYU = cuerpoANYU.get("lang");
                     if (!(lenguajeANYU instanceof String) || !LENGUAJES_ANYU.contains(lenguajeANYU)) {
@@ -245,28 +214,6 @@ public final class ServidorANYU {
             rANYU.put("runner", "AGbyte");
             jsonANYU(exANYU, 200, rANYU);
         }
-    }
-
-    /** Google devuelve aquí al navegador; se valida con el «state» de un inicio pedido por la app. */
-    private void regresoGoogleANYU(HttpExchange exANYU) throws IOException {
-        String hostANYU = exANYU.getRequestHeaders().getFirst("Host");
-        if (hostANYU == null || !(hostANYU.equals("127.0.0.1:" + puertoANYU) || hostANYU.equals("localhost:" + puertoANYU))) {
-            jsonANYU(exANYU, 403, Map.of("error", "forbidden"));
-            return;
-        }
-        Map<String, String> consultaANYU = new HashMap<>();
-        String qANYU = exANYU.getRequestURI().getRawQuery();
-        if (qANYU != null) {
-            for (String parANYU : qANYU.split("&")) {
-                if (parANYU.isEmpty()) continue;
-                int kANYU = parANYU.indexOf('=');
-                String claveANYU = URLDecoder.decode(kANYU < 0 ? parANYU : parANYU.substring(0, kANYU), StandardCharsets.UTF_8);
-                String valorANYU = kANYU < 0 ? "" : URLDecoder.decode(parANYU.substring(kANYU + 1), StandardCharsets.UTF_8);
-                consultaANYU.putIfAbsent(claveANYU, valorANYU);
-            }
-        }
-        Object[] rANYU = GoogleLoginANYU.terminarANYU(consultaANYU);
-        enviarANYU(exANYU, 200, "text/html; charset=utf-8", GoogleLoginANYU.paginaANYU((Boolean) rANYU[0], (String) rANYU[1]).getBytes(StandardCharsets.UTF_8), false);
     }
 
     // ------------------------------------------------------------------ archivos de la app

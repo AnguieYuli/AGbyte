@@ -9,7 +9,7 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>AGbyte</name>
-    <description>AGbyte para escritorio en Java: servidor local, editor que ejecuta código, inicio con Google y ventana propia.</description>
+    <description>AGbyte para escritorio en Java: servidor local, editor que ejecuta código y ventana propia. Funciona 100% sin internet.</description>
 
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
